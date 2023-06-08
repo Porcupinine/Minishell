@@ -1,7 +1,19 @@
 #include <stdio.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+#include <signal.h>
 
-int main() {
-    printf("Hello, World!\n");
-    return 0;
+void handler(int num)
+{
+
 }
-git
+int main(int argc, char **argv, char **envp) {
+    char *commands;
+
+    signal(SIGINT, handler);
+    while (1)
+    {
+        commands = readline("minishell: ");
+        printf("%s", commands);
+    }
+}

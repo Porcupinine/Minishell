@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/minishell.dir/main.c.o -o minishell  /sam/Codam/minishell/Lib42/libft.a -lreadline 
