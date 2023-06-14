@@ -69,32 +69,48 @@ include CMakeFiles/minishell.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/minishell.dir/flags.make
 
-CMakeFiles/minishell.dir/main.c.o: CMakeFiles/minishell.dir/flags.make
-CMakeFiles/minishell.dir/main.c.o: /sam/Codam/minishell/main.c
-CMakeFiles/minishell.dir/main.c.o: CMakeFiles/minishell.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sam/Codam/minishell/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/minishell.dir/main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/minishell.dir/main.c.o -MF CMakeFiles/minishell.dir/main.c.o.d -o CMakeFiles/minishell.dir/main.c.o -c /sam/Codam/minishell/main.c
+CMakeFiles/minishell.dir/src/main.c.o: CMakeFiles/minishell.dir/flags.make
+CMakeFiles/minishell.dir/src/main.c.o: /sam/Codam/minishell/src/main.c
+CMakeFiles/minishell.dir/src/main.c.o: CMakeFiles/minishell.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sam/Codam/minishell/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/minishell.dir/src/main.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/minishell.dir/src/main.c.o -MF CMakeFiles/minishell.dir/src/main.c.o.d -o CMakeFiles/minishell.dir/src/main.c.o -c /sam/Codam/minishell/src/main.c
 
-CMakeFiles/minishell.dir/main.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/minishell.dir/main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /sam/Codam/minishell/main.c > CMakeFiles/minishell.dir/main.c.i
+CMakeFiles/minishell.dir/src/main.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/minishell.dir/src/main.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /sam/Codam/minishell/src/main.c > CMakeFiles/minishell.dir/src/main.c.i
 
-CMakeFiles/minishell.dir/main.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/minishell.dir/main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /sam/Codam/minishell/main.c -o CMakeFiles/minishell.dir/main.c.s
+CMakeFiles/minishell.dir/src/main.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/minishell.dir/src/main.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /sam/Codam/minishell/src/main.c -o CMakeFiles/minishell.dir/src/main.c.s
+
+CMakeFiles/minishell.dir/src/Parsing/parsing.c.o: CMakeFiles/minishell.dir/flags.make
+CMakeFiles/minishell.dir/src/Parsing/parsing.c.o: /sam/Codam/minishell/src/Parsing/parsing.c
+CMakeFiles/minishell.dir/src/Parsing/parsing.c.o: CMakeFiles/minishell.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sam/Codam/minishell/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/minishell.dir/src/Parsing/parsing.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/minishell.dir/src/Parsing/parsing.c.o -MF CMakeFiles/minishell.dir/src/Parsing/parsing.c.o.d -o CMakeFiles/minishell.dir/src/Parsing/parsing.c.o -c /sam/Codam/minishell/src/Parsing/parsing.c
+
+CMakeFiles/minishell.dir/src/Parsing/parsing.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/minishell.dir/src/Parsing/parsing.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /sam/Codam/minishell/src/Parsing/parsing.c > CMakeFiles/minishell.dir/src/Parsing/parsing.c.i
+
+CMakeFiles/minishell.dir/src/Parsing/parsing.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/minishell.dir/src/Parsing/parsing.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /sam/Codam/minishell/src/Parsing/parsing.c -o CMakeFiles/minishell.dir/src/Parsing/parsing.c.s
 
 # Object files for target minishell
 minishell_OBJECTS = \
-"CMakeFiles/minishell.dir/main.c.o"
+"CMakeFiles/minishell.dir/src/main.c.o" \
+"CMakeFiles/minishell.dir/src/Parsing/parsing.c.o"
 
 # External object files for target minishell
 minishell_EXTERNAL_OBJECTS =
 
-minishell: CMakeFiles/minishell.dir/main.c.o
+minishell: CMakeFiles/minishell.dir/src/main.c.o
+minishell: CMakeFiles/minishell.dir/src/Parsing/parsing.c.o
 minishell: CMakeFiles/minishell.dir/build.make
 minishell: /sam/Codam/minishell/Lib42/libft.a
 minishell: CMakeFiles/minishell.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/sam/Codam/minishell/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable minishell"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/sam/Codam/minishell/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable minishell"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/minishell.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
