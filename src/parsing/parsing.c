@@ -29,7 +29,6 @@ void count_args(s_data *mini_data)
         }
         walk++;
     }
-    printf("%d", mini_data->amount_of_tolkens);
 }
 
 //take in account << and <
