@@ -25,6 +25,8 @@ typedef struct t_env_args
  * @str
  * @in_file boolean in case need read from a file
  * @out_file boolean in case need to write on a file
+ * @s_quote if it's between single quotes
+ * @d_quote if it's between double quotes
  * @next next item on the list
  */
 typedef struct t_tolkens
