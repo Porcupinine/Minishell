@@ -32,6 +32,8 @@ typedef struct t_tolkens
     char *str;
     bool in_file;
     bool out_file;
+    bool s_quote;
+    bool d_quote;
     struct t_tolkens *next;
 }s_tolkens;
 
