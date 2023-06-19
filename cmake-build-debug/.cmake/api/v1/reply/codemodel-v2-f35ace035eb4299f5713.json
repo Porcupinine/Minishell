@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "minishell::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-minishell-Debug-4423894cd2d1e52c9967.json",
+					"jsonFile" : "target-minishell-Debug-4f5a63cf3686170b9058.json",
 					"name" : "minishell",
 					"projectIndex" : 0
 				}
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/sam/Codam/minishell/cmake-build-debug",
-		"source" : "/sam/Codam/minishell"
+		"build" : "/Users/lpraca-l/Documents/CodamGit/minishell/cmake-build-debug",
+		"source" : "/Users/lpraca-l/Documents/CodamGit/minishell"
 	},
 	"version" : 
 	{

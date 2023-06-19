@@ -1,1 +1,0 @@
-/usr/bin/cc -g CMakeFiles/minishell.dir/src/main.c.o CMakeFiles/minishell.dir/src/Parsing/parsing.c.o -o minishell  /sam/Codam/minishell/Lib42/libft.a -lreadline 

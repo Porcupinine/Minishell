@@ -1,0 +1,22 @@
+# ninja log v5
+1	111	1687167792000000000	CMakeFiles/minishell.dir/src/Parsing/lexycal_analizer.c.o	1200e34bf96457c5
+1	56	1687167910000000000	CMakeFiles/minishell.dir/src/Parsing/parsing.c.o	dd09996e6cc3fbb2
+0	309	1687167926000000000	CMakeFiles/minishell.dir/src/main.c.o	ce8e4b58fbc68f28
+310	414	1687167926000000000	minishell	9f97eec679a6663d
+1	153	1687167957000000000	CMakeFiles/minishell.dir/src/main.c.o	ce8e4b58fbc68f28
+153	239	1687167957000000000	minishell	9f97eec679a6663d
+4	123	1687167987000000000	CMakeFiles/minishell.dir/src/main.c.o	ce8e4b58fbc68f28
+123	196	1687167987000000000	minishell	9f97eec679a6663d
+1	52	1687168002000000000	CMakeFiles/minishell.dir/src/main.c.o	ce8e4b58fbc68f28
+52	115	1687168002000000000	minishell	9f97eec679a6663d
+1	383	1687168813000000000	CMakeFiles/minishell.dir/src/main.c.o	ce8e4b58fbc68f28
+1	383	1687168813000000000	CMakeFiles/minishell.dir/src/Parsing/parsing.c.o	dd09996e6cc3fbb2
+383	479	1687168813000000000	minishell	9f97eec679a6663d
+1	73	1687168878000000000	CMakeFiles/minishell.dir/src/main.c.o	ce8e4b58fbc68f28
+73	111	1687168878000000000	minishell	9f97eec679a6663d
+5	475	1687169636000000000	CMakeFiles/minishell.dir/src/Parsing/parsing.c.o	dd09996e6cc3fbb2
+476	583	1687169636000000000	minishell	9f97eec679a6663d
+0	116	1687169816000000000	CMakeFiles/minishell.dir/src/Parsing/parsing.c.o	dd09996e6cc3fbb2
+117	269	1687169816000000000	minishell	9f97eec679a6663d
+1	119	1687170014000000000	CMakeFiles/minishell.dir/src/Parsing/parsing.c.o	dd09996e6cc3fbb2
+119	201	1687170014000000000	minishell	9f97eec679a6663d

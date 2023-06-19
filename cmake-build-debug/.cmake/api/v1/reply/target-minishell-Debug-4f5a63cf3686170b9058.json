@@ -42,7 +42,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g -fdiagnostics-color=always"
+					"fragment" : "-g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -mmacosx-version-min=10.14 -fcolor-diagnostics"
 				},
 				{
 					"fragment" : "-std=gnu99"
@@ -60,7 +60,8 @@
 			"sourceIndexes" : 
 			[
 				0,
-				3
+				3,
+				4
 			]
 		}
 	],
@@ -79,7 +80,7 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "/sam/Codam/minishell/Lib42/libft.a",
+				"fragment" : "/Users/lpraca-l/Documents/CodamGit/minishell/Lib42/libft.a",
 				"role" : "libraries"
 			},
 			{
@@ -104,7 +105,8 @@
 			"sourceIndexes" : 
 			[
 				0,
-				3
+				3,
+				4
 			]
 		},
 		{
@@ -138,6 +140,12 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "src/Parsing/parsing.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/Parsing/lexycal_analizer.c",
 			"sourceGroupIndex" : 0
 		}
 	],

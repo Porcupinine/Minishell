@@ -1,4 +1,4 @@
-/snap/clion/237/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -S /sam/Codam/minishell -B /sam/Codam/minishell/cmake-build-debug
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/ninja -G Ninja -S /Users/lpraca-l/Documents/CodamGit/minishell -B /Users/lpraca-l/Documents/CodamGit/minishell/cmake-build-debug
 -- Configuring done
 -- Generating done
--- Build files have been written to: /sam/Codam/minishell/cmake-build-debug
+-- Build files have been written to: /Users/lpraca-l/Documents/CodamGit/minishell/cmake-build-debug

@@ -3,32 +3,33 @@
 #include <readline/history.h>
 #include <signal.h>
 #include "../Lib42/include/libft.h"
+#include "../include/minishell.h"
+#include "../include/parser.h"
 
-void handler(int num)
-{
-    // writes signal used on the log?
-    if (//SIGINT, kill all kids (CTRL C))
-    else if (//SIGQUIT, kill family (CTRL D))
-    else if (// , do nothing (CTRL \))
-}
+//void handler(int num)
+//{
+//    // writes signal used on the log?
+//    if (//SIGINT, kill all kids (CTRL C))
+//    else if (//SIGQUIT, do nothing (CTRL \))
+//    else if (//EOF, kill family (CTRL D))
+//}
 
 int main(int argc, char **argv, char **envp)
 {
-    char *commands;
-    struct sigaction sa;
+//    struct sigaction sa;
+    s_data *mini_data;
 
-    sa.sa_handler = &handler;
-    if (argc != 1)
-        ft_error("EROOR!!\nWrong amount of args!\n");
-    signal(SIGINT, handler);
-    sigaction()
+    mini_data = malloc(1*sizeof(s_data));
+    if (mini_data == NULL)
+        ft_error("Data malloc fail!\n");
+//    sa.sa_handler = &handler;
+//    if (argc != 1)
+//        ft_error("EROOR!!\nWrong amount of args!\n");
+//    signal(SIGINT, handler);
     while (1)
     {
-        commands = readline("minishell: ");
-        printf("%s", commands);
+        mini_data->command_line = readline("\nminishell: ");
+        printf("%s\n", mini_data->command_line);
+        count_args(mini_data);
     }
 }
-
-//ctrl c kill runing child processe, make a handler that recognize if its parent or kid
-//ctrl d kill them  all
-// ctrl \ faz nada

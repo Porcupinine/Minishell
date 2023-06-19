@@ -5,12 +5,18 @@
 #ifndef MINISHELL_MINISHELL_H
 #define MINISHELL_MINISHELL_H
 
+/**
+ * @amount_of_args
+ * @tolkens
+ * @env_arg
+ * @command_line
+ */
 typedef struct t_data
 {
-    int amount_of_args;
-    char **args;
-    char *env_arg;
-
+    int amount_of_tolkens;
+    char **tolkens;
+    char **env_arg;
+    char *command_line;
 
 }s_data;
 
