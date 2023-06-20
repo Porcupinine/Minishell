@@ -61,7 +61,9 @@
 			[
 				0,
 				3,
-				4
+				4,
+				5,
+				6
 			]
 		}
 	],
@@ -106,7 +108,9 @@
 			[
 				0,
 				3,
-				4
+				4,
+				5,
+				6
 			]
 		},
 		{
@@ -139,13 +143,25 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/Parsing/parsing.c",
+			"path" : "src/parsing/parsing.c",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/Parsing/lexycal_analizer.c",
+			"path" : "src/parsing/lexycal_analizer.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/parsing/env_var.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/arg_list_actions/add_new_node.c",
 			"sourceGroupIndex" : 0
 		}
 	],

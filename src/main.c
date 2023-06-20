@@ -6,26 +6,32 @@
 #include "../include/minishell.h"
 #include "../include/parser.h"
 
-//void handler(int num)
-//{
-//    // writes signal used on the log?
-//    if (//SIGINT, kill all kids (CTRL C))
-//    else if (//SIGQUIT, do nothing (CTRL \))
-//    else if (//EOF, kill family (CTRL D))
-//}
+void sigint_handler(int sig)
+{
+    write(1, "sigint\n", 7);
+}
+
+void sigquit_handler(int sig)
+{
+    write(1,"sigquit\n", 8);
+}
 
 int main(int argc, char **argv, char **envp)
 {
-//    struct sigaction sa;
-    s_data *mini_data;
+    struct sigaction sigint_sa;
+    struct sigaction sigquit_sa;
+    t_data *mini_data;
 
-    mini_data = malloc(1*sizeof(s_data));
+    mini_data = malloc(1*sizeof(t_data));
     if (mini_data == NULL)
         ft_error("Data malloc fail!\n");
-//    sa.sa_handler = &handler;
-//    if (argc != 1)
-//        ft_error("EROOR!!\nWrong amount of args!\n");
-//    signal(SIGINT, handler);
+    mini_data->mini_envp = envp;
+    sigquit_sa.sa_handler = &sigquit_handler;
+    sigint_sa.sa_handler = &sigint_handler;
+    if (argc != 1)
+        ft_error("EROOR!!\nWrong amount of args!\n");
+    sigaction(SIGQUIT, &sigquit_sa, NULL);
+    sigaction(SIGINT, &sigint_sa, NULL);
     while (1)
     {
         mini_data->command_line = readline("\nminishell: ");

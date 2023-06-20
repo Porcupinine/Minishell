@@ -13,12 +13,12 @@
  * @content content of the variable
  * @next next variable
  */
-typedef struct t_env_args
+typedef struct s_env_args
 {
     char *name;
     char *content;
-    struct t_env_args *next;
-}s_env_args;
+    struct s_env_args *next;
+}t_env_args;
 
 /**
  * list with all tolkens
@@ -29,15 +29,15 @@ typedef struct t_env_args
  * @d_quote if it's between double quotes
  * @next next item on the list
  */
-typedef struct t_tolkens
+typedef struct s_tolkens
 {
     char *str;
     bool in_file;
     bool out_file;
     bool s_quote;
     bool d_quote;
-    struct t_tolkens *next;
-}s_tolkens;
+    struct s_tolkens *next;
+}t_tolkens;
 
 /**
  * Main struct with all the information that is needed to run
@@ -48,16 +48,20 @@ typedef struct t_tolkens
  * @env_arg list of environment variables
  * @command_line original command line
  */
-typedef struct t_data
+typedef struct s_data
 {
     int amount_of_tolkens;
     int amount_of_env_args;
     char **tolkens;
-    s_tolkens tolkens_list;
-    s_env_args env_args;
+    char **mini_envp;
+    t_tolkens tolkens_list;
+    t_env_args env_args;
     char *command_line;
+    int count_s_quote;
+    int count_d_quote;
 
-}s_data;
+
+}t_data;
 
 
 
