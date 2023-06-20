@@ -13,7 +13,7 @@ void sigint_handler(int sig)
 
 void sigquit_handler(int sig)
 {
-    write(1,"sigquit\n", 8);
+
 }
 
 int main(int argc, char **argv, char **envp)
