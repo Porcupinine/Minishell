@@ -1,0 +1,9 @@
+# ninja log v5
+1	111	1687167792000000000	CMakeFiles/minishell.dir/src/Parsing/lexycal_analizer.c.o	1200e34bf96457c5
+1	119	1687170014000000000	CMakeFiles/minishell.dir/src/Parsing/parsing.c.o	dd09996e6cc3fbb2
+1	579	1687266403000000000	CMakeFiles/minishell.dir/src/main.c.o	ce8e4b58fbc68f28
+16	522	1687261829000000000	CMakeFiles/minishell.dir/src/parsing/lexycal_analizer.c.o	264a9655c36902a4
+522	647	1687261829000000000	CMakeFiles/minishell.dir/src/parsing/env_var.c.o	18b79c71d71e0c14
+579	671	1687266403000000000	minishell	5cb487a9c8f3204b
+15	647	1687261829000000000	CMakeFiles/minishell.dir/src/parsing/parsing.c.o	b7b47ae918c5f2fd
+1	44	1687261839000000000	CMakeFiles/minishell.dir/src/arg_list_actions/add_new_node.c.o	b670e136610937ee

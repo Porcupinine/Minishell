@@ -49,11 +49,35 @@ cmake_ninja_workdir = /Users/lpraca-l/Documents/CodamGit/minishell/cmake-build-d
 
 build cmake_object_order_depends_target_minishell: phony || CMakeFiles/minishell.dir
 
-build CMakeFiles/minishell.dir/main.c.o: C_COMPILER__minishell_Debug /Users/lpraca-l/Documents/CodamGit/minishell/main.c || cmake_object_order_depends_target_minishell
-  DEP_FILE = CMakeFiles/minishell.dir/main.c.o.d
+build CMakeFiles/minishell.dir/src/main.c.o: C_COMPILER__minishell_Debug /Users/lpraca-l/Documents/CodamGit/minishell/src/main.c || cmake_object_order_depends_target_minishell
+  DEP_FILE = CMakeFiles/minishell.dir/src/main.c.o.d
   FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -mmacosx-version-min=10.14 -fcolor-diagnostics -std=gnu99
   OBJECT_DIR = CMakeFiles/minishell.dir
-  OBJECT_FILE_DIR = CMakeFiles/minishell.dir
+  OBJECT_FILE_DIR = CMakeFiles/minishell.dir/src
+
+build CMakeFiles/minishell.dir/src/parsing/parsing.c.o: C_COMPILER__minishell_Debug /Users/lpraca-l/Documents/CodamGit/minishell/src/parsing/parsing.c || cmake_object_order_depends_target_minishell
+  DEP_FILE = CMakeFiles/minishell.dir/src/parsing/parsing.c.o.d
+  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -mmacosx-version-min=10.14 -fcolor-diagnostics -std=gnu99
+  OBJECT_DIR = CMakeFiles/minishell.dir
+  OBJECT_FILE_DIR = CMakeFiles/minishell.dir/src/parsing
+
+build CMakeFiles/minishell.dir/src/parsing/lexycal_analizer.c.o: C_COMPILER__minishell_Debug /Users/lpraca-l/Documents/CodamGit/minishell/src/parsing/lexycal_analizer.c || cmake_object_order_depends_target_minishell
+  DEP_FILE = CMakeFiles/minishell.dir/src/parsing/lexycal_analizer.c.o.d
+  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -mmacosx-version-min=10.14 -fcolor-diagnostics -std=gnu99
+  OBJECT_DIR = CMakeFiles/minishell.dir
+  OBJECT_FILE_DIR = CMakeFiles/minishell.dir/src/parsing
+
+build CMakeFiles/minishell.dir/src/parsing/env_var.c.o: C_COMPILER__minishell_Debug /Users/lpraca-l/Documents/CodamGit/minishell/src/parsing/env_var.c || cmake_object_order_depends_target_minishell
+  DEP_FILE = CMakeFiles/minishell.dir/src/parsing/env_var.c.o.d
+  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -mmacosx-version-min=10.14 -fcolor-diagnostics -std=gnu99
+  OBJECT_DIR = CMakeFiles/minishell.dir
+  OBJECT_FILE_DIR = CMakeFiles/minishell.dir/src/parsing
+
+build CMakeFiles/minishell.dir/src/arg_list_actions/add_new_node.c.o: C_COMPILER__minishell_Debug /Users/lpraca-l/Documents/CodamGit/minishell/src/arg_list_actions/add_new_node.c || cmake_object_order_depends_target_minishell
+  DEP_FILE = CMakeFiles/minishell.dir/src/arg_list_actions/add_new_node.c.o.d
+  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -mmacosx-version-min=10.14 -fcolor-diagnostics -std=gnu99
+  OBJECT_DIR = CMakeFiles/minishell.dir
+  OBJECT_FILE_DIR = CMakeFiles/minishell.dir/src/arg_list_actions
 
 
 # =============================================================================
@@ -63,8 +87,9 @@ build CMakeFiles/minishell.dir/main.c.o: C_COMPILER__minishell_Debug /Users/lpra
 #############################################
 # Link the executable minishell
 
-build minishell: C_EXECUTABLE_LINKER__minishell_Debug CMakeFiles/minishell.dir/main.c.o
+build minishell: C_EXECUTABLE_LINKER__minishell_Debug CMakeFiles/minishell.dir/src/main.c.o CMakeFiles/minishell.dir/src/parsing/parsing.c.o CMakeFiles/minishell.dir/src/parsing/lexycal_analizer.c.o CMakeFiles/minishell.dir/src/parsing/env_var.c.o CMakeFiles/minishell.dir/src/arg_list_actions/add_new_node.c.o | /Users/lpraca-l/Documents/CodamGit/minishell/Lib42/libft.a
   FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -mmacosx-version-min=10.14
+  LINK_LIBRARIES = /Users/lpraca-l/Documents/CodamGit/minishell/Lib42/libft.a  -lreadline
   OBJECT_DIR = CMakeFiles/minishell.dir
   POST_BUILD = :
   PRE_LINK = :
