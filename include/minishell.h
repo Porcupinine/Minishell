@@ -5,7 +5,17 @@
 #ifndef MINISHELL_MINISHELL_H
 #define MINISHELL_MINISHELL_H
 
+#include <signal.h>
 #include <stdbool.h>
+
+/**
+ * list of child PIDs
+ */
+typedef struct s_pid
+{
+    pid_t pid;
+    struct s_pid *next;
+}t_pid;
 
 /**
  * list of environment variables
