@@ -5,6 +5,7 @@
 #include "../Lib42/include/libft.h"
 #include "../include/minishell.h"
 #include "../include/parser.h"
+#include "../include/lexical_analyzer.h"
 
 void sigint_handler(int sig)
 {
@@ -35,7 +36,8 @@ int main(int argc, char **argv, char **envp)
     while (1)
     {
         mini_data->command_line = readline("\nminishell: ");
-        printf("%s\n", mini_data->command_line);
+//        printf("%s\n", mini_data->command_line);
+        break_cmd(mini_data);
         count_args(mini_data);
     }
 }

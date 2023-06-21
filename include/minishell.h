@@ -42,10 +42,6 @@ typedef struct s_env_args
 typedef struct s_tolkens
 {
     char *str;
-    bool in_file;
-    bool out_file;
-    bool s_quote;
-    bool d_quote;
     struct s_tolkens *next;
 }t_tolkens;
 
@@ -64,13 +60,11 @@ typedef struct s_data
     int amount_of_env_args;
     char **tolkens;
     char **mini_envp;
-    t_tolkens tolkens_list;
-    t_env_args env_args;
+    t_tolkens *tolkens_list;
+    t_env_args *env_args;
     char *command_line;
     int count_s_quote;
     int count_d_quote;
-
-
 }t_data;
 
 

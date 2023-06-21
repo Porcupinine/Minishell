@@ -48,19 +48,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/clion/237/bin/cmake/linux/x64/bin/cmake
+CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
 
 # The command to remove a file.
-RM = /snap/clion/237/bin/cmake/linux/x64/bin/cmake -E rm -f
+RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /sam/Codam/minishell
+CMAKE_SOURCE_DIR = /Users/lpraca-l/Documents/CodamGit/minishell
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /sam/Codam/minishell/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/lpraca-l/Documents/CodamGit/minishell/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -68,7 +68,7 @@ CMAKE_BINARY_DIR = /sam/Codam/minishell/cmake-build-debug
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/snap/clion/237/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -78,7 +78,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/snap/clion/237/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /sam/Codam/minishell/cmake-build-debug/CMakeFiles /sam/Codam/minishell/cmake-build-debug//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/lpraca-l/Documents/CodamGit/minishell/cmake-build-debug/CMakeFiles /Users/lpraca-l/Documents/CodamGit/minishell/cmake-build-debug//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /sam/Codam/minishell/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/lpraca-l/Documents/CodamGit/minishell/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -129,29 +129,53 @@ minishell/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/build
 .PHONY : minishell/fast
 
-src/Parsing/parsing.o: src/Parsing/parsing.c.o
-.PHONY : src/Parsing/parsing.o
+src/arg_list_actions/add_arg_node.o: src/arg_list_actions/add_arg_node.c.o
+.PHONY : src/arg_list_actions/add_arg_node.o
 
 # target to build an object file
-src/Parsing/parsing.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/src/Parsing/parsing.c.o
-.PHONY : src/Parsing/parsing.c.o
+src/arg_list_actions/add_arg_node.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/src/arg_list_actions/add_arg_node.c.o
+.PHONY : src/arg_list_actions/add_arg_node.c.o
 
-src/Parsing/parsing.i: src/Parsing/parsing.c.i
-.PHONY : src/Parsing/parsing.i
+src/arg_list_actions/add_arg_node.i: src/arg_list_actions/add_arg_node.c.i
+.PHONY : src/arg_list_actions/add_arg_node.i
 
 # target to preprocess a source file
-src/Parsing/parsing.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/src/Parsing/parsing.c.i
-.PHONY : src/Parsing/parsing.c.i
+src/arg_list_actions/add_arg_node.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/src/arg_list_actions/add_arg_node.c.i
+.PHONY : src/arg_list_actions/add_arg_node.c.i
 
-src/Parsing/parsing.s: src/Parsing/parsing.c.s
-.PHONY : src/Parsing/parsing.s
+src/arg_list_actions/add_arg_node.s: src/arg_list_actions/add_arg_node.c.s
+.PHONY : src/arg_list_actions/add_arg_node.s
 
 # target to generate assembly for a file
-src/Parsing/parsing.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/src/Parsing/parsing.c.s
-.PHONY : src/Parsing/parsing.c.s
+src/arg_list_actions/add_arg_node.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/src/arg_list_actions/add_arg_node.c.s
+.PHONY : src/arg_list_actions/add_arg_node.c.s
+
+src/lexical_analyser/lexe.o: src/lexical_analyser/lexe.c.o
+.PHONY : src/lexical_analyser/lexe.o
+
+# target to build an object file
+src/lexical_analyser/lexe.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/src/lexical_analyser/lexe.c.o
+.PHONY : src/lexical_analyser/lexe.c.o
+
+src/lexical_analyser/lexe.i: src/lexical_analyser/lexe.c.i
+.PHONY : src/lexical_analyser/lexe.i
+
+# target to preprocess a source file
+src/lexical_analyser/lexe.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/src/lexical_analyser/lexe.c.i
+.PHONY : src/lexical_analyser/lexe.c.i
+
+src/lexical_analyser/lexe.s: src/lexical_analyser/lexe.c.s
+.PHONY : src/lexical_analyser/lexe.s
+
+# target to generate assembly for a file
+src/lexical_analyser/lexe.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/src/lexical_analyser/lexe.c.s
+.PHONY : src/lexical_analyser/lexe.c.s
 
 src/main.o: src/main.c.o
 .PHONY : src/main.o
@@ -177,6 +201,126 @@ src/main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/src/main.c.s
 .PHONY : src/main.c.s
 
+src/parsing/env_var.o: src/parsing/env_var.c.o
+.PHONY : src/parsing/env_var.o
+
+# target to build an object file
+src/parsing/env_var.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/src/parsing/env_var.c.o
+.PHONY : src/parsing/env_var.c.o
+
+src/parsing/env_var.i: src/parsing/env_var.c.i
+.PHONY : src/parsing/env_var.i
+
+# target to preprocess a source file
+src/parsing/env_var.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/src/parsing/env_var.c.i
+.PHONY : src/parsing/env_var.c.i
+
+src/parsing/env_var.s: src/parsing/env_var.c.s
+.PHONY : src/parsing/env_var.s
+
+# target to generate assembly for a file
+src/parsing/env_var.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/src/parsing/env_var.c.s
+.PHONY : src/parsing/env_var.c.s
+
+src/parsing/lexycal_analizer.o: src/parsing/lexycal_analizer.c.o
+.PHONY : src/parsing/lexycal_analizer.o
+
+# target to build an object file
+src/parsing/lexycal_analizer.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/src/parsing/lexycal_analizer.c.o
+.PHONY : src/parsing/lexycal_analizer.c.o
+
+src/parsing/lexycal_analizer.i: src/parsing/lexycal_analizer.c.i
+.PHONY : src/parsing/lexycal_analizer.i
+
+# target to preprocess a source file
+src/parsing/lexycal_analizer.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/src/parsing/lexycal_analizer.c.i
+.PHONY : src/parsing/lexycal_analizer.c.i
+
+src/parsing/lexycal_analizer.s: src/parsing/lexycal_analizer.c.s
+.PHONY : src/parsing/lexycal_analizer.s
+
+# target to generate assembly for a file
+src/parsing/lexycal_analizer.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/src/parsing/lexycal_analizer.c.s
+.PHONY : src/parsing/lexycal_analizer.c.s
+
+src/parsing/parsing.o: src/parsing/parsing.c.o
+.PHONY : src/parsing/parsing.o
+
+# target to build an object file
+src/parsing/parsing.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/src/parsing/parsing.c.o
+.PHONY : src/parsing/parsing.c.o
+
+src/parsing/parsing.i: src/parsing/parsing.c.i
+.PHONY : src/parsing/parsing.i
+
+# target to preprocess a source file
+src/parsing/parsing.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/src/parsing/parsing.c.i
+.PHONY : src/parsing/parsing.c.i
+
+src/parsing/parsing.s: src/parsing/parsing.c.s
+.PHONY : src/parsing/parsing.s
+
+# target to generate assembly for a file
+src/parsing/parsing.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/src/parsing/parsing.c.s
+.PHONY : src/parsing/parsing.c.s
+
+src/tolken_list_actions/add_tolken.o: src/tolken_list_actions/add_tolken.c.o
+.PHONY : src/tolken_list_actions/add_tolken.o
+
+# target to build an object file
+src/tolken_list_actions/add_tolken.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/src/tolken_list_actions/add_tolken.c.o
+.PHONY : src/tolken_list_actions/add_tolken.c.o
+
+src/tolken_list_actions/add_tolken.i: src/tolken_list_actions/add_tolken.c.i
+.PHONY : src/tolken_list_actions/add_tolken.i
+
+# target to preprocess a source file
+src/tolken_list_actions/add_tolken.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/src/tolken_list_actions/add_tolken.c.i
+.PHONY : src/tolken_list_actions/add_tolken.c.i
+
+src/tolken_list_actions/add_tolken.s: src/tolken_list_actions/add_tolken.c.s
+.PHONY : src/tolken_list_actions/add_tolken.s
+
+# target to generate assembly for a file
+src/tolken_list_actions/add_tolken.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/src/tolken_list_actions/add_tolken.c.s
+.PHONY : src/tolken_list_actions/add_tolken.c.s
+
+src/tolken_list_actions/print_tolkens.o: src/tolken_list_actions/print_tolkens.c.o
+.PHONY : src/tolken_list_actions/print_tolkens.o
+
+# target to build an object file
+src/tolken_list_actions/print_tolkens.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/src/tolken_list_actions/print_tolkens.c.o
+.PHONY : src/tolken_list_actions/print_tolkens.c.o
+
+src/tolken_list_actions/print_tolkens.i: src/tolken_list_actions/print_tolkens.c.i
+.PHONY : src/tolken_list_actions/print_tolkens.i
+
+# target to preprocess a source file
+src/tolken_list_actions/print_tolkens.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/src/tolken_list_actions/print_tolkens.c.i
+.PHONY : src/tolken_list_actions/print_tolkens.c.i
+
+src/tolken_list_actions/print_tolkens.s: src/tolken_list_actions/print_tolkens.c.s
+.PHONY : src/tolken_list_actions/print_tolkens.s
+
+# target to generate assembly for a file
+src/tolken_list_actions/print_tolkens.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/src/tolken_list_actions/print_tolkens.c.s
+.PHONY : src/tolken_list_actions/print_tolkens.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -186,12 +330,30 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... minishell"
-	@echo "... src/Parsing/parsing.o"
-	@echo "... src/Parsing/parsing.i"
-	@echo "... src/Parsing/parsing.s"
+	@echo "... src/arg_list_actions/add_arg_node.o"
+	@echo "... src/arg_list_actions/add_arg_node.i"
+	@echo "... src/arg_list_actions/add_arg_node.s"
+	@echo "... src/lexical_analyser/lexe.o"
+	@echo "... src/lexical_analyser/lexe.i"
+	@echo "... src/lexical_analyser/lexe.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/parsing/env_var.o"
+	@echo "... src/parsing/env_var.i"
+	@echo "... src/parsing/env_var.s"
+	@echo "... src/parsing/lexycal_analizer.o"
+	@echo "... src/parsing/lexycal_analizer.i"
+	@echo "... src/parsing/lexycal_analizer.s"
+	@echo "... src/parsing/parsing.o"
+	@echo "... src/parsing/parsing.i"
+	@echo "... src/parsing/parsing.s"
+	@echo "... src/tolken_list_actions/add_tolken.o"
+	@echo "... src/tolken_list_actions/add_tolken.i"
+	@echo "... src/tolken_list_actions/add_tolken.s"
+	@echo "... src/tolken_list_actions/print_tolkens.o"
+	@echo "... src/tolken_list_actions/print_tolkens.i"
+	@echo "... src/tolken_list_actions/print_tolkens.s"
 .PHONY : help
 
 
