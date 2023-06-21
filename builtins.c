@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 17:07:22 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/06/20 16:26:09 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:56:43 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,41 +60,41 @@ void	builtin_echo(char **argv) // or command (check struct naming)
 	if cd ../../.. --> check if backslash present else add it yoruself
 	if cd xx/ --> check if backslash present else add it yoruself
 */
-void	builtin_cd(s_data *minidata, char **envp)
+void	builtin_cd(t_data *mini_data)
 {
 	int i;
 	struct stat info;
 	
-	if (ft_strchr(minidata->tokens.str[0], "cd\0")) // bring back to home directory
+	if (ft_strchr(mini_data->tokens.str[0], "cd\0")) // bring back to home directory
 	{
 		i = 0;
-		while (envp[i])
+		while (mini_data->mini_envp[i])
 		{
-			if (ft_strncmp(envp[i], "HOME=", 5) == 0) // all good also if unset HOME as should error
+			if (ft_strncmp(mini_data->mini_envp[i], "HOME=", 5) == 0) // all good also if unset HOME as should error
 				break ;
 			i++;
 		}
-		if (chdir(envp[i] + 5) != 0)
+		if (chdir(mini_data->mini_envp[i] + 5) != 0)
 			return (ft_exit(errno)); // check
 		return (0); // check
 	}
 	else // a specified path
 	{
-		if (lstat(minidata->token.str[0], &info) == 0) // do something if != 0 ??
+		if (lstat(mini_data->token.str[0], &info) == 0) // do something if != 0 ??
 		{
 			if (S_ISDIR(info.st_mode)) // check if the path leads is a directory
 			{
-				if (minidata->token.str[0][ft_strlen(minidata->token.str)] != "/")
-					minidata->token.str[0] = ft_strjoin(minidata->token.str[0], "/");
+				if (mini_data->token.str[0][ft_strlen(mini_data->token.str)] != "/")
+					mini_data->token.str[0] = ft_strjoin(mini_data->token.str[0], "/");
 			}	
 		}
-		if (chdir(minidata->token.str[0]) != 0)
+		if (chdir(mini_data->token.str[0]) != 0)
 			return (ft_exit(errno)); // check
 		return (0); // check
 	}
 }
 
-void	builtin_pwd(s_data *minidata) // ft getcwd ?? or via envp "PWD=" not an option if path unset
+void	builtin_pwd(t_data *mini_data) // ft getcwd ?? or via envp "PWD=" not an option if path unset
 {
 	char *pwd_path;
 
@@ -121,12 +121,12 @@ void	builtin_export()
 	maybe getenvp then unlink
 	and for attributes/var ??
 */
-void	builtin_unset(s_data *minidata) 
+void	builtin_unset(t_data *mini_data) 
 {
 	char *arg;
 	char *path;
 	
-	arg = ft_substr(minidata->tokens.str, ft_strlen("unset "), ft_strlen(minidata->tokens.str)); // str in a certain position tho..
+	arg = ft_substr(mini_data->tokens.str, ft_strlen("unset "), ft_strlen(mini_data->tokens.str)); // str in a certain position tho..
 	if (arg == NULL)
 		return (ft_exit(errno)); // check this exit tho
 	// need to check if only 1 word tho or not?
