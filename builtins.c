@@ -6,9 +6,16 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 17:07:22 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/06/14 13:02:52 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:26:09 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdio.h>
+#include <unistd.h>
+#include <limits.h>
+#include <errno.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 /* 
 file for the buildins:
@@ -21,35 +28,84 @@ file for the buildins:
     ◦ exit with no options
 */
 
+void ft_exit(int error)
+{
+	strerror(error);
+	exit(error);
+}
+
+/*
+	should it also handle echo $?  ??
+	example to deal with the $ARG/$PATH expantion: printf("PATH : %s\n", getenv("PATH"));
+	// one extra else if in case non-accepted flags, or does laura handle upfront?
+	// for both handle the $ or not ?? think so
+*/
 void	builtin_echo(char **argv) // or command (check struct naming)
 {
 	if (ft_strncmp(argv[1], "echo -n", 7) == 0)
-		printf("%s", argv[2]); // without \n at the end
+		printf("%s", argv[2]);
 	else
-		printf("%s\n", argv[2]); // or whatever
-	// for both handle the $ or not ?? think so
-	// what do we return? exit code?
+		printf("%s\n", argv[2]);
+	
+	return (0); // check
 }
 
-void	builtin_cd()
-{
-	// Q: whats a relative or absolute path?
-}
+/*
+	abs path describe the location from the root directory
+	relative path takes you below your current one
 
-void	builtin_pwd(char **envp)
+	if only cd --> takes you back to home directory
+	if cd . --> don't implement
+	if cd .. --> don't implement
+	if cd ../../.. --> check if backslash present else add it yoruself
+	if cd xx/ --> check if backslash present else add it yoruself
+*/
+void	builtin_cd(s_data *minidata, char **envp)
 {
 	int i;
-
-	i = 0;
-	while (envp[i])
+	struct stat info;
+	
+	if (ft_strchr(minidata->tokens.str[0], "cd\0")) // bring back to home directory
 	{
-			if (ft_strncmp(envp[i], "PWD=", 4) == 0)
+		i = 0;
+		while (envp[i])
+		{
+			if (ft_strncmp(envp[i], "HOME=", 5) == 0) // all good also if unset HOME as should error
 				break ;
 			i++;
+		}
+		if (chdir(envp[i] + 5) != 0)
+			return (ft_exit(errno)); // check
+		return (0); // check
 	}
-	// check if found somehow
-	printf("%s", envp[i] + 4); // is string format right ??
-	// return something ??
+	else // a specified path
+	{
+		if (lstat(minidata->token.str[0], &info) == 0) // do something if != 0 ??
+		{
+			if (S_ISDIR(info.st_mode)) // check if the path leads is a directory
+			{
+				if (minidata->token.str[0][ft_strlen(minidata->token.str)] != "/")
+					minidata->token.str[0] = ft_strjoin(minidata->token.str[0], "/");
+			}	
+		}
+		if (chdir(minidata->token.str[0]) != 0)
+			return (ft_exit(errno)); // check
+		return (0); // check
+	}
+}
+
+void	builtin_pwd(s_data *minidata) // ft getcwd ?? or via envp "PWD=" not an option if path unset
+{
+	char *pwd_path;
+
+	pwd_path = malloc((PATH_MAX + 1) * sizeof(char));
+	if (pwd_path == NULL)
+		return (ft_exit(errno)); // check this exit tho
+	if (getcwd(pwd_path, PATH_MAX + 1) == NULL)
+		return (ft_exit(errno)); // check this exit tho
+	printf("%s\n", pwd_path);
+	free(pwd_path);
+	return (0);	// return or exit? "The pwd utility exits 0 on success, and >0 if an error occurs."
 }
 
 void	builtin_export()
@@ -58,10 +114,34 @@ void	builtin_export()
 	// do we support the = something ??
 }
 
-void	builtin_unset() // unset values and attributes of variables and functions
+/* 
+	unset: values and attributes of variables and functions
+	Unsetting a variable or function that was not previously set shall not be considered an error and does not cause the shell to abort.
+	via envp (PATH and SHELL)?? --> look in the shell + the list created by laura
+	maybe getenvp then unlink
+	and for attributes/var ??
+*/
+void	builtin_unset(s_data *minidata) 
 {
-	// via envp (PATH and SHELL)??
-	// Unsetting a variable or function that was not previously set shall not be considered an error and does not cause the shell to abort.
+	char *arg;
+	char *path;
+	
+	arg = ft_substr(minidata->tokens.str, ft_strlen("unset "), ft_strlen(minidata->tokens.str)); // str in a certain position tho..
+	if (arg == NULL)
+		return (ft_exit(errno)); // check this exit tho
+	// need to check if only 1 word tho or not?
+	path = getenv(arg);
+	if (path == NULL)
+		return (ft_exit(errno)); // check this exit tho
+	if (unlink(path) == 0) // search the ones given by shell
+		return (0);
+	else if (arg ) // search OUR list
+	{
+		/* code */
+	}
+	else // meaning not found
+		return (ft_exit(errno));
+	return (0); // check
 }
 
 void	builtin_env()
