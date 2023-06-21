@@ -1,21 +1,9 @@
 # ninja log v5
 1	111	1687167792000000000	CMakeFiles/minishell.dir/src/Parsing/lexycal_analizer.c.o	1200e34bf96457c5
 1	119	1687170014000000000	CMakeFiles/minishell.dir/src/Parsing/parsing.c.o	dd09996e6cc3fbb2
-1	73	1687168878000000000	CMakeFiles/minishell.dir/src/main.c.o	ce8e4b58fbc68f28
-119	201	1687170014000000000	minishell	9f97eec679a6663d
+1	579	1687266403000000000	CMakeFiles/minishell.dir/src/main.c.o	ce8e4b58fbc68f28
 16	522	1687261829000000000	CMakeFiles/minishell.dir/src/parsing/lexycal_analizer.c.o	264a9655c36902a4
 522	647	1687261829000000000	CMakeFiles/minishell.dir/src/parsing/env_var.c.o	18b79c71d71e0c14
+579	671	1687266403000000000	minishell	5cb487a9c8f3204b
 15	647	1687261829000000000	CMakeFiles/minishell.dir/src/parsing/parsing.c.o	b7b47ae918c5f2fd
 1	44	1687261839000000000	CMakeFiles/minishell.dir/src/arg_list_actions/add_new_node.c.o	b670e136610937ee
-0	91	1687261839000000000	CMakeFiles/minishell.dir/src/main.c.o	ce8e4b58fbc68f28
-91	236	1687261839000000000	minishell	5cb487a9c8f3204b
-1	125	1687262072000000000	CMakeFiles/minishell.dir/src/main.c.o	ce8e4b58fbc68f28
-125	204	1687262072000000000	minishell	5cb487a9c8f3204b
-0	120	1687262157000000000	CMakeFiles/minishell.dir/src/main.c.o	ce8e4b58fbc68f28
-120	251	1687262158000000000	minishell	5cb487a9c8f3204b
-0	96	1687262345000000000	CMakeFiles/minishell.dir/src/main.c.o	ce8e4b58fbc68f28
-96	202	1687262345000000000	minishell	5cb487a9c8f3204b
-23	512	1687263191000000000	CMakeFiles/minishell.dir/src/main.c.o	ce8e4b58fbc68f28
-512	629	1687263191000000000	minishell	5cb487a9c8f3204b
-1	579	1687266403000000000	CMakeFiles/minishell.dir/src/main.c.o	ce8e4b58fbc68f28
-579	671	1687266403000000000	minishell	5cb487a9c8f3204b
