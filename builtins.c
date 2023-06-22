@@ -6,10 +6,11 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 17:07:22 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/06/21 14:56:43 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/06/21 17:12:19 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../include/minishell.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <limits.h>
@@ -121,12 +122,34 @@ void	builtin_export()
 	maybe getenvp then unlink
 	and for attributes/var ??
 */
+static t_env_args *search_args(t_env_args *env_args, char *arg)
+{
+	while (env_args->next != NULL)
+	{
+		if (env_args->name == arg)
+			return (&env_args); 
+		env_args = env_args->next;
+	}
+	return (NULL);
+}
+
+static void del_args(t_env_args *env_args)
+{
+	t_env_args *temp;
+	
+	temp = env_args->next;
+	env_args->name = env_args->next->name;
+	env_args = temp;
+	free(temp);
+}
+
 void	builtin_unset(t_data *mini_data) 
 {
 	char *arg;
 	char *path;
+	t_env_args *temp;
 	
-	arg = ft_substr(mini_data->tokens.str, ft_strlen("unset "), ft_strlen(mini_data->tokens.str)); // str in a certain position tho..
+	arg = ft_substr(mini_data->tolkens->str, ft_strlen("unset "), ft_strlen(mini_data->tolkens->str)); // str in a certain position tho..
 	if (arg == NULL)
 		return (ft_exit(errno)); // check this exit tho
 	// need to check if only 1 word tho or not?
@@ -135,13 +158,15 @@ void	builtin_unset(t_data *mini_data)
 		return (ft_exit(errno)); // check this exit tho
 	if (unlink(path) == 0) // search the ones given by shell
 		return (0);
-	else if (arg ) // search OUR list
+	else // search OUR list
 	{
-		/* code */
+		if (search_args(&mini_data->env_args, arg) != NULL)
+		{
+			del_args(search_args(&mini_data->env_args, arg));
+			return (0);
+		}
 	}
-	else // meaning not found
-		return (ft_exit(errno));
-	return (0); // check
+	return (ft_exit(errno)); // meaning not found
 }
 
 void	builtin_env()
