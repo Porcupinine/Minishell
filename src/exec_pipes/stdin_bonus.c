@@ -6,11 +6,14 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:03:07 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/06/13 16:54:01 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/06/22 16:12:10 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../../include/minishell.h"
+#include "../../include/parser.h"
+#include "../../include/pipes.h"
+#include "../../Lib42/include/libft.h"
 
 static void	free_stdin(char *line, char *str)
 {

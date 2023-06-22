@@ -6,11 +6,14 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 10:46:37 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/06/13 15:13:00 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/06/22 16:11:41 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../../include/minishell.h"
+#include "../../include/parser.h"
+#include "../../include/pipes.h"
+#include "../../Lib42/include/libft.h"
 
 // review them all as they aren't true to "real" bash
 

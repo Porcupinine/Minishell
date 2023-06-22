@@ -1,19 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   pipex_bonus.h                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/08 12:16:50 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/06/13 12:18:57 by dmaessen         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#ifndef PIPES_H
+# define PIPES_H
 
-#ifndef PIPEX_H
-# define PIPEX_H
-
-# include "./libft/libft.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <sys/stat.h>
@@ -38,7 +25,7 @@ typedef struct s_pipexb
 	int		index;
 }	t_pipexb;
 
-int		main(int argc, char *argv[], char *envp[]);
+// int		main(int argc, char *argv[], char *envp[]);
 
 void	free_str(char **str);
 void	cmd_err(char *argv, int error);
@@ -77,13 +64,3 @@ char	*ft_substr_gnl(char const *s, unsigned int start, size_t len);
 void	ft_free(char **memory, char *line);
 
 #endif
-
-/*
-
-USAGE:
-$> ./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2
-	behaves as: < file1 cmd1 | cmd2 | cmd3 ... | cmdn > file2
-$> ./pipex here_doc LIMITER cmd cmd1 file
-	behaves as: cmd << LIMITER | cmd1 >> file 
-
-*/

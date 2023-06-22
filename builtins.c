@@ -6,11 +6,15 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 17:07:22 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/06/21 17:12:19 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/06/22 16:12:39 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include "../../include/parser.h"
+#include "../../include/pipes.h"
+#include "../../Lib42/include/libft.h"
+
 #include <stdio.h>
 #include <unistd.h>
 #include <limits.h>

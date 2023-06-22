@@ -6,11 +6,14 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 12:22:07 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/06/13 17:06:39 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/06/22 16:11:49 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../../include/minishell.h"
+#include "../../include/parser.h"
+#include "../../include/pipes.h"
+#include "../../Lib42/include/libft.h"
 
 static int	find_path(char **envp)
 {

@@ -6,9 +6,12 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 12:19:38 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/06/13 12:19:52 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/06/22 16:12:26 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../../include/minishell.h"
+#include "../../include/parser.h"
+#include "../../include/pipes.h"
+#include "../../Lib42/include/libft.h"
 

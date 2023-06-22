@@ -6,11 +6,14 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 14:49:22 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/06/13 16:14:16 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/06/22 16:11:31 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../../include/minishell.h"
+#include "../../include/parser.h"
+#include "../../include/pipes.h"
+#include "../../Lib42/include/libft.h"
 
 static void	child_start(int fd_w[], int in_file, t_pipexb pipex)
 {
