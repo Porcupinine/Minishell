@@ -5,7 +5,17 @@
 #ifndef MINISHELL_MINISHELL_H
 #define MINISHELL_MINISHELL_H
 
+#include <signal.h>
 #include <stdbool.h>
+
+/**
+ * list of child PIDs
+ */
+typedef struct s_pid
+{
+    pid_t pid;
+    struct s_pid *next;
+}t_pid;
 
 /**
  * list of environment variables
@@ -54,8 +64,8 @@ typedef struct s_data
     int amount_of_env_args;
     char **tolkens;
     char **mini_envp;
-    t_tolkens *tolkens_list;
-    t_env_args *env_args;
+    t_tolkens tolkens_list;
+    t_env_args env_args;
     char *command_line;
     int count_s_quote;
     int count_d_quote;
