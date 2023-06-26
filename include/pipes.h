@@ -57,10 +57,6 @@ void	close_pipe(int **fd, int argc);
 void	free_fd(int **fd, int argc);
 
 char	*get_next_line(int fd);
-char	*ft_strjoin_gnl(char *memory, char *buf);
-char	*ft_strchr_gnl(const char *s, int c);
 void	*ft_calloc(size_t count, size_t size);
-char	*ft_substr_gnl(char const *s, unsigned int start, size_t len);
-void	ft_free(char **memory, char *line);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/07 11:56:57 by dmaessen          #+#    #+#              #
-#    Updated: 2023/06/22 16:07:17 by dmaessen         ###   ########.fr        #
+#    Updated: 2023/06/26 10:33:16 by dmaessen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,11 @@ HEADERS	:= -I ./include -I $(LIB42)/include
 LIBS	:= $(LIB42)/libft.a
 
 #------------------------------------------------------------------------Source
-SRC     := pipex_bonus.c stdin_bonus.c heredoc_bonus.c paths_bonus.c errors_free_bonus.c cmd_bonus.c child_bonus.c \
-		main.c
+SRC     := src/arg_list_actions/add_new_node.c \
+		src/exec_pipes/pipex.c src/exec_pipes/stdin.c src/exec_pipes/heredoc.c \
+		src/exec_pipes/path.c src/exec_pipes/errors_free.c src/exec_pipes/cmd.c src/exec_pipes/child.c \
+		src/parsing/env_var.c src/parsing/lexycal_analizer.c src/parsing/parsing.c \
+		main.c \
 
 #-----------------------------------------------------------------------Objects
 OBJS	:= ${SRC:.c=.o}
