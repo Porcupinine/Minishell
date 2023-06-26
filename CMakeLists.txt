@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.25)
 project(minishell C)
+include_directories(${CMAKE_SOURCE_DIR}/Lib42/include)
 
 set(CMAKE_C_STANDARD 99)
 

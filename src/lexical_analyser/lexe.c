@@ -6,7 +6,7 @@ void break_cmd(t_data *mini_data)
 {
     int end;
     int start;
-    char str;
+    char *str;
 
     start = 0;
     end = 0;
@@ -14,9 +14,9 @@ void break_cmd(t_data *mini_data)
     {
         if(mini_data->command_line[end] == ' ')
         {
-            ft_strlcpy(&str, &mini_data->command_line[start], end-start);
-            add_tolken(mini_data->tolkens_list, &str);
-            start = end;
+            str = ft_substr(mini_data->command_line, start, end-start);
+            add_tolken(&mini_data->tolkens_list, str);
+            start = end+1;
         }
         end++;
     }
