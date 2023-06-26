@@ -15,8 +15,8 @@ void count_args(t_data *mini_data)
     {
         if(ft_strchr("\"\'<>|$", mini_data->command_line[walk]) != 0)
         {
-            if(mini_data->command_line[walk] == '<' && mini_data->command_line[walk + 1] == '<' ||
-                    mini_data->command_line[walk] == '>' && mini_data->command_line[walk + 1] == '>')
+            if((mini_data->command_line[walk] == '<' && mini_data->command_line[walk + 1] == '<') ||
+                    (mini_data->command_line[walk] == '>' && mini_data->command_line[walk + 1] == '>'))
                 walk++;
             if (mini_data->command_line[walk] == '\"')
                 mini_data->count_d_quote++;
