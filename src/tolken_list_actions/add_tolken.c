@@ -5,31 +5,41 @@
 #include <stdlib.h>
 #include "../../include/minishell.h"
 #include "../../Lib42/include/libft.h"
+#include <stdio.h>
 
-static t_tolkens *find_last(t_tolkens *tolken)
+static t_tokens *find_last(t_tokens *token)
 {
-    while (tolken->next != NULL)
-        tolken = tolken->next;
-    return (tolken);
+    t_tokens *temp;
+
+    temp = token;
+    if (temp == NULL)
+        return (NULL);
+//    printf("%p\n", token);
+    while (temp->next != NULL)
+    {
+        temp = temp->next;
+//        printf("%p\n", temp);
+    }
+    return (temp);
 }
 
-void add_tolken(t_tolkens **tolkens, char *tolken)
+void add_token(t_tokens **tokens, char *token)
 {
-    t_tolkens *new_tolken;
+    t_tokens *new_token;
 
-    new_tolken = malloc(sizeof(t_tolkens));
-    if(new_tolken == NULL)
-        ft_error("Malloc tolken fail\n");
-    new_tolken->str = tolken;
-    new_tolken->next = NULL;
-    if(*tolkens == NULL)
-        *tolkens = new_tolken;
+    new_token = malloc(sizeof(t_tokens));
+    if(new_token == NULL)
+        ft_error("Malloc token fail\n");
+    new_token->str = token;
+    new_token->next = NULL;
+    if(*tokens == NULL)
+        *tokens = new_token;
     else
     {
-        t_tolkens *last_node;
+        t_tokens *last_node;
 
-        last_node = find_last(*tolkens);
-        last_node->next = new_tolken;
+        last_node = find_last(*tokens);
+        last_node->next = new_token;
     }
 }
 

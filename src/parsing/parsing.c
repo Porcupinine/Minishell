@@ -10,7 +10,7 @@ void count_args(t_data *mini_data)
     mini_data->count_d_quote = 0;
     mini_data->count_s_quote = 0;
     walk = 0;
-    mini_data->amount_of_tolkens = 0;
+    mini_data->amount_of_tokens = 0;
     while (mini_data->command_line[walk] != '\0')
     {
         if(ft_strchr("\"\'<>|$", mini_data->command_line[walk]) != 0)
@@ -22,7 +22,7 @@ void count_args(t_data *mini_data)
                 mini_data->count_d_quote++;
             if (mini_data->command_line[walk] == '\'')
                 mini_data->count_s_quote++;
-            mini_data->amount_of_tolkens++;
+            mini_data->amount_of_tokens++;
             printf("%s",&mini_data->command_line[walk]);
         }
         walk++;

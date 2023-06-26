@@ -23,7 +23,7 @@ int main(int argc, char **argv, char **envp)
     struct sigaction sigquit_sa;
     t_data *mini_data;
 
-    mini_data = malloc(1*sizeof(t_data));
+    mini_data = ft_calloc(1, sizeof(t_data));
     if (mini_data == NULL)
         ft_error("Data malloc fail!\n");
     mini_data->mini_envp = envp;
@@ -38,6 +38,6 @@ int main(int argc, char **argv, char **envp)
         mini_data->command_line = readline("\nminishell: ");
 //        printf("%s\n", mini_data->command_line);
         break_cmd(mini_data);
-        count_args(mini_data);
+//        count_args(mini_data);
     }
 }

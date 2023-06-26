@@ -7,7 +7,7 @@
 
 #include "minishell.h"
 
-void add_tolken(t_tolkens **tolkens, char *tolken);
-void print_tolkens(t_tolkens *tolkens);
+void add_token(t_tokens **tokens, char *token);
+void print_tokens(t_tokens *tolkens);
 
 #endif //MINISHELL_TOLKEN_LIST_ACTIONS_H

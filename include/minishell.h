@@ -39,11 +39,11 @@ typedef struct s_env_args
  * @d_quote if it's between double quotes
  * @next next item on the list
  */
-typedef struct s_tolkens
+typedef struct s_tokens
 {
     char *str;
-    struct s_tolkens *next;
-}t_tolkens;
+    struct s_tokens *next;
+}t_tokens;
 
 /**
  * Main struct with all the information that is needed to run
@@ -56,11 +56,11 @@ typedef struct s_tolkens
  */
 typedef struct s_data
 {
-    int amount_of_tolkens;
+    int amount_of_tokens;
     int amount_of_env_args;
-    char **tolkens;
+    char **tokens;
     char **mini_envp;
-    t_tolkens *tolkens_list;
+    t_tokens *tokens_list;
     t_env_args *env_args;
     char *command_line;
     int count_s_quote;

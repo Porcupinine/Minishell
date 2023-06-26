@@ -15,10 +15,12 @@ void break_cmd(t_data *mini_data)
         if(mini_data->command_line[end] == ' ')
         {
             str = ft_substr(mini_data->command_line, start, end-start);
-            add_tolken(&mini_data->tolkens_list, str);
+            add_token(&mini_data->tokens_list, str);
             start = end+1;
         }
         end++;
     }
-    print_tolkens(mini_data->tolkens_list);
+    str = ft_substr(mini_data->command_line, start, end-start);
+    add_token(&mini_data->tokens_list, str);
+    print_tokens(mini_data->tokens_list);
 }

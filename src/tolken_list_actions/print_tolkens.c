@@ -1,11 +1,11 @@
 #include "../../include/minishell.h"
 #include <stdio.h>
 
-void print_tolkens(t_tolkens *tolkens)
+void print_tokens(t_tokens *tokens)
 {
-    while (tolkens != NULL)
+    while (tokens != NULL)
     {
-        printf("%s\n", tolkens->str);
-        tolkens = tolkens->next;
+        printf("%s\n", tokens->str);
+        tokens = tokens->next;
     }
 }
