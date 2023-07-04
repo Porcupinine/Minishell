@@ -12,6 +12,9 @@ void sigint_handler(int sig)
     write(1, "sigint\n", 7);
 }
 
+// if (!isatty(STDIN_FILENO))
+//      rl_outstream = stdin;
+
 void sigquit_handler(int sig)
 {
 

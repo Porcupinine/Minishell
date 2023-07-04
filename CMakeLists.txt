@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.25)
 project(minishell C)
 include_directories(${CMAKE_SOURCE_DIR}/Lib42/include)
 
-add_compile_options(-fsanitize=address -fsanitize=address)
+add_compile_options(-fsanitize=address -g3)
 add_link_options(-fsanitize=address)
 set(CMAKE_C_STANDARD 99)
 
