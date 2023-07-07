@@ -2,89 +2,47 @@
 #include "../../include/tolken_list_actions.h"
 #include "../../Lib42/include/libft.h"
 #include "../../include/lexical_analyzer.h"
+#include <stdlib.h>
 
-void if_pipe(t_data *mini_data, int start, int end)
+void token_str(t_tokens **tokens_list, t_state_machine *parser, char c,  char **buffer)
 {
-    if (mini_data->command_line[end+1] != ' ')
+    if(ft_isalnum((int) c) != 0)
     {
-        char *str;
-
-        add_token(&mini_data->tokens_list, "|");
-        end++;
-        str = ft_substr(mini_data->command_line, start, end-start);
-        add_token(&mini_data->tokens_list, str);
+        add_token(tokens_list, *buffer, true, T_CHAR);
+        if(c == ' ' || c == '\n')
+            parser->state = S_WHITESPACE;
+        else if(c == '>')
+            parser->state = S_BIG;
+        else if(c == '<')
+            parser->state = S_SMALL;
+        else if(c == '|')
+            parser->state = S_PIPE;
     }
+    else
+        ft_strlcat(*buffer, (const char *) c, 1);
 }
 
-void if_iqual(t_data *minidata, int start, int end)
-{
-
-}
-
-void break_cmd(t_data *mini_data)
-{
-    int end;
-    int start;
-    char *str;
-
-    start = 0;
-    end = 0;
-    while (mini_data->command_line[end] != '\0')
-    {
-        if(ft_strchr(" |=", mini_data->command_line[end]) != 0 )
-        {
-            str = ft_substr(mini_data->command_line, start, end-start);
-            add_token(&mini_data->tokens_list, str);
-            if (mini_data->command_line[end] == '|')
-            {
-                add_token(&mini_data->tokens_list, "|");
-                end++;
-            }
-            if (mini_data->command_line[end] == '=')
-            {
-                add_token(&mini_data->tokens_list, "=");
-                end++;
-            }
-            while(mini_data->command_line[end] == ' ')
-                end++;
-            start = end;
-        }
-        end++;
-    }
-    str = ft_substr(mini_data->command_line, start, end-start);
-    add_token(&mini_data->tokens_list, str);
-    print_tokens(mini_data->tokens_list);
-}
-void parse_str(t_state_machine *parser, char *command)
+void parse_machine(t_data *mini_data, t_state_machine *parser)
 {
     char *buffer;
+    int count;
 
-}
-
-void parse_machine(t_state_machine *parser, char *command)
-{
-    while (*command != '\0')
+    count = 0;
+    buffer = ft_calloc(1, sizeof (char*));
+    while (mini_data->command_line[count] != '\0')
     {
         if (parser->state == S_WHITESPACE)
         {
-            if (*command == ' ') parser->state = S_WHITESPACE;
-            if (ft_isalnum(*command) != 0) parser->state = S_CHAR;
-            if (ft_strchr("<>|", *command) != 0) parser->state = S_METACHAR;
-            if (*command == '\0') parser->state = S_END;
-
+            token_space_newline(parser, mini_data->command_line[count]);
         }
         else if (parser->state == S_CHAR)
-        {w
-            if (*command ==)
-        }
-        else if (parser->state == S_END)
         {
-
+            token_str(&mini_data->tokens_list, parser, mini_data->command_line[count], &buffer);
         }
-        else if (parser->state == S_METACHAR)
+        else if (parser->state == S_PIPE)
         {
-
+            token_pipe(&mini_data->tokens_list, parser, mini_data->command_line[count]);
         }
-        command++;
+        count++;
     }
 }

@@ -8,6 +8,15 @@
 #include <signal.h>
 #include <stdbool.h>
 
+typedef enum s_type
+{
+    T_WHITESPACE,
+    T_PIPE,
+    T_BIGGER,
+    T_SMALLER,
+    T_CHAR,
+    T_END,
+}t_type;
 /**
  * list of child PIDs
  */
@@ -31,16 +40,15 @@ typedef struct s_env_args
 }t_env_args;
 
 /**
- * list with all tolkens
- * @str
- * @in_file boolean in case need read from a file
- * @out_file boolean in case need to write on a file
- * @s_quote if it's between single quotes
- * @d_quote if it's between double quotes
- * @next next item on the list
+ * @param status true if valid, false if error was found
+ * @param type type of token
+ * @param str tolken
+ * @param next pointer to next tolken
  */
 typedef struct s_tokens
 {
+    bool status;
+    t_type  type;
     char *str;
     struct s_tokens *next;
 }t_tokens;
