@@ -8,6 +8,6 @@
 #include "minishell.h"
 
 void add_token(t_tokens **tokens, char *token, bool status, t_type type);
-void print_tokens(t_tokens *tolkens);
+void print_tokens(t_tokens *tokens);
 
 #endif //MINISHELL_TOLKEN_LIST_ACTIONS_H

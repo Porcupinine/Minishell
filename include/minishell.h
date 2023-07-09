@@ -12,8 +12,10 @@ typedef enum s_type
 {
     T_WHITESPACE,
     T_PIPE,
-    T_BIGGER,
-    T_SMALLER,
+    T_BIG,
+    T_BIGBIG,
+    T_SMALL,
+    T_SMALLSMALL,
     T_CHAR,
     T_END,
 }t_type;

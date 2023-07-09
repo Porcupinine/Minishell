@@ -8,6 +8,8 @@
 void token_space_newline(t_state_machine *parser, char c)
 {
     if (ft_isalnum(c) != 0)
+        parser->state = S_CHAR;
+    else
     {
         if (c == '|')
             parser->state = S_PIPE;
@@ -16,6 +18,4 @@ void token_space_newline(t_state_machine *parser, char c)
         else if (c == '<')
             parser->state = S_SMALL;
     }
-    else
-        parser->state = S_CHAR;
 }
