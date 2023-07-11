@@ -6,7 +6,7 @@
 
 void token_pipe(t_tokens **tokens_list, t_state_machine *parser, char c)
 {
-    if (c == '|' || c == '<' || c == '>' || c == '\0') // huston we have a problem
+    if (c == '|' || c == '<' || c == '>')
     {
         add_token(tokens_list, "|", false, T_PIPE);
         if (c == '|')
@@ -14,14 +14,11 @@ void token_pipe(t_tokens **tokens_list, t_state_machine *parser, char c)
         if (c == '<')
             parser->state = S_SMALL;
         if (c == '>')
-            parser->state = S_BIG;
-        if (c == '\0')
-            parser->state = S_END;
-//        parser->state = S_INVALID;
+            parser->state = S_BIG;//TODO redirect pipedoesnt work
     }
     else
         add_token(tokens_list, "|",true, T_PIPE);
-    if (ft_isalnum(c) != 0)
+    if (ft_strchr(" |<>\"'", c) == 0)
         parser->state = S_CHAR;
     if (c == ' ' || c == '\n')
         parser->state = S_WHITESPACE;
@@ -29,14 +26,10 @@ void token_pipe(t_tokens **tokens_list, t_state_machine *parser, char c)
 
 void token_bigger(t_tokens **tokens_list, t_state_machine *parser, char c)
 {
-    if (c == '|' || c == '\0') // huston we have a problem
+    if (c == '|')
     {
         add_token(tokens_list, ">", false, T_BIG);
-        if (c == '|')
-            parser->state = S_PIPE;
-        if (c == '\0')
-            parser->state = S_END;
-//        parser->state = S_INVALID;
+        parser->state = S_PIPE;
     }
     else if (c == '>')
     {
@@ -48,7 +41,7 @@ void token_bigger(t_tokens **tokens_list, t_state_machine *parser, char c)
         add_token(tokens_list, ">", true, T_BIG);
         if (c == '<')
             parser->state = S_SMALL;;
-        if (ft_isalnum(c) != 0)
+        if (ft_strchr(" |<>\"'", c) == 0)
             parser->state = S_CHAR;
         if (c == ' ' || c == '\n')
             parser->state = S_WHITESPACE;
@@ -57,14 +50,10 @@ void token_bigger(t_tokens **tokens_list, t_state_machine *parser, char c)
 
 void token_smaller(t_tokens **tokens_list, t_state_machine *parser, char c)
 {
-    if (c == '|' || c == '\0') // huston we have a problem
+    if (c == '|')
     {
         add_token(tokens_list, "<", false, T_SMALL);
-        if (c == '|')
-            parser->state = S_PIPE;
-        if (c == '\0')
-            parser->state = S_END;
-//        parser->state = S_INVALID;
+        parser->state = S_PIPE;
     }
     else if (c == '<')
     {
@@ -76,9 +65,17 @@ void token_smaller(t_tokens **tokens_list, t_state_machine *parser, char c)
         add_token(tokens_list, "<", true, T_SMALL);
         if (c == '>')
             parser->state = S_SMALL;;
-        if (ft_isalnum(c) != 0)
+        if (ft_strchr(" |<>\"'", c) == 0)
             parser->state = S_CHAR;
         if (c == ' ' ||  c == '\n')
             parser->state = S_WHITESPACE;
     }
+}
+
+void token_bigbig(t_tokens **tokens_list, t_state_machine *parser, char c)
+{
+    if (c == )
+    add_token(tokens_list, ">", true, T_BIG);
+    if (ft_strchr(" |<>\"'", c) == 0)
+        parser->state = S_CHAR;
 }

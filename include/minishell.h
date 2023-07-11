@@ -73,15 +73,10 @@ typedef struct s_tokens
  */
 typedef struct s_data
 {
-    int amount_of_tokens;
-    int amount_of_env_args;
-    char **tokens;
     char **mini_envp;
     t_tokens *tokens_list;
     t_env_args *env_args;
     char *command_line;
-    int count_s_quote;
-    int count_d_quote;
 }t_data;
 
 

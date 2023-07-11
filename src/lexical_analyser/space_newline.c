@@ -7,8 +7,11 @@
 
 void token_space_newline(t_state_machine *parser, char c)
 {
-    if (ft_isalnum(c) != 0)
+    if (ft_strchr(" |<>\"'", c) == 0)
+    {
         parser->state = S_CHAR;
+        parser->token = append_char(parser->token, c);
+    }
     else
     {
         if (c == '|')

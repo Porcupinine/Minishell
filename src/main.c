@@ -11,6 +11,7 @@
 void sigint_handler(int sig)
 {
     write(1, "sigint\n", 7);
+	//TODO TOP changes the signal, it can break minishell
 }
 
 // if (!isatty(STDIN_FILENO))

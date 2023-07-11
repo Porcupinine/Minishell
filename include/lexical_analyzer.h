@@ -27,6 +27,7 @@ typedef struct s_state_machine
 {
     SM_STATES state;
     char *token;
+    int count;
     SM_STATES prev_state;
 }t_state_machine;
 
@@ -37,4 +38,8 @@ void token_space_newline(t_state_machine *parser, char c);
 void token_pipe(t_tokens **tokens_list, t_state_machine *parser, char c);
 void token_bigger(t_tokens **tokens_list, t_state_machine *parser, char c);
 void token_smaller(t_tokens **tokens_list, t_state_machine *parser, char c);
+void token_doublequotes(t_tokens **tokens_list, t_state_machine *parser, char *cmd_line);
+void token_bigbig(t_tokens **tokens_list, t_state_machine *parser, char c);
+
+
 #endif //MINISHELL_LEXICAL_ANALYZER_H
