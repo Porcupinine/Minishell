@@ -23,14 +23,16 @@ static t_tokens *find_last(t_tokens *token)
     return (temp);
 }
 
-void add_token(t_tokens **tokens, char *token)
+void add_token(t_tokens **tokens, char *token, bool status, t_type type)
 {
     t_tokens *new_token;
 
     new_token = malloc(sizeof(t_tokens));
     if(new_token == NULL)
         ft_error("Malloc token fail\n");
-    new_token->str = token;
+    new_token->str = ft_strdup(token);
+    new_token->status = status;
+    new_token->type = type;
     new_token->next = NULL;
     if(*tokens == NULL)
         *tokens = new_token;

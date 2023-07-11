@@ -6,6 +6,7 @@
 #include "../include/minishell.h"
 #include "../include/parser.h"
 #include "../include/lexical_analyzer.h"
+#include "../include/tolken_list_actions.h"
 
 void sigint_handler(int sig)
 {
@@ -40,7 +41,8 @@ int main(int argc, char **argv, char **envp)
     {
         mini_data->command_line = readline("\nminishell: ");
 //        printf("%s\n", mini_data->command_line);
-        break_cmd(mini_data);
 //        count_args(mini_data);
+        parse_machine(mini_data);
+        print_tokens(mini_data->tokens_list);
     }
 }

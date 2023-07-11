@@ -8,6 +8,17 @@
 #include <signal.h>
 #include <stdbool.h>
 
+typedef enum s_type
+{
+    T_WHITESPACE,
+    T_PIPE,
+    T_BIG,
+    T_BIGBIG,
+    T_SMALL,
+    T_SMALLSMALL,
+    T_CHAR,
+    T_END,
+}t_type;
 /**
  * list of child PIDs
  */
@@ -31,13 +42,22 @@ typedef struct s_env_args
 }t_env_args;
 
 /**
+<<<<<<< HEAD
  *
  * @param str
  * @next
  *
+=======
+ * @param status true if valid, false if error was found
+ * @param type type of token
+ * @param str tolken
+ * @param next pointer to next tolken
+>>>>>>> 6b6bf631dbea0ae153cf54321488ef9e3c32cd25
  */
 typedef struct s_tokens
 {
+    bool status;
+    t_type  type;
     char *str;
     struct s_tokens *next;
 }t_tokens;

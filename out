@@ -1,0 +1,14 @@
+.
+..
+.git
+.gitignore
+.gitmodules
+.idea
+CMakeLists.txt
+Lib42
+cmake-build-debug
+include
+out
+scraps.txt
+src
+test
