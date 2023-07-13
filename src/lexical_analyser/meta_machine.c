@@ -3,18 +3,14 @@
 #include "../../Lib42/include/libft.h"
 #include "../../include/lexical_analyzer.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 void token_pipe(t_tokens **tokens_list, t_state_machine *parser, char c)
 {
     if (c == '|' || c == '<' || c == '>')
     {
-        add_token(tokens_list, "|", T_PIPE);
-        if (c == '|')
-            parser->state = S_PIPE; // TODO sybtax error
-        if (c == '<')
-            parser->state = S_SMALL;
-        if (c == '>')
-            parser->state = S_BIG;//TODO redirect pipedoesnt work
+        printf("\033[1;31m Syntax error\n \033[1;31m");
+        //TODO syntax error
     }
     else
         add_token(tokens_list, "|", T_PIPE);
@@ -28,8 +24,8 @@ void token_bigger(t_tokens **tokens_list, t_state_machine *parser, char c)
 {
     if (c == '|')
     {
-        add_token(tokens_list, ">", T_BIG);
-        parser->state = S_PIPE;
+        printf("\033[1;31m Syntax error\n \033[1;31m");
+        //TODO syntax error
     }
     else if (c == '>')
     {
