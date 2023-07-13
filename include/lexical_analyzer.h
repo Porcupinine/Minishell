@@ -7,6 +7,13 @@
 
 #include "minishell.h"
 
+typedef enum SM_STATUS
+{
+	S_WAITING,
+	S_WORD,
+	S_END,
+}SM_STATUS;
+
 typedef enum SM_STATES
 {
     S_WHITESPACE,
@@ -20,14 +27,21 @@ typedef enum SM_STATES
     S_DOBLEQUOTE,
     S_SINGLEQUOTE,
     S_ENVARG,
-    S_END,
 }SM_STATES;
 
+/**
+ *@param token_start pointer to the initil position of the
+ * tolken in the command line
+ * @param len size of the string to be tolkenized
+ */
 typedef struct s_state_machine
 {
     SM_STATES state;
-    char *token;
+	SM_STATUS status;
+    char *cmd;
     int count;
+	int start;
+	int len;
     SM_STATES prev_state;
 }t_state_machine;
 
@@ -40,6 +54,7 @@ void token_bigger(t_tokens **tokens_list, t_state_machine *parser, char c);
 void token_smaller(t_tokens **tokens_list, t_state_machine *parser, char c);
 void token_doublequotes(t_tokens **tokens_list, t_state_machine *parser, char *cmd_line);
 void token_bigbig(t_tokens **tokens_list, t_state_machine *parser, char c);
-
+void token_str(t_tokens **tokens_list, t_state_machine *parser, char c);
+void found_char(t_state_machine *parser);
 
 #endif //MINISHELL_LEXICAL_ANALYZER_H

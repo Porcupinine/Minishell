@@ -56,11 +56,18 @@ typedef struct s_env_args
  */
 typedef struct s_tokens
 {
-    bool status;
     t_type  type;
     char *str;
     struct s_tokens *next;
 }t_tokens;
+
+typedef struct s_tokens_point
+{
+	int len;
+	char *start;
+	t_type type;
+	struct s_tokens_point *next;
+}t_token_point;
 
 /**
  * Main struct with all the information that is needed to run
@@ -76,6 +83,7 @@ typedef struct s_data
     char **mini_envp;
     t_tokens *tokens_list;
     t_env_args *env_args;
+	t_token_point *token_point;
     char *command_line;
 }t_data;
 
