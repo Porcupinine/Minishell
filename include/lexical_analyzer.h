@@ -23,10 +23,7 @@ typedef enum SM_STATES
     S_SMALL,
     S_SMALSMAL,
     S_CHAR,
-    S_INVALID,
-    S_DOBLEQUOTE,
-    S_SINGLEQUOTE,
-    S_ENVARG,
+    S_ERROR,
 }SM_STATES;
 
 /**

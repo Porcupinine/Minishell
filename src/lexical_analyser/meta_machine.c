@@ -8,10 +8,7 @@
 void token_pipe(t_tokens **tokens_list, t_state_machine *parser, char c)
 {
     if (c == '|' || c == '<' || c == '>')
-    {
-        printf("\033[1;31m Syntax error\n \033[1;31m");
-        //TODO syntax error
-    }
+        parser->state = S_ERROR;
     else
         add_token(tokens_list, "|", T_PIPE);
     if (ft_strchr(" |<>\"'", c) == 0)
@@ -23,10 +20,7 @@ void token_pipe(t_tokens **tokens_list, t_state_machine *parser, char c)
 void token_bigger(t_tokens **tokens_list, t_state_machine *parser, char c)
 {
     if (c == '|')
-    {
-        printf("\033[1;31m Syntax error\n \033[1;31m");
-        //TODO syntax error
-    }
+        parser->state = S_ERROR;
     else if (c == '>')
     {
         add_token(tokens_list, ">>", T_BIGBIG);
@@ -72,7 +66,7 @@ void token_bigbig(t_tokens **tokens_list, t_state_machine *parser, char c)
 {
     if (c == '>')
 	{
-		//TODO syntax error
+        parser->state = S_ERROR;
 	}
     add_token(tokens_list, ">", T_BIG);
     if (ft_strchr(" |<>\"'", c) == 0)

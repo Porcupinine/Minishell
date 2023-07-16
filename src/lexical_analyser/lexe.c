@@ -6,7 +6,6 @@
 
 void token_start(t_state_machine *parser, char c)
 {
-
     if (ft_strchr(" |<>\"'", c) == 0)
 	{
 		parser->state = S_CHAR;
@@ -14,8 +13,8 @@ void token_start(t_state_machine *parser, char c)
 	}
     if(c == ' ')
         parser->state = S_WHITESPACE;
-    //TODO other options even if they are error ???
-
+    else
+        parser->state = S_ERROR;
 }
 
 void parse_machine(t_data *mini_data)
@@ -43,6 +42,8 @@ void parse_machine(t_data *mini_data)
         else if (parser->state == S_BIGBIG)
             ;
         else if (parser->state == S_BIG)
+            ;
+        else if (parser->state == S_ERROR)
             ;
         parser->count++;
     }
