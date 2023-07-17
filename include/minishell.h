@@ -54,5 +54,4 @@ typedef struct s_data
 	char		*command_line;
 }t_data;
 
-
 #endif //MINISHELL_MINISHELL_H
