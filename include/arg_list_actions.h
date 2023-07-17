@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parser.h                                           :+:    :+:            */
+/*   arg_list_actions.h                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/07/17 17:32:37 by laura         #+#    #+#                 */
-/*   Updated: 2023/07/17 17:32:49 by laura         ########   odam.nl         */
+/*   Created: 2023/07/17 17:36:31 by laura         #+#    #+#                 */
+/*   Updated: 2023/07/17 17:36:58 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef ARG_LIST_ACTIONS_H
+# define ARG_LIST_ACTIONS_H
 
-void	count_args(t_data *mini_data);
+# include "minishell.h"
 
-#endif //PARSER_H
+void	add_arg(t_env_args *args, char *name, char *value);
+
+#endif //MINISHELL_ARG_LIST_ACTIONS_H

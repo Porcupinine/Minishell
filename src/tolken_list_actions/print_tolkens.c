@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parser.h                                           :+:    :+:            */
+/*   print_tolkens.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/07/17 17:32:37 by laura         #+#    #+#                 */
-/*   Updated: 2023/07/17 17:32:49 by laura         ########   odam.nl         */
+/*   Created: 2023/07/17 17:24:02 by laura         #+#    #+#                 */
+/*   Updated: 2023/07/17 17:25:19 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "../../include/minishell.h"
+#include "../../include/lexical_analyzer.h"
+#include <stdio.h>
 
-void	count_args(t_data *mini_data);
-
-#endif //PARSER_H
+void	print_tokens(t_tokens *tokens)
+{
+	while (tokens != NULL)
+	{
+		printf("%s\n", tokens->str);
+		tokens = tokens->next;
+	}
+}
