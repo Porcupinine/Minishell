@@ -15,14 +15,14 @@
 
 # include "minishell.h"
 
-typedef enum SM_STATUS
+typedef enum s_SM_STATUS
 {
 	S_WAITING,
 	S_WORD,
 	S_END,
-} SM_STATUS;
+}t_SM_STATUS;
 
-typedef enum SM_STATES
+typedef enum s_SM_STATES
 {
 	S_WHITESPACE,
 	S_PIPE,
@@ -32,7 +32,7 @@ typedef enum SM_STATES
 	S_SMALSMAL,
 	S_CHAR,
 	S_ERROR,
-} SM_STATES;
+}t_SM_STATES;
 
 typedef enum s_type
 {
@@ -68,8 +68,8 @@ typedef struct s_tokens
  */
 typedef struct s_state_machine
 {
-	SM_STATES	state;
-	SM_STATUS	status;
+	t_SM_STATES	state;
+	t_SM_STATUS	status;
 	t_tokens	*tokens_list;
 	char		*cmd;
 	int			count;
