@@ -1,15 +1,22 @@
-//
-// Created by Laura Praca Lacerda on 6/21/23.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   tolken_list_actions.h                              :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: laura <laura@student.codam.nl>               +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/07/17 17:31:44 by laura         #+#    #+#                 */
+/*   Updated: 2023/07/17 17:32:28 by laura         ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 
-#ifndef MINISHELL_TOLKEN_LIST_ACTIONS_H
-#define MINISHELL_TOLKEN_LIST_ACTIONS_H
+#ifndef TOLKEN_LIST_ACTIONS_H
+# define TOLKEN_LIST_ACTIONS_H
 
-#include "minishell.h"
-#include "lexical_analyzer.h"
+# include "minishell.h"
+# include "lexical_analyzer.h"
 
-void add_token(t_tokens **tokens, char *token, t_type type);
-void print_tokens(t_tokens *tokens);
-void add_token_point(t_token_point **token, t_state_machine *parser, t_type type);
+void	add_token(t_tokens **tokens, char *token, t_type type);
+void	print_tokens(t_tokens *tokens);
 
-#endif //MINISHELL_TOLKEN_LIST_ACTIONS_H
+#endif //TOLKEN_LIST_ACTIONS_H

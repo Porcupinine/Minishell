@@ -1,31 +1,28 @@
-//
-// Created by laura on 11-6-23.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   minishell.h                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: laura <laura@student.codam.nl>               +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/07/17 17:32:57 by laura         #+#    #+#                 */
+/*   Updated: 2023/07/17 17:34:24 by laura         ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 
-#ifndef MINISHELL_MINISHELL_H
-#define MINISHELL_MINISHELL_H
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-#include <signal.h>
-#include <stdbool.h>
+# include <signal.h>
+# include <stdbool.h>
 
-typedef enum s_type
-{
-    T_WHITESPACE,
-    T_PIPE,
-    T_BIG,
-    T_BIGBIG,
-    T_SMALL,
-    T_SMALLSMALL,
-    T_CHAR,
-    T_END,
-}t_type;
 /**
  * list of child PIDs
  */
 typedef struct s_pid
 {
-    pid_t pid;
-    struct s_pid *next;
+	pid_t			pid;
+	struct s_pid	*next;
 }t_pid;
 
 /**
@@ -36,38 +33,10 @@ typedef struct s_pid
  */
 typedef struct s_env_args
 {
-    char *name;
-    char *content;
-    struct s_env_args *next;
+	char				*name;
+	char				*content;
+	struct s_env_args	*next;
 }t_env_args;
-
-/**
-<<<<<<< HEAD
- *
- * @param str
- * @next
- *
-=======
- * @param status true if valid, false if error was found
- * @param type type of token
- * @param str tolken
- * @param next pointer to next tolken
->>>>>>> 6b6bf631dbea0ae153cf54321488ef9e3c32cd25
- */
-typedef struct s_tokens
-{
-    t_type  type;
-    char *str;
-    struct s_tokens *next;
-}t_tokens;
-
-typedef struct s_tokens_point
-{
-	int len;
-	char *start;
-	t_type type;
-	struct s_tokens_point *next;
-}t_token_point;
 
 /**
  * Main struct with all the information that is needed to run
@@ -80,13 +49,10 @@ typedef struct s_tokens_point
  */
 typedef struct s_data
 {
-    char **mini_envp;
-    t_tokens *tokens_list;
-    t_env_args *env_args;
-	t_token_point *token_point;
-    char *command_line;
+	char		**mini_envp;
+	t_env_args	*env_args;
+	char		*command_line;
 }t_data;
-
 
 
 #endif //MINISHELL_MINISHELL_H

@@ -1,51 +1,69 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   lexe.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: laura <laura@student.codam.nl>               +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/07/17 17:28:34 by laura         #+#    #+#                 */
+/*   Updated: 2023/07/17 17:29:46 by laura         ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 #include "../../include/tolken_list_actions.h"
 #include "../../Lib42/include/libft.h"
 #include "../../include/lexical_analyzer.h"
 #include <stdlib.h>
+#include <stdio.h>
 
-void token_start(t_state_machine *parser, char c)
+void	token_start(t_state_machine *parser)
 {
-    if (ft_strchr(" |<>\"'", c) == 0)
+	char	c;
+
+	c = parser->cmd[parser->count];
+	if (ft_strchr(" |<>\"'", c) == 0)
 	{
 		parser->state = S_CHAR;
 		parser->status = S_WORD;
 	}
-    if(c == ' ')
-        parser->state = S_WHITESPACE;
-    else
-        parser->state = S_ERROR;
+	else if (c == ' ')
+		parser->state = S_WHITESPACE;
+	else
+		parser->state = S_ERROR;
 }
 
-void parse_machine(t_data *mini_data)
+void	populate_function_ptrs(void (**functions)(t_state_machine *))
 {
-    t_state_machine *parser;
+	(functions)[S_WHITESPACE] = &token_space_newline;
+	(functions)[S_PIPE] = &token_pipe;
+	(functions)[S_BIG] = &token_bigger;
+	(functions)[S_BIGBIG] = &token_bigbig;
+	(functions)[S_SMALL] = &token_smaller;
+	(functions)[S_SMALSMAL] = &token_smallsmall;
+	(functions)[S_CHAR] = &token_str;
+	(functions)[S_ERROR] = &token_error;
+}
 
-    parser = ft_calloc(1, sizeof (t_state_machine));
-    if (parser == NULL)
-        return ; //TODO fail?
-    parser->count = 0;
+void	parse_machine(t_data *mini_data)
+{
+	t_state_machine	*parser;
+
+	void (*functions[8])(t_state_machine*);
+	populate_function_ptrs(functions);
+
+	parser = ft_calloc(1, sizeof (t_state_machine));
+	if (parser == NULL)
+		return ; //TODO fail?
+	parser->count = 0;
 	parser->cmd = mini_data->command_line;
-    token_start(parser, mini_data->command_line[parser->count]);
-    while (mini_data->command_line[parser->count] != '\0')
-    {
-        if (parser->state == S_WHITESPACE)
-            token_space_newline(parser, mini_data->command_line[parser->count]);
-        else if (parser->state == S_CHAR)
-            token_str(&mini_data->tokens_list, parser, mini_data->command_line[parser->count]);
-        else if (parser->state == S_PIPE)
-            token_pipe(&mini_data->tokens_list, parser, mini_data->command_line[parser->count]);
-        else if (parser->state == S_SMALL)
-            ;
-        else if (parser->state == S_SMALSMAL)
-            ;
-        else if (parser->state == S_BIGBIG)
-            ;
-        else if (parser->state == S_BIG)
-            ;
-        else if (parser->state == S_ERROR)
-            ;
-        parser->count++;
-    }
-    add_token(&mini_data->tokens_list, ft_substr(parser->cmd, parser->start, parser->len), T_CHAR);
+	token_start(parser);
+	while (mini_data->command_line[parser->count] != '\0')
+	{
+		functions[parser->state](parser);
+		parser->count++;
+	}
+	add_token(&parser->tokens_list, \
+	ft_substr(parser->cmd, parser->start, parser->len), T_CHAR);
+	print_tokens(parser->tokens_list);
 }

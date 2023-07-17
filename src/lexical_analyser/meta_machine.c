@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   meta_machine.c                                     :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: laura <laura@student.codam.nl>               +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/07/17 17:27:23 by laura         #+#    #+#                 */
+/*   Updated: 2023/07/17 17:28:25 by laura         ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 #include "../../include/tolken_list_actions.h"
 #include "../../Lib42/include/libft.h"
@@ -5,70 +17,98 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void token_pipe(t_tokens **tokens_list, t_state_machine *parser, char c)
+void	token_pipe(t_state_machine *parser)
 {
-    if (c == '|' || c == '<' || c == '>')
-        parser->state = S_ERROR;
-    else
-        add_token(tokens_list, "|", T_PIPE);
-    if (ft_strchr(" |<>\"'", c) == 0)
+	char	c;
+
+	c = parser->cmd[parser->count];
+	if (c == '|' || c == '<' || c == '>')
+		parser->state = S_ERROR;
+	else
+		add_token(&parser->tokens_list, "|", T_PIPE);
+	if (ft_strchr(" |<>\"'", c) == 0)
 		found_char(parser);
-    if (c == ' ' || c == '\n')
-        parser->state = S_WHITESPACE;
+	if (c == ' ' || c == '\n')
+		parser->state = S_WHITESPACE;
 }
 
-void token_bigger(t_tokens **tokens_list, t_state_machine *parser, char c)
+void	token_bigger(t_state_machine *parser)
 {
-    if (c == '|')
-        parser->state = S_ERROR;
-    else if (c == '>')
-    {
-        add_token(tokens_list, ">>", T_BIGBIG);
-        parser->state = S_BIGBIG;;
-    }
-    else
-    {
-        add_token(tokens_list, ">", T_BIG);
-        if (c == '<')
-            parser->state = S_SMALL;;
-        if (ft_strchr(" |<>\"'", c) == 0)
+	char	c;
+
+	c = parser->cmd[parser->count];
+	if (c == '|')
+		parser->state = S_ERROR;
+	else if (c == '>')
+	{
+		add_token(&parser->tokens_list, ">>", T_BIGBIG);
+		parser->state = S_BIGBIG;
+	}
+	else
+	{
+		add_token(&parser->tokens_list, ">", T_BIG);
+		if (c == '<')
+			parser->state = S_SMALL;
+		if (ft_strchr(" |<>\"'", c) == 0)
 			found_char(parser);
 		if (c == ' ' || c == '\n')
-            parser->state = S_WHITESPACE;
-    }
-}
-
-void token_smaller(t_tokens **tokens_list, t_state_machine *parser, char c)
-{
-    if (c == '|')
-    {
-        add_token(tokens_list, "<", T_SMALL);
-        parser->state = S_PIPE;
-    }
-    else if (c == '<')
-    {
-        add_token(tokens_list, "<<", T_SMALLSMALL);
-        parser->state = S_BIGBIG;;
-    }
-    else
-    {
-        add_token(tokens_list, "<", T_SMALL);
-        if (c == '>')
-            parser->state = S_SMALL;;
-        if (ft_strchr(" |<>\"'", c) == 0)
-			found_char(parser);
-		if (c == ' ' ||  c == '\n')
-            parser->state = S_WHITESPACE;
-    }
-}
-
-void token_bigbig(t_tokens **tokens_list, t_state_machine *parser, char c)
-{
-    if (c == '>')
-	{
-        parser->state = S_ERROR;
+			parser->state = S_WHITESPACE;
 	}
-    add_token(tokens_list, ">", T_BIG);
-    if (ft_strchr(" |<>\"'", c) == 0)
+}
+
+void	token_smaller(t_state_machine *parser)
+{
+	char	c;
+
+	c = parser->cmd[parser->count];
+	if (c == '|')
+	{
+		add_token(&parser->tokens_list, "<", T_SMALL);
+		parser->state = S_PIPE;
+	}
+	else if (c == '<')
+	{
+		add_token(&parser->tokens_list, "<<", T_SMALLSMALL);
+		parser->state = S_BIGBIG;
+	}
+	else
+	{
+		add_token(&parser->tokens_list, "<", T_SMALL);
+		if (c == '>')
+			parser->state = S_SMALL;
+		if (ft_strchr(" |<>\"'", c) == 0)
+			found_char(parser);
+		if (c == ' ' || c == '\n')
+			parser->state = S_WHITESPACE;
+	}
+}
+
+void	token_bigbig(t_state_machine *parser)
+{
+	char	c;
+
+	c = parser->cmd[parser->count];
+	if (c == '>' || c == '|' || c == '<')
+	{
+		parser->state = S_ERROR;
+	}
+	if (ft_strchr(" |<>\"'", c) == 0)
 		found_char(parser);
+	if (c == ' ' || c == '\n')
+		parser->state = S_WHITESPACE;
+}
+
+void	token_smallsmall(t_state_machine *parser)
+{
+	char	c;
+
+	c = parser->cmd[parser->count];
+	if (c == '>' || c == '|' || c == '<')
+	{
+		parser->state = S_ERROR;
+	}
+	if (ft_strchr(" |<>\"'", c) == 0)
+		found_char(parser);
+	if (c == ' ' || c == '\n')
+		parser->state = S_WHITESPACE;
 }
