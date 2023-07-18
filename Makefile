@@ -6,7 +6,7 @@
 #    By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/07 11:56:57 by dmaessen          #+#    #+#              #
-#    Updated: 2023/06/26 10:33:16 by dmaessen         ###   ########.fr        #
+#    Updated: 2023/07/18 16:47:11 by dmaessen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 
-re: clean all
+re: fclean
+	@$(MAKE) all
 
 .PHONY: all, clean, fclean, re, lib42_build
