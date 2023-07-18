@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 17:07:22 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/18 17:17:15 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/18 21:57:51 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,10 @@ void	builtin_export(t_data *mini_data)
 		return (ft_exit(errno));
 	while (!mini_data->mini_envp[end])
 		end++;
+	// either
 	ft_lstadd_back(); // make our own ft for it tho to allocate the content of it already
+	// or
+	
 	// all depends if we use an array or a linekd list here
 	// do i need to malloc the line ? PROBABLY YES
 }
