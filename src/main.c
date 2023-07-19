@@ -52,7 +52,7 @@ int	main(int argc, char **argv, char **envp)
 	sigaction(SIGINT, &sigint_sa, NULL);
 	while (1)
 	{
-		mini_data->command_line = readline("\nminishell: ");
+		mini_data->command_line = readline("\nminisomething: ");
 //        printf("%s\n", mini_data->command_line);
 //        count_args(mini_data);
 		parse_machine(mini_data);
