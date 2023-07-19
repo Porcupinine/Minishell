@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 17:07:22 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/19 13:00:08 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/19 18:29:56 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,7 +241,7 @@ void	builtin_exit(t_data *mini_data)
 	// int status;
 	printf("exit\n");
 	exit(0); 
-	// cjeck if we need to free things before closing the program
+	// check if we need to free things before closing the program
 	// or with another status, but which one then??
 }
 
