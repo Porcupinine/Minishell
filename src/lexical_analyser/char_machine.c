@@ -16,12 +16,82 @@
 #include "../../include/lexical_analyzer.h"
 #include <stdlib.h>
 
+void	found_char(t_state_machine *parser)
+{
+	if (parser->status != S_WORD && parser->status != S_DQUOTES)
+	{
+		parser->status = S_WORD;
+		parser->start = parser->count;
+	}
+	else
+		parser->len++;
+	parser->state = S_CHAR;
+}
+
+void found_squote(t_state_machine *parser)
+{
+	if (parser->status == S_WAITING)
+	{
+		parser->status = S_SQUOTES;
+		parser->len++;
+		parser->start = parser->count;
+	}
+	else if (parser->status == S_SQUOTES)
+	{
+		parser->len++;
+		parser->status = S_WORD;
+	}
+	else if (parser->status == S_WORD)
+	{
+		parser->len++;
+		parser->status = S_SQUOTES;
+	}
+	else
+		parser->len++;
+	parser->state = S_CHAR;
+}
+
+void found_dquote(t_state_machine *parser)
+{
+	if (parser->status == S_WAITING)
+	{
+		parser->len++;
+		parser->status = S_DQUOTES;
+		parser->start = parser->count;
+	}
+	else if (parser->status == S_DQUOTES)
+	{
+		parser->len++;
+		parser->status = S_WORD;
+	}
+	else if (parser->status == S_WORD)
+	{
+		parser->len++;
+		parser->status = S_DQUOTES;
+	}
+	else
+		parser->len++;
+	parser->state = S_CHAR;
+}
+
+void found_quotes(t_state_machine *parser)
+{
+	if (parser->cmd[parser->count] == '\'')
+		found_squote(parser);
+	else if (parser->cmd[parser->count] == '"')
+		found_dquote(parser);
+}
+
 void	token_str(t_state_machine *parser)
 {
 	char	c;
 
 	c = parser->cmd[parser->count];
-	if (ft_strchr(" |<>\"'", c) == 0)
+	if (ft_strchr(metachar, c) != 0 && parser->status == S_DQUOTES)
+		parser->len++;
+	else if (ft_strchr(quotes, c) != 0)
+		found_quotes(parser);
+	else if (ft_strchr(metachar, c) == 0)
 		parser->len++;
 	else
 	{
@@ -38,16 +108,4 @@ void	token_str(t_state_machine *parser)
 		else if (c == '|')
 			parser->state = S_PIPE;
 	}
-}
-
-void	found_char(t_state_machine *parser)
-{
-	if (parser->status != S_WORD)
-	{
-		parser->status = S_WORD;
-		parser->start = parser->count;
-	}
-	else
-		parser->len++;
-	parser->state = S_CHAR;
 }

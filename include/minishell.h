@@ -16,6 +16,11 @@
 # include <signal.h>
 # include <stdbool.h>
 
+#define append_output "O_APPEND | O_CREAT | O_WRONLY | O_TRUNC"
+#define redirect_output "O_CREAT | O_WRONLY | O_TRUNC"
+#define redirect_infile "O_RDONLY"
+#define heredoc "O_CREAT | O_WRONLY | O_TRUNC"
+
 /**
  * list of child PIDs
  */
@@ -24,6 +29,31 @@ typedef struct s_pid
 	pid_t			pid;
 	struct s_pid	*next;
 }t_pid;
+
+/**
+ *
+ */
+typedef struct s_outfile
+{
+	char *file;
+	char *type; // give one of the defines
+	struct s_outfile *next;
+}t_outfile;
+
+typedef struct s_infile
+{
+	char *file;
+	char *type;
+
+}t_infile;
+
+typedef struct s_commands
+{
+	char *cmd;
+	t_outfile *outfiles;
+	t_infile  *infiles;
+	struct s_commands *next;
+}t_commands;
 
 /**
  * list of environment variables
