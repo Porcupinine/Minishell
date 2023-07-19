@@ -19,7 +19,9 @@
 
 void	token_space_newline(t_state_machine *parser)
 {
-	if (ft_strchr(" |<>\"'", parser->cmd[parser->count]) == 0)
+	if (ft_strchr("\"'", parser->cmd[parser->count]) != 0)
+		found_quotes(parser);
+	else if (ft_strchr(" |<>", parser->cmd[parser->count]) == 0)
 	{
 		if (parser->status != S_WORD)
 		{
@@ -37,5 +39,8 @@ void	token_space_newline(t_state_machine *parser)
 			parser->state = S_BIG;
 		else if (parser->cmd[parser->count] == '<')
 			parser->state = S_SMALL;
+		else if (parser->cmd[parser->count] == ' ')
+			parser->len++;
 	}
+
 }

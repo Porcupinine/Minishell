@@ -15,10 +15,15 @@
 
 # include "minishell.h"
 
+#define quotes "\"'"
+#define metachar " |><	"
+
 typedef enum s_SM_STATUS
 {
 	S_WAITING,
 	S_WORD,
+	S_DQUOTES,
+	S_SQUOTES,
 	S_END,
 }t_SM_STATUS;
 
@@ -36,7 +41,6 @@ typedef enum s_SM_STATES
 
 typedef enum s_type
 {
-	T_WHITESPACE,
 	T_PIPE,
 	T_BIG,
 	T_BIGBIG,
@@ -90,6 +94,8 @@ void	token_str(t_state_machine *parser);
 void	found_char(t_state_machine *parser);
 void	token_smallsmall(t_state_machine *parser);
 void	token_error(t_state_machine *parser);
+void found_quotes(t_state_machine *parser);
+
 
 
 

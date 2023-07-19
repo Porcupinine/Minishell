@@ -22,7 +22,12 @@ void	token_start(t_state_machine *parser)
 	char	c;
 
 	c = parser->cmd[parser->count];
-	if (ft_strchr(" |<>\"'", c) == 0)
+	if (ft_strchr(metachar, c) == 0)
+	{
+		parser->state = S_CHAR;
+		parser->status = S_WORD;
+	}
+	else if (ft_strchr(quotes, c) != 0)
 	{
 		parser->state = S_CHAR;
 		parser->status = S_WORD;
@@ -63,6 +68,8 @@ void	parse_machine(t_data *mini_data)
 		functions[parser->state](parser);
 		parser->count++;
 	}
+	if (parser->status == S_DQUOTES || parser->status == S_SQUOTES)
+		parser->state = S_ERROR;
 	add_token(&parser->tokens_list, \
 	ft_substr(parser->cmd, parser->start, parser->len), T_CHAR);
 	print_tokens(parser->tokens_list);
