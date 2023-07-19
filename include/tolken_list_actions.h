@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parser.h                                           :+:    :+:            */
+/*   tolken_list_actions.h                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/07/17 17:32:37 by laura         #+#    #+#                 */
-/*   Updated: 2023/07/17 17:32:49 by laura         ########   odam.nl         */
+/*   Created: 2023/07/17 17:31:44 by laura         #+#    #+#                 */
+/*   Updated: 2023/07/17 17:32:28 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef TOLKEN_LIST_ACTIONS_H
+# define TOLKEN_LIST_ACTIONS_H
 
-void	count_args(t_data *mini_data);
+# include "minishell.h"
+# include "lexical_analyzer.h"
 
-#endif //PARSER_H
+void	add_token(t_tokens **tokens, char *token, t_type type);
+void	print_tokens(t_tokens *tokens);
+
+#endif //TOLKEN_LIST_ACTIONS_H

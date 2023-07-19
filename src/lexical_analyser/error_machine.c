@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parser.h                                           :+:    :+:            */
+/*   error_machine.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/07/17 17:32:37 by laura         #+#    #+#                 */
-/*   Updated: 2023/07/17 17:32:49 by laura         ########   odam.nl         */
+/*   Created: 2023/07/17 17:30:08 by laura         #+#    #+#                 */
+/*   Updated: 2023/07/17 17:30:15 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "../../include/minishell.h"
+#include "../../include/tolken_list_actions.h"
+#include "../../Lib42/include/libft.h"
+#include "../../include/lexical_analyzer.h"
+#include <stdlib.h>
+#include <stdio.h>
 
-void	count_args(t_data *mini_data);
-
-#endif //PARSER_H
+void	token_error(t_state_machine *parser)
+{
+	printf("Syntax error\n");
+}
