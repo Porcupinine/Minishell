@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 17:07:22 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/18 21:57:51 by domi             ###   ########.fr       */
+/*   Updated: 2023/07/19 13:00:08 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/param.h>
-
-/* 
-file for the buildins:
-    ◦ echo with option -n
-    ◦ cd with only a relative or absolute path
-    ◦ pwd with no options
-    ◦ export with no options
-    ◦ unset with no options
-    ◦ env with no options or arguments
-    ◦ exit with no options
-*/
 
 void ft_exit(int error)
 {
@@ -274,3 +263,8 @@ void	builtins(char **argv, char **envp, t_data *mini_data) // still incomplete (
 		builtin_exit(mini_data);
 		// can't we just use the "real exit" function here, and leave the shell?
 }
+
+// void builtins()
+// {
+// 	// maybe to the same way laura constructed her function void thing-y
+// }
