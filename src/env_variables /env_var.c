@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parser.h                                           :+:    :+:            */
+/*   env_var.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/07/17 17:32:37 by laura         #+#    #+#                 */
-/*   Updated: 2023/07/17 17:32:49 by laura         ########   odam.nl         */
+/*   Created: 2023/07/17 17:26:37 by laura         #+#    #+#                 */
+/*   Updated: 2023/07/17 17:26:55 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "../../include/minishell.h"
+#include <stdlib.h>
+#include "../../Lib42/include/libft.h"
+#include "../../include/lexical_analyzer.h"
 
-void	count_args(t_data *mini_data);
+void found_equal(t_tokens *tokens)
+{
 
-#endif //PARSER_H
+}
+
+void search_for_equals(t_tokens *tolkens)
+{
+	while(tolkens)
+	{
+		if (tolkens->type == T_CHAR)
+		{
+			if(ft_strchr(tolkens->str, '=') != 0)
+				found_equal(tolkens);
+		}
+		tolkens = tolkens->next;
+	}
+}
