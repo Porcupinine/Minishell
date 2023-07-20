@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 17:32:57 by laura             #+#    #+#             */
-/*   Updated: 2023/07/19 18:18:42 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/20 09:14:17 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # include <signal.h>
 # include <stdbool.h>
 
-#define append_output "O_APPEND | O_CREAT | O_WRONLY | O_TRUNC"
-#define redirect_output "O_CREAT | O_WRONLY | O_TRUNC"
-#define redirect_infile "O_RDONLY"
-#define heredoc "O_CREAT | O_WRONLY | O_TRUNC"
+#define append_output O_APPEND | O_CREAT | O_WRONLY | O_TRUNC
+#define redirect_output O_CREAT | O_WRONLY | O_TRUNC
+#define redirect_infile O_RDONLY
+#define heredoc O_CREAT | O_WRONLY | O_TRUNC
 
 /**
  * list of child PIDs

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/19 18:32:00 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/20 11:38:25 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	start(t_data *mini_data)
 		// if -1 ??
 	
 	// still old stuff to check out if needed in the structure
-		pipex.envp = envp;
 		pipex.index = 0;
 		pipex.fd = open_pipes(argc);
 		if (pipex.fd == NULL)
