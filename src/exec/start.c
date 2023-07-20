@@ -6,19 +6,42 @@
 /*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/20 11:38:25 by domi             ###   ########.fr       */
+/*   Updated: 2023/07/20 14:05:29 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static int	**open_pipes(t_data *mini)
+{
+	int		**fd;
+	int		nb;
+	int		i;
+
+	nb = argc - 4;
+	fd = (int **)malloc((nb) * sizeof(int *));
+	i = 0;
+	while (i < nb)
+	{
+		fd[i] = (int *)malloc(2 * sizeof(int));
+		i++;
+	}
+	i = 0;
+	while (i < nb)
+	{
+		if (pipe(fd[i]) < 0)
+			return (NULL);
+		i++;
+	}
+	return (fd);
+}
+
 int	start(t_data *mini_data)
 {
-	input_re(mini_data);
-		// if -1 ??
-		// if its heredoc tho redirect to somewhere before to read from stdin
-	output_re(mini_data);
-		// if -1 ??
+	input_re(mini_data); // error checking ++ if no in file then ..??
+	output_re(mini_data); // error checking ++ if no out file then ..??
+	
+
 	
 	// still old stuff to check out if needed in the structure
 		pipex.index = 0;
