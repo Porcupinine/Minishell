@@ -16,7 +16,7 @@
 #include <signal.h>
 #include "../Lib42/include/libft.h"
 #include "../include/minishell.h"
-#include "../include/parser.h"
+#include "../include/env_var.h"
 #include "../include/lexical_analyzer.h"
 #include "../include/tolken_list_actions.h"
 
@@ -52,7 +52,7 @@ int	main(int argc, char **argv, char **envp)
 	sigaction(SIGINT, &sigint_sa, NULL);
 	while (1)
 	{
-		mini_data->command_line = readline("\nminishell: ");
+		mini_data->command_line = readline("\nminisomething: ");
 //        printf("%s\n", mini_data->command_line);
 //        count_args(mini_data);
 		parse_machine(mini_data);

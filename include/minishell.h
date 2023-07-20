@@ -82,6 +82,7 @@ typedef struct s_env_args
 typedef struct s_data
 {
 	char		**mini_envp;
+	t_commands 	*cmds;
 	t_env_args	*env_args;
 	char		*command_line;
     t_commands  *commands;
