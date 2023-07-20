@@ -10,9 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef ENV_VAR_H
+# define ENV_VAR_H
 
-void	count_args(t_data *mini_data);
 
-#endif //PARSER_H
+#endif //ENV_VAR_H

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include "../../include/parser.h"
+#include "../../include/env_var.h"
 #include "../../include/pipes.h"
 #include "../../Lib42/include/libft.h"
 

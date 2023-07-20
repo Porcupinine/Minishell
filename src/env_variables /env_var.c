@@ -12,5 +12,23 @@
 
 #include "../../include/minishell.h"
 #include <stdlib.h>
+#include "../../Lib42/include/libft.h"
+#include "../../include/lexical_analyzer.h"
 
-void move_tolkens
+void found_equal(t_tokens *tokens)
+{
+
+}
+
+void search_for_equals(t_tokens *tolkens)
+{
+	while(tolkens)
+	{
+		if (tolkens->type == T_CHAR)
+		{
+			if(ft_strchr(tolkens->str, '=') != 0)
+				found_equal(tolkens);
+		}
+		tolkens = tolkens->next;
+	}
+}

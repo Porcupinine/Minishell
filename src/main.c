@@ -16,7 +16,7 @@
 #include <signal.h>
 #include "../Lib42/include/libft.h"
 #include "../include/minishell.h"
-#include "../include/parser.h"
+#include "../include/env_var.h"
 #include "../include/lexical_analyzer.h"
 #include "../include/tolken_list_actions.h"
 
