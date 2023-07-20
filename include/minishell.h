@@ -6,7 +6,7 @@
 /*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 17:32:57 by laura             #+#    #+#             */
-/*   Updated: 2023/07/20 09:14:17 by domi             ###   ########.fr       */
+/*   Updated: 2023/07/20 16:39:55 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,14 @@ typedef struct s_infile
 
 typedef struct s_commands
 {
-	char *cmd;
-	t_outfile *outfiles;
-    int out;
-	t_infile  *infiles;
-    int in;
+	char 		*cmd;
+	t_outfile 	*outfiles;
+    int 		out;
+	t_infile  	*infiles;
+    int 		in;
+	int			**fd;
+	int			nb_cmds;
+	t_pid		*process;
 	struct s_commands *next;
 }t_commands;
 

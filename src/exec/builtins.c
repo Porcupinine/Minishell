@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 17:07:22 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/19 18:29:56 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/20 15:18:04 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,23 +245,26 @@ void	builtin_exit(t_data *mini_data)
 	// or with another status, but which one then??
 }
 
-void	builtins(char **argv, char **envp, t_data *mini_data) // still incomplete (envp needed)
+int	builtins(char *cmd, t_data *mini_data) // still incomplete (envp needed)
 {
-	if (ft_strncmp(argv[1], "echo", 4) == 0) // change the argv[1] part (depending on struct)
+	if (ft_strncmp(cmd, "echo", 4) == 0) // change the argv[1] part (depending on struct)
 		builtin_echo(mini_data);
-	else if (ft_strncmp(argv[1], "cd", 2) == 0) // change the argv[1] part (depending on struct)
+	else if (ft_strncmp(cmd, "cd", 2) == 0) // change the argv[1] part (depending on struct)
 		builtin_cd();
-	else if (ft_strncmp(argv[1], "pwd", 3) == 0) // change the argv[1] part (depending on struct)
+	else if (ft_strncmp(cmd, "pwd", 3) == 0) // change the argv[1] part (depending on struct)
 		builtin_pwd(envp);
-	else if (ft_strncmp(argv[1], "export", 6) == 0) // change the argv[1] part (depending on struct)
+	else if (ft_strncmp(cmd, "export", 6) == 0) // change the argv[1] part (depending on struct)
 		builtin_export();
-	else if (ft_strncmp(argv[1], "unset", 5) == 0) // change the argv[1] part (depending on struct)
+	else if (ft_strncmp(cmd, "unset", 5) == 0) // change the argv[1] part (depending on struct)
 		builtin_unset();
-	else if (ft_strncmp(argv[1], "env", 3) == 0) // change the argv[1] part (depending on struct)
+	else if (ft_strncmp(cmd, "env", 3) == 0) // change the argv[1] part (depending on struct)
 		builtin_env(mini_data);
-	else if (ft_strncmp(argv[1], "exit", 4) == 0) // change the argv[1] part (depending on struct)
+	else if (ft_strncmp(cmd, "exit", 4) == 0) // change the argv[1] part (depending on struct)
 		builtin_exit(mini_data);
 		// can't we just use the "real exit" function here, and leave the shell?
+	else
+		return (1); // meaning not found
+	return (0);
 }
 
 // void builtins()
