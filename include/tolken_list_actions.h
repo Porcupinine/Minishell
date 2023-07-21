@@ -18,5 +18,6 @@
 
 void	add_token(t_tokens **tokens, char *token, t_type type);
 void	print_tokens(t_tokens *tokens);
+int find_size(t_tokens *tokens);
 
 #endif //TOLKEN_LIST_ACTIONS_H

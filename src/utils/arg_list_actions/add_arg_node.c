@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 #include <stdlib.h>
-#include "../../Lib42/include/libft.h"
+#include "libft.h"
 
 void	add_arg(t_env_args *args, char *name, char *value)
 {
