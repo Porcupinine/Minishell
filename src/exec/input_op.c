@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:19:42 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/20 11:42:55 by domi             ###   ########.fr       */
+/*   Updated: 2023/07/21 16:57:00 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,25 @@
 
 #include <fcntl.h>
 #include <stdlib.h>
+#include <unistd.h>
+
+bool	dollar_check(t_data *mini)
+{
+	bool 	quotes;
+	int		s_quote;
+	int		d_quote;
+	int		i;
+	
+	i = 0;
+	s_quote = 0;
+	d_quote = 0;
+	quotes = false;
+	while (mini->commands->infiles->file[i])
+	{
+		if (mini->commands->infiles->file[i] == )
+		i++;
+	}
+}
 
 static void	free_stdin(char *line, char *str)
 {
@@ -58,9 +77,15 @@ void    read_stdin(t_data *mini)
 	char	*limiter;
 	char	*str;
 	int		i;
+	bool	quotes;
 
 	limiter = mini->commands->infiles->file;
-	line = get_next_line(0); // check if its the correct gnl
+	quotes = dollar_check(mini);
+		// needs to expand $ARG, but what are the edgecases??
+			// if ARG doesn't exist then replace with blank (not even a space)
+			// expands if: word on its own
+			// doesn't expand if: we have two single/double quotes in in the word; if only one then unclosed quote then what??
+	line = get_next_line_exit(0); // check if its the correct gnl
 	str = rm_newline(line, limiter);
 	while (line != NULL && ft_strncmp(str, limiter, ft_strlen(limiter)) != 0)
 	{
@@ -69,7 +94,7 @@ void    read_stdin(t_data *mini)
 		if (ft_strchr(line, '\n') == NULL)
 			break ;
 		free_stdin(line, str);
-		line = get_next_line(0); // check if its the correct gnl
+		line = get_next_line_exit(0); // check if its the correct gnl
 		if (line == NULL)
 			break ;
 		str = rm_newline(line, limiter);
@@ -81,11 +106,11 @@ void    read_stdin(t_data *mini)
 void input_re(t_data *mini)
 {
     if (mini->commands->infiles->file == NULL) // meaning no infile
-        // return something to notify about it
+		mini->commands->in = STDIN_FILENO;
     else if (mini->commands->infiles->file->type == heredoc)
     {
 		mini->commands->in = open("tmp_file", O_CREAT | O_WRONLY | O_TRUNC, 0644); // or name it heredoc??
-        read_stdin(mini); // needs to expand $ARG, but what are the edgecases??
+        read_stdin(mini);
         close(mini->commands->in);
         mini->commands->in = open("tmp_file", O_RDONLY); // or name it heredoc??
     }

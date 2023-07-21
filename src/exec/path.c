@@ -1,6 +1,19 @@
-// ADD 42 HEADER
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   path.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/21 11:43:11 by dmaessen          #+#    #+#             */
+/*   Updated: 2023/07/21 12:32:32 by dmaessen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
+
+#include <stdlib.h>
+#include <unistd.h>
 
 static int	find_path(char **envp)
 {
@@ -56,7 +69,7 @@ char	*split_args(char *cmd, char **envp, t_data *mini)
 	if (!command)
 		return (NULL); // check
 	// check here is command == buitlin else the below
-	if (builtins(command[0], mini) == 1) // meaning not a builtin
+	if (builtins(command, mini) == 1) // meaning not a builtin
 	{
 		if (*envp == NULL)
 			exit(127); // check 

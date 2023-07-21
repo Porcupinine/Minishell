@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 17:32:57 by laura             #+#    #+#             */
-/*   Updated: 2023/07/20 16:39:55 by domi             ###   ########.fr       */
+/*   Updated: 2023/07/21 12:08:13 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_commands
 	int			**fd;
 	int			nb_cmds;
 	t_pid		*process;
+	int			status;
 	struct s_commands *next;
 }t_commands;
 

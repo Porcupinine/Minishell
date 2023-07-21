@@ -3,47 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/20 16:55:09 by domi             ###   ########.fr       */
+/*   Updated: 2023/07/21 16:13:27 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+#include <stdlib.h>
+#include <unistd.h>
+
 static int	execute_pipe(t_data *mini)
 {
+	pid_t	process;
 	int		i;
 	int 	pos;
 
 	i = 1;
 	pos = 0;
-	mini->commands->process = malloc(sizeof(t_pid) * mini->commands->nb_cmds);
-	if (!p.ph)
-		return (ft_exit("Error: malloc.\n"));
+	// mini->commands->process = malloc(sizeof(t_pid) * mini->commands->nb_cmds); // CHECK w Laura
 	while (i <= mini->commands->nb_cmds)
 	{
-		if (i == 1)
-		{
-			pid_lstnew(mini->commands->process->pid); // is this correct
-			mini->commands->process->pid = fork();
-		}
+		// if (i == 1)
+		// {
+		// 	pid_lstnew(mini->commands->process->pid); // is this correct
+		// 	mini->commands->process->pid = fork(); // or just "process" here ??
+		// }
+		process = fork();
 		if (process == -1)
 			return (1); // check
 		if (process == 0)
-			which_child(mini, i, pos); // WE WERE HERE
+			which_child(mini, i, pos);
 		i++;
 		pos++;
 	}
-	close_pipe(pipex.fd, pipex.argc);
-	free_fd(pipex.fd, pipex.argc);
-	close(pipex.in_file);
-	close(pipex.out_f);
-	waitpid(process, &pipex.status, 0);
-	if (WIFEXITED(pipex.status))
-		exit(WEXITSTATUS(pipex.status));
-	return (0);
+	close_pipe(mini->commands->fd, mini->commands->nb_cmds);
+	free_fd(mini->commands->fd, mini->commands->nb_cmds);
+	close(mini->commands->in); // only if needed/present
+	close(mini->commands->out); // only if needed/present
+	if (mini->commands->infiles->file->type == heredoc)
+		unlink("tmp_file");
+	waitpid(process, &mini->commands->status, 0);
+	if (WIFEXITED(mini->commands->status)) // check
+		exit(WEXITSTATUS(mini->commands->status)); // check
+	return (0); // check
 }
 
 static int	**open_pipes(t_data *mini)
@@ -83,19 +88,29 @@ void	close_pipe(int **fd, int nb)
 	}
 }
 
-int	start(t_data *mini_data)
+int	start(t_data *mini)
 {
-	input_re(mini_data); // error checking ++ if no in file then ..??
-	output_re(mini_data); // error checking ++ if no out file then ..??
+	input_re(mini); // error checking ++ if no in file then ..??
+	output_re(mini); // error checking
 	
 	mini->commands->nb_cmds = lst_size(mini->commands);
-	mini->commands->fd = open_pipes(mini);
-	if (mini->commands->fd == NULL)
-		exit(EXIT_FAILURE); // check if correct exit
-	if (execute_pipe(mini) == 1) 
-		exit(EXIT_FAILURE); // check if correct exit
-	
-    // if cmd == 1 ; do something seperate
+	if (mini->commands->nb_cmds == 0)
+	{
+		// could just an outfile? and infile??
+	}
+	else if (mini->commands->nb_cmds == 1)
+	{
+		
+	}
+	else
+	{
+		mini->commands->fd = open_pipes(mini);
+		if (mini->commands->fd == NULL)
+			exit(EXIT_FAILURE); // check if correct exit
+		if (execute_pipe(mini) == 1) // if no in/out file will break the logic here
+			exit(EXIT_FAILURE); // check if correct exit
+	}
+		
     
 	// other version needed without in and out files OR could we make a rule depending on < << >> > ??
 
@@ -110,14 +125,17 @@ int	start(t_data *mini_data)
 /*
 	i left off at:
 		-- start.c
-			execute_pipe line 22 ++ 27: what to do with pids? how to create the list?
-		-- child.c
-			which_child: check line 46 ++ child_last ft
-			which_child: check line 49 ++ child_middle ft
+			execute_pipe line 22 ++ 27: what to do with pids? how to create the list? LAURA??
 		-- utils.c
 			check on the t_pid ones, if correct and needed??
+		-- builtins.c
+			go through them to adapt now we know the structure
 
+	QUESTION:
+		-- what would be the best approach for the pids?? storing them in a struct or not??
+		-- (LAURA) in echo should i still filter though the str see if there is a $ in there??
 	
 	all error handling to go through
+	
 			
 */

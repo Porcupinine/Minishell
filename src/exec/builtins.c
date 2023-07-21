@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 17:07:22 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/20 15:18:04 by domi             ###   ########.fr       */
+/*   Updated: 2023/07/21 14:27:02 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,18 @@ void ft_exit(int error)
 		// if yes check if they are closed
 		// else needs to read from stdin
 */
-void	builtin_echo(t_data *mini_data)
+void	builtin_echo(t_data *mini, char *cmd)
 {
-	// Laura deals with quotes situation
-	if (ft_strncmp(mini_data->token[1], "echo -n", 7) == 0) // probably if flag for echo or not instead of strncmp
-		printf("%s", mini_data->token[1] + 8);
-		// just printf the str (from struct) without new line
+	if (ft_strncmp(mini->commands->cmd, "echo -n", 7) == 0) // probably if flag for echo or not instead of strncmp
+	{
+		// check if there is a $ still in there or not? LAURA
+		printf("%s", mini->commands->cmd + 8);
+	}
 	else
-		printf("%s\n", mini_data->token[1] + 5);
-		// just printf the str (from struct) without new line
-	// we could also have some $ in there to deal with
-		// if flag is on, deal with it else echo direcly
+	{
+		// check if there is a $ still in there or not? LAURA
+		printf("%s\n", mini->commands->cmd + 5);
+	}
 	return (0); // check
 }
 
@@ -163,6 +164,8 @@ void	builtin_export(t_data *mini_data)
 	
 	// all depends if we use an array or a linekd list here
 	// do i need to malloc the line ? PROBABLY YES
+
+	// check if there is more than one arg to set here (could be ++)
 }
 
 /* 
@@ -245,29 +248,24 @@ void	builtin_exit(t_data *mini_data)
 	// or with another status, but which one then??
 }
 
-int	builtins(char *cmd, t_data *mini_data) // still incomplete (envp needed)
+int	builtins(char **cmd, t_data *mini)
 {
-	if (ft_strncmp(cmd, "echo", 4) == 0) // change the argv[1] part (depending on struct)
-		builtin_echo(mini_data);
-	else if (ft_strncmp(cmd, "cd", 2) == 0) // change the argv[1] part (depending on struct)
+	if (ft_strncmp(cmd[0], "echo", 4) == 0)
+		builtin_echo(mini, *cmd);
+	else if (ft_strncmp(cmd[0], "cd", 2) == 0)
 		builtin_cd();
-	else if (ft_strncmp(cmd, "pwd", 3) == 0) // change the argv[1] part (depending on struct)
+	else if (ft_strncmp(cmd[0], "pwd", 3) == 0)
 		builtin_pwd(envp);
-	else if (ft_strncmp(cmd, "export", 6) == 0) // change the argv[1] part (depending on struct)
+	else if (ft_strncmp(cmd[0], "export", 6) == 0)
 		builtin_export();
-	else if (ft_strncmp(cmd, "unset", 5) == 0) // change the argv[1] part (depending on struct)
+	else if (ft_strncmp(cmd[0], "unset", 5) == 0)
 		builtin_unset();
-	else if (ft_strncmp(cmd, "env", 3) == 0) // change the argv[1] part (depending on struct)
+	else if (ft_strncmp(cmd[0], "env", 3) == 0)
 		builtin_env(mini_data);
-	else if (ft_strncmp(cmd, "exit", 4) == 0) // change the argv[1] part (depending on struct)
+	else if (ft_strncmp(cmd[0], "exit", 4) == 0)
 		builtin_exit(mini_data);
 		// can't we just use the "real exit" function here, and leave the shell?
 	else
 		return (1); // meaning not found
 	return (0);
 }
-
-// void builtins()
-// {
-// 	// maybe to the same way laura constructed her function void thing-y
-// }
