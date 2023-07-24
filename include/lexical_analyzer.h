@@ -81,9 +81,6 @@ typedef struct s_state_machine
 	int			len;
 }t_state_machine;
 
-
-
-
 void	parse_machine(t_data *mini_data);
 void	token_space_newline(t_state_machine *parser);
 void	token_pipe(t_state_machine *parser);
@@ -94,9 +91,6 @@ void	token_str(t_state_machine *parser);
 void	found_char(t_state_machine *parser);
 void	token_smallsmall(t_state_machine *parser);
 void	token_error(t_state_machine *parser);
-void found_quotes(t_state_machine *parser);
-
-
-
+void	found_quotes(t_state_machine *parser);
 
 #endif //MINISHELL_LEXICAL_ANALYZER_H

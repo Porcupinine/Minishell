@@ -15,6 +15,6 @@
 
 #include "lexical_analyzer.h"
 
-void search_for_equals(t_tokens *tolkens);
+void	search_for_equals(t_tokens *tokens);
 
 #endif //ENV_VAR_H

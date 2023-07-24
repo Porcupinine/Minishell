@@ -35,24 +35,23 @@ typedef struct s_pid
  */
 typedef struct s_outfile
 {
-	char *file;
-	char *type; // give one of the defines
-	struct s_outfile *next;
+	char				*file;
+	char				*type; // give one of the defines
+	struct s_outfile	*next;
 }t_outfile;
 
 typedef struct s_infile
 {
-	char *file;
-	char *type;
-
+	char	*file;
+	char	*type;
 }t_infile;
 
 typedef struct s_commands
 {
-	char *cmd;
-	t_outfile *outfiles;
-	t_infile  *infiles;
-	struct s_commands *next;
+	char				*cmd;
+	t_outfile			*outfiles;
+	t_infile			*infiles;
+	struct s_commands	*next;
 }t_commands;
 
 /**
@@ -80,7 +79,7 @@ typedef struct s_env_args
 typedef struct s_data
 {
 	char		**mini_envp;
-	t_commands 	*cmds;
+	t_commands	*cmds;
 	t_env_args	*env_args;
 	char		*command_line;
 }t_data;

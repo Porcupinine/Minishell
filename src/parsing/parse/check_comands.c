@@ -3,6 +3,7 @@
 #include "libft.h"
 #include "../../../include/lexical_analyzer.h"
 #include "../../../include/env_var.h"
+#include "../../../include/token_list_actions.h"
 
 int search_envp(t_data *mini_data, char *str)
 {
@@ -20,17 +21,30 @@ int search_envp(t_data *mini_data, char *str)
 
 void parse(t_state_machine *parser, t_data *mini_data)
 {
-	if (fin)
+	t_commands *cmd;
+
+	cmd = ft_calloc(1, sizeof(t_commands));
+	if(cmd == NULL)
+		//TODO huston we have a problem return with error
+	if (parser->tokens_list->type != T_PIPE)
+		//TODO huston we have a problem
 	while (parser->tokens_list)
 	{
 		if (parser->tokens_list->type == T_CHAR)
 		{
-			if (search_envp(mini_data, parser->tokens_list->str) == 0)
-				//add new cmd with following char types;
-				;
-			else
-				// add to arg list
-				;
+			//add node
+//			while (parser->tokens_list->type != T_PIPE)
+//			{
+//				if (parser->tokens_list->type == T_BIG || parser->tokens_list->type == T_BIGBIG
+//					|| parser->tokens_list->type == T_SMALL || parser->tokens_list->type == T_SMALLSMALL)
+//					;
+//				else
+//					ft_strlcat(temp, parser->tokens_list->str, ft_strlen(parser->tokens_list->str));
+//				parser->tokens_list = parser->tokens_list->next;
+//			}
 		}
+		if (parser->tokens_list->type == T_BIG || parser->tokens_list->type == T_BIGBIG
+			|| parser->tokens_list->type == T_SMALL || parser->tokens_list->type == T_SMALLSMALL)
+			;
 	}
 }
