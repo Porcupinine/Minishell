@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 17:32:57 by laura             #+#    #+#             */
-/*   Updated: 2023/07/21 12:08:13 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:13:25 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ typedef struct s_commands
     int 		in;
 	int			**fd;
 	int			nb_cmds;
-	t_pid		*process;
 	int			status;
 	struct s_commands *next;
 }t_commands;
@@ -90,6 +89,7 @@ typedef struct s_data
 	t_env_args	*env_args;
 	char		*command_line;
     t_commands  *commands;
+	t_pid		*process;
 }t_data;
 
 #endif //MINISHELL_MINISHELL_H

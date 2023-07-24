@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/21 16:13:27 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:36:31 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,23 @@
 
 static int	execute_pipe(t_data *mini)
 {
-	pid_t	process;
+	//pid_t	process;
 	int		i;
 	int 	pos;
 
 	i = 1;
 	pos = 0;
-	// mini->commands->process = malloc(sizeof(t_pid) * mini->commands->nb_cmds); // CHECK w Laura
 	while (i <= mini->commands->nb_cmds)
 	{
-		// if (i == 1)
-		// {
-		// 	pid_lstnew(mini->commands->process->pid); // is this correct
-		// 	mini->commands->process->pid = fork(); // or just "process" here ??
-		// }
-		process = fork();
-		if (process == -1)
+		mini->process->pid = pid_lstadd_back(mini->process->pid, fork());
+		// process = fork();
+		if (mini->process->pid == -1) // NO -- NEED TO ITERATE OVER THE NODES AS NO STUCK ON HEAD
 			return (1); // check
-		if (process == 0)
+		if (mini->process->pid == 0) // NO -- NEED TO ITERATE OVER THE NODES AS NO STUCK ON HEAD
 			which_child(mini, i, pos);
 		i++;
 		pos++;
+		// mini->process->pid = mini->process->pid->next;
 	}
 	close_pipe(mini->commands->fd, mini->commands->nb_cmds);
 	free_fd(mini->commands->fd, mini->commands->nb_cmds);
@@ -126,6 +122,7 @@ int	start(t_data *mini)
 	i left off at:
 		-- start.c
 			execute_pipe line 22 ++ 27: what to do with pids? how to create the list? LAURA??
+				CHECK THIS: NO -- NEED TO ITERATE OVER THE NODES AS NO STUCK ON HEAD
 		-- utils.c
 			check on the t_pid ones, if correct and needed??
 		-- builtins.c
@@ -133,7 +130,7 @@ int	start(t_data *mini)
 
 	QUESTION:
 		-- what would be the best approach for the pids?? storing them in a struct or not??
-		-- (LAURA) in echo should i still filter though the str see if there is a $ in there??
+		-- (LAURA) in echo should i still filter though the str see if there is a $ in there?? yes 
 	
 	all error handling to go through
 	
