@@ -36,6 +36,7 @@ void	token_start(t_state_machine *parser)
 		parser->state = S_WHITESPACE;
 	else
 		parser->state = S_ERROR;
+	//TODO infile
 }
 
 void	populate_function_ptrs(void (**functions)(t_state_machine *))

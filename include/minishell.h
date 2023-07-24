@@ -16,10 +16,10 @@
 # include <signal.h>
 # include <stdbool.h>
 
-#define append_output "O_APPEND | O_CREAT | O_WRONLY | O_TRUNC"
-#define redirect_output "O_CREAT | O_WRONLY | O_TRUNC"
-#define redirect_infile "O_RDONLY"
-#define heredoc "O_CREAT | O_WRONLY | O_TRUNC"
+#define append_output O_APPEND | O_CREAT | O_WRONLY | O_TRUNC
+#define redirect_output O_CREAT | O_WRONLY | O_TRUNC
+#define redirect_infile O_RDONLY
+#define heredoc O_CREAT | O_WRONLY | O_TRUNC
 
 /**
  * list of child PIDs
