@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:19:42 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/24 14:58:14 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/25 13:57:28 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,33 +32,27 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static bool	dollar_check(t_data *mini)
+static char *trim_limiter(t_data *mini)
 {
-	bool 	quotes;
-	int		s_quote;
-	int		d_quote;
 	int		i;
-	
+	int		j;
+	char	*trim;
+
 	i = 0;
-	s_quote = 0;
-	d_quote = 0;
-	quotes = false;
+	j = 0;
 	while (mini->commands->infiles->file[i])
 	{
-		if (mini->commands->infiles->file[i] == 34) // single quote
-			s_quote += 1;
-		if (mini->commands->infiles->file[i] == 39) // double quote
-			d_quote += 1;
+		if (mini->commands->infiles->file[i] != 34
+			&& mini->commands->infiles->file[i] != 39)
+			trim[j] = mini->commands->infiles->file[i];
 		i++;
+		j++;
 	}
-	if (s_quote % 2 == 0) // so they're in pair
-		quotes = true;
-	if (s_quote % 2 == 0) // so they're in pair
-		quotes = true;
-	return (quotes);
+	trim[j] = '\0'; // needed??
+	return (trim);
 }
 
-static char	*find_arg(char *arg, t_data *mini)
+static char	*find_arg(char *arg, t_data *mini) // what am i doing, actually not doing with this function??
 {
 	int	i;
 	char *new;
@@ -91,49 +85,6 @@ static char	*find_arg(char *arg, t_data *mini)
 	return (new);
 }
 
-char *expand_dollar(char *line, t_data *mini)
-{
-	int i;
-	int len;
-	int dollar; // maybe put this count in an ft
-	int d;
-	char *arg; // to store he expantion
-	char *new;
-
-	i = 0;
-	dollar = 0;
-	while (line[i])
-	{
-		if (line[i] == '$')
-			dollar++;
-		i++;
-	}
-	d = 0;
-	while (d < dollar)
-	{
-		i = 0;
-		len = 0;
-		while (line[i])
-		{
-			if (line[i] == '$')
-			{
-				while (line[i] != ' ')
-				{
-					arg[len] = line[i];
-					len++;
-					i++;
-				}
-			new = find_arg(arg, mini); // search in path and local and store the expantion
-			ft_strlcat(line[i - len], new, ft_strlen(new)); // is this len correct??
-			free_stdin(new, arg);
-			}
-			i++;
-		}
-		d++;
-	}
-	return (line);
-}
-
 static void	free_stdin(char *line, char *str)
 {
 	free(line);
@@ -147,6 +98,9 @@ static char	*rm_newline(char *line, char *limiter)
 
 	if (line == NULL)
 		return (NULL);
+	if (ft_strchr(line, "\\n") == NULL)
+		line = ft_strtrim(line, "\\n"); // so it also rm that last backslash right??
+			// does this trim need protection or not??
 	len = ft_strlen(line);
 	if (ft_strchr(line, '\n') == NULL || ft_strncmp(limiter, "\n", 2) == 0)
 		sub = ft_substr(line, 0, len + 1);
@@ -163,10 +117,10 @@ void    read_stdin(t_data *mini)
 	int		i;
 	bool	quotes;
 
-	limiter = mini->commands->infiles->file;
 	quotes = dollar_check(mini);
+	limiter = trim_limiter(mini); // no harm doing this check
 	line = get_next_line_exit(0); // check if its the correct gnl
-	str = rm_newline(line, limiter);
+	str = rm_newline(line, limiter); // check if picks up the backslash
 	while (line != NULL && ft_strncmp(str, limiter, ft_strlen(limiter)) != 0)
 	{
 		if (quotes == false)
@@ -187,7 +141,7 @@ void    read_stdin(t_data *mini)
 
 void input_re(t_data *mini)
 {
-    if (mini->commands->infiles->file == NULL) // meaning no infile
+    if (mini->commands->infiles->file == NULL)
 		mini->commands->in = STDIN_FILENO;
     else if (mini->commands->infiles->file->type == heredoc)
     {
@@ -199,5 +153,5 @@ void input_re(t_data *mini)
     else
         mini->commands->in = open(mini->commands->infiles->file, O_RDONLY, 0644);
 	if (mini->commands->in < 0)
-		// through an error -- no perm error
+		// throw an error -- no perm error
 }

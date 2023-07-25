@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 17:07:22 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/21 14:27:02 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/25 13:51:42 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,33 +53,6 @@ void	builtin_echo(t_data *mini, char *cmd)
 	}
 	return (0); // check
 }
-
-// bool	check_quotes(t_data *mini_data)
-// {
-// 	int i;
-// 	bool s_quotes;
-// 	bool d_quotes;
-
-// 	i = 0;
-// 	s_quotes = false;
-// 	d_quotes = false;
-// 	while (mini_data->str[i])
-// 	{
-// 		if (mini_data->str[i] == 34 && d_quotes == false) // double
-// 			d_quotes == true;
-// 		if (mini_data->str[i] == 34 && d_quotes == true)
-// 			d_quotes == false;
-// 		if (mini_data->str[i] == 39 && s_quotes == false) // single
-// 			s_quotes == true;
-// 		if (mini_data->str[i] == 39 && s_quotes == true)
-// 			s_quotes == false;
-// 		i++;
-// 	}
-// 	if (d_quotes == true || s_quotes == true 
-// 		|| (d_quotes == true && s_quotes == true)) // as could be both d && s that are true
-// 		return (true);
-// 	return (false);
-// }
 
 /*
 	abs path describe the location from the root directory
@@ -250,8 +223,8 @@ void	builtin_exit(t_data *mini_data)
 
 int	builtins(char **cmd, t_data *mini)
 {
-	if (ft_strncmp(cmd[0], "echo", 4) == 0)
-		builtin_echo(mini, *cmd);
+	if (ft_strncmp(cmd[0], "echo", 4) == 0) //
+		builtin_echo(mini, *cmd); // with this pointer does it send it as a str completly???
 	else if (ft_strncmp(cmd[0], "cd", 2) == 0)
 		builtin_cd();
 	else if (ft_strncmp(cmd[0], "pwd", 3) == 0)
