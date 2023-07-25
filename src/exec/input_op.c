@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:19:42 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/25 13:57:28 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/25 18:07:25 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,9 @@ static char	*rm_newline(char *line, char *limiter)
 
 	if (line == NULL)
 		return (NULL);
-	if (ft_strchr(line, "\\n") == NULL)
-		line = ft_strtrim(line, "\\n"); // so it also rm that last backslash right??
-			// does this trim need protection or not??
+	// if (ft_strchr(line, "\\n") == NULL) // no we do not need to deal with this
+	// 	line = ft_strtrim(line, "\\n"); // so it also rm that last backslash right??
+	// 		// does this trim need protection or not??
 	len = ft_strlen(line);
 	if (ft_strchr(line, '\n') == NULL || ft_strncmp(limiter, "\n", 2) == 0)
 		sub = ft_substr(line, 0, len + 1);
@@ -145,10 +145,10 @@ void input_re(t_data *mini)
 		mini->commands->in = STDIN_FILENO;
     else if (mini->commands->infiles->file->type == heredoc)
     {
-		mini->commands->in = open("tmp_file", O_CREAT | O_WRONLY | O_TRUNC, 0644); // or name it heredoc??
+		mini->commands->in = open("tmp_file", O_CREAT | O_WRONLY | O_TRUNC, 0644);
         read_stdin(mini);
         close(mini->commands->in);
-        mini->commands->in = open("tmp_file", O_RDONLY); // or name it heredoc??
+        mini->commands->in = open("tmp_file", O_RDONLY);
     }
     else
         mini->commands->in = open(mini->commands->infiles->file, O_RDONLY, 0644);
