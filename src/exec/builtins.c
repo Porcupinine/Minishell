@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 17:07:22 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/25 13:51:42 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/25 17:43:02 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,6 +216,7 @@ void	builtin_exit(t_data *mini_data)
 {
 	// int status;
 	printf("exit\n");
+	// do we also maybe need to use rl_clear_history ??
 	exit(0); 
 	// check if we need to free things before closing the program
 	// or with another status, but which one then??
