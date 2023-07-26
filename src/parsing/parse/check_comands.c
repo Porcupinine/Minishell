@@ -51,5 +51,6 @@ void parse(t_state_machine *parser, t_data *mini_data)
 		}
 		add_cmd_node(&mini_data->cmds, cmd);
 		cmd = NULL;
+		it_token = it_token->next;
 	}
 }

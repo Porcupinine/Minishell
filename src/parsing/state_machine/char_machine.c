@@ -22,6 +22,7 @@ void	found_char(t_state_machine *parser)
 	{
 		parser->status = S_WORD;
 		parser->start = parser->count;
+		parser->len++;
 	}
 	else
 		parser->len++;

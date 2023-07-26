@@ -71,7 +71,7 @@ void	token_smaller(t_state_machine *parser)
 	else if (c == '<')
 	{
 		add_token(&parser->tokens_list, "<<", T_SMALLSMALL);
-		parser->state = S_BIGBIG;
+		parser->state = S_SMALSMAL;
 	}
 	else if (ft_strchr(QUOTES, parser->cmd[parser->count]) != 0)
 		found_quotes(parser);
