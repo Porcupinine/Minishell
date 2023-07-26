@@ -5,16 +5,31 @@
 #include "../../../include/env_var.h"
 #include "../../../include/token_list_actions.h"
 
-static t_outfile *find_last(t_outfile *out)
+static t_outfile *find_last_out(t_outfile *out)
 {
-	if (out == NULL)
+	t_outfile *tmp;
+
+	tmp = out;
+	if (tmp == NULL)
 		return(NULL);
-	while (out->next != NULL)
-		out = out->next;
-	return (out);
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	return (tmp);
 }
 
-void add_outfile(t_outfile **outfile, enum s_type type, char *str)
+static t_infile *find_last_in(t_infile *in)
+{
+	t_infile *tmp;
+
+	tmp = in;
+	if (tmp == NULL)
+		return (NULL);
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	return (tmp);
+}
+
+static void add_outfile(t_outfile **outfile, enum s_type type, char *str)
 {
 	t_outfile *new_out;
 	t_outfile *last;
@@ -29,16 +44,16 @@ void add_outfile(t_outfile **outfile, enum s_type type, char *str)
 		new_out->type = APPEND_OUTPUT;
 	new_out->file = str;
 	new_out->next = NULL;
-	if (outfile == NULL)
+	if (*outfile == NULL)
 		*outfile = new_out;
 	else
 	{
-		last = find_last(*outfile);;
+		last = find_last_out(*outfile);;
 		last->next = new_out;
 	}
 }
 
-void add_infile(t_infile **infile, enum s_type type, char *str)
+static void add_infile(t_infile **infile, enum s_type type, char *str)
 {
 	t_infile *new_in;
 	t_infile *last;
@@ -48,30 +63,24 @@ void add_infile(t_infile **infile, enum s_type type, char *str)
 	if (new_in == NULL)
 		;//TODO malloc fail
 	if (type == T_SMALL)
-		new_in>type = REDIRECT_INPUT;
+		new_in->type = REDIRECT_INPUT;
 	if (type == T_SMALLSMALL)
 		new_in->type = HEREDOC;
 	new_in->file = str;
 	new_in->next = NULL;
+	if (*infile == NULL)
+		*infile = new_in;
+	else
+	{
+		last = find_last_in(*infile);
+		last->next = new_in;
+	}
 }
 
 void add_inout(t_commands **cmd, char *str, enum s_type type)
 {
 	if(type == T_BIG || type == T_BIGBIG)
-		add_outfile;
+		add_outfile(&(*cmd)->outfiles, type, str);
 	else
-		add_infile;
-	if (type == T_BIG)
-		(*cmd)->outfiles->type = REDIRECT_OUTPUT;
-	if (type == T_BIGBIG)
-		(*cmd)->outfiles->type = APPEND_OUTPUT;
-	if (type == T_SMALL)
-		(*cmd)->infiles->type = REDIRECT_INPUT;
-	if (type == T_SMALLSMALL)
-		(*cmd)->infiles->type = HEREDOC;
-}
-
-void add_cmd_node(t_commands **cmd, t_commands *new_cmd)
-{
-
+		add_infile(&(*cmd)->infiles, type, str);
 }

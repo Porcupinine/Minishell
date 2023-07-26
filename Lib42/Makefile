@@ -5,7 +5,7 @@ NAME	:= libft.a
 CC 		=  -gcc
 
 #-------------------------------------------------------------------------Flags
-CFLAGS	+= -Wextra -Wall -Werror -Wunreachable-code -Ofast
+CFLAGS	+= -Wextra -Wall -Werror -Wunreachable-code -Wno-unused-result -Ofast
 ASANFLAGS += -fsanitize=address -fsanitize=leak
 
 #-----------------------------------------------------------------------Headers

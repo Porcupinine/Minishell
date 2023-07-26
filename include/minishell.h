@@ -15,11 +15,12 @@
 
 # include <signal.h>
 # include <stdbool.h>
+#include <fcntl.h>
 
-#define append_output O_APPEND | O_CREAT | O_WRONLY | O_TRUNC
-#define redirect_output O_CREAT | O_WRONLY | O_TRUNC
-#define redirect_infile O_RDONLY
-#define heredoc O_CREAT | O_WRONLY | O_TRUNC
+#define APPEND_OUTPUT (O_APPEND | O_CREAT | O_WRONLY | O_TRUNC) //1601
+#define REDIRECT_OUTPUT (O_CREAT | O_WRONLY | O_TRUNC) //577
+#define REDIRECT_INPUT (O_RDONLY) // 0
+#define HEREDOC (O_CREAT | O_WRONLY | O_TRUNC) //577
 
 /**
  * list of child PIDs
@@ -36,14 +37,15 @@ typedef struct s_pid
 typedef struct s_outfile
 {
 	char				*file;
-	char				*type; // give one of the defines
+	int 				type;
 	struct s_outfile	*next;
 }t_outfile;
 
 typedef struct s_infile
 {
-	char	*file;
-	char	*type;
+	char			*file;
+	unsigned short 				type;
+	struct s_infile *next;
 }t_infile;
 
 typedef struct s_commands

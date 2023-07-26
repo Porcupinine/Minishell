@@ -15,8 +15,8 @@
 
 # include "minishell.h"
 
-#define quotes "\"'"
-#define metachar " |><	"
+#define QUOTES "\"'"
+#define METACHAR " |><	"
 
 typedef enum s_SM_STATUS
 {
@@ -92,5 +92,7 @@ void	found_char(t_state_machine *parser);
 void	token_smallsmall(t_state_machine *parser);
 void	token_error(t_state_machine *parser);
 void	found_quotes(t_state_machine *parser);
+
+void parse(t_state_machine *parser, t_data *mini_data);
 
 #endif //MINISHELL_LEXICAL_ANALYZER_H

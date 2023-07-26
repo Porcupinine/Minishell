@@ -16,18 +16,19 @@
 #include "../../../include/lexical_analyzer.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "../../../include/cmd_list_actions.h"
 
 void	token_start(t_state_machine *parser)
 {
 	char	c;
 
 	c = parser->cmd[parser->count];
-	if (ft_strchr(metachar, c) == 0)
+	if (ft_strchr(METACHAR, c) == 0)
 	{
 		parser->state = S_CHAR;
 		parser->status = S_WORD;
 	}
-	else if (ft_strchr(quotes, c) != 0)
+	else if (ft_strchr(QUOTES, c) != 0)
 	{
 		parser->state = S_CHAR;
 		parser->status = S_WORD;
@@ -74,4 +75,6 @@ void	parse_machine(t_data *mini_data)
 	add_token(&parser->tokens_list, \
 	ft_substr(parser->cmd, parser->start, parser->len), T_CHAR);
 	print_tokens(parser->tokens_list);
+	parse(parser, mini_data);
+	print_cmd_list(mini_data->cmds);
 }

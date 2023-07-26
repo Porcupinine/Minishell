@@ -26,7 +26,7 @@ void	token_pipe(t_state_machine *parser)
 		parser->state = S_ERROR;
 	else
 		add_token(&parser->tokens_list, "|", T_PIPE);
-	if (ft_strchr(metachar, c) == 0)
+	if (ft_strchr(METACHAR, c) == 0)
 		found_char(parser);
 	if (c == ' ' || c == '\n')
 		parser->state = S_WHITESPACE;
@@ -44,14 +44,14 @@ void	token_bigger(t_state_machine *parser)
 		add_token(&parser->tokens_list, ">>", T_BIGBIG);
 		parser->state = S_BIGBIG;
 	}
-	else if (ft_strchr(quotes, parser->cmd[parser->count]) != 0)
+	else if (ft_strchr(QUOTES, parser->cmd[parser->count]) != 0)
 		found_quotes(parser);
 	else
 	{
 		add_token(&parser->tokens_list, ">", T_BIG);
 		if (c == '<')
 			parser->state = S_SMALL;
-		if (ft_strchr(metachar, c) == 0)
+		if (ft_strchr(METACHAR, c) == 0)
 			found_char(parser);
 		if (c == ' ' || c == '\n')
 			parser->state = S_WHITESPACE;
@@ -73,14 +73,14 @@ void	token_smaller(t_state_machine *parser)
 		add_token(&parser->tokens_list, "<<", T_SMALLSMALL);
 		parser->state = S_BIGBIG;
 	}
-	else if (ft_strchr(quotes, parser->cmd[parser->count]) != 0)
+	else if (ft_strchr(QUOTES, parser->cmd[parser->count]) != 0)
 		found_quotes(parser);
 	else
 	{
 		add_token(&parser->tokens_list, "<", T_SMALL);
 		if (c == '>')
 			parser->state = S_SMALL;
-		if (ft_strchr(metachar, c) == 0)
+		if (ft_strchr(METACHAR, c) == 0)
 			found_char(parser);
 		if (c == ' ' || c == '\n')
 			parser->state = S_WHITESPACE;
@@ -96,9 +96,9 @@ void	token_bigbig(t_state_machine *parser)
 	{
 		parser->state = S_ERROR;
 	}
-	else if (ft_strchr(quotes, parser->cmd[parser->count]) != 0)
+	else if (ft_strchr(QUOTES, parser->cmd[parser->count]) != 0)
 		found_quotes(parser);
-	else if (ft_strchr(metachar, c) == 0)
+	else if (ft_strchr(METACHAR, c) == 0)
 		found_char(parser);
 	else if (c == ' ' || c == '\n')
 		parser->state = S_WHITESPACE;
@@ -113,9 +113,9 @@ void	token_smallsmall(t_state_machine *parser)
 	{
 		parser->state = S_ERROR;
 	}
-	else if (ft_strchr(metachar, c) == 0)
+	else if (ft_strchr(METACHAR, c) == 0)
 		found_char(parser);
-	else if (ft_strchr(quotes, parser->cmd[parser->count]) != 0)
+	else if (ft_strchr(QUOTES, parser->cmd[parser->count]) != 0)
 		found_quotes(parser);
 	else if (c == ' ' || c == '\n')
 		parser->state = S_WHITESPACE;
