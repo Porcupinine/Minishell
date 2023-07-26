@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 17:07:22 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/25 17:43:02 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/26 16:42:36 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void ft_exit(int error)
 		// if yes check if they are closed
 		// else needs to read from stdin
 */
-void	builtin_echo(t_data *mini, char *cmd)
+int	builtin_echo(t_data *mini, char *cmd)
 {
 	if (ft_strncmp(mini->commands->cmd, "echo -n", 7) == 0) // probably if flag for echo or not instead of strncmp
 	{
@@ -64,21 +64,21 @@ void	builtin_echo(t_data *mini, char *cmd)
 	if cd ../../.. --> check if backslash present else add it yoruself
 	if cd xx/ --> check if backslash present else add it yoruself
 */
-void	builtin_cd(t_data *mini_data)
+void	builtin_cd(t_data *mini, char *cmd)
 {
 	int i;
 	struct stat info;
 	
-	if (ft_strchr(mini_data->tokens.str[0], "cd\0")) // bring back to home directory // condition: if no flag
+	if (ft_strchr(cmd, "cd\0") || ft_strchr(cmd, "cd ~\0")) // bring back to home directory // condition: if no flag
 	{
 		i = 0;
-		while (mini_data->mini_envp[i])
+		while (mini->mini_envp[i])
 		{
-			if (ft_strncmp(mini_data->mini_envp[i], "HOME=", 5) == 0) // all good also if unset HOME as should error
+			if (ft_strncmp(mini->mini_envp[i], "HOME=", 5) == 0) // all good also if unset HOME as should error
 				break ;
 			i++;
 		}
-		if (chdir(mini_data->mini_envp[i] + 5) != 0)
+		if (chdir(mini->mini_envp[i] + 5) != 0)
 			return (ft_exit(errno)); // check
 		return (0); // check
 	}
@@ -227,7 +227,7 @@ int	builtins(char **cmd, t_data *mini)
 	if (ft_strncmp(cmd[0], "echo", 4) == 0) //
 		builtin_echo(mini, *cmd); // with this pointer does it send it as a str completly???
 	else if (ft_strncmp(cmd[0], "cd", 2) == 0)
-		builtin_cd();
+		builtin_cd(mini, cmd);
 	else if (ft_strncmp(cmd[0], "pwd", 3) == 0)
 		builtin_pwd(envp);
 	else if (ft_strncmp(cmd[0], "export", 6) == 0)
