@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/26 10:28:15 by domi             ###   ########.fr       */
+/*   Updated: 2023/07/27 13:23:31 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ int	start(t_data *mini)
 			i' not using find_arg ft, how come
 		-- builtins.c --> WORKING ON THIS HERE
 			go through them to adapt now we know the structure
+			builtin_echo.c: find a good way to retreive and add/expand the $ARG 
 		-- error.c
 			write something for all the errors
 		-- ...
