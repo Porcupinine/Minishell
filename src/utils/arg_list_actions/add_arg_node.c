@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   tolken_list_actions.h                              :+:    :+:            */
+/*   add_arg_node.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/07/17 17:31:44 by laura         #+#    #+#                 */
-/*   Updated: 2023/07/17 17:32:28 by laura         ########   odam.nl         */
+/*   Created: 2023/07/17 17:31:19 by laura         #+#    #+#                 */
+/*   Updated: 2023/07/17 17:31:34 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOLKEN_LIST_ACTIONS_H
-# define TOLKEN_LIST_ACTIONS_H
+#include "../../../include/minishell.h"
+#include <stdlib.h>
+#include "libft.h"
 
-# include "minishell.h"
-# include "lexical_analyzer.h"
+void	add_arg(t_env_args *args, char *name, char *value)
+{
+	t_env_args	*new_arg;
 
-void	add_token(t_tokens **tokens, char *token, t_type type);
-void	print_tokens(t_tokens *tokens);
-
-#endif //TOLKEN_LIST_ACTIONS_H
+	new_arg = malloc(sizeof(t_env_args));
+	if (new_arg == NULL)
+		ft_error("Malloc arg fail\n");
+	args->next = new_arg;
+	new_arg->name = name;
+	new_arg->content = value;
+	new_arg->next = NULL;
+}

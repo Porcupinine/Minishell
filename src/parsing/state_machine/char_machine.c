@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
-#include "../../include/tolken_list_actions.h"
-#include "../../Lib42/include/libft.h"
-#include "../../include/lexical_analyzer.h"
+#include "../../../include/minishell.h"
+#include "../../../include/token_list_actions.h"
+#include "libft.h"
+#include "../../../include/lexical_analyzer.h"
 #include <stdlib.h>
 
 void	found_char(t_state_machine *parser)
@@ -22,6 +22,7 @@ void	found_char(t_state_machine *parser)
 	{
 		parser->status = S_WORD;
 		parser->start = parser->count;
+		parser->len++;
 	}
 	else
 		parser->len++;
@@ -87,11 +88,11 @@ void	token_str(t_state_machine *parser)
 	char	c;
 
 	c = parser->cmd[parser->count];
-	if (ft_strchr(metachar, c) != 0 && parser->status == S_DQUOTES)
+	if (ft_strchr(METACHAR, c) != 0 && parser->status == S_DQUOTES)
 		parser->len++;
-	else if (ft_strchr(quotes, c) != 0)
+	else if (ft_strchr(QUOTES, c) != 0)
 		found_quotes(parser);
-	else if (ft_strchr(metachar, c) == 0)
+	else if (ft_strchr(METACHAR, c) == 0)
 		parser->len++;
 	else
 	{
