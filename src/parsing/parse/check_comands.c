@@ -34,7 +34,7 @@ static void between_pipes(char *temp, enum s_type *type, t_commands **cmd, t_tok
 
 static void token_iter(const t_data *mini_data, t_commands **cmd, t_tokens **it_token, char *temp, enum s_type *type)
 {
-	while ((*it_token)) // do I need this ????
+	while ((*it_token))
 	{
 		(*cmd) = ft_calloc(1,sizeof (t_commands));
 		if ((*cmd) == NULL)
