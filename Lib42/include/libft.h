@@ -210,6 +210,15 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
  */
 char	*ft_strjoin(char const *s1, char const *s2);
 /**
+ * Allocates (with malloc(3)) and returns a new
+ * string, which is the result of the concatenation
+ * of ’s1’ and ’s2’. with a space between them.
+ * @param s1 string 1
+ * @param s2 string 2
+ * @return resulting string or NULL if it fails
+ */
+char	*ft_strjoin_space(char const *s1, char const *s2);
+/**
  * Allocates (with malloc(3)) and returns a copy of
  * ’s1’ with the characters specified in ’set’ removed
  * from the beginning and the end of the string.
