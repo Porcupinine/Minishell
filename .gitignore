@@ -1,2 +1,4 @@
 .idea/
 cmake-build-debug/
+Lib42/objs/
+Lib42/libft.a

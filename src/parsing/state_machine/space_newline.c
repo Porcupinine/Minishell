@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
-#include "../../include/tolken_list_actions.h"
-#include "../../Lib42/include/libft.h"
-#include "../../include/lexical_analyzer.h"
+#include "../../../include/minishell.h"
+#include "../../../include/token_list_actions.h"
+#include "libft.h"
+#include "../../../include/lexical_analyzer.h"
 #include <stdlib.h>
 
 
@@ -21,7 +21,7 @@ void	token_space_newline(t_state_machine *parser)
 {
 	if (ft_strchr("\"'", parser->cmd[parser->count]) != 0)
 		found_quotes(parser);
-	else if (ft_strchr(" |<>", parser->cmd[parser->count]) == 0)
+	else if (ft_strchr(METACHAR, parser->cmd[parser->count]) == 0)
 	{
 		if (parser->status != S_WORD)
 		{

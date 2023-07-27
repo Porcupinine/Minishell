@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
-#include "../../include/lexical_analyzer.h"
+#include "../../../include/minishell.h"
+#include "../../../include/lexical_analyzer.h"
 #include <stdio.h>
 
 void	print_tokens(t_tokens *tokens)

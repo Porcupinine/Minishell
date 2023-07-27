@@ -11,10 +11,10 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "../../include/minishell.h"
-#include "../../Lib42/include/libft.h"
+#include "../../../include/minishell.h"
+#include "libft.h"
 #include <stdio.h>
-#include "../../include/lexical_analyzer.h"
+#include "../../../include/lexical_analyzer.h"
 
 static t_tokens	*find_last(t_tokens *token)
 {
