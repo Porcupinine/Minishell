@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/27 16:57:27 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/27 16:58:53 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ int	start(t_data *mini)
 		-- builtins.c --> WORKING ON THIS HERE
 			go through them to adapt now we know the structure
 			builtin_echo.c: find a good way to retreive and add/expand the $ARG 
+			builtin_export.c: so it also works with multiple ARGs to be set
 		-- error.c
 			write something for all the errors
 		-- ...
