@@ -1,17 +1,27 @@
-//
-// Created by laura on 20-7-23.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   search_token.c                                     :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: laura <laura@student.codam.nl>               +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/07/28 11:48:59 by laura         #+#    #+#                 */
+/*   Updated: 2023/07/28 11:49:27 by laura         ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #include "../../../include/lexical_analyzer.h"
 
-int find_size(t_tokens *tokens)
+int	find_size(t_tokens *tokens)
 {
-	int count;
+	int	count;
 
 	count = 0;
-	while(tokens)
+	while (tokens)
 	{
 		count++;
 		tokens = tokens->next;
 	}
-	return(count);
+	return (count);
 }

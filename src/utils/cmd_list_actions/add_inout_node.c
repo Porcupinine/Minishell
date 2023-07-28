@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   add_inout_node.c                                   :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: laura <laura@student.codam.nl>               +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/07/28 11:51:29 by laura         #+#    #+#                 */
+/*   Updated: 2023/07/28 11:52:24 by laura         ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../include/minishell.h"
 #include <stdlib.h>
 #include "libft.h"
@@ -5,21 +17,21 @@
 #include "../../../include/env_var.h"
 #include "../../../include/token_list_actions.h"
 
-static t_outfile *find_last_out(t_outfile *out)
+static t_outfile	*find_last_out(t_outfile *out)
 {
-	t_outfile *tmp;
+	t_outfile	*tmp;
 
 	tmp = out;
 	if (tmp == NULL)
-		return(NULL);
+		return (NULL);
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 	return (tmp);
 }
 
-static t_infile *find_last_in(t_infile *in)
+static t_infile	*find_last_in(t_infile *in)
 {
-	t_infile *tmp;
+	t_infile	*tmp;
 
 	tmp = in;
 	if (tmp == NULL)
@@ -29,10 +41,10 @@ static t_infile *find_last_in(t_infile *in)
 	return (tmp);
 }
 
-static void add_outfile(t_outfile **outfile, enum s_type type, char *str)
+static void	add_outfile(t_outfile **outfile, enum s_type type, char *str)
 {
-	t_outfile *new_out;
-	t_outfile *last;
+	t_outfile	*new_out;
+	t_outfile	*last;
 
 	last = NULL;
 	new_out = ft_calloc(1, sizeof (t_outfile));
@@ -53,10 +65,10 @@ static void add_outfile(t_outfile **outfile, enum s_type type, char *str)
 	}
 }
 
-static void add_infile(t_infile **infile, enum s_type type, char *str)
+static void	add_infile(t_infile **infile, enum s_type type, char *str)
 {
-	t_infile *new_in;
-	t_infile *last;
+	t_infile	*new_in;
+	t_infile	*last;
 
 	last = NULL;
 	new_in = ft_calloc(1, sizeof (t_infile));
@@ -77,9 +89,9 @@ static void add_infile(t_infile **infile, enum s_type type, char *str)
 	}
 }
 
-void add_inout(t_commands **cmd, char *str, enum s_type type)
+void	add_inout(t_commands **cmd, char *str, enum s_type type)
 {
-	if(type == T_BIG || type == T_BIGBIG)
+	if (type == T_BIG || type == T_BIGBIG)
 		add_outfile(&(*cmd)->outfiles, type, str);
 	else
 		add_infile(&(*cmd)->infiles, type, str);

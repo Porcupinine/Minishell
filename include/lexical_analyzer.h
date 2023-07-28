@@ -6,7 +6,7 @@
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/17 17:34:36 by laura         #+#    #+#                 */
-/*   Updated: 2023/07/17 17:36:23 by laura         ########   odam.nl         */
+/*   Updated: 2023/07/28 12:04:14 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,13 @@
 
 # include "minishell.h"
 
-#define QUOTES "\"'"
-#define METACHAR " |><	"
+/*defines to help set values for functions that search for quotes and metachars*/
+# define QUOTES "\"'"
+# define METACHAR " |><	"
 
+/**
+ * enums that
+ */
 typedef enum s_SM_STATUS
 {
 	S_WAITING,
@@ -81,18 +85,68 @@ typedef struct s_state_machine
 	int			len;
 }t_state_machine;
 
+/**
+ * state machine that will that the command_line contained inside
+ * the data struct and break it into tokens
+ * @param mini_data data struct
+ */
 void	parse_machine(t_data *mini_data);
+/**
+ * operates on S_WHITESPACE state
+ * @param parser
+ */
 void	token_space_newline(t_state_machine *parser);
+/**
+ * operates on S_PIPE state
+ * @param parser
+ */
 void	token_pipe(t_state_machine *parser);
+/**
+ * operates S_BIG state
+ * @param parser
+ */
 void	token_bigger(t_state_machine *parser);
+/**
+ * operates on S_SMALL state
+ * @param parser
+ */
 void	token_smaller(t_state_machine *parser);
+/**
+ * operates on S_BIGBIG state
+ * @param parser
+ */
 void	token_bigbig(t_state_machine *parser);
+/**
+ * operates on S_CHAR state
+ * @param parser
+ */
 void	token_str(t_state_machine *parser);
+/**
+ * function is called once a char is found, if
+ * that is the first found char, status is set from
+ * S_WAITING to S_WORD, start is set and len starts to be
+ * incremented
+ * @param parser
+ */
 void	found_char(t_state_machine *parser);
+/**
+ * operates on S_SMALLSMALL state
+ * @param parser
+ */
 void	token_smallsmall(t_state_machine *parser);
+/**
+ *
+ * @param parser
+ */
 void	token_error(t_state_machine *parser);
+/**
+ * function called once double or single quotes are found
+ * checks the status of the machine and set it either to a
+ * S_DQUOTE, S_SQUOTE or S_WORD
+ * @param parser
+ */
 void	found_quotes(t_state_machine *parser);
 
-void parse(t_state_machine *parser, t_data *mini_data);
+void	parse(t_state_machine *parser, t_data *mini_data);
 
 #endif //MINISHELL_LEXICAL_ANALYZER_H

@@ -6,7 +6,7 @@
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/17 17:30:22 by laura         #+#    #+#                 */
-/*   Updated: 2023/07/17 17:31:04 by laura         ########   odam.nl         */
+/*   Updated: 2023/07/28 11:57:43 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	found_char(t_state_machine *parser)
 	parser->state = S_CHAR;
 }
 
-void found_squote(t_state_machine *parser)
+void	found_squote(t_state_machine *parser)
 {
 	if (parser->status == S_WAITING)
 	{
@@ -52,7 +52,7 @@ void found_squote(t_state_machine *parser)
 	parser->state = S_CHAR;
 }
 
-void found_dquote(t_state_machine *parser)
+void	found_dquote(t_state_machine *parser)
 {
 	if (parser->status == S_WAITING)
 	{
@@ -75,7 +75,7 @@ void found_dquote(t_state_machine *parser)
 	parser->state = S_CHAR;
 }
 
-void found_quotes(t_state_machine *parser)
+void	found_quotes(t_state_machine *parser)
 {
 	if (parser->cmd[parser->count] == '\'')
 		found_squote(parser);

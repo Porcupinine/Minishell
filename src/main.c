@@ -53,7 +53,6 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		mini_data->command_line = readline("\nminisomething: ");
-		add_history(mini_data->command_line);
 		parse_machine(mini_data);
 	}
 }

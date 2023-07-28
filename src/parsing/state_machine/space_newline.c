@@ -6,7 +6,7 @@
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/17 17:27:08 by laura         #+#    #+#                 */
-/*   Updated: 2023/07/17 17:27:12 by laura         ########   odam.nl         */
+/*   Updated: 2023/07/28 11:58:48 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,4 @@ void	token_space_newline(t_state_machine *parser)
 		else if (parser->cmd[parser->count] == ' ')
 			parser->len++;
 	}
-
 }

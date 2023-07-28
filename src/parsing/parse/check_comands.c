@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   check_comands.c                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: laura <laura@student.codam.nl>               +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/07/28 11:53:20 by laura         #+#    #+#                 */
+/*   Updated: 2023/07/28 11:56:34 by laura         ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../include/minishell.h"
 #include <stdlib.h>
 #include "libft.h"
@@ -6,7 +18,8 @@
 #include "../../../include/token_list_actions.h"
 #include "../../../include/cmd_list_actions.h"
 
-static void between_pipes(char *temp, enum s_type *type, t_commands **cmd, t_tokens **it_token)
+static void	between_pipes(char *temp, enum s_type *type, t_commands **cmd, \
+t_tokens **it_token)
 {
 	while ((*it_token) && (*it_token)->type == T_CHAR)
 	{
@@ -16,8 +29,9 @@ static void between_pipes(char *temp, enum s_type *type, t_commands **cmd, t_tok
 		//TODO espaćo
 	}
 	temp = "\0";
-	if ((*it_token) && ((*it_token)->type == T_BIG || (*it_token)->type == T_BIGBIG
-						|| (*it_token)->type == T_SMALL || (*it_token)->type == T_SMALLSMALL))
+	if ((*it_token) && ((*it_token)->type == T_BIG || \
+	(*it_token)->type == T_BIGBIG || (*it_token)->type == T_SMALL || \
+	(*it_token)->type == T_SMALLSMALL))
 	{
 		(*type) = (*it_token)->type;
 		(*it_token) = (*it_token)->next; // need to check if exists ?
@@ -32,11 +46,12 @@ static void between_pipes(char *temp, enum s_type *type, t_commands **cmd, t_tok
 	}
 }
 
-static void token_iter(t_data *mini_data, t_commands **cmd, t_tokens **it_token, char *temp, enum s_type *type)
+static void	token_iter(t_data *mini_data, t_commands **cmd, \
+t_tokens **it_token, char *temp, enum s_type *type)
 {
 	while ((*it_token))
 	{
-		(*cmd) = ft_calloc(1,sizeof (t_commands));
+		(*cmd) = ft_calloc (1, sizeof (t_commands));
 		if ((*cmd) == NULL)
 			;//TODO erro
 		while ((*it_token) && (*it_token)->type != T_PIPE)
@@ -47,23 +62,23 @@ static void token_iter(t_data *mini_data, t_commands **cmd, t_tokens **it_token,
 		{
 			add_cmd_node(&mini_data->cmds, (*cmd));
 			(*cmd) = NULL;
-			if((*it_token))
+			if ((*it_token))
 				(*it_token) = (*it_token)->next;
 		}
 	}
 }
 
-void parse(t_state_machine *parser, t_data *mini_data)
+void	parse(t_state_machine *parser, t_data *mini_data)
 {
-	t_commands *cmd;
-	t_tokens *it_token;
-	char *temp;
-	enum s_type type;
+	t_commands	*cmd;
+	t_tokens	*it_token;
+	char		*temp;
+	enum s_type	type;
 
 	it_token = parser->tokens_list;
 	cmd = NULL;
 	temp = ft_calloc(1,sizeof (char *));
-	if(temp == NULL)
+	if (temp == NULL)
 		;//TODO malloc fail
 	if (it_token->type != T_PIPE)
 		//TODO houston we have a problem

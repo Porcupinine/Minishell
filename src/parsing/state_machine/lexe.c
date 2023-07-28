@@ -6,7 +6,7 @@
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/17 17:28:34 by laura         #+#    #+#                 */
-/*   Updated: 2023/07/17 17:29:46 by laura         ########   odam.nl         */
+/*   Updated: 2023/07/28 11:58:23 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,9 @@ void	populate_function_ptrs(void (**functions)(t_state_machine *))
 void	parse_machine(t_data *mini_data)
 {
 	t_state_machine	*parser;
+	void			(*functions[8])(t_state_machine*);
 
-	void (*functions[8])(t_state_machine*);
 	populate_function_ptrs(functions);
-
 	parser = ft_calloc(1, sizeof (t_state_machine));
 	if (parser == NULL)
 		return ; //TODO fail?

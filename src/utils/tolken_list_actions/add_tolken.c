@@ -6,7 +6,7 @@
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/17 17:24:07 by laura         #+#    #+#                 */
-/*   Updated: 2023/07/17 17:26:04 by laura         ########   odam.nl         */
+/*   Updated: 2023/07/28 11:50:25 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ static t_tokens	*find_last(t_tokens *token)
 void	add_token(t_tokens **tokens, char *token, t_type type)
 {
 	t_tokens	*new_token;
+	t_tokens	*last_node;
 
+	last_node = NULL;
 	new_token = malloc(sizeof(t_tokens));
 	if (new_token == NULL)
 		ft_error("Malloc token fail\n");
@@ -44,8 +46,6 @@ void	add_token(t_tokens **tokens, char *token, t_type type)
 		*tokens = new_token;
 	else
 	{
-		t_tokens	*last_node;
-
 		last_node = find_last(*tokens);
 		last_node->next = new_token;
 	}
