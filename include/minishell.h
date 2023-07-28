@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: laura <laura@student.codam.nl>               +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/07/17 17:32:57 by laura         #+#    #+#                 */
-/*   Updated: 2023/07/17 17:34:24 by laura         ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/17 17:32:57 by laura             #+#    #+#             */
+/*   Updated: 2023/07/27 13:31:03 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,15 @@ typedef struct s_infile
 
 typedef struct s_commands
 {
-	char				*cmd;
-	t_outfile			*outfiles;
-	t_infile			*infiles;
-	struct s_commands	*next;
+	char 		*cmd;
+	t_outfile 	*outfiles;
+    int 		out;
+	t_infile  	*infiles;
+    int 		in;
+	int			**fd;
+	int			nb_cmds;
+	int			status;
+	struct s_commands *next;
 }t_commands;
 
 /**
@@ -84,6 +89,8 @@ typedef struct s_data
 	t_commands	*cmds;
 	t_env_args	*env_args;
 	char		*command_line;
+    t_commands  *commands;
+	t_pid		*process;
 }t_data;
 
 #endif //MINISHELL_MINISHELL_H
