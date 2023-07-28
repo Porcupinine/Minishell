@@ -55,6 +55,7 @@ int	main(int argc, char **argv, char **envp)
 		mini_data->command_line = readline("\nminisomething: ");
 //        printf("%s\n", mini_data->command_line);
 //        count_args(mini_data);
+
 		parse_machine(mini_data);
 	}
 }
