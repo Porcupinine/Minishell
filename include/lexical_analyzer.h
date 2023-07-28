@@ -20,7 +20,11 @@
 # define METACHAR " |><	"
 
 /**
- * enums that
+ * enums that symbolize the machine status
+ * S_WAITTING is set if the states are metachars
+ * S_WORD is set everytime a char is found
+ * S_SQUOTES is set once the first single quote is found
+ * S_DQUOTES is set once the first double quote is found
  */
 typedef enum s_SM_STATUS
 {
@@ -146,7 +150,11 @@ void	token_error(t_state_machine *parser);
  * @param parser
  */
 void	found_quotes(t_state_machine *parser);
-
+/**
+ * parse the data from token list to a command list
+ * @param parser for the token list
+ * @param mini_data for command list
+ */
 void	parse(t_state_machine *parser, t_data *mini_data);
 
 #endif //MINISHELL_LEXICAL_ANALYZER_H
