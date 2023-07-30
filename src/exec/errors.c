@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:20:42 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/25 18:17:13 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/30 19:15:32 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,23 @@ int	    cmd_err(char *str, int error)
 {
 	perror(str);
 	return (error); // but return as an exit
+}
+
+void	builtin_err(char *cmd, char *str)
+{
+	write(2, "minishell: ", 11);
+	write(2, cmd, ft_strlen(cmd));
+	write(2, ": ", 2);
+	write(2, str, ft_strlen(str));
+}
+
+void	builtin_err_unset(char *arg, char *str)
+{
+	write(2, "minishell: ", 11);
+	write(2, "unset: ", 7);
+	write(2, arg, ft_strlen(arg));
+	write(2, ": ", 2);
+	write(2, str, ft_strlen(str));
 }
 
 // void	no_perm_err(int argc, char *argv[]) // from pipex -- REWORK

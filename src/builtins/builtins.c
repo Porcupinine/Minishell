@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 17:07:22 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/27 13:25:30 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/30 21:08:37 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,81 +23,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/param.h>
-
-void ft_exit(int error)
-{
-	strerror(error);
-	exit(error);
-}
-
-/* 
-	unset: values and attributes of variables and functions
-	Unsetting a variable or function that was not previously set shall not be considered an error and does not cause the shell to abort.
-	via envp (PATH and SHELL)?? --> look in the shell + the list created by laura
-	maybe getenvp then unlink
-	and for attributes/var ??
-*/
-static t_env_args *search_args(t_env_args *env_args, char *arg)
-{
-	while (env_args->next != NULL)
-	{
-		if (env_args->name == arg)
-			return (&env_args); 
-		env_args = env_args->next;
-	}
-	return (NULL);
-}
-
-static void del_args(t_env_args *env_args)
-{
-	t_env_args *temp;
-	
-	temp = env_args->next;
-	env_args->name = env_args->next->name;
-	env_args = temp;
-	free(temp);
-}
-
-void	builtin_unset(t_data *mini_data) 
-{
-	char *arg;
-	char *path;
-	t_env_args *temp;
-	
-	arg = ft_substr(mini_data->tolkens->str, ft_strlen("unset "), ft_strlen(mini_data->tolkens->str)); // str in a certain position tho..
-	// ABOVE IS WRONG JUST TAKE NEXT ARG IN LIST AFTER 'UNSET'
-	if (arg == NULL || arg == "_") // as the underscore cannot be unset, but not an error tho for underscore??
-		return (ft_exit(errno)); // check this exit tho
-	// need to check if only 1 word tho or not?
-	path = getenv(arg);
-	if (path == NULL)
-		return (ft_exit(errno)); // check this exit tho
-	if (unlink(path) == 0) // search the ones given by shell
-		return (0);
-	// but doesn't work on directories i believe ..
-	else // search OUR list
-	{
-		if (search_args(&mini_data->env_args, arg) != NULL)
-		{
-			del_args(search_args(&mini_data->env_args, arg)); // check if my logic is correct
-			return (0);
-		}
-	}
-	return (ft_exit(errno)); // meaning not found
-}
-
-void	builtin_exit(t_data *mini_data)
-{
-	// int status;
-
-	// TO REWORK, exit can hold an int (exit 1), alpha (not sure if accepted) and something else dk
-	
-	printf("exit\n");
-	// do we also maybe need to use rl_clear_history ??
-	exit(0); 
-	// check if we need to free things before closing the program
-	// or with another status, but which one then??
-}
 
 int	builtins(char **cmd, t_data *mini)
 {
