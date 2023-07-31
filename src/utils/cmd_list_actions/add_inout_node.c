@@ -51,9 +51,9 @@ static void	add_outfile(t_outfile **outfile, enum s_type type, char *str)
 	if (new_out == NULL)
 		;//TODO malloc fail
 	if (type == T_BIG)
-		new_out->type = REDIRECT_OUTPUT;
+		new_out->type = "REDIRECT_OUTPUT";
 	if (type == T_BIGBIG)
-		new_out->type = APPEND_OUTPUT;
+		new_out->type = "APPEND_OUTPUT";
 	new_out->file = str;
 	new_out->next = NULL;
 	if (*outfile == NULL)
@@ -75,9 +75,9 @@ static void	add_infile(t_infile **infile, enum s_type type, char *str)
 	if (new_in == NULL)
 		;//TODO malloc fail
 	if (type == T_SMALL)
-		new_in->type = REDIRECT_INPUT;
+		new_in->type = "REDIRECT_INPUT";
 	if (type == T_SMALLSMALL)
-		new_in->type = HEREDOC;
+		new_in->type = "HEREDOC";
 	new_in->file = str;
 	new_in->next = NULL;
 	if (*infile == NULL)

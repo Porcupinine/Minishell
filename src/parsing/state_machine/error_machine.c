@@ -16,6 +16,7 @@
 #include "../../../include/lexical_analyzer.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "../../include/lexical_analyzer.h"
 
 void	token_error(t_state_machine *parser)
 {
