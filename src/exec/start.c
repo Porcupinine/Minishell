@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 15:00:47 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/31 16:27:26 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ int	start(t_data *mini)
 			the builtinds cmd is already split so double pointer, make use of it no...
 			builtin_echo.c: find a good way to retreive and add/expand the $ARG 
 			builtin_export.c: so it also works with multiple ARGs to be set
+			builtin_unset.c: could just rm the line, free it and shift up the rest??
 		-- error.c
 			write something for all the errors
 			++ go throgh all error handling to go through

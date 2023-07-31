@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:25:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 14:46:50 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/31 16:51:18 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ int	builtin_export(t_data *mini, char *cmd)
 	int nb; // amount of args to export
     
 	if (*mini->mini_envp == NULL)
-		return (ft_exit(errno));
+		return (-1); // TODO check if needs to be NULL
     cmd = ft_substr(cmd, 8, ft_strlen(cmd)); // needs protection?
 	// if (cmd == NULL)
 	// 	return (NULL); // needs protection?? if NULL??
-	str = ft_split(cmd, " ");
+	str = ft_split(cmd, ' ');
 	if (str == NULL)
 		return (NULL);
 	nb = 0;

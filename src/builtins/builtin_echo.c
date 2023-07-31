@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:09:31 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 14:46:57 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/31 16:57:16 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	builtin_echo(t_data *mini, char *cmd)
 		i = 9;
 		while (mini->commands->cmd[i])
 		{
-			ft_putstr_fd(mini->commands->cmd[i], mini->commands->out);
+			ft_putchar_fd(mini->commands->cmd[i], mini->commands->out);
 			i++;
 		}
 	}
@@ -43,7 +43,7 @@ int	builtin_echo(t_data *mini, char *cmd)
 		i = 6;
 		while (mini->commands->cmd[i])
 		{
-			ft_putstr_fd(mini->commands->cmd[i], mini->commands->out);
+			ft_putchar_fd(mini->commands->cmd[i], mini->commands->out);
 			i++;
 		}
 		write(mini->commands->out, "\n", 1);
