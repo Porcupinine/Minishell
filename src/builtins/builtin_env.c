@@ -6,34 +6,26 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:13:30 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/27 13:13:56 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/31 14:46:54 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include "../../include/env_var.h"
-#include "../../include/pipes.h"
+#include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
 
-#include <stdio.h>
-#include <unistd.h>
-#include <limits.h>
-#include <errno.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/param.h>
-
-void	builtin_env(t_data *mini)
+int	builtin_env(t_data *mini, char **cmd)
 {
 	int i;
 
-	if (*mini->mini_envp == NULL)
-		return (ft_exit(errno));
+	if (cmd[1] != NULL) // make sense??
+		return (builtin_err(cmd[0], "too many arguments\n"), 1); // check on this
 	i = 0;
 	while (mini->mini_envp[i])
 	{
-		printf("%s\n", mini->mini_envp[i]);
+		ft_putstr_fd(mini->mini_envp[i], 1);
+		ft_putchar_fd('\n', 1);
 		i++;
 	}
 	return (0);

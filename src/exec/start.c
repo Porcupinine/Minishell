@@ -6,14 +6,14 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/27 16:57:27 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/31 15:00:47 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-#include <stdlib.h>
-#include <unistd.h>
+#include "../../include/minishell.h"
+#include "../../include/env_var.h"
+#include "../../include/exec.h"
+#include "../../Lib42/include/libft.h"
 
 static int	execute_pipe(t_data *mini)
 {
@@ -38,7 +38,7 @@ static int	execute_pipe(t_data *mini)
 	free_fd(mini->commands->fd, mini->commands->nb_cmds);
 	close(mini->commands->in);
 	close(mini->commands->out);
-	if (mini->commands->infiles->file->type == heredoc)
+	if (mini->commands->infiles->file->type == HEREDOC)
 		unlink("tmp_file");
 	waitpid(mini->process->pid, &mini->commands->status, 0); // does this work with: mini->process->pid ??
 	if (WIFEXITED(mini->commands->status)) // check
@@ -93,7 +93,7 @@ int	start(t_data *mini)
 	{
 		close(mini->commands->in);
 		close(mini->commands->out);
-		if (mini->commands->infiles->file->type == heredoc)
+		if (mini->commands->infiles->file->type == HEREDOC)
 			unlink("tmp_file");
 	}
 	else if (mini->commands->nb_cmds == 1) // I WAS HERE TRYING TO FIGURE OUT HOW TO APPROACH IF ONLY 1CMD
@@ -101,7 +101,7 @@ int	start(t_data *mini)
 		split_args(mini->commands->cmd, mini->mini_envp, mini); // just reuse this one right??
 		close(mini->commands->in);
 		close(mini->commands->out);
-		if (mini->commands->infiles->file->type == heredoc)
+		if (mini->commands->infiles->file->type == HEREDOC)
 			unlink("tmp_file");
 	}
 	else
@@ -121,19 +121,22 @@ int	start(t_data *mini)
 	i left off at:
 		-- input_op.c --> CHECK ON THIS THING HERE
 			i' not using find_arg ft, how come
+			—- check if NULL checks needed when in file == NULL;
+		-- output_op.c --> TO DO
+			explicitly tell how to open, without the expansion
 		-- builtins.c --> WORKING ON THIS HERE
-			go through them to adapt now we know the structure
+			the builtinds cmd is already split so double pointer, make use of it no...
 			builtin_echo.c: find a good way to retreive and add/expand the $ARG 
+			builtin_export.c: so it also works with multiple ARGs to be set
 		-- error.c
 			write something for all the errors
-		-- ...
-			all error handling to go through
+			++ go throgh all error handling to go through
 		-- start.c 
 			HEREDOC CHECK: --> THINK THAT'S SOLVED NOW, check
 				(limiter = hey)
 					hallo\
 					hey
-					hey (only exists here and it gives back hallohey so rm the \) --> THINK THAT'S SOLVED NOW
+					hey (only exists here and it gives back hallohey so rm the \) --> THINK THAT'S SOLVED NOW, DON'T HANDLE ACTUALLY
 				(limiter = he"y")
 					it will disregard the quotes and just use hey as limiter --> THINK THAT'S SOLVED NOW
 

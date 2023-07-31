@@ -6,19 +6,37 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:20:42 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/25 18:17:13 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/31 14:46:21 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-#include <stdio.h>
-#include <string.h>
+#include "../../include/minishell.h"
+#include "../../include/env_var.h"
+#include "../../include/exec.h"
+#include "../../Lib42/include/libft.h"
 
 int	    cmd_err(char *str, int error)
 {
 	perror(str);
 	return (error); // but return as an exit
+}
+
+void	builtin_err(char *cmd, char *str)
+{
+	write(2, "minishell: ", 11);
+	write(2, cmd, ft_strlen(cmd));
+	write(2, ": ", 2);
+	write(2, str, ft_strlen(str));
+}
+
+void	builtin_err2(char *cmd, char *arg, char *str)
+{
+	write(2, "minishell: ", 11);
+	write(2, cmd, ft_strlen(cmd));
+	write(2, ": ", 2);
+	write(2, arg, ft_strlen(arg));
+	write(2, ": ", 2);
+	write(2, str, ft_strlen(str));
 }
 
 // void	no_perm_err(int argc, char *argv[]) // from pipex -- REWORK

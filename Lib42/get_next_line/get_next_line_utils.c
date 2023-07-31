@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   get_next_line_utils.c                              :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: lpraca-l <lpraca-l@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/11/04 19:18:41 by lpraca-l      #+#    #+#                 */
-/*   Updated: 2023/01/23 17:35:16 by lpraca-l      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/04 19:18:41 by lpraca-l          #+#    #+#             */
+/*   Updated: 2023/07/31 14:39:38 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_strjoin_gnl(char const *s1, char const *s2, long buff_len_to_get)
 	len = ft_strlen_gnl(s1) + buff_len_to_get;
 	join = malloc((len + 1) * sizeof(char));
 	if (join == NULL)
-		return (NULL);
+		return (NULL);//TODO malloc fail;
 	while (s1[counts1] != '\0')
 	{
 		join[counts1] = s1[counts1];
