@@ -17,7 +17,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "../../../include/cmd_list_actions.h"
-#include ""
+#include "../../../include/exec.h"
+
 void	token_start(t_state_machine *parser)
 {
 	char	c;
@@ -78,6 +79,6 @@ void	parse_machine(t_data *mini_data)
 	print_tokens(parser->tokens_list);
 	parse(parser, mini_data);
 	printf("-------CMD LIST------\n");
-	print_cmd_list(mini_data->cmds);
-
+	print_cmd_list(mini_data->commands);
+//	start(mini_data);
 }

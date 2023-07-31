@@ -44,7 +44,7 @@ int	main(int argc, char **argv, char **envp)
 	mini_data = ft_calloc(1, sizeof(t_data));
 	if (mini_data == NULL)
 		ft_error("Data malloc fail!\n");
-	mini_data->mini_envp = envp;
+	mini_data->mini_envp = envp;//TODO malloc this
 	sigquit_sa.sa_handler = &sigquit_handler;
 	sigint_sa.sa_handler = &sigint_handler;
 	if (argc != 1)

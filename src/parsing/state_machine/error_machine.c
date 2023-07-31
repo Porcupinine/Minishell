@@ -20,4 +20,5 @@
 void	token_error(t_state_machine *parser)
 {
 	printf("Syntax error\n");
+
 }
