@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:11:06 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/28 15:12:48 by domi             ###   ########.fr       */
+/*   Updated: 2023/07/31 12:47:45 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@
 #include <sys/stat.h>
 #include <sys/param.h>
 
-void	builtin_pwd(t_data *mini_data)
+void	builtin_pwd(t_data *mini)
 {
-	char *pwd_path;
-	char *pwd;
+	char 	*pwd_path;
+	char 	*pwd;
+	int 	len;
 
 	pwd_path = getcwd(NULL, 0);
 	if (pwd_path == NULL)
@@ -36,6 +37,7 @@ void	builtin_pwd(t_data *mini_data)
 	if (pwd == NULL)
 		return (ft_exit(errno)); // check this exit tho
 	ft_memmove(pwd, pwd_path, ft_strlen(pwd_path));
+	len = ft_strlen(pwd);
 	pwd[len] = '\n';
 	ft_putstr_fd(pwd, mini->commands->out);
 	free(pwd_path);

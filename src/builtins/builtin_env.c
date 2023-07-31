@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:13:30 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/28 12:20:40 by domi             ###   ########.fr       */
+/*   Updated: 2023/07/31 12:45:46 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 #include <sys/stat.h>
 #include <sys/param.h>
 
-int	builtin_env(t_data *mini, char *cmd)
+int	builtin_env(t_data *mini, char **cmd)
 {
 	int i;
 
-	if (ft_strlen(cmd) > 3)
+	if (cmd[1] != NULL) // make sense??
 		return (builtin_err(cmd[0], "too many arguments\n"), 1); // check on this
 	i = 0;
 	while (mini->mini_envp[i])

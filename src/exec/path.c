@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:11 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/21 12:32:32 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/31 12:53:12 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,6 @@ char	*split_args(char *cmd, char **envp, t_data *mini)
 		exit(EXIT_FAILURE); // check -- means execve failed
 	}
 	// and if a builtin?? something else needed? or things to free??
+	free_str(command);
 	exit(EXIT_SUCCESS); // or not?
 }

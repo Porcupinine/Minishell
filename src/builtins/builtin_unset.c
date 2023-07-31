@@ -1,4 +1,28 @@
-// ADD HEADER
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_unset.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/31 12:32:10 by dmaessen          #+#    #+#             */
+/*   Updated: 2023/07/31 12:53:48 by dmaessen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../include/minishell.h"
+#include "../../include/env_var.h"
+#include "../../include/pipes.h"
+#include "../../Lib42/include/libft.h"
+
+#include <stdio.h>
+#include <unistd.h>
+#include <limits.h>
+#include <errno.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/param.h>
 
 /* 
 	unset: values and attributes of variables and functions
@@ -27,7 +51,7 @@ char **update_envp(char **envp, char *arg, int size)
 	}
 	new[size] = NULL;
 	free(envp); // needed??
-	free(arg); // needed??
+	// free(arg); // needed??
 	return (new);
 }
 
@@ -54,7 +78,7 @@ static int unset_arg(t_data *mini, char *arg)
 	new = update_envp(mini->mini_envp, to_unset, size - 1); // think twice 
 	if (to_unset == NULL)
 		return (free(to_unset), -1);
-	mini->mini_envp = new:
+	mini->mini_envp = new;
 	return (0);
 }
 
@@ -72,16 +96,11 @@ int find_envp(t_data *mini, char *arg)
 	return (-1); // meaning not found
 }
 
-void	builtin_unset(t_data *mini, char *cmd) 
+void	builtin_unset(t_data *mini, char **arg) 
 {
-	char **arg;
 	int pos;
 	int i;
-	t_env_args *temp;
-	
-	arg = ft_split(cmd, " ");
-	if (arg == NULL) // as the underscore cannot be unset, but not an error tho for underscore??
-		return (ft_exit(errno)); // check this exit tho
+
 	// need to check if only 1 word tho or not?
 	i = 1; // skipping the word unset
 	while (arg[i])
@@ -92,13 +111,12 @@ void	builtin_unset(t_data *mini, char *cmd)
 		if (pos != -1)
 		{
 			if (mini->mini_envp[pos])
-				unset_arg(data, arg[i]); // could this fail??
+				unset_arg(mini, arg[i]); // could this fail??
 		}
 		else
-			return (builtin_err_unset(arg[i], "not a valid identifier\n"), 1);
+			return (builtin_err2("unset", arg[i], "not a valid identifier\n"), 1);
 		i++;
 	}
-	free(arg); // or not?? but a recursive free here
 	// but doesn't work on directories i believe ..
 	// else // search OUR list
 	// {

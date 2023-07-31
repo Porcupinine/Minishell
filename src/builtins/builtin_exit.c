@@ -1,4 +1,14 @@
-// ADD 42 HEADER
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_exit.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/31 12:32:30 by dmaessen          #+#    #+#             */
+/*   Updated: 2023/07/31 12:55:59 by dmaessen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include "../../include/env_var.h"
@@ -35,7 +45,7 @@ static int	ft_atoi_long(char *str)
 			nb = (nb * 10) + (str[i] - 48);
 		else
 			return (-1);
-		if (nb > INT_MAX || (nb * -1) < INT_MIN) 
+		if (nb > INT_MAX || (nb * -1) < INT_MIN) // is this right??
 			return (-1);
 		i++;
 	}
@@ -80,6 +90,6 @@ void	builtin_exit(t_data *mini, char *cmd)
 		free(sub); // needed??
 	}
 	// do we also maybe need to use rl_clear_history ??
-	// or something else??
-	exit(code); // i doubt its only this.. cannot exit with more than 256 right?? ++ things to be freed
+	code = code % 256;
+	exit(code); // only this?? ++ things to be freed
 }

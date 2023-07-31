@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/27 16:58:53 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/31 12:41:56 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,19 +122,18 @@ int	start(t_data *mini)
 		-- input_op.c --> CHECK ON THIS THING HERE
 			i' not using find_arg ft, how come
 		-- builtins.c --> WORKING ON THIS HERE
-			go through them to adapt now we know the structure
+			the builtinds cmd is already split so double pointer, make use of it no...
 			builtin_echo.c: find a good way to retreive and add/expand the $ARG 
 			builtin_export.c: so it also works with multiple ARGs to be set
 		-- error.c
 			write something for all the errors
-		-- ...
-			all error handling to go through
+			++ go throgh all error handling to go through
 		-- start.c 
 			HEREDOC CHECK: --> THINK THAT'S SOLVED NOW, check
 				(limiter = hey)
 					hallo\
 					hey
-					hey (only exists here and it gives back hallohey so rm the \) --> THINK THAT'S SOLVED NOW
+					hey (only exists here and it gives back hallohey so rm the \) --> THINK THAT'S SOLVED NOW, DON'T HANDLE ACTUALLY
 				(limiter = he"y")
 					it will disregard the quotes and just use hey as limiter --> THINK THAT'S SOLVED NOW
 
