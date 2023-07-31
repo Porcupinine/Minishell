@@ -17,7 +17,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "../../../include/cmd_list_actions.h"
-
+#include ""
 void	token_start(t_state_machine *parser)
 {
 	char	c;
@@ -70,7 +70,8 @@ void	parse_machine(t_data *mini_data)
 		parser->count++;
 	}
 	if (parser->status == S_DQUOTES || parser->status == S_SQUOTES)
-		parser->state = S_ERROR;
+		printf("Syntax error\n");
+		//parser->state = S_ERROR;//TODO error
 	add_token(&parser->tokens_list, \
 	ft_substr(parser->cmd, parser->start, parser->len), T_CHAR);
 	printf("------TOKEN LIST------\n");
@@ -78,4 +79,5 @@ void	parse_machine(t_data *mini_data)
 	parse(parser, mini_data);
 	printf("-------CMD LIST------\n");
 	print_cmd_list(mini_data->cmds);
+
 }

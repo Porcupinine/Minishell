@@ -13,4 +13,7 @@
 #ifndef MINISHELL_BUILTINS_H
 #define MINISHELL_BUILTINS_H
 
+#include "minishell.h"
+
+void	line_history(t_data *mini_data);
 #endif //MINISHELL_BUILTINS_H

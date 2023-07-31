@@ -19,6 +19,7 @@
 #include "../include/env_var.h"
 #include "../include/lexical_analyzer.h"
 #include "../include/token_list_actions.h"
+#include "../../include/builtins.h"
 
 void	sigint_handler(int sig)
 {
@@ -53,6 +54,7 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		mini_data->command_line = readline("\nminisomething: ");
+		line_history(mini_data);
 		parse_machine(mini_data);
 	}
 }
