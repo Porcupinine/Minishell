@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:19:42 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 14:53:18 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/31 15:00:57 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ void input_re(t_data *mini)
 {
     if (mini->commands->infiles->file == NULL)
 		mini->commands->in = NULL; // check
-    else if (mini->commands->infiles->file->type == heredoc)
+    else if (mini->commands->infiles->file->type == HEREDOC)
     {
 		mini->commands->in = open("tmp_file", O_CREAT | O_WRONLY | O_TRUNC, 0644);
         read_stdin(mini);

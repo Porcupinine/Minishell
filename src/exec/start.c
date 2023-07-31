@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 14:55:54 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/31 15:00:47 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	execute_pipe(t_data *mini)
 	free_fd(mini->commands->fd, mini->commands->nb_cmds);
 	close(mini->commands->in);
 	close(mini->commands->out);
-	if (mini->commands->infiles->file->type == heredoc)
+	if (mini->commands->infiles->file->type == HEREDOC)
 		unlink("tmp_file");
 	waitpid(mini->process->pid, &mini->commands->status, 0); // does this work with: mini->process->pid ??
 	if (WIFEXITED(mini->commands->status)) // check
@@ -93,7 +93,7 @@ int	start(t_data *mini)
 	{
 		close(mini->commands->in);
 		close(mini->commands->out);
-		if (mini->commands->infiles->file->type == heredoc)
+		if (mini->commands->infiles->file->type == HEREDOC)
 			unlink("tmp_file");
 	}
 	else if (mini->commands->nb_cmds == 1) // I WAS HERE TRYING TO FIGURE OUT HOW TO APPROACH IF ONLY 1CMD
@@ -101,7 +101,7 @@ int	start(t_data *mini)
 		split_args(mini->commands->cmd, mini->mini_envp, mini); // just reuse this one right??
 		close(mini->commands->in);
 		close(mini->commands->out);
-		if (mini->commands->infiles->file->type == heredoc)
+		if (mini->commands->infiles->file->type == HEREDOC)
 			unlink("tmp_file");
 	}
 	else

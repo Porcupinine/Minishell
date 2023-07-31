@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 14:43:48 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 14:54:30 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/31 15:00:03 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include <limits.h>
 #include <errno.h>
 #include <string.h>
