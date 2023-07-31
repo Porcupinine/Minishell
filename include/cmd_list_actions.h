@@ -32,7 +32,7 @@ void add_cmd_node(t_commands **cmd, t_commands *new_cmd);
 void add_inout(t_commands **cmd, char *str, enum s_type type);
 /**
  * print the list of commands with list of infiles and outfiles if they exist
- * @param cmd pointer to the head of the command list 
+ * @param cmd pointer to the head of the command list
  */
 void print_cmd_list(t_commands *cmd);
 

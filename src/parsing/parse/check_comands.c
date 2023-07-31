@@ -34,7 +34,7 @@ t_tokens **it_token)
 	(*it_token)->type == T_SMALLSMALL))
 	{
 		(*type) = (*it_token)->type;
-		(*it_token) = (*it_token)->next; // need to check if exists ?
+		(*it_token) = (*it_token)->next;
 	}
 	if ((*it_token) && (*it_token)->type != T_CHAR)
 		//TODO Houston we have a problem
@@ -47,8 +47,13 @@ t_tokens **it_token)
 }
 
 static void	token_iter(t_data *mini_data, t_commands **cmd, \
-t_tokens **it_token, char *temp, enum s_type *type)
+t_tokens **it_token, enum s_type *type)
 {
+	char		*temp;
+
+	temp = ft_calloc(1,sizeof (char *));
+	if (temp == NULL)
+		;//TODO malloc fail
 	while ((*it_token))
 	{
 		(*cmd) = ft_calloc (1, sizeof (t_commands));
@@ -72,15 +77,11 @@ void	parse(t_state_machine *parser, t_data *mini_data)
 {
 	t_commands	*cmd;
 	t_tokens	*it_token;
-	char		*temp;
 	enum s_type	type;
 
 	it_token = parser->tokens_list;
 	cmd = NULL;
-	temp = ft_calloc(1,sizeof (char *));
-	if (temp == NULL)
-		;//TODO malloc fail
 	if (it_token->type != T_PIPE)
 		//TODO houston we have a problem
-		token_iter(mini_data, &cmd, &it_token, temp, &type);
+		token_iter(mini_data, &cmd, &it_token, &type);
 }
