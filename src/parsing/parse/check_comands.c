@@ -65,7 +65,7 @@ t_tokens **it_token, enum s_type *type)
 		}
 		if ((*cmd) != NULL)
 		{
-			add_cmd_node(&mini_data->cmds, (*cmd));
+			add_cmd_node(&mini_data->commands, (*cmd));
 			(*cmd) = NULL;
 			if ((*it_token))
 				(*it_token) = (*it_token)->next;
