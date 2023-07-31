@@ -6,14 +6,14 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:11 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 12:53:12 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/31 14:46:00 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-#include <stdlib.h>
-#include <unistd.h>
+#include "../../include/minishell.h"
+#include "../../include/env_var.h"
+#include "../../include/exec.h"
+#include "../../Lib42/include/libft.h"
 
 static int	find_path(char **envp)
 {

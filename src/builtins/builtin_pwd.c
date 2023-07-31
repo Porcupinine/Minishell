@@ -6,25 +6,16 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:11:06 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 12:47:45 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/31 14:48:45 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include "../../include/env_var.h"
-#include "../../include/pipes.h"
+#include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
 
-#include <stdio.h>
-#include <unistd.h>
-#include <limits.h>
-#include <errno.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/param.h>
-
-void	builtin_pwd(t_data *mini)
+int	builtin_pwd(t_data *mini)
 {
 	char 	*pwd_path;
 	char 	*pwd;

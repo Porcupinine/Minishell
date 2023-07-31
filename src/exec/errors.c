@@ -6,14 +6,14 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:20:42 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 12:07:02 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/31 14:46:21 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-#include <stdio.h>
-#include <string.h>
+#include "../../include/minishell.h"
+#include "../../include/env_var.h"
+#include "../../include/exec.h"
+#include "../../Lib42/include/libft.h"
 
 int	    cmd_err(char *str, int error)
 {

@@ -6,23 +6,14 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 17:07:22 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 12:56:25 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/31 14:46:40 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include "../../include/env_var.h"
-#include "../../include/pipes.h"
+#include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
-
-#include <stdio.h>
-#include <unistd.h>
-#include <limits.h>
-#include <errno.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/param.h>
 
 int	builtins(char **cmd, t_data *mini)
 {

@@ -6,23 +6,14 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 12:32:30 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 12:55:59 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/31 14:49:34 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include "../../include/env_var.h"
-#include "../../include/pipes.h"
+#include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
-
-#include <stdio.h>
-#include <unistd.h>
-#include <limits.h>
-#include <errno.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/param.h>
 
 static int	ft_atoi_long(char *str)
 {

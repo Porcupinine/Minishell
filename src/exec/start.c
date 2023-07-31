@@ -6,14 +6,14 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 12:41:56 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/31 14:55:54 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-#include <stdlib.h>
-#include <unistd.h>
+#include "../../include/minishell.h"
+#include "../../include/env_var.h"
+#include "../../include/exec.h"
+#include "../../Lib42/include/libft.h"
 
 static int	execute_pipe(t_data *mini)
 {
@@ -121,6 +121,9 @@ int	start(t_data *mini)
 	i left off at:
 		-- input_op.c --> CHECK ON THIS THING HERE
 			i' not using find_arg ft, how come
+			—- check if NULL checks needed when in file == NULL;
+		-- output_op.c --> TO DO
+			explicitly tell how to open, without the expansion
 		-- builtins.c --> WORKING ON THIS HERE
 			the builtinds cmd is already split so double pointer, make use of it no...
 			builtin_echo.c: find a good way to retreive and add/expand the $ARG 

@@ -6,9 +6,14 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:19:42 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/25 18:07:25 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/31 14:53:18 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../include/minishell.h"
+#include "../../include/env_var.h"
+#include "../../include/exec.h"
+#include "../../Lib42/include/libft.h"
 
 /* 
     for the input operators sorting out
@@ -25,13 +30,6 @@
         can we have multiple after one another??
 
 */
-
-#include "minishell.h"
-
-#include <fcntl.h>
-#include <stdlib.h>
-#include <unistd.h>
-
 static char *trim_limiter(t_data *mini)
 {
 	int		i;
@@ -109,7 +107,7 @@ static char	*rm_newline(char *line, char *limiter)
 	return (sub);
 }
 
-void    read_stdin(t_data *mini)
+void	read_stdin(t_data *mini)
 {
 	char	*line;
 	char	*limiter;
@@ -117,7 +115,10 @@ void    read_stdin(t_data *mini)
 	int		i;
 	bool	quotes;
 
-	quotes = dollar_check(mini);
+	quotes = false;
+	if (ft_strchr(mini->commands->infiles->file, '"') != 0
+		|| ft_strchr(mini->commands->infiles->file, '\'') != 0)
+		quotes = true;
 	limiter = trim_limiter(mini); // no harm doing this check
 	line = get_next_line_exit(0); // check if its the correct gnl
 	str = rm_newline(line, limiter); // check if picks up the backslash
@@ -142,7 +143,7 @@ void    read_stdin(t_data *mini)
 void input_re(t_data *mini)
 {
     if (mini->commands->infiles->file == NULL)
-		mini->commands->in = STDIN_FILENO;
+		mini->commands->in = NULL; // check
     else if (mini->commands->infiles->file->type == heredoc)
     {
 		mini->commands->in = open("tmp_file", O_CREAT | O_WRONLY | O_TRUNC, 0644);

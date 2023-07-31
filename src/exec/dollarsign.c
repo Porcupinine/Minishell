@@ -6,16 +6,14 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:54:29 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/25 13:55:38 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/31 14:46:27 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-#include <fcntl.h>
-#include <stdlib.h>
-#include <unistd.h>
-
+#include "../../include/minishell.h"
+#include "../../include/env_var.h"
+#include "../../include/exec.h"
+#include "../../Lib42/include/libft.h"
 
 char *expand_dollar(char *line, t_data *mini)
 {

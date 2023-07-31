@@ -6,14 +6,14 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:21:59 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/25 13:24:01 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/31 14:46:02 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-#include <fcntl.h>
-#include <unistd.h>
+#include "../../include/minishell.h"
+#include "../../include/env_var.h"
+#include "../../include/exec.h"
+#include "../../Lib42/include/libft.h"
 
 void output_re(t_data *mini)
 {

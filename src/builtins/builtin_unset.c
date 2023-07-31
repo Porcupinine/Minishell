@@ -6,23 +6,14 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 12:32:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 12:53:48 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/31 14:48:07 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include "../../include/env_var.h"
-#include "../../include/pipes.h"
+#include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
-
-#include <stdio.h>
-#include <unistd.h>
-#include <limits.h>
-#include <errno.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/param.h>
 
 /* 
 	unset: values and attributes of variables and functions
@@ -96,7 +87,7 @@ int find_envp(t_data *mini, char *arg)
 	return (-1); // meaning not found
 }
 
-void	builtin_unset(t_data *mini, char **arg) 
+int	builtin_unset(t_data *mini, char **arg) // or not an int??
 {
 	int pos;
 	int i;
