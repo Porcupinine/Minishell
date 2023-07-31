@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:25:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 16:51:18 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/31 17:00:47 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	builtin_export(t_data *mini, char *cmd)
 	// 	return (NULL); // needs protection?? if NULL??
 	str = ft_split(cmd, ' ');
 	if (str == NULL)
-		return (NULL);
+		return (-1); // TODO check if needs to be NULL
 	nb = 0;
 	while (str[nb])
 		nb++;
@@ -48,7 +48,7 @@ int	builtin_export(t_data *mini, char *cmd)
 		end++;
 	mini->mini_envp[end + 1] = malloc((ft_strlen(cmd) + 1) * sizeof(char));
 	if (str == NULL)
-		return (NULL);
+		return (-1); // TODO check if needs to be NULL
 	i = 0;
 	while (cmd[i])
 	{

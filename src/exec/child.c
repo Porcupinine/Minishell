@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:14 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 16:57:40 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/31 17:01:48 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	child_last(int fd_r[], int out_file, t_data *mini, int pos) // pos t
 	close_pipe(mini->commands->fd, mini->commands->nb_cmds);
 	i = -1;
 	while (++i < pos && mini->commands->next != NULL)
-		mini->commands->cmd = mini->commands->next;
+		mini->commands = mini->commands->next;
 	split_args(mini->commands->cmd, mini->mini_envp, mini); // check if it gave the right pos in the end
 }
 
@@ -57,7 +57,7 @@ static void	child_middle(int fd_r[], int fd_w[], t_data *mini, int pos) // pos t
 	close_pipe(mini->commands->fd, mini->commands->nb_cmds);
 	i = -1;
 	while (++i < pos && mini->commands->next != NULL)
-		mini->commands->cmd = mini->commands->next;
+		mini->commands = mini->commands->next;
 	split_args(mini->commands->cmd, mini->mini_envp, mini); // check if it gave the right pos in the end
 }
 

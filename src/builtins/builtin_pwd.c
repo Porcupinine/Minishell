@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:11:06 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 14:48:45 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/31 17:07:58 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	builtin_pwd(t_data *mini)
 
 	pwd_path = getcwd(NULL, 0);
 	if (pwd_path == NULL)
-		return (ft_exit(errno)); // check this exit tho
+		return (-1); // TODO check this exit tho
 	pwd = ft_calloc((ft_strlen(pwd_path) + 2), sizeof(char)); // for null term + newline
 	if (pwd == NULL)
-		return (ft_exit(errno)); // check this exit tho
+		return (-1); // TODO check this exit tho
 	ft_memmove(pwd, pwd_path, ft_strlen(pwd_path));
 	len = ft_strlen(pwd);
 	pwd[len] = '\n';

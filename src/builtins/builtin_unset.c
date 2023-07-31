@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 12:32:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 16:52:02 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/31 17:05:38 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	builtin_unset(t_data *mini, char **arg) // or not an int??
 	i = 1; // skipping the word unset
 	while (arg[i])
 	{
-		if (arg[i] == '_')
+		if (arg[i][0] == '_')
 			i++; // can't be unset
 		pos = find_envp(mini, arg[i]);
 		if (pos != -1)
