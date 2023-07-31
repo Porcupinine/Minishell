@@ -6,12 +6,6 @@
 # include <stdbool.h>
 # include <fcntl.h>
 
-/*Defined flags to be used as type for outfiles and infiles */
-# define APPEND_OUTPUT (O_APPEND | O_CREAT | O_WRONLY | O_TRUNC) //1601
-# define REDIRECT_OUTPUT (O_CREAT | O_WRONLY | O_TRUNC) //577
-# define REDIRECT_INPUT (O_RDONLY) // 0
-# define HEREDOC (O_CREAT | O_WRONLY | O_TRUNC) //577
-
 /**
  * list of child PIDs
  */
@@ -31,7 +25,7 @@ typedef struct s_pid
 typedef struct s_outfile
 {
 	char				*file;
-	int					type;
+	char				*type;
 	struct s_outfile	*next;
 }t_outfile;
 
@@ -46,7 +40,7 @@ typedef struct s_outfile
 typedef struct s_infile
 {
 	char			*file;
-	unsigned short	type;
+	char			*type;
 	struct s_infile	*next;
 }t_infile;
 

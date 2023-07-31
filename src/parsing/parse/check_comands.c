@@ -53,12 +53,12 @@ t_tokens **it_token, enum s_type *type)
 
 	temp = ft_calloc(1,sizeof (char *));
 	if (temp == NULL)
-		;//TODO malloc fail
+		ft_error("Malloc fail\n");
 	while ((*it_token))
 	{
 		(*cmd) = ft_calloc (1, sizeof (t_commands));
 		if ((*cmd) == NULL)
-			;//TODO erro
+			ft_error("Malloc fail\n");
 		while ((*it_token) && (*it_token)->type != T_PIPE)
 		{
 			between_pipes(temp, type, cmd, it_token);

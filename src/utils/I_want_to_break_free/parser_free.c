@@ -4,7 +4,7 @@
 
 #include "../../include/minishell.h"
 #include "../../include/lexical_analyzer.h"
-#include <stdio.h>
+#include <stdlib.h>
 
 void free_token_list(t_tokens **tokens)
 {
@@ -12,14 +12,26 @@ void free_token_list(t_tokens **tokens)
 
 	tmp = NULL;
 	if (tokens == NULL)
-
-	while(tokens)
+		return ;
+	while(*tokens)
 	{
-
+		tmp = *tokens;
+		*tokens = (*tokens)->next;
+		free(tmp);
 	}
 }
 
 void free_cmd_list (t_commands **cmd)
 {
+	t_commands *tmp;
 
+	tmp = NULL;
+	if (cmd == NULL)
+		return ;
+	while (*cmd)
+	{
+		tmp = *cmd;
+		*cmd = (*cmd)->next;
+		free(tmp);
+	}
 }
