@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 14:43:48 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 15:00:03 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/01 17:31:53 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,11 @@ int	    cmd_err(char *str, int error);
 void	builtin_err(char *cmd, char *str);
 void	builtin_err2(char *cmd, char *arg, char *str);
 
-char	*expand_dollar(char *line, t_data *mini); // USING??
-bool	dollar_check(t_data *mini); // USING
+char	*expand_dollar(char *line, t_data *mini);
+int 	expand_var(char **line, t_data *mini, int start);
+int 	var_len(char *line, int start);
+char 	*var_name(char *line, int start, int end);
+char 	*search_envp(char *var, t_data *mini);
+char	*var_replace(char **line, char *var_exp, int start, int end);
 
 #endif

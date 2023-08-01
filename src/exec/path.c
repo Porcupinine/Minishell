@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:11 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 14:46:00 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/01 13:01:11 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ static char	*join_path(char *command, char **paths, int i)
 			free_str(paths);
 			return (the_path);
 		}
+		// if (access(the_path, F_OK) || access(the_path, X_OK))
+		// {
+		// 	err_msg(NULL, cmd->cmd[0]); // adapt
+		// 	if (errno == 13) 
+		// 		_exit(126);
+		// 	_exit(127);
+		// }
 		free(the_path);
 		i++;
 	}
