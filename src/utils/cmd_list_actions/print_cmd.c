@@ -18,7 +18,7 @@ void	print_in(t_infile *in)
 {
 	while (in)
 	{
-		printf("cmd in: %s   type: %d\n", in->file, in->type);
+		printf("cmd in: %s   type: %s\n", in->file, in->type);
 		in = in->next;
 	}
 }
@@ -27,7 +27,7 @@ void	print_out(t_outfile *out)
 {
 	while (out)
 	{
-		printf("cmd out: %s    type: %d\n", out->file, out->type);
+		printf("cmd out: %s    type: %s\n", out->file, out->type);
 		out = out->next;
 	}
 }
@@ -40,5 +40,6 @@ void	print_cmd_list(t_commands *cmd)
 		print_in(cmd->infiles);
 		print_out(cmd->outfiles);
 		cmd = cmd->next;
+		printf("------------------\n");
 	}
 }
