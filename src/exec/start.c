@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/02 13:02:08 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/02 14:46:35 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	start(t_data *mini)
 	// input_re(mini); // error checking
 	// output_re(mini); // error checking 
 	mini->commands->nb_cmds = lst_size(mini->commands);
-	if (mini->commands->nb_cmds == 0)
+	if (mini->commands->nb_cmds == 1 && mini->commands->cmd = NULL) 
 	{
 		input_re(mini->commands, mini); // error checking
 		output_re(mini); // error checking 

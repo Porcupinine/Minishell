@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:19:42 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/02 12:26:52 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/02 14:55:34 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	read_stdin(t_commands *commands, t_data *mini)
 		free_stdin(line, str);
 }
 
-void input_re(t_commands *commands, t_data *mini)
+void input_re(t_commands *commands, t_data *mini) // CHECK FOR MORE THAN 1 infile
 {
     if (commands->infiles->file == NULL)
 		commands->in = NULL; // check
