@@ -109,6 +109,7 @@ typedef struct s_data
 	char		*command_line;
 	t_commands	*commands;
 	t_pid		*process;
+	int 		exit_code;
 }t_data;
 
 #endif //MINISHELL_MINISHELL_H
