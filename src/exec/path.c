@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:11 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/01 13:01:11 by domi             ###   ########.fr       */
+/*   Updated: 2023/08/02 09:01:46 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,16 @@ static char	*join_path(char *command, char **paths, int i)
 		the_path = ft_strjoin(the_path, command);
 		if (!the_path)
 			return (free(the_path), NULL);
-		if (access(the_path, F_OK) == 0) // needs to be X_OK perhaps ??
+		if (access(the_path, F_OK) != 0 || access(the_path, X_OK) != 0)
+		{
+			err_msg(command[0], "Permission denied\n");
+			return ; // check as should: exit(127);
+		}
+		if (access(the_path, X_OK) == 0)
 		{
 			free_str(paths);
 			return (the_path);
 		}
-		// if (access(the_path, F_OK) || access(the_path, X_OK))
-		// {
-		// 	err_msg(NULL, cmd->cmd[0]); // adapt
-		// 	if (errno == 13) 
-		// 		_exit(126);
-		// 	_exit(127);
-		// }
 		free(the_path);
 		i++;
 	}
@@ -72,27 +70,25 @@ char	*split_args(char *cmd, char **envp, t_data *mini)
 	int		i;
 
 	i = 0;
-	command = ft_split(cmd, ' '); // need to check if there is a remaining $ to replce in there?
+	command = ft_split(cmd, ' ');
 	if (!command)
-		return (NULL); // check
-	// check here is command == buitlin else the below
+		return (ft_error("Malloc failed\n"), NULL); // check
 	if (builtins(command, mini) == 1) // meaning not a builtin
 	{
 		if (*envp == NULL)
-			exit(127); // check 
+			exit(127); // check as we don't want to exit
 		paths = ft_split(envp[find_path(envp)] + 5, ':');
 		if (!paths)
-			cmd_not_found(command); // check
+			err_cmd_not_found(command); // exit should be with // exit(127);
 		path_to_cmd = join_path(command[0], paths, 0);
 		if (!path_to_cmd)
-			cmd_not_found(command); // check
+			err_cmd_not_found(command); // exit should be with // exit(127);
 		if (path_to_cmd != NULL && command != NULL)
 			execve(path_to_cmd, command, envp);
-		free(path_to_cmd); // check -- means execve failed
-		free_str(command); // check -- means execve failed
-		exit(EXIT_FAILURE); // check -- means execve failed
+		free(path_to_cmd);
+		free_str(command);
+		return (-1); // check
 	}
-	// and if a builtin?? something else needed? or things to free??
 	free_str(command);
-	exit(EXIT_SUCCESS); // or not?
+	return (0); // check, what happens if something goes wrong in builtins??
 }

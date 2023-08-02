@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollarsign.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:54:29 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/01 19:25:34 by domi             ###   ########.fr       */
+/*   Updated: 2023/08/02 08:31:03 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,109 +14,6 @@
 #include "../../include/env_var.h"
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
-
-// char *expand_dollar(char *line, t_data *mini)
-// {
-// 	int i;
-// 	int len;
-// 	int dollar; // maybe put this count in an ft
-// 	int d;
-// 	char *arg; // to store he expantion
-// 	char *new;
-
-// 	i = 0;
-// 	dollar = 0;
-// 	while (line[i])
-// 	{
-// 		if (line[i] == '$')
-// 			dollar++;
-// 		i++;
-// 	}
-// 	d = 0;
-// 	while (d < dollar)
-// 	{
-// 		i = 0;
-// 		len = 0;
-// 		while (line[i])
-// 		{
-// 			if (line[i] == '$')
-// 			{
-// 				while (line[i] != ' ')
-// 				{
-// 					arg[len] = line[i];
-// 					len++;
-// 					i++;
-// 				}
-// 			new = find_arg(arg, mini); // search in path and local and store the expantion
-// 			ft_strlcat(line[i - len], new, ft_strlen(new)); // is this len correct??
-// 			free_stdin(new, arg);
-// 			}
-// 			i++;
-// 		}
-// 		d++;
-// 	}
-// 	return (line);
-// }
-
-// bool	dollar_check(t_data *mini) // laura takes care of this, syntax wise
-// {
-// 	bool 	quotes;
-// 	int		s_quote;
-// 	int		d_quote;
-// 	int		i;
-	
-// 	i = 0;
-// 	s_quote = 0;
-// 	d_quote = 0;
-// 	quotes = false;
-// 	while (mini->commands->infiles->file[i])
-// 	{
-// 		if (mini->commands->infiles->file[i] == 34)
-// 			s_quote += 1;
-// 		if (mini->commands->infiles->file[i] == 39)
-// 			d_quote += 1;
-// 		i++;
-// 	}
-// 	if (s_quote % 2 == 0) // so they're in pair
-// 		quotes = true;
-// 	if (s_quote % 2 == 0)
-// 		quotes = true;
-// 	// if uneven do we want to then throw an error actually?? LAURA??
-// 	return (quotes);
-// }
-
-// static char	*find_arg(char *arg, t_data *mini) // what am i doing, actually not doing with this function??
-// {
-// 	int	i;
-// 	char *new;
-
-// 	i = 0;
-// 	arg = ft_strtrim(arg, '$');
-// 	while (mini->mini_envp[i])
-// 	{
-// 		if (ft_strncmp(mini->mini_envp[i], arg, ft_strlen(arg)) == 0)
-// 		{
-// 			new = ft_strtrim(mini->mini_envp[i], arg); // do i need to protect this thing?? or free??
-// 			break ;
-// 		}
-// 		i++;
-// 	}
-// 	if (new == NULL)
-// 	{
-// 		while (mini->env_args != NULL) // or is the ->next pointing to NULL ??
-// 		{
-// 			if (ft_strncmp(mini->env_args, arg, ft_strlen(arg)) == 0)
-// 			{
-// 				new = ft_strtrim(mini->env_args, arg); // do i need to protect this thing?? or free??
-// 				break ;
-// 			}
-// 			mini->env_args = mini->env_args->next;
-// 		}
-// 	}
-// 	if (new == NULL) // if ARG doesn't exist then replace with blank (not even a space)
-// 		new[0] = '\0'; // meaning just nothing, right??
-// 	return (new);
-// }
 
 int var_len(char *line, int start)
 {
@@ -226,3 +123,106 @@ char *expand_dollar(char *line, t_data *mini)
 	}
 	return (line);
 }
+
+// char *expand_dollar(char *line, t_data *mini)
+// {
+// 	int i;
+// 	int len;
+// 	int dollar; // maybe put this count in an ft
+// 	int d;
+// 	char *arg; // to store he expantion
+// 	char *new;
+
+// 	i = 0;
+// 	dollar = 0;
+// 	while (line[i])
+// 	{
+// 		if (line[i] == '$')
+// 			dollar++;
+// 		i++;
+// 	}
+// 	d = 0;
+// 	while (d < dollar)
+// 	{
+// 		i = 0;
+// 		len = 0;
+// 		while (line[i])
+// 		{
+// 			if (line[i] == '$')
+// 			{
+// 				while (line[i] != ' ')
+// 				{
+// 					arg[len] = line[i];
+// 					len++;
+// 					i++;
+// 				}
+// 			new = find_arg(arg, mini); // search in path and local and store the expantion
+// 			ft_strlcat(line[i - len], new, ft_strlen(new)); // is this len correct??
+// 			free_stdin(new, arg);
+// 			}
+// 			i++;
+// 		}
+// 		d++;
+// 	}
+// 	return (line);
+// }
+
+// bool	dollar_check(t_data *mini) // laura takes care of this, syntax wise
+// {
+// 	bool 	quotes;
+// 	int		s_quote;
+// 	int		d_quote;
+// 	int		i;
+	
+// 	i = 0;
+// 	s_quote = 0;
+// 	d_quote = 0;
+// 	quotes = false;
+// 	while (mini->commands->infiles->file[i])
+// 	{
+// 		if (mini->commands->infiles->file[i] == 34)
+// 			s_quote += 1;
+// 		if (mini->commands->infiles->file[i] == 39)
+// 			d_quote += 1;
+// 		i++;
+// 	}
+// 	if (s_quote % 2 == 0) // so they're in pair
+// 		quotes = true;
+// 	if (s_quote % 2 == 0)
+// 		quotes = true;
+// 	// if uneven do we want to then throw an error actually?? LAURA??
+// 	return (quotes);
+// }
+
+// static char	*find_arg(char *arg, t_data *mini) // what am i doing, actually not doing with this function??
+// {
+// 	int	i;
+// 	char *new;
+
+// 	i = 0;
+// 	arg = ft_strtrim(arg, '$');
+// 	while (mini->mini_envp[i])
+// 	{
+// 		if (ft_strncmp(mini->mini_envp[i], arg, ft_strlen(arg)) == 0)
+// 		{
+// 			new = ft_strtrim(mini->mini_envp[i], arg); // do i need to protect this thing?? or free??
+// 			break ;
+// 		}
+// 		i++;
+// 	}
+// 	if (new == NULL)
+// 	{
+// 		while (mini->env_args != NULL) // or is the ->next pointing to NULL ??
+// 		{
+// 			if (ft_strncmp(mini->env_args, arg, ft_strlen(arg)) == 0)
+// 			{
+// 				new = ft_strtrim(mini->env_args, arg); // do i need to protect this thing?? or free??
+// 				break ;
+// 			}
+// 			mini->env_args = mini->env_args->next;
+// 		}
+// 	}
+// 	if (new == NULL) // if ARG doesn't exist then replace with blank (not even a space)
+// 		new[0] = '\0'; // meaning just nothing, right??
+// 	return (new);
+// }
