@@ -50,7 +50,7 @@ void	populate_function_ptrs(void (**functions)(t_state_machine *))
 	(functions)[S_SMALL] = &token_smaller;
 	(functions)[S_SMALSMAL] = &token_smallsmall;
 	(functions)[S_CHAR] = &token_str;
-	(functions)[S_ERROR] = &token_error;
+//	(functions)[S_ERROR] = &token_error;
 }
 
 void	parse_machine(t_data *mini_data)
@@ -75,10 +75,10 @@ void	parse_machine(t_data *mini_data)
 		//parser->state = S_ERROR;//TODO error
 	add_token(&parser->tokens_list, \
 	ft_substr(parser->cmd, parser->start, parser->len), T_CHAR);
-	printf("------TOKEN LIST------\n");
-	print_tokens(parser->tokens_list);
-	parse(parser, mini_data);
-	printf("-------CMD LIST------\n");
-	print_cmd_list(mini_data->commands);
+//	printf("------TOKEN LIST------\n");
+//	print_tokens(parser->tokens_list);
+//	parse(parser, mini_data);
+//	printf("-------CMD LIST------\n");
+//	print_cmd_list(mini_data->commands);
 //	start(mini_data);
 }

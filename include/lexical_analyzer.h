@@ -156,5 +156,5 @@ void	found_quotes(t_state_machine *parser);
  * @param mini_data for command list
  */
 void	parse(t_state_machine *parser, t_data *mini_data);
-
+void	syntax_error(t_tokens **tokens, char c);
 #endif //MINISHELL_LEXICAL_ANALYZER_H

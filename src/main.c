@@ -21,9 +21,6 @@
 #include "../include/token_list_actions.h"
 #include "../../include/builtins.h"
 
-//struct sigaction	sigint_sa;
-//struct sigaction	sigquit_sa;
-
 void	sigint_handler(int sig)
 {
 	write(1, "\n", 1);
@@ -60,8 +57,6 @@ void set_signals(void)
 
 int	main(int argc, char **argv, char **envp)
 {
-//	struct sigaction	sigint_sa;
-//	struct sigaction	sigquit_sa;
 	t_data				*mini_data;
 
 	mini_data = ft_calloc(1, sizeof(t_data));
@@ -69,14 +64,8 @@ int	main(int argc, char **argv, char **envp)
 		ft_error("Data malloc fail!\n");
 	mini_data->mini_envp = envp;//TODO malloc this
 	set_signals();
-//	sigemptyset(&sigint_sa.sa_mask);
-//	sigemptyset(&sigquit_sa.sa_mask);
-//	sigquit_sa.sa_handler = &sigquit_handler;
-//	sigint_sa.sa_handler = &sigint_handler;
 	if (argc != 1)
 		ft_error("EROOR!!\nWrong amount of args!\n");
-//	sigaction(SIGQUIT, &sigquit_sa, NULL);
-//	sigaction(SIGINT, &sigint_sa, NULL);
 	while (1)
 	{
 		mini_data->command_line = readline("minisomething: ");

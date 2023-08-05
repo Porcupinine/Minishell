@@ -6,6 +6,8 @@
 # include <stdbool.h>
 # include <fcntl.h>
 
+//int g_exit_code;
+
 typedef enum S_REDIRECT
 {
 	REDIRECT_INPUT,
@@ -109,7 +111,7 @@ typedef struct s_data
 	char		*command_line;
 	t_commands	*commands;
 	t_pid		*process;
-	int 		exit_code;
+//	int 		exit_code;
 }t_data;
 
 #endif //MINISHELL_MINISHELL_H
