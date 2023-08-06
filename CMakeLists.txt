@@ -25,4 +25,5 @@ add_executable(minishell src/main.c include/env_var.h include/minishell.h
 #        src/builtins/builtin_unset.c src/builtins/builtins.c src/exec/child.c src/exec/dollarsign.c
 #        src/exec/errors.c src/exec/input_op.c src/exec/output_op.c src/exec/path.c src/exec/start.c
 #        src/exec/utils.c)
+
 target_link_libraries(minishell ${CMAKE_SOURCE_DIR}/Lib42/libft.a -lreadline)

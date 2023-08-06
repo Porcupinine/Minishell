@@ -6,6 +6,13 @@
 # include <stdbool.h>
 # include <fcntl.h>
 
+typedef enum S_REDIRECT
+{
+	REDIRECT_INPUT,
+	HEREDOC,
+	REDIRECT_OUTPUT,
+	APPEND_OUTPUT,
+}T_REDIRECT;
 /**
  * list of child PIDs
  */
@@ -25,7 +32,7 @@ typedef struct s_pid
 typedef struct s_outfile
 {
 	char				*file;
-	char				*type;
+	T_REDIRECT			type;
 	struct s_outfile	*next;
 }t_outfile;
 
@@ -40,7 +47,7 @@ typedef struct s_outfile
 typedef struct s_infile
 {
 	char			*file;
-	char			*type;
+	T_REDIRECT		type;
 	struct s_infile	*next;
 }t_infile;
 
