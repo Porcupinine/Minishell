@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:25:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/02 08:30:00 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/06 15:00:37 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,3 +60,7 @@ int	builtin_export(t_data *mini, char *cmd)
 	ft_free(str); // as its double pointer OR DOES THIS GET FREE UPON CLOSING OF THE PROG ONLY??
     return (0);
 }
+
+// deal with the below
+// eg. just "export" and its printing the whole env with 'declare -x' in front of each line
+// eg. "export =hey" --> minishell: export: '=hey': not a valid identifier

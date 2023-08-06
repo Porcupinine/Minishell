@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_b_exit.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 08:08:19 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/02 08:08:23 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/06 11:31:27 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ static char	*sub_mem(char *memory)
 		return (free(memory), NULL);
 	sub = ft_substr_gnl_b(memory, i, len - i);
 	if (!sub)
-		return (ft_free_b(&memory, NULL), ft_error("Malloc fail\n"), NULL); // TODO malloc exit fine like this?
+		return (ft_free_b(&memory, NULL), NULL);
+		// return (ft_free_b(&memory, NULL), ft_error("Malloc fail\n"), NULL); // TODO malloc exit fine like this?
 	free(memory);
 	return (sub);
 }
@@ -68,7 +69,8 @@ static char	*reading(int fd, char *memory)
 
 	buf = ft_calloc_b((BUFFER_SIZE + 1), sizeof(char));
 	if (!buf)
-		return (free(memory), ft_error("Malloc fail\n"), NULL); // TODO malloc exit fine like this?
+		return (free(memory), NULL);
+		// return (free(memory), ft_error("Malloc fail\n"), NULL); // TODO malloc exit fine like this?
 	nbyte = 1;
 	while (nbyte != 0 && !ft_strchr_gnl_b(memory, '\n'))
 	{
@@ -95,7 +97,8 @@ char	*get_next_line_fd(int fd)
 	{
 		memory = ft_calloc_b(1, 1);
 		if (!memory)
-			return (ft_error("Malloc fail\n"), NULL); // TODO malloc exit fine like this?
+			return (NULL);
+			// return (ft_error("Malloc fail\n"), NULL); // TODO malloc exit fine like this?
 	}
 	memory = reading(fd, memory);
 	if (!memory)

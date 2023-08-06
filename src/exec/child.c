@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:14 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/02 12:54:44 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/06 11:46:33 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	child_last(int fd_r[], int out_file, t_commands *commands, t_data *m
 
 static void	child_middle(int fd_r[], int fd_w[], t_commands *commands, t_data *mini) // pos to loop to the right node before sending to split_arg
 {
-	int i;
+	// int i;
 
 	if (dup2(fd_r[0], STDIN_FILENO) == -1)
 		exit(EXIT_FAILURE); // check

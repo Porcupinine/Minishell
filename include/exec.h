@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 14:43:48 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/02 12:55:05 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/06 11:45:45 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int		lst_size(t_commands *lst);
 void	free_str(char **str);
 t_pid	*pid_lstlast(t_pid *lst); // USING??
 void	pid_lstadd_back(t_pid **lst, pid_t content); // USING??
+void	free_fd(int **fd, int nb_cmds);
 
 char	*split_args(char *cmd, char **envp, t_data *mini);
 

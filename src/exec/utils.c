@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 12:19:38 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/02 11:30:04 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/06 12:45:44 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ void	pid_lstadd_back(t_pid **lst, pid_t content)
 
 	new_node = malloc(1 * sizeof(t_pid));
 	if (new_node == NULL)
-		return (ft_error("Malloc failed.\n"), NULL); // check
+	{
+		ft_error("Malloc failed.\n");
+		// return (NULL); // check
+	}
 	new_node->pid = content;
 	new_node->next = NULL;
 	if (*lst == NULL)
@@ -71,4 +74,19 @@ t_pid	*pid_lstlast(t_pid *lst)
 		lst = lst->next;
 	}
 	return (lst);
+}
+
+void	free_fd(int **fd, int nb_cmds)
+{
+	int	nb;
+	int	i;
+
+	nb = nb_cmds;
+	i = 0;
+	while (i < nb)
+	{
+		free(fd[i]);
+		i++;
+	}
+	free(fd);
 }

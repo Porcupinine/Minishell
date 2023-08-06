@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/02 14:46:35 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/06 12:46:55 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,10 @@ void	close_pipe(int **fd, int nb)
 
 static void close_fds(t_data *mini)
 {
-	if (mini->commands->in != NULL)
-		close(mini->commands->in);
-	if (mini->commands->out != NULL)
-		close(mini->commands->out);
+	//if (mini->commands->in != NULL)
+	close(mini->commands->in);
+	//if (mini->commands->out != NULL)
+	close(mini->commands->out);
 	// if (mini->commands->infiles->file->type == "HEREDOC") // check -- change for int
 	if (access("tmp_file", F_OK) == 0) // does this work? apply to the rest if yes
 		unlink("tmp_file");
@@ -105,16 +105,16 @@ int	start(t_data *mini)
 	// input_re(mini); // error checking
 	// output_re(mini); // error checking 
 	mini->commands->nb_cmds = lst_size(mini->commands);
-	if (mini->commands->nb_cmds == 1 && mini->commands->cmd = NULL) 
+	if (mini->commands->nb_cmds == 1 && !mini->commands->cmd) 
 	{
 		input_re(mini->commands, mini); // error checking
-		output_re(mini); // error checking 
+		output_re(mini->commands); // error checking 
 		close_fds(mini);
 	}
 	else if (mini->commands->nb_cmds == 1)
 	{
 		input_re(mini->commands, mini); // error checking
-		output_re(mini); // error checking 
+		output_re(mini->commands); // error checking 
 		mini->commands->fd = open_pipes(mini);
 		if (mini->commands->fd == NULL)
 			err_msg("", "pipe opening failed.\n"); // check

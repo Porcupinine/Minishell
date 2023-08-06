@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:19:42 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/02 14:55:34 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/06 12:39:30 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../../include/env_var.h"
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
+#include "../../Lib42/include/get_next_line.h"
 
 static char *trim_limiter(t_commands *commands)
 {
@@ -21,6 +22,9 @@ static char *trim_limiter(t_commands *commands)
 	int		j;
 	char	*trim;
 
+	trim = ft_calloc(ft_strlen(commands->infiles->file), 1);
+	if (trim == NULL)
+		return (ft_error("Malloc failed.\n"), NULL); // check
 	i = 0;
 	j = 0;
 	while (commands->infiles->file[i])
@@ -31,8 +35,7 @@ static char *trim_limiter(t_commands *commands)
 		i++;
 		j++;
 	}
-	trim[j] = '\0'; // needed??
-	return (trim);
+	return (trim); // needs to be freed later??
 }
 
 static void	free_stdin(char *line, char *str)
@@ -69,7 +72,7 @@ void	read_stdin(t_commands *commands, t_data *mini)
 		|| ft_strchr(commands->infiles->file, '\'') != 0)
 		quotes = true;
 	limiter = trim_limiter(commands);
-	line = get_next_line_fd(STDIN_FILENO); // correct gnl?
+	line = get_next_line_fd(0); // correct gnl?
 	str = rm_newline(line, limiter);
 	while (line != NULL && ft_strncmp(str, limiter, ft_strlen(limiter)) != 0)
 	{
@@ -80,7 +83,7 @@ void	read_stdin(t_commands *commands, t_data *mini)
 		if (ft_strchr(line, '\n') == NULL)
 			break ;
 		free_stdin(line, str);
-		line = get_next_line_fd(STDIN_FILENO); // check if its the correct gnl
+		line = get_next_line_fd(0); // check if its the correct gnl
 		if (line == NULL)
 			break ;
 		str = rm_newline(line, limiter);
@@ -89,20 +92,34 @@ void	read_stdin(t_commands *commands, t_data *mini)
 		free_stdin(line, str);
 }
 
-void input_re(t_commands *commands, t_data *mini) // CHECK FOR MORE THAN 1 infile
+static void handle_heredoc(t_commands *commands, t_data *mini)
+{
+	commands->in = open("tmp_file", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	read_stdin(commands, mini);
+	close(commands->in);
+	commands->in = open("tmp_file", O_RDONLY);
+}
+
+void input_re(t_commands *commands, t_data *mini)
 {
     if (commands->infiles->file == NULL)
-		commands->in = NULL; // check
-		// commands->in = STDIN_FILENO; // test this
-    else if (commands->infiles->file->type == HEREDOC)
-    {
-		commands->in = open("tmp_file", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-        read_stdin(commands, mini);
-        close(commands->in);
-        commands->in = open("tmp_file", O_RDONLY);
-    }
-    else
-        commands->in = open(commands->infiles->file, O_RDONLY, 0644);
-	if (commands->in < 0)
-		builtin_err(commands->infiles->file, "No such file or directory"); // return?
+		commands->in = STDIN_FILENO; // test this
+		// commands->in = NULL; // check
+	while (commands->infiles)
+	{
+		if (commands->infiles->type == HEREDOC)
+			handle_heredoc(commands, mini);
+		else
+			commands->in = open(commands->infiles->file, O_RDONLY, 0644);
+		if (commands->in < 0)
+		{
+			builtin_err(commands->infiles->file, "No such file or directory"); // return?
+			break ; // right??
+		}
+		if (commands->infiles->next != NULL)
+			close(commands->in);
+		// else
+		// 	break ; // needed??
+		commands->infiles = commands->infiles->next;
+	}
 }

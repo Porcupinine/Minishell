@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:11 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/02 09:01:46 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/06 12:07:00 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ static char	*join_path(char *command, char **paths, int i)
 			return (free(the_path), NULL);
 		if (access(the_path, F_OK) != 0 || access(the_path, X_OK) != 0)
 		{
-			err_msg(command[0], "Permission denied\n");
-			return ; // check as should: exit(127);
+			err_msg(command, "Permission denied\n");
+			//return ; // check as should: exit(127);
 		}
 		if (access(the_path, X_OK) == 0)
 		{
@@ -67,9 +67,7 @@ char	*split_args(char *cmd, char **envp, t_data *mini)
 	char	**command;
 	char	*path_to_cmd;
 	char	**paths;
-	int		i;
 
-	i = 0;
 	command = ft_split(cmd, ' ');
 	if (!command)
 		return (ft_error("Malloc failed\n"), NULL); // check
