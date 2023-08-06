@@ -21,6 +21,8 @@
 #include "../include/token_list_actions.h"
 #include "../../include/builtins.h"
 
+int g_exit_code;
+
 void	sigint_handler(int sig)
 {
 	write(1, "\n", 1);
@@ -71,5 +73,6 @@ int	main(int argc, char **argv, char **envp)
 		mini_data->command_line = readline("minisomething: ");
 		line_history(mini_data);
 		parse_machine(mini_data);
+		printf("Exit code: %d\n", g_exit_code);
 	}
 }

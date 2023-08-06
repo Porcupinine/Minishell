@@ -20,12 +20,31 @@
 #include "../../include/lexical_analyzer.h"
 #include "../../include/I_want_to_break_free.h"
 
-void	syntax_error(t_tokens **tokens, char c)
+extern int g_exit_code;
+
+void	syntax_error(t_state_machine *parser, char c)
 {
 	//error 258
 	printf("Syntax error near unexpected token '%c'\n", c);
-//	g_exit_code = 258;
-	free_token_list(tokens);
+	g_exit_code = 258;
+	parser->state = S_ERROR;
+	free_token_list(&parser->tokens_list);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
+
+void	unclosed_error(t_state_machine *parser)
+{
+	char	c;
+
+	if (parser->status == S_DQUOTES)
+		c = '"';
+	else
+		c = '\'';
+	printf("Unclosed '%c'\n", c);
+	g_exit_code = 258;
+	free_token_list(&parser->tokens_list);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
