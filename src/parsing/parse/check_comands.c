@@ -73,7 +73,7 @@ t_tokens **it_token, enum s_type *type)
 	}
 }
 
-void	parse(t_state_machine *parser, t_data *mini_data)
+void	parse_tokens(t_state_machine *parser, t_data *mini_data)
 {
 	t_commands	*cmd;
 	t_tokens	*it_token;
@@ -81,7 +81,7 @@ void	parse(t_state_machine *parser, t_data *mini_data)
 
 	it_token = parser->tokens_list;
 	cmd = NULL;
-	if (it_token->type != T_PIPE)
-		//TODO houston we have a problem
-		token_iter(mini_data, &cmd, &it_token, &type);
+	if (it_token == NULL)
+		return ;
+	token_iter(mini_data, &cmd, &it_token, &type);
 }

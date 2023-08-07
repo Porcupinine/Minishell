@@ -94,7 +94,7 @@ typedef struct s_state_machine
  * the data struct and break it into tokens
  * @param mini_data data struct
  */
-void	parse_machine(t_data *mini_data);
+void	parse_machine(t_data *mini_data, t_state_machine *parser);
 /**
  * operates on S_WHITESPACE state
  * @param parser
@@ -155,8 +155,9 @@ void	found_quotes(t_state_machine *parser);
  * @param parser for the token list
  * @param mini_data for command list
  */
-void	parse(t_state_machine *parser, t_data *mini_data);
+void	parse_tokens(t_state_machine *parser, t_data *mini_data);
 void	syntax_error(t_state_machine *parser, char c);
 void	unclosed_error(t_state_machine *parser);
+void	parse(t_data *mini_data);
 
 #endif //MINISHELL_LEXICAL_ANALYZER_H

@@ -34,7 +34,7 @@ void	print_out(t_outfile *out)
 
 void	print_cmd_list(t_commands *cmd)
 {
-	while (cmd)
+	while (cmd != NULL)
 	{
 		printf("cmd: %s\n", cmd->cmd);
 		print_in(cmd->infiles);
