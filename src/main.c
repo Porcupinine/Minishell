@@ -20,11 +20,19 @@
 #include "../include/lexical_analyzer.h"
 #include "../include/token_list_actions.h"
 #include "../../include/builtins.h"
+#include "../include/envp_parser.h"
+
+int g_exit_code;
 
 void	sigint_handler(int sig)
 {
-	write(1, "sigint\n", 7);
-	//TODO TOP changes the signal, it can break minishell
+	write(1, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+	kill(0, SIGQUIT);
+//	//TODO TOP changes the signal, it can b
+//	// reak minishell
 }
 
 // if (!isatty(STDIN_FILENO))
@@ -32,29 +40,42 @@ void	sigint_handler(int sig)
 
 void	sigquit_handler(int sig)
 {
+//	rl_on_new_line();
+//	rl_replace_line("", 0);
+//	rl_redisplay();
+}
 
+void set_signals(void)
+{
+	struct sigaction	sigint_sa;
+	struct sigaction	sigquit_sa;
+
+	sigemptyset(&sigint_sa.sa_mask);
+	sigemptyset(&sigquit_sa.sa_mask);
+	sigquit_sa.sa_handler = &sigquit_handler;
+	sigint_sa.sa_handler = &sigint_handler;
+	sigaction(SIGQUIT, &sigquit_sa, NULL);
+	sigaction(SIGINT, &sigint_sa, NULL);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
-	struct sigaction	sigint_sa;
-	struct sigaction	sigquit_sa;
 	t_data				*mini_data;
 
 	mini_data = ft_calloc(1, sizeof(t_data));
 	if (mini_data == NULL)
 		ft_error("Data malloc fail!\n");
-	mini_data->mini_envp = envp;//TODO malloc this
-	sigquit_sa.sa_handler = &sigquit_handler;
-	sigint_sa.sa_handler = &sigint_handler;
+//	parse_array_envp(mini_data, envp);
+	parse_list_envp(mini_data, envp);
+	set_signals();
 	if (argc != 1)
 		ft_error("EROOR!!\nWrong amount of args!\n");
-	sigaction(SIGQUIT, &sigquit_sa, NULL);
-	sigaction(SIGINT, &sigint_sa, NULL);
 	while (1)
 	{
-		mini_data->command_line = readline("\nminisomething: ");
+		mini_data->command_line = readline("minisomething: ");
 		line_history(mini_data);
-		parse_machine(mini_data);
+		parse(mini_data);
+		printf("Exit code: %d\n", g_exit_code);
 	}
+	return (0);
 }

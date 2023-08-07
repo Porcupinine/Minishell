@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.25)
 project(minishell C)
-include_directories(${CMAKE_SOURCE_DIR}/Lib42/include)
+include_directories(${CMAKE_SOURCE_DIR}/Lib42/include SYSTEM/Users/lpraca-l/.brew/opt/readline/include)
 
 #add_compile_options(-fsanitize=address -g3)
 #add_link_options(-fsanitize=address)
@@ -19,7 +19,7 @@ add_executable(minishell src/main.c include/env_var.h include/minishell.h
         src/parsing/state_machine/error_machine.c src/parsing/parse/check_comands.c
         src/utils/tolken_list_actions/search_token.c include/cmd_list_actions.h
         src/utils/cmd_list_actions/add_inout_node.c src/utils/cmd_list_actions/print_cmd.c
-        src/utils/cmd_list_actions/add_cmd_node.c src/utils/history/history.c src/utils/I_want_to_break_free/parser_free.c include/I_want_to_break_free.h)
+        src/utils/cmd_list_actions/add_cmd_node.c src/utils/history/history.c src/utils/I_want_to_break_free/parser_free.c include/I_want_to_break_free.h src/parsing/parser.c src/utils/envp_parser/parse_array_envp.c include/envp_parser.h src/utils/envp_parser/parse_list_envp.c src/parsing/parse/check_commands2.c)
 #        include/builtins.h src/builtins/builtin_cd.c src/builtins/builtin_echo.c src/builtins/builtin_env.c
 #        src/builtins/builtin_exit.c src/builtins/builtin_export.c src/builtins/builtin_pwd.c
 #        src/builtins/builtin_unset.c src/builtins/builtins.c src/exec/child.c src/exec/dollarsign.c
@@ -27,3 +27,4 @@ add_executable(minishell src/main.c include/env_var.h include/minishell.h
 #        src/exec/utils.c)
 
 target_link_libraries(minishell ${CMAKE_SOURCE_DIR}/Lib42/libft.a -lreadline)
+target_link_directories(minishell PRIVATE /Users/lpraca-l/.brew/opt/readline/lib)

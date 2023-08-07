@@ -92,6 +92,12 @@ typedef struct s_env_args
 	struct s_env_args	*next;
 }t_env_args;
 
+typedef struct s_mini_envp_list
+{
+	char					*str;
+	struct s_mini_envp_list *next;
+}t_mini_envp_list;
+
 /**
  * Main struct with all the information that is needed to run
  * the commands given to minishell
@@ -103,12 +109,14 @@ typedef struct s_env_args
  */
 typedef struct s_data
 {
-	char		**mini_envp;
-	t_commands	*cmds;
-	t_env_args	*env_args;
-	char		*command_line;
-	t_commands	*commands;
-	t_pid		*process;
+	char			**mini_envp;
+	t_commands		*cmds;
+	t_env_args		*env_args;
+	t_mini_envp_list *mini_envp_list;
+	char			*command_line;
+	t_commands		*commands;
+	t_pid			*process;
+//	int 			exit_code;
 }t_data;
 
 #endif //MINISHELL_MINISHELL_H

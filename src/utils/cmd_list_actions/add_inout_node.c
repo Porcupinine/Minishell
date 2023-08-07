@@ -49,7 +49,7 @@ static void	add_outfile(t_outfile **outfile, enum s_type type, char *str)
 	last = NULL;
 	new_out = ft_calloc(1, sizeof (t_outfile));
 	if (new_out == NULL)
-		;//TODO malloc fail
+		ft_error("Malloc fail\n");
 	if (type == T_BIG)
 		new_out->type = REDIRECT_OUTPUT;
 	if (type == T_BIGBIG)
@@ -73,7 +73,7 @@ static void	add_infile(t_infile **infile, enum s_type type, char *str)
 	last = NULL;
 	new_in = ft_calloc(1, sizeof (t_infile));
 	if (new_in == NULL)
-		;//TODO malloc fail
+		ft_error("Malloc fail\n");
 	if (type == T_SMALL)
 		new_in->type = REDIRECT_INPUT;
 	if (type == T_SMALLSMALL)
