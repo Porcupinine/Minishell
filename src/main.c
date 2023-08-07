@@ -20,6 +20,7 @@
 #include "../include/lexical_analyzer.h"
 #include "../include/token_list_actions.h"
 #include "../../include/builtins.h"
+#include "../include/envp_parser.h"
 
 int g_exit_code;
 
@@ -64,7 +65,8 @@ int	main(int argc, char **argv, char **envp)
 	mini_data = ft_calloc(1, sizeof(t_data));
 	if (mini_data == NULL)
 		ft_error("Data malloc fail!\n");
-	mini_data->mini_envp = envp;//TODO malloc this
+//	parse_array_envp(mini_data, envp);
+	parse_list_envp(mini_data, envp);
 	set_signals();
 	if (argc != 1)
 		ft_error("EROOR!!\nWrong amount of args!\n");

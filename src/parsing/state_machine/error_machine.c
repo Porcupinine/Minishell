@@ -25,6 +25,21 @@ extern int g_exit_code;
 void	syntax_error(t_state_machine *parser, char c)
 {
 	//error 258
+	if (c == '\n')
+		printf("Syntax error near unexpected token `newline'\n");
+	else
+		printf("Syntax error near unexpected token '%c'\n", c);
+	g_exit_code = 258;
+	parser->state = S_ERROR;
+	free_token_list(&parser->tokens_list);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
+
+void	syntax_error_parse(t_state_machine *parser, char c)
+{
+	//error 258
 	printf("Syntax error near unexpected token '%c'\n", c);
 	g_exit_code = 258;
 	parser->state = S_ERROR;

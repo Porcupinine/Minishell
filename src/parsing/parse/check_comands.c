@@ -26,7 +26,6 @@ t_tokens **it_token)
 		temp = ft_strjoin_space(temp, (*it_token)->str);
 		(*it_token) = (*it_token)->next;
 		(*cmd)->cmd = temp;
-		//TODO espaćo
 	}
 	temp = "\0";
 	if ((*it_token) && ((*it_token)->type == T_BIG || \
@@ -37,8 +36,7 @@ t_tokens **it_token)
 		(*it_token) = (*it_token)->next;
 	}
 	if ((*it_token) && (*it_token)->type != T_CHAR)
-		//TODO Houston we have a problem
-		;
+		;//TODO headache
 	else if ((*it_token))
 	{
 		add_inout(cmd, (*it_token)->str, (*type));
