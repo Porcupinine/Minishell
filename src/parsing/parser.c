@@ -16,9 +16,9 @@ void parse(t_data *mini_data)
 	if (parser == NULL)
 		ft_error("Malloc fail\n");
 	parse_machine(mini_data, parser);
-	parse_tokens(parser, mini_data);
 	printf("------TOKEN LIST------\n");
 	print_tokens(parser->tokens_list);
+	parse_tokens(parser, mini_data);
 	printf("-------CMD LIST------\n");
 	print_cmd_list(mini_data->commands);
 }

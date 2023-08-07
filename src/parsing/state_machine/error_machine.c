@@ -37,13 +37,12 @@ void	syntax_error(t_state_machine *parser, char c)
 	rl_redisplay();
 }
 
-void	syntax_error_parse(t_state_machine *parser, char c)
+void	syntax_error_parse(t_state_machine *parser, t_data *mini_data)
 {
-	//error 258
-	printf("Syntax error near unexpected token '%c'\n", c);
+	printf("Syntax error near unexpected token `newline'\n");
 	g_exit_code = 258;
-	parser->state = S_ERROR;
 	free_token_list(&parser->tokens_list);
+	free_cmd_list(&mini_data->commands);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();

@@ -110,7 +110,6 @@ typedef struct s_mini_envp_list
 typedef struct s_data
 {
 	char			**mini_envp;
-	t_commands		*cmds;
 	t_env_args		*env_args;
 	t_mini_envp_list *mini_envp_list;
 	char			*command_line;
