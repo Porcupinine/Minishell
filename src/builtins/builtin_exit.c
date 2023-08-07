@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 12:32:30 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 16:43:14 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/07 16:20:09 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ static int	ft_atoi_long(char *str)
 	return ((int)(sign * nb));
 }
 
-void	builtin_exit(t_data *mini, char *cmd)
+// void	builtin_exit(t_data *mini, char *cmd)
+void	builtin_exit(char *cmd)
 {
 	int i;
 	int j;

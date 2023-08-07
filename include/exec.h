@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 14:43:48 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/06 11:45:45 by domi             ###   ########.fr       */
+/*   Updated: 2023/08/07 16:19:38 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ char 	**update_envp(char **envp, char *arg, int size);
 
 int		builtin_pwd(t_data *mini);
 
-int		builtin_export(t_data *mini, char *cmd);
+int     builtin_export(t_data *mini, char **cmd);
 
-void	builtin_exit(t_data *mini, char *cmd);
+void	builtin_exit(char *cmd); // t_data *mini,  needed ??
 
 int		builtin_env(t_data *mini, char **cmd);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:11 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/06 12:07:00 by domi             ###   ########.fr       */
+/*   Updated: 2023/08/07 11:09:24 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*split_args(char *cmd, char **envp, t_data *mini)
 			execve(path_to_cmd, command, envp);
 		free(path_to_cmd);
 		free_str(command);
-		return (-1); // check
+		// throw an error, to check
 	}
 	free_str(command);
 	return (0); // check, what happens if something goes wrong in builtins??

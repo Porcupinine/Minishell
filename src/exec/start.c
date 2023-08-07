@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/06 12:46:55 by domi             ###   ########.fr       */
+/*   Updated: 2023/08/07 11:13:41 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 static int	execute_pipe(t_data *mini)
 {
-	pid_t	process;
+	pid_t	pid;
 	int		i;
 	int 	pos;
 
@@ -27,11 +27,11 @@ static int	execute_pipe(t_data *mini)
 	{
 		input_re(mini->commands, mini); // error checking
 		output_re(mini->commands); // error checking 
-		process = fork();
-		pid_lstadd_back(mini->process->pid, process);
-		if (process == -1)
+		pid = fork();
+		pid_lstadd_back(&mini->process, pid);
+		if (pid == -1)
 			return (ft_error("Fork failed.\n"), errno); // check errno
-		if (process == 0)
+		if (pid == 0)
 			which_child(mini, mini->commands, i, pos);
 		i++;
 		pos++;
@@ -44,7 +44,7 @@ static int	execute_pipe(t_data *mini)
 	// if (mini->commands->infiles->file->type == "HEREDOC") // check -- change for int
 	if (access("tmp_file", F_OK) == 0) // does this work? apply to the rest if yes
 		unlink("tmp_file");
-	waitpid(process, &mini->commands->status, 0); // or w/ mini->process->pid ??
+	waitpid(pid, &mini->commands->status, 0); // or w/ mini->process->pid ??
 	if (WIFEXITED(mini->commands->status))
 		return (WEXITSTATUS(mini->commands->status)); // check
 	return (0); // check
