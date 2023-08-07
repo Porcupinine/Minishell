@@ -21,7 +21,7 @@ void free_token_list(t_tokens **tokens)
 	}
 }
 
-void free_cmd_list (t_commands **cmd)
+void free_cmd_list(t_commands **cmd)
 {
 	t_commands *tmp;
 
@@ -32,6 +32,21 @@ void free_cmd_list (t_commands **cmd)
 	{
 		tmp = *cmd;
 		*cmd = (*cmd)->next;
+		free(tmp);
+	}
+}
+
+void free_pid_list(t_pid **lst)
+{
+	t_pid *tmp;
+
+	tmp = NULL;
+	if (lst == NULL)
+		return ;
+	while (*lst)
+	{
+		tmp = *lst;
+		*lst = (*lst)->next;
 		free(tmp);
 	}
 }

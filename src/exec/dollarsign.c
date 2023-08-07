@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollarsign.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:54:29 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/06 11:47:00 by domi             ###   ########.fr       */
+/*   Updated: 2023/08/07 17:04:00 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "../../include/env_var.h"
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
+
+extern int g_exit_code;
 
 int var_len(char *line, int start)
 {
@@ -51,8 +53,8 @@ char *search_envp(char *var, t_data *mini)
 	int i;
 
 	i = 0;
-	// if (var[i] == '?')
-		// do something here ??
+	if (var[i] == '?')
+		return (ft_itoa(g_exit_code));
 	while (mini->mini_envp[i])
 	{
 		if (ft_strncmp(mini->mini_envp[i], var, ft_strlen(var)) == 0)

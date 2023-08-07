@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:25:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/07 16:20:26 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/07 17:31:31 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static int len_equal(char *cmd)
 	i = 0;
 	while (cmd[i])
 	{
-		if (cmd[i] == '=') // last thing we want to copy over
+		if (cmd[i] == '=')
 		{
 			i++;
 			break ;
@@ -102,7 +102,7 @@ static char **add_line_envp(char **envp, char *cmd, int size)
 	}
 	new[i] = ft_strdup(cmd); // what if it returns NULL here??
 	new[size] = NULL;
-	free(envp); // needed??
+	free(envp); // needed?? recursively??
 	return (new);
 }
 
@@ -141,7 +141,7 @@ int builtin_export(t_data *mini, char **cmd)
 
 	if (!cmd[1])
 		print_xenv(mini);
-	i = 1; // so it skips export word
+	i = 1;
 	while (cmd[i])
 	{
 		if (check_cmd(cmd[i]) == true)

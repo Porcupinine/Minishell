@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:11 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/07 11:09:24 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/07 17:07:51 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*split_args(char *cmd, char **envp, t_data *mini)
 	if (builtins(command, mini) == 1) // meaning not a builtin
 	{
 		if (*envp == NULL)
-			exit(127); // check as we don't want to exit
+			exit(127); // TODO check as we don't want to exit
 		paths = ft_split(envp[find_path(envp)] + 5, ':');
 		if (!paths)
 			err_cmd_not_found(command); // exit should be with // exit(127);

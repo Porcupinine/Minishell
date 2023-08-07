@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:14 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/06 11:46:33 by domi             ###   ########.fr       */
+/*   Updated: 2023/08/07 16:44:48 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,47 +18,38 @@
 static void	child_start(int fd_w[], int in_file, t_commands *commands, t_data *mini)
 {
 	if (dup2(in_file, STDIN_FILENO) == -1)
-		exit(EXIT_FAILURE); // check
+		err_msg("", "dup2 failed.\n"); // check -- exit(EXIT_FAILURE);
 	if (dup2(fd_w[1], STDOUT_FILENO) == -1)
-		exit(EXIT_FAILURE); // check
+		err_msg("", "dup2 failed.\n"); // check -- exit(EXIT_FAILURE);
 	close(fd_w[0]);
 	close(in_file);
 	close_pipe(commands->fd, commands->nb_cmds);
 	split_args(commands->cmd, mini->mini_envp, mini);
 }
 
-static void	child_last(int fd_r[], int out_file, t_commands *commands, t_data *mini) // pos to loop to the right node before sending to split_arg
+static void	child_last(int fd_r[], int out_file, t_commands *commands, t_data *mini)
 {
-	// int i;
-
 	if (dup2(fd_r[0], STDIN_FILENO) == -1)
-		exit(EXIT_FAILURE); // check
+		err_msg("", "dup2 failed.\n"); // check -- exit(EXIT_FAILURE);
 	if (dup2(out_file, STDOUT_FILENO) == -1)
-		exit(EXIT_FAILURE); // check
+		err_msg("", "dup2 failed.\n"); // check -- exit(EXIT_FAILURE);
 	close(fd_r[1]);
 	close(out_file);
 	close_pipe(commands->fd, commands->nb_cmds);
-	// i = -1;
-	// while (++i < pos && mini->commands->next != NULL)
-	// 	mini->commands = mini->commands->next;
-	split_args(commands->cmd, mini->mini_envp, mini); // check if it gave the right pos in the end
+	split_args(commands->cmd, mini->mini_envp, mini);
 }
 
-static void	child_middle(int fd_r[], int fd_w[], t_commands *commands, t_data *mini) // pos to loop to the right node before sending to split_arg
+static void	child_middle(int fd_r[], int fd_w[], t_commands *commands, t_data *mini)
 {
-	// int i;
-
 	if (dup2(fd_r[0], STDIN_FILENO) == -1)
-		exit(EXIT_FAILURE); // check
+		err_msg("", "dup2 failed.\n"); // check -- exit(EXIT_FAILURE);
 	if (dup2(fd_w[1], STDOUT_FILENO) == -1)
-		exit(EXIT_FAILURE); // check
+		err_msg("", "dup2 failed.\n"); // check -- exit(EXIT_FAILURE);
 	close(fd_w[0]);
 	close(fd_r[1]);
 	close_pipe(commands->fd, commands->nb_cmds);
-	// i = -1;
-	// while (++i < pos && mini->commands->next != NULL)
-	// 	mini->commands = mini->commands->next;
-	split_args(commands->cmd, mini->mini_envp, mini); // check if it gave the right pos in the end
+	
+	split_args(commands->cmd, mini->mini_envp, mini); 
 }
 
 void	which_child(t_data *mini, t_commands *commands, int i, int pos)
@@ -71,17 +62,17 @@ void	which_child(t_data *mini, t_commands *commands, int i, int pos)
 	{
 		if (i <= 1024) // think its fine here as you never know if something might break -- max amount pipes
 			child_middle(commands->fd[pos - 1], commands->fd[pos], commands, mini);
-		// else
-			// idk -- error of some sort;
+		else
+			err_msg("", "max amount of pipes reached.\n");// idk -- error of some sort;
 	}
 }
 
 void	run_one_cmd(int in_file, int out_file, t_data *mini)
 {
 	if (dup2(in_file, STDIN_FILENO) == -1) 
-		exit(EXIT_FAILURE); // check
+		err_msg("", "dup2 failed.\n"); // check -- exit(EXIT_FAILURE);
 	if (dup2(out_file, STDOUT_FILENO) == -1)
-		exit(EXIT_FAILURE); // check
+		err_msg("", "dup2 failed.\n"); // check -- exit(EXIT_FAILURE);
 	close(in_file);
 	close(out_file);
 	close_pipe(mini->commands->fd, mini->commands->nb_cmds); // needed again here??
