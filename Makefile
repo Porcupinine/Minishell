@@ -6,7 +6,7 @@
 #    By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/07 11:56:57 by dmaessen          #+#    #+#              #
-#    Updated: 2023/08/09 13:12:35 by dmaessen         ###   ########.fr        #
+#    Updated: 2023/08/09 13:23:57 by dmaessen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ all: $(NAME)
 $(OBJ_DIR)%.o : %.c
 	@mkdir -p $(dir $@)
 	@$(CC) -o $@ -c $< $(HEADERS) ${INC_READLINE}
+        # $(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) ${INC_READLINE}
 
 lib42_build:
 	@$(MAKE) -C $(LIB42)
