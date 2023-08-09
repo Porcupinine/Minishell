@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:19:42 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/06 12:39:30 by domi             ###   ########.fr       */
+/*   Updated: 2023/08/07 17:29:13 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,6 @@ void input_re(t_commands *commands, t_data *mini)
 		}
 		if (commands->infiles->next != NULL)
 			close(commands->in);
-		// else
-		// 	break ; // needed??
 		commands->infiles = commands->infiles->next;
 	}
 }

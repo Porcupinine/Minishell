@@ -10,5 +10,6 @@
 
 void free_token_list(t_tokens **tokens);
 void free_cmd_list (t_commands **cmd);
+void free_pid_list(t_pid **lst);
 
 #endif //I_WANT_TO_BREAK_FREE_H

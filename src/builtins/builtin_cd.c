@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:09:12 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 16:57:11 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/07 17:33:19 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	builtin_cd(t_data *mini, char *cmd)
 	
 	if (*mini->mini_envp == NULL)
 		return (-1); // TODO check if needs to be NULL
-	if (ft_strncmp(cmd, "cd\0", 3) || ft_strncmp(cmd, "cd ~\0", 5)) // back to home directory
+	if (ft_strncmp(cmd, "cd\0", 3) || ft_strncmp(cmd, "cd ~\0", 5))
 	{
 		i = 0;
 		while (mini->mini_envp[i])
@@ -44,7 +44,7 @@ int	builtin_cd(t_data *mini, char *cmd)
 						ft_substr(mini->mini_envp[i], 6, ft_strlen(mini->mini_envp[i])),
 						"Permission denied\n"), 1);
 				change_pwd(mini); // meaning if succeed so we need to undate this 
-					// check on a return value of what??
+					// check on a return value or what??
 				return (0);
 			}
 			i++;
@@ -86,7 +86,7 @@ int search_path_cd(t_data *mini)
 	if (chdir(str) != 0)
 		return (builtin_err2("cd", str, "Not a directory\n"), 1); // check
 	change_pwd(mini); // meaning if succeed so we need to undate this 
-		// check on a return value of what??
+		// check on a return value or what??
 	free(str);
 	return (0); // check
 	

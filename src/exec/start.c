@@ -6,13 +6,14 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/07 11:13:41 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/09 07:44:49 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include "../../include/env_var.h"
 #include "../../include/exec.h"
+#include "../../include/I_want_to_break_free.h"
 #include "../../Lib42/include/libft.h"
 
 static int	execute_pipe(t_data *mini)
@@ -91,9 +92,7 @@ void	close_pipe(int **fd, int nb)
 
 static void close_fds(t_data *mini)
 {
-	//if (mini->commands->in != NULL)
 	close(mini->commands->in);
-	//if (mini->commands->out != NULL)
 	close(mini->commands->out);
 	// if (mini->commands->infiles->file->type == "HEREDOC") // check -- change for int
 	if (access("tmp_file", F_OK) == 0) // does this work? apply to the rest if yes
@@ -102,8 +101,6 @@ static void close_fds(t_data *mini)
 
 int	start(t_data *mini)
 {
-	// input_re(mini); // error checking
-	// output_re(mini); // error checking 
 	mini->commands->nb_cmds = lst_size(mini->commands);
 	if (mini->commands->nb_cmds == 1 && !mini->commands->cmd) 
 	{
@@ -130,23 +127,19 @@ int	start(t_data *mini)
 			err_msg("", "pipe opening failed.\n"); // check, might be double now
 		if (execute_pipe(mini) == errno) // check
 			return (errno); // check what to return here, maybe just 1
-		// pid's need to be freed??
+		free_pid_list(&mini->process);
 	}
+	free_cmd_list(&mini->commands);// right??
 	return (0);  // right?? because if anything it will have errored in the input/output ft
 }
 
 
 /*
 	i left off at:
-		-- input_op.c --> CHECK ON THIS THING HERE
-			—- check if NULL checks needed when in file == NULL;
 		-- output_op.c --> TO DO
 			explicitly tell how to open, without the expansion
 		-- builtins.c --> WORKING ON THIS HERE
 			the builtinds cmd is already split so double pointer, make use of it no...
-			builtin_echo.c: find a good way to retreive and add/expand the $ARG 
-			builtin_export.c: so it also works with multiple ARGs to be set
-			builtin_unset.c: could just rm the line, free it and shift up the rest??
 		-- error.c
 			write something for all the errors
 			++ go throgh all error handling to go through

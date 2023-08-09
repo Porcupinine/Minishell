@@ -5,6 +5,7 @@
 # include <signal.h>
 # include <stdbool.h>
 # include <fcntl.h>
+# include <stdio.h>
 
 typedef enum S_REDIRECT
 {

@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 12:32:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/07 15:53:29 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/07 17:36:41 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,14 +108,5 @@ int	builtin_unset(t_data *mini, char **arg) // or not an int??
 			return (builtin_err2("unset", arg[i], "not a valid identifier\n"), 1);
 		i++;
 	}
-	// but doesn't work on directories i believe ..
-	// else // search OUR list
-	// {
-	// 	if (search_args(&mini_data->env_args, arg) != NULL)
-	// 	{
-	// 		del_args(search_args(&mini_data->env_args, arg)); // check if my logic is correct
-	// 		return (0);
-	// 	}
-	// }
 	return (0); // meaning all good
 }
