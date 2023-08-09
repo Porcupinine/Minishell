@@ -6,7 +6,7 @@
 #    By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/07 11:56:57 by dmaessen          #+#    #+#              #
-#    Updated: 2023/07/31 15:28:54 by dmaessen         ###   ########.fr        #
+#    Updated: 2023/08/09 13:12:35 by dmaessen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,13 @@
 NAME	:= minishell
 
 #----------------------------------------------------------------------Compiler
-CC 		=  -gcc
+CC 	:=  -gcc
 
 #-------------------------------------------------------------------------Flags
 CFLAGS	+= -Wextra -Wall -Werror
 ASANFLAGS += -fsanitize=address -fsanitize=leak
+LIB_READLINE = -L/Users/dmaessen/.brew/opt/readline/lib #-L/Users/lpraca-l/.brew/opt/readline/lib
+INC_READLINE = -I/Users/dmaessen/.brew/opt/readline/include #-I/Users/lpraca-l/.brew/opt/readline/include
 
 #----------------------------------------------------------------Libraries path
 LIB42   := ./Lib42
@@ -57,13 +59,13 @@ all: $(NAME)
 
 $(OBJ_DIR)%.o : %.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
+	@$(CC) -o $@ -c $< $(HEADERS) ${INC_READLINE}
 
 lib42_build:
 	@$(MAKE) -C $(LIB42)
 
 $(NAME): lib42_build $(OBJECTS_PREFIXED)
-	@$(CC) $(OBJECTS_PREFIXED) $(LIBS) $(HEADERS) -o $(NAME)
+	@$(CC) $(OBJECTS_PREFIXED) $(LIBS) $(HEADERS) -o $(NAME) $@ -lreadline ${LIB_READLINE}
 
 clean:
 	@rm -rf $(OBJ_DIR)

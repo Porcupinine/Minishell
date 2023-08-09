@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:14 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/07 16:44:48 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/09 07:35:52 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ static void	child_middle(int fd_r[], int fd_w[], t_commands *commands, t_data *m
 	close(fd_w[0]);
 	close(fd_r[1]);
 	close_pipe(commands->fd, commands->nb_cmds);
-	
 	split_args(commands->cmd, mini->mini_envp, mini); 
 }
 

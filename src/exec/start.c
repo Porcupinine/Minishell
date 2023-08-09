@@ -6,13 +6,14 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/07 17:27:08 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/09 07:44:49 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include "../../include/env_var.h"
 #include "../../include/exec.h"
+#include "../../include/I_want_to_break_free.h"
 #include "../../Lib42/include/libft.h"
 
 static int	execute_pipe(t_data *mini)
@@ -126,9 +127,9 @@ int	start(t_data *mini)
 			err_msg("", "pipe opening failed.\n"); // check, might be double now
 		if (execute_pipe(mini) == errno) // check
 			return (errno); // check what to return here, maybe just 1
-		free_pid_list(mini->process);
+		free_pid_list(&mini->process);
 	}
-	free_cmd_list(mini->commands);// right??
+	free_cmd_list(&mini->commands);// right??
 	return (0);  // right?? because if anything it will have errored in the input/output ft
 }
 
