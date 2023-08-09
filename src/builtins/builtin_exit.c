@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 12:32:30 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 14:49:34 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/07 16:20:09 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,26 @@ static int	ft_atoi_long(char *str)
 	return ((int)(sign * nb));
 }
 
-void	builtin_exit(t_data *mini, char *cmd)
+// void	builtin_exit(t_data *mini, char *cmd)
+void	builtin_exit(char *cmd)
 {
 	int i;
 	int j;
 	char *sub;
 	long long code;
 
+	code = 0; // right?
 	i = 0;
 	while(cmd[i])
 		i++;
 	if (i == 4 && ft_strncmp(cmd, "exit", ft_strlen(cmd)) == 0)
-		ft_putstr("exit\n", 2); 
+		ft_putstr_fd("exit\n", 2); 
 		// and exit with 0 (right??) but things need to be freed first
 	i = 0;
 	j = 0;
 	while(cmd[i])
 	{
-		if (cmd[i] == " ")
+		if (cmd[i] == ' ')
 			j++;
 		i++;
 	}
@@ -79,8 +81,8 @@ void	builtin_exit(t_data *mini, char *cmd)
 			// exit with 255 BUT things to free first
 		}
 		free(sub); // needed??
+		code = code % 256;
 	}
 	// do we also maybe need to use rl_clear_history ??
-	code = code % 256;
 	exit(code); // only this?? ++ things to be freed
 }

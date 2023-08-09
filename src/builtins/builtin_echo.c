@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:09:31 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 14:46:57 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/02 08:34:05 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,21 @@ int	builtin_echo(t_data *mini, char *cmd)
 	
 	if (ft_strncmp(mini->commands->cmd, "echo -n", 7) == 0)
 	{
-		// check if there is a $ still in there or not? LAURA
+		cmd = expand_dollar(cmd, mini);
 		i = 9;
 		while (mini->commands->cmd[i])
 		{
-			ft_putstr_fd(mini->commands->cmd[i], mini->commands->out);
+			ft_putchar_fd(mini->commands->cmd[i], mini->commands->out);
 			i++;
 		}
 	}
 	else
 	{
+		cmd = expand_dollar(cmd, mini);
 		i = 6;
 		while (mini->commands->cmd[i])
 		{
-			ft_putstr_fd(mini->commands->cmd[i], mini->commands->out);
+			ft_putchar_fd(mini->commands->cmd[i], mini->commands->out);
 			i++;
 		}
 		write(mini->commands->out, "\n", 1);

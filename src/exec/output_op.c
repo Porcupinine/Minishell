@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   output_op.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:21:59 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 14:46:02 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/06 12:47:54 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,40 @@
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
 
-void output_re(t_data *mini)
+static void open_lastfile(t_commands *commands, t_outfile *last_out)
 {
-    if (mini->commands->outfiles->file == NULL)
-	{
-		mini->commands->out = STDOUT_FILENO;
-		return (0); // or what??
-	}
+	if (last_out->type == APPEND_OUTPUT)
+		commands->out = open(last_out->file, O_CREAT | O_WRONLY | O_APPEND, 0644);
+	else
+		commands->out = open(last_out->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+}
+
+void output_re(t_commands *commands)
+{
+    if (commands->outfiles->file == NULL)
+		commands->out = STDOUT_FILENO;
 	else
 	{
 		while (1)
 		{
-			if (mini->commands->outfiles->file->next != NULL)
+			if (commands->outfiles->next != NULL)
 			{
-				mini->commands->out = open(mini->commands->outfiles->file, (int)(mini->commands->outfiles->file->type), 0644); // type needs to be int
-				if (mini->commands->out < 0)
- 					// throw an error -- no perm error
-				close(mini->commands->out); // so we can leave the last one open in the end
+				if (commands->outfiles->type == APPEND_OUTPUT)
+					commands->out = open(commands->outfiles->file, O_CREAT | O_WRONLY | O_APPEND, 0644);
+				else
+					commands->out = open(commands->outfiles->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+				if (commands->out < 0)
+ 					builtin_err(commands->outfiles->file, "No such file or directory"); // return?
+				close(commands->out);
 			}	
 			else
 			{
-				mini->commands->out = open(mini->commands->outfiles->file, (int)(mini->commands->outfiles->file->type), 0644); // type needs to be int
-				if (mini->commands->out < 0)
-					// throw an error -- no perm error
+				open_lastfile(commands, commands->outfiles); 
+				if (commands->out < 0)
+ 					builtin_err(commands->outfiles->file, "No such file or directory"); // return?
 				break ;
 			}
-			mini->commands->outfiles->file = mini->commands->outfiles->file->next;
+			commands->outfiles = commands->outfiles->next;
 		}
 	}
 }

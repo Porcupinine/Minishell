@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 17:07:22 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 14:46:40 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/07 16:19:26 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ int	builtins(char **cmd, t_data *mini)
 	else if (ft_strncmp(cmd[0], "pwd", 3) == 0)
 		builtin_pwd(mini); // yes
 	else if (ft_strncmp(cmd[0], "export", 6) == 0)
-		builtin_export();
+		builtin_export(mini, cmd);
 	else if (ft_strncmp(cmd[0], "unset", 5) == 0)
 		builtin_unset(mini, cmd); // double pointer yes
 	else if (ft_strncmp(cmd[0], "env", 3) == 0)
 		builtin_env(mini, cmd); // yes i think
 	else if (ft_strncmp(cmd[0], "exit", 4) == 0)
-		builtin_exit(mini, *cmd); // debatable to make this a double 
+		builtin_exit(*cmd); // debatable to make this a double 
 		// can't we just use the "real exit" function here, and leave the shell?
 	else
 		return (1); // meaning not found

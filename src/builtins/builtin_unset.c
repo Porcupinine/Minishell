@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 12:32:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 14:48:07 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/07 15:53:29 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char **update_envp(char **envp, char *arg, int size)
 		if (ft_strncmp(envp[i], arg, ft_strlen(arg)) == 0)
 			free(envp[i]);
 		else
-			new[i] = envp[i];
+			new[i] = ft_strdup(envp[i]); // what if it returns NULL here??
 		i++;
 	}
 	new[size] = NULL;
@@ -96,7 +96,7 @@ int	builtin_unset(t_data *mini, char **arg) // or not an int??
 	i = 1; // skipping the word unset
 	while (arg[i])
 	{
-		if (arg[i] == "_")
+		if (arg[i][0] == '_')
 			i++; // can't be unset
 		pos = find_envp(mini, arg[i]);
 		if (pos != -1)

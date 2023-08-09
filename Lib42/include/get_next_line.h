@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   get_next_line.h                                    :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: lpraca-l <lpraca-l@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/11/04 19:18:21 by lpraca-l      #+#    #+#                 */
-/*   Updated: 2023/07/20 12:07:28 by laura         ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/04 19:18:21 by lpraca-l          #+#    #+#             */
+/*   Updated: 2023/08/01 19:53:38 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,12 @@ char	*ft_strlcpy_gnl(const char	*src, long dst_size);
 int		ft_strlen_gnl(const char *c);
 
 void	ft_bzero_gnl(void *s, size_t n);
+
+char	*get_next_line_fd(int fd);
+void	ft_free_b(char **memory, char *line);
+char	*ft_strjoin_gnl_b(char *memory, char *buf);
+char	*ft_strchr_gnl_b(const char *s, int c);
+void	*ft_calloc_b(size_t count, size_t size);
+char	*ft_substr_gnl_b(char const *s, unsigned int start, size_t len);
+
 #endif

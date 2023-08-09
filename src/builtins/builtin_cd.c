@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:09:12 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 14:47:02 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/07/31 16:57:11 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	builtin_cd(t_data *mini, char *cmd)
 	int i;
 	
 	if (*mini->mini_envp == NULL)
-		return (ft_exit(errno));
-	if (ft_strchr(cmd, "cd\0") || ft_strchr(cmd, "cd ~\0")) // back to home directory
+		return (-1); // TODO check if needs to be NULL
+	if (ft_strncmp(cmd, "cd\0", 3) || ft_strncmp(cmd, "cd ~\0", 5)) // back to home directory
 	{
 		i = 0;
 		while (mini->mini_envp[i])
@@ -39,7 +39,7 @@ int	builtin_cd(t_data *mini, char *cmd)
 			if (ft_strncmp(mini->mini_envp[i], "HOME=", 5) == 0) // all good also if unset HOME as should error
 			{
 				change_oldpwd(mini); // meaning if succeed so we need to undate this 
-				if (chdirft_substr(mini->mini_envp[i], 6, ft_strlen(mini->mini_envp[i])) != 0)
+				if (chdir(ft_substr(mini->mini_envp[i], 6, ft_strlen(mini->mini_envp[i]))) != 0)
 					return (builtin_err2("cd",
 						ft_substr(mini->mini_envp[i], 6, ft_strlen(mini->mini_envp[i])),
 						"Permission denied\n"), 1);
@@ -66,7 +66,7 @@ int search_path_cd(t_data *mini)
 
 	str = malloc((ft_strlen(mini->commands->cmd) - 2) * sizeof(char)); // -3 to skip cd and space but + 1 not null term
 	if (str == NULL)
-		return (NULL); // check here
+		return (-1); // TODO check if needs to be NULL
 	i = 0;
 	while (mini->commands->cmd[i + 3]) // here too +3 right??
 	{
@@ -79,7 +79,7 @@ int search_path_cd(t_data *mini)
 		change_oldpwd(mini); // check on a return value of what??
 		if (S_ISDIR(info.st_mode)) // check if the path leads is a directory
 		{
-			if (str[ft_strlen(str)] != "/")
+			if (str[ft_strlen(str)] != '/')
 				str = ft_strjoin(str, "/");
 		}
 	}
@@ -101,7 +101,7 @@ int change_oldpwd(t_data *mini)
 
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
-		return (NULL); // check this exit tho
+		return (-1); // TODO check if needs to be NULL
 	len = ft_strlen(pwd);
 	i = 0;
 	j = 0;
@@ -132,7 +132,7 @@ int change_pwd(t_data *mini)
 
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
-		return (NULL); // check this exit tho
+		return (-1); // TODO check if needs to be NULL
 	len = ft_strlen(pwd);
 	i = 0;
 	j = 0;

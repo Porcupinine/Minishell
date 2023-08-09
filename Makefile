@@ -6,7 +6,7 @@
 #    By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/07 11:56:57 by dmaessen          #+#    #+#              #
-#    Updated: 2023/07/18 16:47:11 by dmaessen         ###   ########.fr        #
+#    Updated: 2023/07/31 15:28:54 by dmaessen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ CFLAGS	+= -Wextra -Wall -Werror
 ASANFLAGS += -fsanitize=address -fsanitize=leak
 
 #----------------------------------------------------------------Libraries path
-LIB42   := ./lib42
+LIB42   := ./Lib42
 
 #-----------------------------------------------------------------------Headers
 HEADERS	:= -I ./include -I $(LIB42)/include
@@ -30,11 +30,20 @@ HEADERS	:= -I ./include -I $(LIB42)/include
 LIBS	:= $(LIB42)/libft.a
 
 #------------------------------------------------------------------------Source
-SRC     := src/arg_list_actions/add_new_node.c \
-		src/exec_pipes/pipex.c src/exec_pipes/stdin.c src/exec_pipes/heredoc.c \
-		src/exec_pipes/path.c src/exec_pipes/errors_free.c src/exec_pipes/cmd.c src/exec_pipes/child.c \
-		src/parsing/env_var.c src/parsing/lexycal_analizer.c src/parsing/parsing.c \
-		main.c \
+SRC     := src/main.c src/utils/arg_list_actions/add_arg_node.c src/parsing/state_machine/lexe.c \
+        src/utils/tolken_list_actions/add_tolken.c \
+        src/utils/tolken_list_actions/print_tolkens.c \
+        src/parsing/state_machine/meta_machine.c src/parsing/state_machine/space_newline.c \
+        src/parsing/state_machine/space_newline.c src/parsing/state_machine/char_machine.c \
+        src/parsing/state_machine/error_machine.c src/parsing/parse/check_comands.c \
+        src/utils/tolken_list_actions/search_token.c \
+        src/utils/cmd_list_actions/add_inout_node.c src/utils/cmd_list_actions/print_cmd.c \
+        src/utils/cmd_list_actions/add_cmd_node.c src/utils/history/history.c \
+        src/builtins/builtin_cd.c src/builtins/builtin_echo.c src/builtins/builtin_env.c \
+        src/builtins/builtin_exit.c src/builtins/builtin_export.c src/builtins/builtin_pwd.c \
+        src/builtins/builtin_unset.c src/builtins/builtins.c src/exec/child.c src/exec/dollarsign.c \
+        src/exec/errors.c src/exec/input_op.c src/exec/output_op.c src/exec/path.c src/exec/start.c \
+        src/exec/utils.c
 
 #-----------------------------------------------------------------------Objects
 OBJS	:= ${SRC:.c=.o}
