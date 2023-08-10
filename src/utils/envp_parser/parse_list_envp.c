@@ -51,5 +51,5 @@ void parse_list_envp(t_data *mini_data, char **envp)
 		add_envp_node(&mini_data->mini_envp_list, envp[count]);
 		count++;
 	}
-	print_envp_list(mini_data->mini_envp_list);
+//	print_envp_list(mini_data->mini_envp_list);
 }

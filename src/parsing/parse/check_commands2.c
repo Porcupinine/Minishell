@@ -10,20 +10,35 @@
 
 extern int g_exit_code;
 
+void extract_cmd(t_tokens **it_token, t_commands **cmd)
+{
+	char		*temp;
+
+	temp = ft_calloc(1, sizeof(char *));
+	if (temp == NULL)
+		ft_error("Malloc fail\n");
+	while ((*it_token) && (*it_token)->type == T_CHAR)
+	{
+		temp = ft_strjoin_space(temp, (*it_token)->str);
+		(*it_token) = (*it_token)->next;
+		(*cmd)->cmd = temp;
+	}
+}
+
 void	parse_tokens(t_state_machine *parser, t_data *mini_data)
 {
 	t_commands	*cmd;
 	t_tokens	*it_token;
 	enum s_type	type;
-	char		*temp;
+//	char		*temp;
 
 	it_token = parser->tokens_list;
 	cmd = NULL;
 	if (it_token == NULL)
 		return;
-	temp = ft_calloc(1, sizeof(char *));
-	if (temp == NULL)
-		ft_error("Malloc fail\n");
+//	temp = ft_calloc(1, sizeof(char *));
+//	if (temp == NULL)
+//		ft_error("Malloc fail\n");
 	while ((it_token))
 	{
 		(cmd) = ft_calloc(1, sizeof(t_commands));
@@ -31,13 +46,14 @@ void	parse_tokens(t_state_machine *parser, t_data *mini_data)
 			ft_error("Malloc fail\n");
 		while ((it_token) && (it_token)->type != T_PIPE)
 		{
-			while ((it_token) && (it_token)->type == T_CHAR)
-			{
-				temp = ft_strjoin_space(temp, (it_token)->str);
-				(it_token) = (it_token)->next;
-				(cmd)->cmd = temp;
-			}
-			temp = "\0";
+			extract_cmd(&it_token, &cmd);
+//			while ((it_token) && (it_token)->type == T_CHAR)
+//			{
+//				temp = ft_strjoin_space(temp, (it_token)->str);
+//				(it_token) = (it_token)->next;
+//				(cmd)->cmd = temp;
+//			}
+//			temp = "\0";
 			if ((it_token) && ((it_token)->type == T_BIG || \
 				(it_token)->type == T_BIGBIG || (it_token)->type == T_SMALL || \
 				(it_token)->type == T_SMALLSMALL))

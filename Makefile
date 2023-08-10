@@ -65,7 +65,7 @@ lib42_build:
 	@$(MAKE) -C $(LIB42)
 
 $(NAME): lib42_build $(OBJECTS_PREFIXED)
-	@$(CC) $(OBJECTS_PREFIXED) $(LIBS) $(HEADERS) -o $(NAME) $@ -lreadline ${LIB_READLINE}
+	@$(CC) $(OBJECTS_PREFIXED) $(LIBS) $(HEADERS) -o $@ -lreadline ${LIB_READLINE}
 
 clean:
 	@rm -rf $(OBJ_DIR)
