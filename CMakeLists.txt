@@ -4,11 +4,17 @@ include_directories(${CMAKE_SOURCE_DIR}/Lib42/include SYSTEM/Users/lpraca-l/.bre
 
 add_compile_options(-fsanitize=address -g3)
 add_link_options(-fsanitize=address)
-add_compile_options(-fsanitize=address -fsanitize=address)
-add_link_options(-fsanitize=address)
+#add_compile_options(-fsanitize=address -fsanitize=address)
+#add_link_options(-fsanitize=address)
 #add_compile_options(-Wall -Werror -Wextra)
 
 set(CMAKE_C_STANDARD 99)
+
+add_custom_target(
+        extern_lib
+        COMMAND make
+        WORKING_DIRECTORY /Lib42
+)
 
 add_executable(minishell src/main.c include/env_var.h include/minishell.h
         src/utils/arg_list_actions/add_arg_node.c src/parsing/state_machine/lexe.c

@@ -35,8 +35,8 @@ LIBS	:= $(LIB42)/libft.a
 SRC     := src/main.c src/utils/arg_list_actions/add_arg_node.c src/parsing/state_machine/lexe.c \
         src/utils/tolken_list_actions/add_tolken.c \
         src/utils/tolken_list_actions/print_tolkens.c \
-        src/parsing/state_machine/meta_machine.c src/parsing/state_machine/space_newline.c \
-        src/parsing/state_machine/space_newline.c src/parsing/state_machine/char_machine.c \
+        src/utils/parsing/state_machine/meta_machine.c src/parsing/state_machine/space_newline.c \
+        src/utils/parsing/state_machine/space_newline.c src/parsing/state_machine/char_machine.c \
         src/parsing/state_machine/error_machine.c src/parsing/parse/check_comands.c \
         src/utils/tolken_list_actions/search_token.c \
         src/utils/cmd_list_actions/add_inout_node.c src/utils/cmd_list_actions/print_cmd.c \

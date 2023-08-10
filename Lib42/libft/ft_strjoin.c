@@ -16,6 +16,7 @@ of ’s1’ and ’s2’.
 Returns the new string or NULL if the allocation fails.*/
 
 #include "libft.h"
+#include <stdio.h>
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -55,8 +56,9 @@ char	*ft_strjoin_space(char const *s1, char const *s2)
 	counts1 = 0;
 	counts2 = 0;
 	len = ft_strlen(s1) + ft_strlen(s2);
+	printf("len s1:%lu  len s3:%lu\n", ft_strlen(s1), ft_strlen(s2));
 	if (ft_strlen(s1) == 0 || ft_strlen(s2) == 0)
-		join = ft_calloc((len+ 1), sizeof(char));
+		join = ft_calloc((len + 1), sizeof(char));
 	else
 		join = ft_calloc((len + 2), sizeof(char));
 	if (join == NULL)
@@ -78,6 +80,7 @@ char	*ft_strjoin_space(char const *s1, char const *s2)
 		counts2++;
 	}
 	join[counts1] = '\0';
+	printf("len join: %lu\n", ft_strlen(join));
 	return (join);
 }
 //TODO make this norminette
