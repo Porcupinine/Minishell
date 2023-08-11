@@ -6,10 +6,9 @@
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/28 11:48:59 by laura         #+#    #+#                 */
-/*   Updated: 2023/07/28 11:49:27 by laura         ########   odam.nl         */
+/*   Updated: 2023/08/11 08:05:58 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../../include/lexical_analyzer.h"
 

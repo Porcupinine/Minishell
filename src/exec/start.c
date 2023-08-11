@@ -15,6 +15,7 @@
 #include "../../include/exec.h"
 #include "../../include/I_want_to_break_free.h"
 #include "../../Lib42/include/libft.h"
+#include <sys/wait.h>
 
 static int	execute_pipe(t_data *mini)
 {

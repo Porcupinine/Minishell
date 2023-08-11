@@ -6,7 +6,7 @@
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/17 17:34:36 by laura         #+#    #+#                 */
-/*   Updated: 2023/07/28 12:04:14 by laura         ########   odam.nl         */
+/*   Updated: 2023/08/11 08:27:28 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # include "minishell.h"
 
-/*defines to help set values for functions that search for quotes and metachars*/
+/*defines to help set values for functions that search for 
+quotes and metachars*/
 # define QUOTES "\"'"
 # define METACHAR " |><	"
 
@@ -35,6 +36,19 @@ typedef enum s_SM_STATUS
 	S_END,
 }t_SM_STATUS;
 
+/**
+ * enum that symbolize the current type of character
+ * S_WHITESPACE set when a white space is found, they
+ * are supposed to be ignored
+ * S_PIPE pipes get theis own token and are ignored 
+ * during the parsing 
+ * S_BIG redirection output
+ * S_BIGBIG append output
+ * S_SMALL redirection input
+ * S_SMALSMAL heredoc
+ * S_CHAR any character that is not a "metachar"
+ * S_ERROR Huoston we have a problem
+*/
 typedef enum s_SM_STATES
 {
 	S_WHITESPACE,
@@ -47,6 +61,15 @@ typedef enum s_SM_STATES
 	S_ERROR,
 }t_SM_STATES;
 
+/**
+ * types are set in the token list and used for parsing
+ * T_PIPE pipes will be ignored 
+ * T_BIG redirection output
+ * T_BIGBIG append output
+ * T_SMALL redirection input
+ * T_SMALSMAL heredoc
+ * T_CHAR token is suposed to be trated as regular string
+*/
 typedef enum s_type
 {
 	T_PIPE,
@@ -59,12 +82,9 @@ typedef enum s_type
 }t_type;
 
 /**
- * @param str
- * @next
- * @param status true if valid, false if error was found
- * @param type type of token
- * @param str tolken
- * @param next pointer to next tolken
+ * @param str token AKA valid char or char set
+ * @param type type of token 
+ * @param next pointer to next token
  */
 typedef struct s_tokens
 {
@@ -74,9 +94,15 @@ typedef struct s_tokens
 }t_tokens;
 
 /**
- *@param token_start pointer to the initil position of the
- * tolken in the command line
- * @param len size of the string to be tolkenized
+ * state machine control struct
+ * @param state current state
+ * @param status current status
+ * @param tokens_list list of tokens
+ * @param cmd command line copied from t_data
+ * @param count current position in cmd
+ * @param start used to set everytime a non-"metachar"
+ * is first found in order to get the strings
+ * @param len counter used once start is set 
  */
 typedef struct s_state_machine
 {
@@ -156,8 +182,20 @@ void	found_quotes(t_state_machine *parser);
  * @param mini_data for command list
  */
 void	parse_tokens(t_state_machine *parser, t_data *mini_data);
+/**
+ * prints syntax error, set exit code to 258 and free token list
+ * @param parser state machine 
+ * @param c character that triggered the error
+*/
 void	syntax_error(t_state_machine *parser, char c);
+/**
+ * prints quotes syntax error, set exit code to 258 and free token list
+ * @param parser state machine 
+*/
 void	unclosed_error(t_state_machine *parser);
+/**
+ * main parser function
+*/
 void	parse(t_data *mini_data);
 
 #endif //MINISHELL_LEXICAL_ANALYZER_H

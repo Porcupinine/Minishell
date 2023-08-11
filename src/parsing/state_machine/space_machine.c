@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   space_newline.c                                    :+:    :+:            */
+/*   space_machine.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/17 17:27:08 by laura         #+#    #+#                 */
-/*   Updated: 2023/07/28 11:58:48 by laura         ########   odam.nl         */
+/*   Updated: 2023/08/11 08:01:30 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "libft.h"
 #include "../../../include/lexical_analyzer.h"
 #include <stdlib.h>
-
 
 void	token_space_newline(t_state_machine *parser)
 {

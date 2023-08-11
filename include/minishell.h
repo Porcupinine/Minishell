@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   minishell.h                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: laura <laura@student.codam.nl>               +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/08/11 08:08:41 by laura         #+#    #+#                 */
+/*   Updated: 2023/08/11 08:09:18 by laura         ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -7,13 +18,13 @@
 # include <fcntl.h>
 # include <stdio.h>
 
-typedef enum S_REDIRECT
+typedef enum s_redirect
 {
 	REDIRECT_INPUT,
 	HEREDOC,
 	REDIRECT_OUTPUT,
 	APPEND_OUTPUT,
-}T_REDIRECT;
+}t_redirect;
 /**
  * list of child PIDs
  */
@@ -33,7 +44,7 @@ typedef struct s_pid
 typedef struct s_outfile
 {
 	char				*file;
-	T_REDIRECT			type;
+	t_redirect			type;
 	struct s_outfile	*next;
 }t_outfile;
 
@@ -48,7 +59,7 @@ typedef struct s_outfile
 typedef struct s_infile
 {
 	char			*file;
-	T_REDIRECT		type;
+	t_redirect		type;
 	struct s_infile	*next;
 }t_infile;
 
@@ -96,7 +107,7 @@ typedef struct s_env_args
 typedef struct s_mini_envp_list
 {
 	char					*str;
-	struct s_mini_envp_list *next;
+	struct s_mini_envp_list	*next;
 }t_mini_envp_list;
 
 /**
@@ -110,13 +121,12 @@ typedef struct s_mini_envp_list
  */
 typedef struct s_data
 {
-	char			**mini_envp;
-	t_env_args		*env_args;
-	t_mini_envp_list *mini_envp_list;
-	char			*command_line;
-	t_commands		*commands;
-	t_pid			*process;
-//	int 			exit_code;
+	char				**mini_envp;
+	t_env_args			*env_args;
+	t_mini_envp_list	*mini_envp_list;
+	char				*command_line;
+	t_commands			*commands;
+	t_pid				*process;
 }t_data;
 
 #endif //MINISHELL_MINISHELL_H

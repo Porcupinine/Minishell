@@ -6,7 +6,7 @@
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/28 11:51:29 by laura         #+#    #+#                 */
-/*   Updated: 2023/07/28 11:52:24 by laura         ########   odam.nl         */
+/*   Updated: 2023/08/11 08:02:36 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	add_outfile(t_outfile **outfile, enum s_type type, char *str)
 		*outfile = new_out;
 	else
 	{
-		last = find_last_out(*outfile);;
+		last = find_last_out(*outfile);
 		last->next = new_out;
 	}
 }

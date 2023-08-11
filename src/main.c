@@ -6,7 +6,7 @@
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/17 17:23:55 by laura         #+#    #+#                 */
-/*   Updated: 2023/07/17 17:24:47 by laura         ########   odam.nl         */
+/*   Updated: 2023/08/11 08:06:17 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	sigquit_handler(int sig)
 //	rl_redisplay();
 }
 
-void set_signals(void)
+void	set_signals(void)
 {
 	struct sigaction	sigint_sa;
 	struct sigaction	sigquit_sa;

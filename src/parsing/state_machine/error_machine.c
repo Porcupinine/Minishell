@@ -6,7 +6,7 @@
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/17 17:30:08 by laura         #+#    #+#                 */
-/*   Updated: 2023/07/17 17:30:15 by laura         ########   odam.nl         */
+/*   Updated: 2023/08/11 07:57:17 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ extern int g_exit_code;
 
 void	syntax_error(t_state_machine *parser, char c)
 {
-	//error 258
 	if (c == '\n')
 		printf("Syntax error near unexpected token `newline'\n");
 	else

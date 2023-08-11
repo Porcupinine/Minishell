@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   check_commands2.c                                  :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: laura <laura@student.codam.nl>               +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/08/11 07:55:33 by laura         #+#    #+#                 */
+/*   Updated: 2023/08/11 07:56:53 by laura         ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../include/minishell.h"
 #include <stdlib.h>
 #include "libft.h"
@@ -10,10 +22,10 @@
 
 extern int g_exit_code;
 
-void extract_cmd(t_tokens **it_token, t_commands **cmd)
+void	extract_cmd(t_tokens **it_token, t_commands **cmd)
 {
 	char		*temp;
-	char 		*temp2;
+	char		*temp2;
 
 	temp = ft_calloc(1, sizeof(char));
 	if (temp == NULL)
@@ -28,8 +40,8 @@ void extract_cmd(t_tokens **it_token, t_commands **cmd)
 	(*cmd)->cmd = temp;
 }
 
-void between_pipes(t_tokens **it_token, t_commands **cmd, t_data *mini_data,
-				   t_state_machine *parser)
+void	between_pipes(t_tokens **it_token, t_commands **cmd, t_data *mini_data, \
+	t_state_machine *parser)
 {
 	enum s_type	type;
 
@@ -37,7 +49,8 @@ void between_pipes(t_tokens **it_token, t_commands **cmd, t_data *mini_data,
 	{
 		extract_cmd(it_token, cmd);
 		if ((*it_token) && ((*it_token)->type == T_BIG || \
-				(*it_token)->type == T_BIGBIG || (*it_token)->type == T_SMALL || \
+				(*it_token)->type == T_BIGBIG || \
+				(*it_token)->type == T_SMALL || \
 				(*it_token)->type == T_SMALLSMALL))
 		{
 			(type) = (*it_token)->type;
@@ -61,7 +74,7 @@ void	parse_tokens(t_state_machine *parser, t_data *mini_data)
 	it_token = parser->tokens_list;
 	cmd = NULL;
 	if (it_token == NULL)
-		return;
+		return ;
 	while ((it_token))
 	{
 		(cmd) = ft_calloc(1, sizeof(t_commands));
