@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   print_tolkens.c                                    :+:    :+:            */
+/*print_tolkens.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
@@ -18,7 +18,7 @@ void	print_tokens(t_tokens *tokens)
 {
 	while (tokens != NULL)
 	{
-		printf("%s\n", tokens->str);
+		printf("token: %s   type: %d\n", tokens->str, tokens->type);
 		tokens = tokens->next;
 	}
 }

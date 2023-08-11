@@ -6,7 +6,7 @@
 #    By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/07 11:56:57 by dmaessen          #+#    #+#              #
-#    Updated: 2023/08/09 13:23:57 by dmaessen         ###   ########.fr        #
+#    Updated: 2023/08/09 13:12:35 by dmaessen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,10 +24,12 @@ ASANFLAGS += -fsanitize=address -fsanitize=leak
 LIB42   := ./Lib42
 
 #-----------------------------------------------------------------------Headers
-HEADERS	:= -I ./include -I $(LIB42)/include -I/Users/$(USER)/.brew/opt/readline/include
+HEADERS	:= -I ./include -I $(LIB42)/includ
+INC_READLINE = -I/Users/$(USER)/.brew/opt/readline/include
 
 #---------------------------------------------------------------------Libraries
-LIBS	:= $(LIB42)/libft.a -L/Users/$(USER)/.brew/opt/readline/lib
+LIBS	:= $(LIB42)/libft.a
+LIB_READLINE = -L/Users/$(USER)/.brew/opt/readline/lib
 
 #------------------------------------------------------------------------Source
 SRC     := src/main.c \
@@ -51,11 +53,23 @@ SRC     := src/main.c \
 	   src/utils/token_list_actions/search_token.c
 
 #-----------------------------------------------------------------------Objects
-OBJS	:= $(SRC:.c=.o)
+OBJS	:= ${SRC:.c=.o}
 
 #---------------------------------------------------------------------Directory
 OBJ_DIR := objs/
 OBJECTS_PREFIXED := $(addprefix $(OBJ_DIR), $(OBJS))
+
+#-----------------------------------------------------------------OS Dependency
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S), Darwin)
+	HEADERS += $(INC_READLINE)
+	LIBS += $(LIB_READLINE)
+else ifeq ($(UNAME_S), Linux)
+	HEADERS = $(HEADERS)
+	LIBS = $(LIBS)
+else
+	$(error OS: $(OS) is not supported!)
+endif
 
 #-------------------------------------------------------------------------Rules
 all: $(NAME)
@@ -63,7 +77,6 @@ all: $(NAME)
 $(OBJ_DIR)%.o : %.c
 	@mkdir -p $(dir $@)
 	@$(CC) -o $@ -c $< $(HEADERS)
-        # $(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) ${INC_READLINE}
 
 lib42_build:
 	@$(MAKE) -C $(LIB42)

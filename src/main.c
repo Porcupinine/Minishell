@@ -20,6 +20,7 @@
 #include "../include/lexical_analyzer.h"
 #include "../include/token_list_actions.h"
 #include "../../include/builtins.h"
+#include "../include/exec.h"
 #include "../include/envp_parser.h"
 
 int g_exit_code;
@@ -75,6 +76,7 @@ int	main(int argc, char **argv, char **envp)
 		mini_data->command_line = readline("minisomething: ");
 		line_history(mini_data);
 		parse(mini_data);
+		start(mini_data);
 		printf("Exit code: %d\n", g_exit_code);
 	}
 	return (0);

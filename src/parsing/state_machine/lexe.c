@@ -12,12 +12,14 @@
 
 #include "../../../include/minishell.h"
 #include "../../../include/token_list_actions.h"
-#include "libft.h"
+#include "../../Lib42/include/libft.h"
 #include "../../../include/lexical_analyzer.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include "../../../include/cmd_list_actions.h"
 #include "../../../include/exec.h"
+
+extern int g_exit_code;
 
 void	token_start(t_state_machine *parser)
 {
@@ -65,10 +67,14 @@ void	parse_machine(t_data *mini_data, t_state_machine *parser)
 	if (parser->status == S_DQUOTES || parser->status == S_SQUOTES)
 		unclosed_error(parser);
 	if (parser->state == S_CHAR)
+	{
 		add_token(&parser->tokens_list, \
 	ft_substr(parser->cmd, parser->start, parser->len), T_CHAR);
+		g_exit_code = 0;
+	}
 	else
 		syntax_error(parser, parser->cmd[(parser->count) - 1]);
 }
-//TODO check last shit
+//TODO can end with space but we like to ignore it
+
 
