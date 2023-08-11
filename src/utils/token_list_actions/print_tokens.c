@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   env_var.h                                          :+:    :+:            */
+/*print_tolkens.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/07/17 17:32:37 by laura         #+#    #+#                 */
-/*   Updated: 2023/08/11 08:36:45 by laura         ########   odam.nl         */
+/*   Created: 2023/07/17 17:24:02 by laura         #+#    #+#                 */
+/*   Updated: 2023/07/17 17:25:19 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_VAR_H
-# define ENV_VAR_H
+#include "../../../include/minishell.h"
+#include "../../../include/lexical_analyzer.h"
+#include <stdio.h>
 
-# include "lexical_analyzer.h"
-
-void	search_for_equals(t_tokens *tokens);
-#endif //ENV_VAR_H
+void	print_tokens(t_tokens *tokens)
+{
+	while (tokens != NULL)
+	{
+		printf("token: %s   type: %d\n", tokens->str, tokens->type);
+		tokens = tokens->next;
+	}
+}

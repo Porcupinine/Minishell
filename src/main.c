@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: laura <laura@student.codam.nl>               +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/07/17 17:23:55 by laura         #+#    #+#                 */
-/*   Updated: 2023/07/17 17:24:47 by laura         ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/17 17:23:55 by laura             #+#    #+#             */
+/*   Updated: 2023/08/11 14:30:50 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 #include "../include/env_var.h"
 #include "../include/lexical_analyzer.h"
 #include "../include/token_list_actions.h"
-#include "../../include/builtins.h"
+#include "../include/builtins.h"
+#include "../include/exec.h"
 #include "../include/envp_parser.h"
 
 int g_exit_code;
@@ -45,7 +46,7 @@ void	sigquit_handler(int sig)
 //	rl_redisplay();
 }
 
-void set_signals(void)
+void	set_signals(void)
 {
 	struct sigaction	sigint_sa;
 	struct sigaction	sigquit_sa;
@@ -65,7 +66,7 @@ int	main(int argc, char **argv, char **envp)
 	mini_data = ft_calloc(1, sizeof(t_data));
 	if (mini_data == NULL)
 		ft_error("Data malloc fail!\n");
-//	parse_array_envp(mini_data, envp);
+	// parse_array_envp(mini_data, envp);
 	parse_list_envp(mini_data, envp);
 	set_signals();
 	if (argc != 1)
@@ -75,6 +76,7 @@ int	main(int argc, char **argv, char **envp)
 		mini_data->command_line = readline("minisomething: ");
 		line_history(mini_data);
 		parse(mini_data);
+		start(mini_data);
 		printf("Exit code: %d\n", g_exit_code);
 	}
 	return (0);

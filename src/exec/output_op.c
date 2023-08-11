@@ -25,7 +25,7 @@ static void open_lastfile(t_commands *commands, t_outfile *last_out)
 
 void output_re(t_commands *commands)
 {
-    if (commands->outfiles->file == NULL)
+    if (commands->outfiles == NULL)
 		commands->out = STDOUT_FILENO;
 	else
 	{

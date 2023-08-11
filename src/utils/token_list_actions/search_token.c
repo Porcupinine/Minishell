@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   env_var.h                                          :+:    :+:            */
+/*   search_token.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/07/17 17:32:37 by laura         #+#    #+#                 */
-/*   Updated: 2023/08/11 08:36:45 by laura         ########   odam.nl         */
+/*   Created: 2023/07/28 11:48:59 by laura         #+#    #+#                 */
+/*   Updated: 2023/08/11 08:05:58 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_VAR_H
-# define ENV_VAR_H
+#include "../../../include/lexical_analyzer.h"
 
-# include "lexical_analyzer.h"
+int	find_size(t_tokens *tokens)
+{
+	int	count;
 
-void	search_for_equals(t_tokens *tokens);
-#endif //ENV_VAR_H
+	count = 0;
+	while (tokens)
+	{
+		count++;
+		tokens = tokens->next;
+	}
+	return (count);
+}

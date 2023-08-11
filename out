@@ -1,5 +1,12 @@
-hellos
-test
-testing dougle QUOTES whit pipe
-testing dougle | QUOTES whit pipe
-testing "dougle | QUOTES" whit pipe
+CMakeLists.txt
+Lib42
+Makefile
+include
+minishell
+objs
+out
+out2
+scraps.txt
+src
+testMakefile
+test_folder

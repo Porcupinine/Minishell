@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 17:07:22 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/07 16:19:26 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/11 14:08:22 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 int	builtins(char **cmd, t_data *mini)
 {
 	if (ft_strncmp(cmd[0], "echo", 4) == 0)
-		builtin_echo(mini, *cmd); // with this pointer does it send it as a str completly???
+		builtin_echo(mini, cmd);
 	else if (ft_strncmp(cmd[0], "cd", 2) == 0)
 		builtin_cd(mini, *cmd); // or would a double pointer make sense here?
 	else if (ft_strncmp(cmd[0], "pwd", 3) == 0)

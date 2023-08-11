@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:54:29 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/07 17:04:00 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/11 14:30:15 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ char *search_envp(char *var, t_data *mini)
 	i = 0;
 	if (var[i] == '?')
 		return (ft_itoa(g_exit_code));
+	// printf("here, mini_envp == %s\n", mini->mini_envp[0]); // TO RM
 	while (mini->mini_envp[i])
 	{
 		if (ft_strncmp(mini->mini_envp[i], var, ft_strlen(var)) == 0)
@@ -104,6 +105,7 @@ int expand_var(char **line, t_data *mini, int start) // maybe no double pointer 
 	if (end == start)
 		return (start);
 	var = var_name(*line, start, end - start);
+//  printf("GETTING HERE?? expand dollaaaar\n -- line == %s || var == %s -- \n", line[0], var); // to rm
 	var_exp = search_envp(var, mini);
 	new_len_line = (start - 1) + ft_strlen(var_exp);
 	*line = var_replace(line, var_exp, start, end);
@@ -115,12 +117,11 @@ int expand_var(char **line, t_data *mini, int start) // maybe no double pointer 
 char *expand_dollar(char *line, t_data *mini)
 {
 	int 	i;
-
 	i = 0;
 	while (line[i])
 	{
 		if (line[i] == '$')
-			i = expand_var(&line, mini, i + 1); // i adds up here each time
+			i = expand_var(&line, mini, i + 1);
 		i++;
 	}
 	return (line);

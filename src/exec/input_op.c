@@ -102,7 +102,7 @@ static void handle_heredoc(t_commands *commands, t_data *mini)
 
 void input_re(t_commands *commands, t_data *mini)
 {
-    if (commands->infiles->file == NULL)
+    if (commands->infiles == NULL)
 		commands->in = STDIN_FILENO; // test this
 		// commands->in = NULL; // check
 	while (commands->infiles)
