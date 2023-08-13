@@ -25,12 +25,17 @@
 
 int g_exit_code;
 
-void	sigint_handler(int sig)
+void return_prompt(void)
 {
-	write(1, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
+}
+
+void	sigint_handler(int sig)
+{
+	write(1, "\n", 1);
+	return_prompt();
 	kill(0, SIGQUIT);
 //	//TODO TOP changes the signal, it can b
 //	// reak minishell
@@ -76,7 +81,7 @@ int	main(int argc, char **argv, char **envp)
 		mini_data->command_line = readline("minisomething: ");
 		line_history(mini_data);
 		parse(mini_data);
-		start(mini_data);
+//		start(mini_data);
 		printf("Exit code: %d\n", g_exit_code);
 	}
 	return (0);

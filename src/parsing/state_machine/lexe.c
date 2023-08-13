@@ -59,8 +59,6 @@ void	parse_machine(t_data *mini_data, t_state_machine *parser)
 	while (mini_data->command_line[parser->count] != '\0' \
 		&& parser->state != S_ERROR)
 	{
-		if (parser->state == S_ERROR)
-			break ;
 		functions[parser->state](parser);
 		parser->count++;
 	}

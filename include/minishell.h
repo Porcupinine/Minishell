@@ -129,4 +129,6 @@ typedef struct s_data
 	t_pid				*process;
 }t_data;
 
+void return_prompt(void);
+
 #endif //MINISHELL_MINISHELL_H
