@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:54:29 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/14 14:14:03 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:44:01 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ char *search_envp(char *var, t_data *mini)
 	i = 0;
 	if (var[i] == '?')
 		return (ft_itoa(g_exit_code));
-	// printf("here, mini_envp == %s\n", mini->mini_envp[0]); // TO RM
 	while (mini->mini_envp[i])
 	{
 		if (ft_strncmp(mini->mini_envp[i], var, ft_strlen(var)) == 0)
@@ -73,7 +72,7 @@ char *var_replace(char **line, char *var_exp, int start, int end)
 	char *join;
 	char *newline;
 
-	sub = ft_substr(*line, 0, start - 1); // rm the dollar sign
+	sub = ft_substr(*line, 0, start - 1);
 	if (sub == NULL)
 		ft_error("Malloc fail\n");
 	join = ft_strjoin(sub, var_exp);
@@ -92,7 +91,7 @@ char *var_replace(char **line, char *var_exp, int start, int end)
 	return (newline);
 }
 
-int expand_var(char **line, t_data *mini, int start) // maybe no double pointer needed
+int expand_var(char **line, t_data *mini, int start)
 {
 	int 	end;
 	int 	new_len_line;
@@ -109,7 +108,6 @@ int expand_var(char **line, t_data *mini, int start) // maybe no double pointer 
 	free(var);
 	return (new_len_line);
 }
-// edgecase: $? and $_ (automatic? shows last command but a newline if multiple commands ran)
 
 char *expand_dollar(char *line, t_data *mini)
 {
@@ -123,3 +121,4 @@ char *expand_dollar(char *line, t_data *mini)
 	}
 	return (line);
 }
+// edgecase: $? and $_ (automatic? shows last command but a newline if multiple commands ran)

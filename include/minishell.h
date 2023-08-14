@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: laura <laura@student.codam.nl>               +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/08/11 08:08:41 by laura         #+#    #+#                 */
-/*   Updated: 2023/08/11 08:09:18 by laura         ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/11 08:08:41 by laura             #+#    #+#             */
+/*   Updated: 2023/08/14 14:49:05 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ typedef struct s_commands
 	int					out;
 	int					in;
 	int					**fd;
-	int					nb_cmds;
 	int					status;
 	struct s_commands	*next;
 }t_commands;
@@ -127,6 +126,7 @@ typedef struct s_data
 	char				*command_line;
 	t_commands			*commands;
 	t_pid				*process;
+	int					nb_cmds;
 }t_data;
 
 #endif //MINISHELL_MINISHELL_H
