@@ -37,8 +37,7 @@ void	free_cmd_list(t_commands **cmd)
 	tmp = NULL;
 	if (cmd == NULL)
 		return ;
-	while (*cmd)
-	{
+	while (*cmd) {
 		tmp = *cmd;
 		*cmd = (*cmd)->next;
 		free(tmp);

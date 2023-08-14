@@ -33,6 +33,10 @@ void	token_start(t_state_machine *parser)
 	}
 	else if (c == ' ')
 		parser->state = S_WHITESPACE;
+	else if (c == '>')
+		parser->state = S_BIG;
+	else if (c == '<')
+		parser->state = S_SMALL;
 	else
 		syntax_error(parser, c);
 }
@@ -59,8 +63,6 @@ void	parse_machine(t_data *mini_data, t_state_machine *parser)
 	while (mini_data->command_line[parser->count] != '\0' \
 		&& parser->state != S_ERROR)
 	{
-		if (parser->state == S_ERROR)
-			break ;
 		functions[parser->state](parser);
 		parser->count++;
 	}
@@ -72,6 +74,8 @@ void	parse_machine(t_data *mini_data, t_state_machine *parser)
 	ft_substr(parser->cmd, parser->start, parser->len), T_CHAR);
 		g_exit_code = 0;
 	}
+	else if (parser->state == S_WHITESPACE)
+		;
 	else
 		syntax_error(parser, parser->cmd[(parser->count) - 1]);
 }

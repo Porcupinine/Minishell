@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.25)
 project(minishell C)
 include_directories(${CMAKE_SOURCE_DIR}/Lib42/include SYSTEM/Users/lpraca-l/.brew/opt/readline/include)
 
-add_compile_options(-fsanitize=address -g3)
-add_link_options(-fsanitize=address)
+#add_compile_options(-fsanitize=address -g3)
+#add_link_options(-fsanitize=address)
 #add_compile_options(-fsanitize=address -fsanitize=address)
 #add_link_options(-fsanitize=address)
 #add_compile_options(-Wall -Werror -Wextra)
@@ -30,10 +30,10 @@ add_executable(minishell src/main.c
         src/utils/cmd_list_actions/add_cmd_node.c src/utils/cmd_list_actions/add_inout_node.c
         src/utils/cmd_list_actions/print_cmd.c
         src/utils/envp_parser/parse_list_envp.c src/utils/envp_parser/parse_array_envp.c
-        src/utils/errors/1.c src/utils/errors/258.c
+        src/utils/errors/1.c src/utils/errors/258.c src/utils/errors/127.c src/utils/errors/255.c
         src/utils/history/history.c
         src/utils/I_want_to_break_free/parser_free.c
-        src/utils/token_list_actions/add_tolken.c src/utils/token_list_actions/print_tolkens.c
+        src/utils/token_list_actions/add_token.c src/utils/token_list_actions/print_tokens.c
         src/utils/token_list_actions/search_token.c)
 
 target_link_libraries(minishell ${CMAKE_SOURCE_DIR}/Lib42/libft.a -lreadline)

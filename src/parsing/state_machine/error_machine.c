@@ -31,9 +31,8 @@ void	syntax_error(t_state_machine *parser, char c)
 	g_exit_code = 258;
 	parser->state = S_ERROR;
 	free_token_list(&parser->tokens_list);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	parser->tokens_list = NULL;
+	return_prompt();
 }
 
 void	syntax_error_parse(t_state_machine *parser, t_data *mini_data)
@@ -41,10 +40,10 @@ void	syntax_error_parse(t_state_machine *parser, t_data *mini_data)
 	printf("Syntax error near unexpected token `newline'\n");
 	g_exit_code = 258;
 	free_token_list(&parser->tokens_list);
+	parser->tokens_list = NULL;
 	free_cmd_list(&mini_data->commands);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	mini_data->commands = NULL;
+	return_prompt();
 }
 
 void	unclosed_error(t_state_machine *parser)
@@ -58,7 +57,6 @@ void	unclosed_error(t_state_machine *parser)
 	printf("Unclosed '%c'\n", c);
 	g_exit_code = 258;
 	free_token_list(&parser->tokens_list);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	parser->tokens_list = NULL;
+	return_prompt();
 }

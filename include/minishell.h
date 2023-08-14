@@ -18,6 +18,8 @@
 # include <fcntl.h>
 # include <stdio.h>
 
+# define MINISHELL "Minihell"
+
 typedef enum s_redirect
 {
 	REDIRECT_INPUT,
@@ -128,5 +130,7 @@ typedef struct s_data
 	t_pid				*process;
 	int					nb_cmds;
 }t_data;
+
+void return_prompt(void);
 
 #endif //MINISHELL_MINISHELL_H

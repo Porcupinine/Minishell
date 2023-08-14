@@ -12,54 +12,21 @@
 
 #include "../../include/minishell.h"
 #include "../../include/I_want_to_break_free.h"
-#include "../../include/exec.h"
 #include <unistd.h>
 #include "../../Lib42/include/libft.h"
-
-// _: _: no such file or directory
+#include "../../include/exec.h"
 
 extern int g_exit_code;
 
-void no_file_directory(char **command)
+void no_command(char **command, t_data *mini_data)
 {
+//	printf("%: Command not found\n", command);
 	write(2, "minishell: ", 11);
 	write(2, command[0], ft_strlen(command[0]));
-	write(2, ": ", 2);
-	write(2, command[1], ft_strlen(command[1]));
-	write(2, ": ", 2);
-	write(2, "No such file or directory\n", 26);
-	g_exit_code = 1;
+	write(2, ": command not found\n", 21);
+	g_exit_code = 127;
+	free_cmd_list(&mini_data->commands);
+	mini_data->commands = NULL;//TODO do we have kids too kill?
 	free_str(command);
-}
-
-void not_valid_identifier(char **command)
-{
-	write(2, "minishell: ", 11);
-	write(2, command[0], ft_strlen(command[0]));
-	write(2, ": ´", 3);
-	write(2, command[1], ft_strlen(command[1]));
-	write(2, "´: ", 3);
-	write(2, "not a valid identifier\n", 23);
-	g_exit_code = 1;
-	free_str(command);
-}
-
-void permission_denied(char **command)
-{
-	write(2, "minishell: ", 11);
-	write(2, command[0], ft_strlen(command[0]));
-	write(2, ": ", 2);
-	write(2, command[1], ft_strlen(command[1]));
-	write(2, ": ", 2);
-	write(2, "permission denied\n", 18);
-	g_exit_code = 1;
-	free_str(command);
-}
-
-void too_many_args(t_data *mini_data)
-{
-	//TODO can see error?
-//	printf();
-	g_exit_code = 1;
-
+	return_prompt();
 }
