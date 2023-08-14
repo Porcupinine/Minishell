@@ -18,6 +18,8 @@
 # include <fcntl.h>
 # include <stdio.h>
 
+# define MINISHELL "Minihell"
+
 typedef enum s_redirect
 {
 	REDIRECT_INPUT,

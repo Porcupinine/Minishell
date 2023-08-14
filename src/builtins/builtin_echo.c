@@ -14,7 +14,7 @@
 #include "../../include/env_var.h"
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
-
+ extern int g_exit_code;
 /*
 	should it also handle echo $?  ??
 	example to deal with the $ARG/$PATH expantion: printf("PATH : %s\n", getenv("PATH"));
@@ -59,5 +59,6 @@ int	builtin_echo(t_data *mini, char **cmd)
 		}
 		write(mini->commands->out, "\n", 1);
 	}
+	g_exit_code = 999;
 	return (0); // check
 }

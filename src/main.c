@@ -27,6 +27,7 @@ int g_exit_code;
 
 void return_prompt(void)
 {
+	printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
@@ -34,7 +35,7 @@ void return_prompt(void)
 
 void	sigint_handler(int sig)
 {
-	write(1, "\n", 1);
+//	write(1, "\n", 1);
 	return_prompt();
 	kill(0, SIGQUIT);
 //	//TODO TOP changes the signal, it can b
@@ -76,9 +77,12 @@ int	main(int argc, char **argv, char **envp)
 	set_signals();
 	if (argc != 1)
 		ft_error("EROOR!!\nWrong amount of args!\n");
+	mini_data->command_line = ft_calloc(1, sizeof(char));
+	if (mini_data->command_line == NULL)
+		ft_error("Malloc fail \n");
 	while (1)
 	{
-		mini_data->command_line = readline("minisomething: ");
+		mini_data->command_line = readline("MINISHELL: ");
 		line_history(mini_data);
 		parse(mini_data);
 //		start(mini_data);

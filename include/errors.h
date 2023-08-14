@@ -21,8 +21,8 @@
 */
 void	syntax_error_parse(t_state_machine *parser, t_data *mini_data);
 void	no_file_directory(char *cmd, char*file, t_data *mini_data);
-void	no_command(char *cmd, t_data *mini_data);
-void	permission_denied(char *cmd, char *folder, t_data *mini_data);
+void	no_command(char *command);
+void	permission_denied(char **command);
 void	not_valid_identifier(char *cmd, char *ident, t_data *mini_data);
 
 

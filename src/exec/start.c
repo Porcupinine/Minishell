@@ -121,7 +121,7 @@ printf("GETTING HERE??\n -- %d in and out %d --\n", mini->commands->in, mini->co
 		run_one_cmd(mini->commands->in, mini->commands->out, mini);
 		close_pipe(mini->commands->fd, mini->commands->nb_cmds);
 		free_fd(mini->commands->fd, mini->commands->nb_cmds);
-		close_fds(mini);
+//		close_fds(mini);
 	}
 	else
 	{
@@ -133,6 +133,7 @@ printf("GETTING HERE??\n -- %d in and out %d --\n", mini->commands->in, mini->co
 		free_pid_list(&mini->process);
 	}
 	free_cmd_list(&mini->commands);// right??
+	mini->commands = NULL;
 	return (0);  // right?? because if anything it will have errored in the input/output ft
 }
 

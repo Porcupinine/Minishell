@@ -12,36 +12,48 @@
 
 #include "../../include/minishell.h"
 #include "../../include/I_want_to_break_free.h"
+#include "../../include/exec.h"
+#include <unistd.h>
+#include "../../Lib42/include/libft.h"
 
 // _: _: no such file or directory
 
 extern int g_exit_code;
 
-void no_file_directory(char *cmd, char*file, t_data *mini_data)
+void no_file_directory(char **command)
 {
-	printf("%s: %s: No such file or directory\n", cmd, file);
+	write(2, "minishell: ", 11);
+	write(2, command[0], ft_strlen(command[0]));
+	write(2, ": ", 2);
+	write(2, command[1], ft_strlen(command[1]));
+	write(2, ": ", 2);
+	write(2, "No such file or directory\n", 26);
 	g_exit_code = 1;
-	free_cmd_list(&mini_data->commands);
-	mini_data->commands = NULL; //TODO do we have kids too kill?
-	return_prompt();
+	free_str(command);
 }
 
-void not_valid_identifier(char *cmd, char *ident, t_data *mini_data)
+void not_valid_identifier(char **command)
 {
-	printf("minisomething: %s: ´%s´: not a valid identifier\n", cmd, ident);
+	write(2, "minishell: ", 11);
+	write(2, command[0], ft_strlen(command[0]));
+	write(2, ": ´", 3);
+	write(2, command[1], ft_strlen(command[1]));
+	write(2, "´: ", 3);
+	write(2, "not a valid identifier\n", 23);
 	g_exit_code = 1;
-	free_cmd_list(&mini_data->commands);
-	mini_data->commands = NULL; //TODO do we have kids too kill?
-	return_prompt();
+	free_str(command);
 }
 
-void permission_denied(char *cmd, char *folder, t_data *mini_data)
+void permission_denied(char **command)
 {
-	printf("minisomething: %s: %s: permission denied\n", cmd, folder);
+	write(2, "minishell: ", 11);
+	write(2, command[0], ft_strlen(command[0]));
+	write(2, ": ", 2);
+	write(2, command[1], ft_strlen(command[1]));
+	write(2, ": ", 2);
+	write(2, "permission denied\n", 18);
 	g_exit_code = 1;
-	free_cmd_list(&mini_data->commands);
-	mini_data->commands = NULL; //TODO do we have kids too kill?
-	return_prompt();
+	free_str(command);
 }
 
 void too_many_args(t_data *mini_data)
@@ -49,7 +61,5 @@ void too_many_args(t_data *mini_data)
 	//TODO can see error?
 //	printf();
 	g_exit_code = 1;
-	free_cmd_list(&mini_data->commands);
-	mini_data->commands = NULL; //TODO do we have kids too kill?
-	return_prompt();
+
 }
