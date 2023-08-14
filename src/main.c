@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 17:23:55 by laura             #+#    #+#             */
-/*   Updated: 2023/08/14 14:03:46 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/14 17:08:59 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	main(int argc, char **argv, char **envp)
 		mini_data->command_line = readline("MINISHELL: ");
 		line_history(mini_data);
 		parse(mini_data);
-//		start(mini_data);
+		start(mini_data);
 		printf("Exit code: %d\n", g_exit_code);
 	}
 	return (0);
