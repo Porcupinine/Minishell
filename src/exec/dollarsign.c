@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:54:29 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/11 14:30:15 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/14 14:14:03 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,6 @@ char *var_replace(char **line, char *var_exp, int start, int end)
 
 int expand_var(char **line, t_data *mini, int start) // maybe no double pointer needed
 {
-	// strjoin or substr maybe
-	// start now is already beyond the $ sign
 	int 	end;
 	int 	new_len_line;
 	char 	*var;
@@ -105,7 +103,6 @@ int expand_var(char **line, t_data *mini, int start) // maybe no double pointer 
 	if (end == start)
 		return (start);
 	var = var_name(*line, start, end - start);
-//  printf("GETTING HERE?? expand dollaaaar\n -- line == %s || var == %s -- \n", line[0], var); // to rm
 	var_exp = search_envp(var, mini);
 	new_len_line = (start - 1) + ft_strlen(var_exp);
 	*line = var_replace(line, var_exp, start, end);
