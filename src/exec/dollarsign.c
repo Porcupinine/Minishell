@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:54:29 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/07 17:04:00 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/14 14:14:03 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ char *search_envp(char *var, t_data *mini)
 	i = 0;
 	if (var[i] == '?')
 		return (ft_itoa(g_exit_code));
+	// printf("here, mini_envp == %s\n", mini->mini_envp[0]); // TO RM
 	while (mini->mini_envp[i])
 	{
 		if (ft_strncmp(mini->mini_envp[i], var, ft_strlen(var)) == 0)
@@ -93,8 +94,6 @@ char *var_replace(char **line, char *var_exp, int start, int end)
 
 int expand_var(char **line, t_data *mini, int start) // maybe no double pointer needed
 {
-	// strjoin or substr maybe
-	// start now is already beyond the $ sign
 	int 	end;
 	int 	new_len_line;
 	char 	*var;
@@ -115,12 +114,11 @@ int expand_var(char **line, t_data *mini, int start) // maybe no double pointer 
 char *expand_dollar(char *line, t_data *mini)
 {
 	int 	i;
-
 	i = 0;
 	while (line[i])
 	{
 		if (line[i] == '$')
-			i = expand_var(&line, mini, i + 1); // i adds up here each time
+			i = expand_var(&line, mini, i + 1);
 		i++;
 	}
 	return (line);

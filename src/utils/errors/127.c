@@ -1,4 +1,4 @@
-git /* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
 /*   1.c                                                :+:    :+:            */
@@ -19,7 +19,7 @@ extern int g_exit_code;
 
 void no_command(char *cmd, t_data *mini_data)
 {
-	printf("%: Command not found\n", cmd);
+//	printf("%: Command not found\n", cmd);
 	g_exit_code = 127;
 	free_cmd_list(&mini_data->commands);
 	mini_data->commands = NULL;//TODO do we have kids too kill?

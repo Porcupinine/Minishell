@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 14:43:48 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/07 16:19:38 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/11 14:13:51 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	builtin_exit(char *cmd); // t_data *mini,  needed ??
 
 int		builtin_env(t_data *mini, char **cmd);
 
-int		builtin_echo(t_data *mini, char *cmd);
+int		builtin_echo(t_data *mini, char **cmd);
 
 int		builtin_cd(t_data *mini, char *cmd);
 int		search_path_cd(t_data *mini);

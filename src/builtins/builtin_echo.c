@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:09:31 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/02 08:34:05 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/11 22:48:23 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,19 @@
 		// if yes check if they are closed
 		// else needs to read from stdin
 */
-int	builtin_echo(t_data *mini, char *cmd)
+int	builtin_echo(t_data *mini, char **cmd)
 {
 	int i;
-	
+
 	if (ft_strncmp(mini->commands->cmd, "echo -n", 7) == 0)
 	{
-		cmd = expand_dollar(cmd, mini);
-		i = 9;
+		i = 0;
+		while (cmd[i])
+		{
+			cmd[i] = expand_dollar(cmd[i], mini);
+			i++;
+		}
+		i = 8;
 		while (mini->commands->cmd[i])
 		{
 			ft_putchar_fd(mini->commands->cmd[i], mini->commands->out);
@@ -40,8 +45,13 @@ int	builtin_echo(t_data *mini, char *cmd)
 	}
 	else
 	{
-		cmd = expand_dollar(cmd, mini);
-		i = 6;
+		i = 0;
+		while (cmd[i])
+		{
+			cmd[i] = expand_dollar(cmd[i], mini);
+			i++;
+		}
+		i = 5;
 		while (mini->commands->cmd[i])
 		{
 			ft_putchar_fd(mini->commands->cmd[i], mini->commands->out);

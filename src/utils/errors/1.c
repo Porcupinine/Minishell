@@ -47,7 +47,7 @@ void permission_denied(char *cmd, char *folder, t_data *mini_data)
 void too_many_args(t_data *mini_data)
 {
 	//TODO can see error?
-	printf();
+//	printf();
 	g_exit_code = 1;
 	free_cmd_list(&mini_data->commands);
 	mini_data->commands = NULL; //TODO do we have kids too kill?

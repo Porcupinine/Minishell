@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:11 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/07 17:07:51 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/14 14:09:13 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ char	*split_args(char *cmd, char **envp, t_data *mini)
 		if (path_to_cmd != NULL && command != NULL)
 			execve(path_to_cmd, command, envp);
 		free(path_to_cmd);
-		free_str(command);
 		// throw an error, to check
 	}
 	free_str(command);

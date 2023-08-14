@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: laura <laura@student.codam.nl>               +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/07/17 17:23:55 by laura         #+#    #+#                 */
-/*   Updated: 2023/08/11 08:06:17 by laura         ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/17 17:23:55 by laura             #+#    #+#             */
+/*   Updated: 2023/08/14 14:03:46 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include "../include/env_var.h"
 #include "../include/lexical_analyzer.h"
 #include "../include/token_list_actions.h"
-#include "../../include/builtins.h"
+#include "../include/builtins.h"
 #include "../include/exec.h"
 #include "../include/envp_parser.h"
 
@@ -72,7 +72,7 @@ int	main(int argc, char **argv, char **envp)
 	if (mini_data == NULL)
 		ft_error("Data malloc fail!\n");
 	parse_array_envp(mini_data, envp);
-//	parse_list_envp(mini_data, envp);
+	// parse_list_envp(mini_data, envp);
 	set_signals();
 	if (argc != 1)
 		ft_error("EROOR!!\nWrong amount of args!\n");

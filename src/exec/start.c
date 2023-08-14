@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/09 07:44:49 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/11 13:55:16 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ static void close_fds(t_data *mini)
 int	start(t_data *mini)
 {
 	mini->commands->nb_cmds = lst_size(mini->commands);
+printf("nb of comds == %d\n", mini->commands->nb_cmds); // to rm
 	if (mini->commands->nb_cmds == 1 && !mini->commands->cmd) 
 	{
 		input_re(mini->commands, mini); // error checking
@@ -116,6 +117,7 @@ int	start(t_data *mini)
 		mini->commands->fd = open_pipes(mini);
 		if (mini->commands->fd == NULL)
 			err_msg("", "pipe opening failed.\n"); // check
+printf("GETTING HERE??\n -- %d in and out %d --\n", mini->commands->in, mini->commands->out); // to rm
 		run_one_cmd(mini->commands->in, mini->commands->out, mini);
 		close_pipe(mini->commands->fd, mini->commands->nb_cmds);
 		free_fd(mini->commands->fd, mini->commands->nb_cmds);

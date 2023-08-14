@@ -21,7 +21,7 @@ extern int g_exit_code;
 void numeric_arg_required(t_data *mini_data)
 {
 	//TODO how?
-	printf();
+//	printf();
 	g_exit_code = 255;
 	free_cmd_list(&mini_data->commands);
 	mini_data->commands = NULL; //TODO do we have kids too kill?

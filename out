@@ -1,2 +1,12 @@
-Exit code: 0
-minisomething: 
+CMakeLists.txt
+Lib42
+Makefile
+include
+minishell
+objs
+out
+out2
+scraps.txt
+src
+testMakefile
+test_folder
