@@ -56,10 +56,12 @@ void permission_denied(char **command)
 	free_str(command);
 }
 
-void too_many_args(t_data *mini_data)
+void too_many_args(char **command)
 {
-	//TODO can see error?
-//	printf();
+	write(2, "minishell: ", 11);
+	write(2, command[0], ft_strlen(command[0]));
+	write(2, ": ", 2);
+	write(2, "too many arguments\n", 19);
 	g_exit_code = 1;
-
+	free(command);
 }

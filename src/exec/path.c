@@ -14,6 +14,7 @@
 #include "../../include/env_var.h"
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
+#include "../../include/errors.h"
 
 static int	find_path(char **envp)
 {
@@ -47,7 +48,7 @@ static char	*join_path(char *command, char **paths, int i)
 			return (free(the_path), NULL);
 		if (access(the_path, F_OK) != 0 || access(the_path, X_OK) != 0)
 		{
-			err_msg(command, "Permission denied\n");
+			permission_denied(&command);
 			//return ; // check as should: exit(127);
 		}
 		if (access(the_path, X_OK) == 0)
@@ -77,10 +78,10 @@ char	*split_args(char *cmd, char **envp, t_data *mini)
 			exit(127); // TODO check as we don't want to exit
 		paths = ft_split(envp[find_path(envp)] + 5, ':');
 		if (!paths)
-			err_cmd_not_found(command); // exit should be with // exit(127);
+			no_command(command); // exit should be with // exit(127);
 		path_to_cmd = join_path(command[0], paths, 0);
 		if (!path_to_cmd)
-			err_cmd_not_found(command); // exit should be with // exit(127);
+			no_command(command); // exit should be with // exit(127);
 		if (path_to_cmd != NULL && command != NULL)
 			execve(path_to_cmd, command, envp);
 		free(path_to_cmd);

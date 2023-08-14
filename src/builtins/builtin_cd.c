@@ -42,7 +42,7 @@ int	builtin_cd(t_data *mini, char *cmd)
 				if (chdir(ft_substr(mini->mini_envp[i], 6, ft_strlen(mini->mini_envp[i]))) != 0)
 					return (builtin_err2("cd",
 						ft_substr(mini->mini_envp[i], 6, ft_strlen(mini->mini_envp[i])),
-						"Permission denied\n"), 1);
+						"Permission denied\n"), 1);//TODO **command??
 				change_pwd(mini); // meaning if succeed so we need to undate this 
 					// check on a return value or what??
 				return (0);
