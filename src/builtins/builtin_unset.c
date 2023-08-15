@@ -27,20 +27,23 @@ char **update_envp(char **envp, char *arg, int size)
 {
 	char **new;
 	int i;
+	int j;
 
 	new = malloc((size + 1) * sizeof(char *));
 	if (new == NULL)
 		ft_error("Malloc failed.\n"); // check
 	i = 0;
-	while (envp[i] && i < size)
+	j = 0;
+	while (envp[i] && i < size + 1)
 	{
 		if (ft_strncmp(envp[i], arg, ft_strlen(arg)) == 0)
-			free(envp[i]);
+			i++;
+			//			free(envp[i]);
 		else
 		{
-			new[i] = ft_strdup(envp[i]); // what if it returns NULL here??
+			new[j] = ft_strdup(envp[i]); // what if it returns NULL here??
 			// printf("envp[%d] == %s\n", i, envp[i]);
-			
+			j++;
 		}
 		i++;
 	}
