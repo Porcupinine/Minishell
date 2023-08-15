@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 12:32:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/15 16:42:58 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/15 17:18:21 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,6 @@
 #include "../../include/env_var.h"
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
-
-/* 
-	unset: values and attributes of variables and functions
-	Unsetting a variable or function that was not previously set shall not be considered an error and does not cause the shell to abort.
-	via envp (PATH and SHELL)?? --> look in the shell + the list created by laura
-	maybe getenvp then unlink
-	and for attributes/var ??
-*/
 
 char **update_envp(char **envp, char *arg, int size)
 {
@@ -38,11 +30,10 @@ char **update_envp(char **envp, char *arg, int size)
 	{
 		if (ft_strncmp(envp[i], arg, ft_strlen(arg)) == 0)
 			i++;
-			//			free(envp[i]);
+			// free(envp[i]);
 		else
 		{
-			new[j] = ft_strdup(envp[i]); // what if it returns NULL here??
-			// printf("envp[%d] == %s\n", i, envp[i]);
+			new[j] = ft_strdup(envp[i]);
 			j++;
 		}
 		i++;
@@ -53,7 +44,7 @@ char **update_envp(char **envp, char *arg, int size)
 	return (new);
 }
 
-int	size_envp(t_data *mini) // put seperate maybe
+int	size_envp(t_data *mini)
 {
 	int size;
 
