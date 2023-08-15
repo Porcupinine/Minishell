@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:49:01 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/15 12:08:04 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/15 21:47:18 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ int	exec_fork_onecmd(t_data *mini)
     close_pipe(mini->commands->fd, mini->nb_cmds);
 	free_fd(mini->commands->fd, mini->nb_cmds);
 	close_fds(mini);
-	waitpid(pid, &mini->commands->status, 0); // or w/ mini->process->pid ??
-	if (WIFEXITED(mini->commands->status))
-		return (WEXITSTATUS(mini->commands->status)); // check
+	waitpid(pid, &mini->status, 0); // or w/ mini->process->pid ??
+	if (WIFEXITED(mini->status)) // check
+		mini->status = WEXITSTATUS(mini->status); // check
 	return (0); // check
 }

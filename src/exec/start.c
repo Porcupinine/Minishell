@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/15 15:57:19 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/15 21:46:09 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,12 @@ static int	execute_pipe(t_data *mini, int nb_cmds)
 	close_pipe(mini->commands->fd, mini->nb_cmds);
 	free_fd(mini->commands->fd, mini->nb_cmds);
 	close_fds(mini);
-	waitpid(pid, &mini->commands->status, 0); // or w/ mini->process->pid ??
+	waitpid(pid, &mini->status, 0); // or w/ mini->process->pid ??
 	// this will become the exit code: SET IT HERE
-	if (WIFEXITED(mini->commands->status))
-		return (WEXITSTATUS(mini->commands->status)); // check
+	if (WIFEXITED(mini->status))
+		mini->status = WEXITSTATUS(mini->status);
+	if (WIFSIGNALED(mini->status))  // check
+		mini->status = WTERMSIG(mini->status);  // check
 	return (0); // check
 }
 
