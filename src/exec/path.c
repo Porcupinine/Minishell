@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:11 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/14 14:09:13 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:56:24 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,14 @@ static char	*join_path(char *command, char **paths, int i)
 		the_path = ft_strjoin(the_path, command);
 		if (!the_path)
 			return (free(the_path), NULL);
-		if (access(the_path, F_OK) != 0 || access(the_path, X_OK) != 0)
+		// if (access(the_path, F_OK) != 0 || access(the_path, X_OK) != 0)
+		if (access(the_path, F_OK) == 0)
 		{
-			permission_denied(&command);
-			//return ; // check as should: exit(127);
-		}
-		if (access(the_path, X_OK) == 0)
-		{
+			if (access(the_path, X_OK) != 0)
+			{
+				err_msg(command, "Permission denied\n");
+				//return ; // check as should: exit(127);
+			}
 			free_str(paths);
 			return (the_path);
 		}
@@ -71,8 +72,8 @@ char	*split_args(char *cmd, char **envp, t_data *mini)
 
 	command = ft_split(cmd, ' ');
 	if (!command)
-		return (ft_error("Malloc failed\n"), NULL); // check
-	if (builtins(command, mini) == 1) // meaning not a builtin
+		ft_error("Malloc failed\n");
+	if (builtins(command, mini) == 1)
 	{
 		if (*envp == NULL)
 			exit(127); // TODO check as we don't want to exit
@@ -81,7 +82,7 @@ char	*split_args(char *cmd, char **envp, t_data *mini)
 			no_command(command); // exit should be with // exit(127);
 		path_to_cmd = join_path(command[0], paths, 0);
 		if (!path_to_cmd)
-		if (path_to_cmd != 			no_command(command); // exit should be with // exit(127);
+			no_command(command); // exit should be with // exit(127);
 		NULL && command != NULL)
 			execve(path_to_cmd, command, envp);
 		free(path_to_cmd);

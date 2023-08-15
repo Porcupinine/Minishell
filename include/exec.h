@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 14:43:48 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/11 14:13:51 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/15 12:02:32 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 
 /* BUILTINS */
 int		builtins(char **cmd, t_data *mini);
+int		check_builtins(char **cmd, t_data *mini);
 
 int		builtin_unset(t_data *mini, char **arg);
 int 	find_envp(t_data *mini, char *arg);
@@ -51,6 +52,7 @@ int		change_pwd(t_data *mini);
 /* EXEC */
 int		start(t_data *mini);
 void	close_pipe(int **fd, int nb);
+void	close_fds(t_data *mini);
 
 int		lst_size(t_commands *lst);
 void	free_str(char **str);
@@ -80,5 +82,7 @@ int 	var_len(char *line, int start);
 char 	*var_name(char *line, int start, int end);
 char 	*search_envp(char *var, t_data *mini);
 char	*var_replace(char **line, char *var_exp, int start, int end);
+
+int		exec_fork_onecmd(t_data *mini);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:25:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/07 17:31:31 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/14 16:34:25 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ static int go_export(t_data *mini, char *cmd)
 	i = len_equal(cmd);
 	name = ft_substr(cmd, 0, i);
 	if (name == NULL)
-		return (ft_error("Malloc failed.\n"), 1); // check
+		ft_error("Malloc failed.\n"); // check
 	i = 0;
 	while (mini->mini_envp[i])
 	{
