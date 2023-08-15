@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/15 15:00:21 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/15 15:57:19 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ int	start(t_data *mini)
 		-- rework the whole child process to create one for all
 		-- go through all the builtins
 			-- ++ send double pointer to cd and exit
+			-- rework cd (its all broke..)
 			-- add mini to exit
 		-- adapt the location to find $?
 		-- check and change all the error functions

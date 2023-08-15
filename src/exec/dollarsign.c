@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:54:29 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/14 15:44:01 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/15 15:10:40 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char *search_envp(char *var, t_data *mini)
 
 	i = 0;
 	if (var[i] == '?')
-		return (ft_itoa(g_exit_code));
+		return (ft_itoa(g_exit_code)); // change this
 	while (mini->mini_envp[i])
 	{
 		if (ft_strncmp(mini->mini_envp[i], var, ft_strlen(var)) == 0)
