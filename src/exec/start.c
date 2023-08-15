@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/14 17:05:33 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/15 15:00:21 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 extern int g_exit_code;
 
-static void close_fds(t_data *mini)
+void close_fds(t_data *mini)
 {
 	if (mini->commands->in != STDIN_FILENO)
 		close(mini->commands->in);
@@ -56,6 +56,7 @@ static int	execute_pipe(t_data *mini, int nb_cmds)
 	free_fd(mini->commands->fd, mini->nb_cmds);
 	close_fds(mini);
 	waitpid(pid, &mini->commands->status, 0); // or w/ mini->process->pid ??
+	// this will become the exit code: SET IT HERE
 	if (WIFEXITED(mini->commands->status))
 		return (WEXITSTATUS(mini->commands->status)); // check
 	return (0); // check
@@ -81,7 +82,7 @@ static int	**open_pipes(t_data *mini)
 	while (i < nb)
 	{
 		if (pipe(fd[i]) < 0)
-			ft_error("Pipe failed.\n"); // check -- needs to be on stderr
+			ft_error("Pipe failed.\n"); // check
 		i++;
 	}
 	return (fd);
@@ -100,6 +101,35 @@ void	close_pipe(int **fd, int nb)
 	}
 }
 
+static void one_cmd(t_data *mini)
+{
+	char **command;
+
+	command = ft_split(mini->commands->cmd, ' ');
+	if (!command)
+		ft_error("Malloc failed\n");
+	input_re(mini->commands, mini); // error checking
+	output_re(mini->commands); // error checking 
+	mini->commands->fd = open_pipes(mini);
+	if (mini->commands->fd == NULL)
+		err_msg("", "pipe opening failed.\n"); // check
+	if (check_builtins(command, mini) == 1) // so not a builtin
+	{
+		free_str(command);
+		exec_fork_onecmd(mini);
+		free_pid_list(&mini->process);
+		mini->process = NULL;
+	}
+	else 
+	{
+		free_str(command);
+		run_one_cmd(mini->commands->in, mini->commands->out, mini);
+		close_pipe(mini->commands->fd, mini->nb_cmds);
+		free_fd(mini->commands->fd, mini->nb_cmds);
+		close_fds(mini);
+	}
+}
+
 int	start(t_data *mini)
 {
 	mini->nb_cmds = lst_size(mini->commands);
@@ -110,18 +140,7 @@ int	start(t_data *mini)
 		close_fds(mini);
 	}
 	else if (mini->nb_cmds == 1)
-	{
-		// FORK EVEN WITH ONE CMD
-		input_re(mini->commands, mini); // error checking
-		output_re(mini->commands); // error checking 
-		mini->commands->fd = open_pipes(mini);
-		if (mini->commands->fd == NULL)
-			err_msg("", "pipe opening failed.\n"); // check
-		run_one_cmd(mini->commands->in, mini->commands->out, mini);
-		close_pipe(mini->commands->fd, mini->nb_cmds);
-		free_fd(mini->commands->fd, mini->nb_cmds);
-		close_fds(mini);
-	}
+		one_cmd(mini);
 	else
 	{
 		mini->commands->fd = open_pipes(mini);
@@ -130,6 +149,7 @@ int	start(t_data *mini)
 		if (execute_pipe(mini, mini->nb_cmds) == errno) // check
 			return (errno); // check what to return here, maybe just 1
 		free_pid_list(&mini->process);
+		mini->process = NULL;
 	}
 	free_cmd_list(&mini->commands);
 	mini->commands = NULL;
@@ -139,10 +159,14 @@ int	start(t_data *mini)
 
 /*
 	TO WORK ON:
-		-- fork even with one command
+		-- fork even with one command --> DONE
 		-- rework the whole child process to create one for all
-		-- check and change all the error functions
-		-- add the right g_exit_code everywhere
 		-- go through all the builtins
+			-- ++ send double pointer to cd and exit
+			-- add mini to exit
+		-- adapt the location to find $?
+		-- check and change all the error functions
+		-- add the right exit_code everywhere
+			-- rm g_exit_code
 	
 */
