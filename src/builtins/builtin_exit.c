@@ -14,6 +14,7 @@
 #include "../../include/env_var.h"
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
+#include "../../include/errors.h"
 
 static int	ft_atoi_long(char *str)
 {
@@ -44,7 +45,7 @@ static int	ft_atoi_long(char *str)
 }
 
 // void	builtin_exit(t_data *mini, char *cmd)
-void	builtin_exit(char *cmd)
+void	builtin_exit(char **cmd)
 {
 	int i;
 	int j;
@@ -55,20 +56,22 @@ void	builtin_exit(char *cmd)
 	i = 0;
 	while(cmd[i])
 		i++;
-	if (i == 4 && ft_strncmp(cmd, "exit", ft_strlen(cmd)) == 0)
+	if (i == 4 && ft_strncmp(cmd[0], "exit", ft_strlen(cmd[0])) == 0)
 		ft_putstr_fd("exit\n", 2); 
 		// and exit with 0 (right??) but things need to be freed first
 	i = 0;
 	j = 0;
-	while(cmd[i])
+	while(cmd[0][i])
 	{
-		if (cmd[i] == ' ')
+		if (cmd[0][i] == ' ')
 			j++;
 		i++;
 	}
 	if (j > 1) // so more than one arg
 	{
-		builtin_err("exit", "too many arguments\n"); //TODO it doesn't have **command
+		too_many_args(cmd);
+		return (1);
+//		builtin_err("exit", "too many arguments\n"); //TODO it doesn't have **command
 		// exit with 1 BUT things to free first
 	}
 	else

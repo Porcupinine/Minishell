@@ -65,3 +65,15 @@ void too_many_args(char **command)
 	g_exit_code = 1;
 	free(command);
 }
+
+void not_directory(char **command)
+{
+	write(2, "minishell: ", 11);
+	write(2, command[0], ft_strlen(command[0]));
+	write(2, ": ", 2);
+	write(2, command[1], ft_strlen(command[1]));
+	write(2, ": ", 2);
+	write(2, "Not a directory\n", 26);
+	g_exit_code = 1;
+	free_str(command);
+}

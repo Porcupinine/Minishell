@@ -59,6 +59,5 @@ int	builtin_echo(t_data *mini, char **cmd)
 		}
 		write(mini->commands->out, "\n", 1);
 	}
-	g_exit_code = 999;
 	return (0); // check
 }

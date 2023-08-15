@@ -58,13 +58,13 @@ int	builtin_cd(t_data *mini, char **cmd)
 	}
 	else // a specified path
 	{
-		search_path_cd(mini); // is the below needed then??
+		search_path_cd(mini, cmd); // is the below needed then??
 		return (0);
 	}
 	return (-1); // is this correct
 }
 
-int search_path_cd(t_data *mini)
+int search_path_cd(t_data *mini, char **cmd)
 {
 	int 		i;
 	char 		*str;
@@ -90,7 +90,11 @@ int search_path_cd(t_data *mini)
 		}
 	}
 	if (chdir(str) != 0)
-		return (builtin_err2("cd", str, "Not a directory\n"), 1); // check
+	{
+		not_directory(cmd);
+		return (1);
+//		return (builtin_err2("cd", str, "Not a directory\n"), 1); // check
+	}
 	change_pwd(mini); // meaning if succeed so we need to undate this 
 		// check on a return value or what??
 	free(str);

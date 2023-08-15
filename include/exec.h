@@ -37,14 +37,14 @@ int		builtin_pwd(t_data *mini);
 
 int     builtin_export(t_data *mini, char **cmd);
 
-void	builtin_exit(char *cmd); // t_data *mini,  needed ??
+void	builtin_exit(char **cmd); // t_data *mini,  needed ??
 
 int		builtin_env(t_data *mini, char **cmd);
 
 int		builtin_echo(t_data *mini, char **cmd);
 
 int		builtin_cd(t_data *mini, char **cmd);
-int		search_path_cd(t_data *mini);
+int		search_path_cd(t_data *mini, char **cmd);
 int		change_oldpwd(t_data *mini);
 int		change_pwd(t_data *mini);
 
