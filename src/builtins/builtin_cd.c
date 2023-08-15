@@ -14,6 +14,7 @@
 #include "../../include/env_var.h"
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
+#include "../../include/errors.h"
 
 /*
 	abs path describe the location from the root directory
@@ -25,13 +26,13 @@
 	if cd ../../.. --> check if backslash present else add it yoruself
 	if cd xx/ --> check if backslash present else add it yoruself
 */
-int	builtin_cd(t_data *mini, char *cmd)
+int	builtin_cd(t_data *mini, char **cmd)
 {
 	int i;
 	
 	if (*mini->mini_envp == NULL)
 		return (-1); // TODO check if needs to be NULL
-	if (ft_strncmp(cmd, "cd\0", 3) || ft_strncmp(cmd, "cd ~\0", 5))
+	if (ft_strncmp(cmd[0], "cd\0", 3) || ft_strncmp(cmd[0], "cd ~\0", 5))
 	{
 		i = 0;
 		while (mini->mini_envp[i])
@@ -40,11 +41,16 @@ int	builtin_cd(t_data *mini, char *cmd)
 			{
 				change_oldpwd(mini); // meaning if succeed so we need to undate this 
 				if (chdir(ft_substr(mini->mini_envp[i], 6, ft_strlen(mini->mini_envp[i]))) != 0)
-					return (builtin_err2("cd",
-						ft_substr(mini->mini_envp[i], 6, ft_strlen(mini->mini_envp[i])),
-						"Permission denied\n"), 1);//TODO **command??
-				change_pwd(mini); // meaning if succeed so we need to undate this 
-					// check on a return value or what??
+				{
+					permission_denied(cmd);
+					return (1);
+				}
+//				return (builtin_err2("cd",
+//										 }
+//						ft_substr(mini->mini_envp[i], 6, ft_strlen(mini->mini_envp[i])),
+//						"Permission denied\n"), 1);//TODO **command??
+//				change_pwd(mini); // meaning if succeed so we need to undate this
+//					// check on a return value or what??
 				return (0);
 			}
 			i++;

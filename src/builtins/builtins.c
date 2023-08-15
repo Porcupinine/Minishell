@@ -20,7 +20,7 @@ int	builtins(char **cmd, t_data *mini)
 	if (ft_strncmp(cmd[0], "echo", 4) == 0)
 		builtin_echo(mini, cmd);
 	else if (ft_strncmp(cmd[0], "cd", 2) == 0)
-		builtin_cd(mini, *cmd); // send ddouble pointer so it can be freed
+		builtin_cd(mini, cmd); // send ddouble pointer so it can be freed
 	else if (ft_strncmp(cmd[0], "pwd", 3) == 0)
 		builtin_pwd(mini);
 	else if (ft_strncmp(cmd[0], "export", 6) == 0)

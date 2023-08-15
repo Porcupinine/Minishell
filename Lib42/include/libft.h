@@ -176,7 +176,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
  */
 int		ft_atoi(const char *nptr);
 /**
- * Duplicates a string
+ * allocate memory and duplicates a string
  * @param s1 string to be duplicated
  * @return duplicated string
  */
