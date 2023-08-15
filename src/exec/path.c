@@ -81,8 +81,8 @@ char	*split_args(char *cmd, char **envp, t_data *mini)
 			no_command(command); // exit should be with // exit(127);
 		path_to_cmd = join_path(command[0], paths, 0);
 		if (!path_to_cmd)
-			no_command(command); // exit should be with // exit(127);
-		if (path_to_cmd != NULL && command != NULL)
+		if (path_to_cmd != 			no_command(command); // exit should be with // exit(127);
+		NULL && command != NULL)
 			execve(path_to_cmd, command, envp);
 		free(path_to_cmd);
 		// throw an error, to check
