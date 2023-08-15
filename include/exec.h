@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 14:43:48 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/15 15:30:17 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/15 16:10:25 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,6 @@ int		builtin_env(t_data *mini, char **cmd);
 int		builtin_echo(t_data *mini, char **cmd);
 
 int		builtin_cd(t_data *mini, char **cmd);
-<<<<<<< HEAD
-=======
-int		search_path_cd(t_data *mini);
-int		change_oldpwd(t_data *mini);
-int		change_pwd(t_data *mini);
-
->>>>>>> master
 
 /* EXEC */
 int		start(t_data *mini);

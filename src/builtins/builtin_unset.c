@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 12:32:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/15 16:00:19 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/15 16:42:58 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,22 @@ char **update_envp(char **envp, char *arg, int size)
 
 	new = malloc((size + 1) * sizeof(char *));
 	if (new == NULL)
-		return (NULL);
+		ft_error("Malloc failed.\n"); // check
 	i = 0;
 	while (envp[i] && i < size)
 	{
 		if (ft_strncmp(envp[i], arg, ft_strlen(arg)) == 0)
 			free(envp[i]);
 		else
+		{
 			new[i] = ft_strdup(envp[i]); // what if it returns NULL here??
+			// printf("envp[%d] == %s\n", i, envp[i]);
+			
+		}
 		i++;
 	}
 	new[size] = NULL;
-	free(envp); // needed??
+	//free(envp); // needed??
 	// free(arg); // needed??
 	return (new);
 }
@@ -66,9 +70,9 @@ static int unset_arg(t_data *mini, char *arg)
 	if (to_unset == NULL)
 		return (-1);
 	size = size_envp(mini);
-	new = update_envp(mini->mini_envp, to_unset, size - 1); // think twice 
-	if (to_unset == NULL)
-		return (free(to_unset), -1);
+	new = update_envp(mini->mini_envp, to_unset, size - 1);
+	if (new == NULL)
+		return (free(to_unset), -1); // check
 	mini->mini_envp = new;
 	return (0);
 }
@@ -84,30 +88,31 @@ int find_envp(t_data *mini, char *arg)
 			return (i);
 		i++;
 	}
-	return (-1); // meaning not found
+	return (-1);
 }
 
-int	builtin_unset(t_data *mini, char **arg) // or not an int??
+int	builtin_unset(t_data *mini, char **arg)
 {
 	int pos;
 	int i;
-
-	// need to check if only 1 word tho or not?
-	i = 1; // skipping the word unset
+	
+	i = 1;
 	while (arg[i])
 	{
-		//if (arg[i][0] == '_')
-		if (ft_strncmp(arg[i], "_", 1) == 0)
-			i++; // can't be unset
-		pos = find_envp(mini, arg[i]);
-		if (pos != -1)
-		{
-			if (mini->mini_envp[pos])
-				unset_arg(mini, arg[i]); // could this fail??
-		}
+		if (ft_strncmp(arg[i], "_\0", 2) == 0)
+			i++;
 		else
-			return (builtin_err2("unset", arg[i], "not a valid identifier\n"), 1);
-		i++;
+		{
+			pos = find_envp(mini, arg[i]);
+			if (pos != -1)
+			{
+				if (mini->mini_envp[pos])
+					unset_arg(mini, arg[i]); // could this fail??
+			}
+			else
+				return (builtin_err2("unset", arg[i], "not a valid identifier\n"), 1);
+			i++;
+		}
 	}
-	return (0); // meaning all good
+	return (0);
 }
