@@ -45,7 +45,7 @@ SRC     := src/main.c \
 	   src/utils/cmd_list_actions/add_cmd_node.c src/utils/cmd_list_actions/add_inout_node.c \
 	   src/utils/cmd_list_actions/print_cmd.c \
 	   src/utils/envp_parser/parse_list_envp.c src/utils/envp_parser/parse_array_envp.c \
-	   src/utils/errors/1.c src/utils/errors/258.c \
+	   src/utils/errors/1.c src/utils/errors/127.c src/utils/errors/255.c src/utils/errors/258.c \
 	   src/utils/history/history.c \
 	   src/utils/I_want_to_break_free/parser_free.c \
 	   src/utils/token_list_actions/add_token.c src/utils/token_list_actions/print_tokens.c \

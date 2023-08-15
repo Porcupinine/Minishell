@@ -68,7 +68,7 @@ void	builtin_exit(char *cmd)
 	}
 	if (j > 1) // so more than one arg
 	{
-		builtin_err("exit", "too many arguments\n");
+		builtin_err("exit", "too many arguments\n"); //TODO it doesn't have **command
 		// exit with 1 BUT things to free first
 	}
 	else
@@ -77,7 +77,7 @@ void	builtin_exit(char *cmd)
 		code = ft_atoi_long(sub);
 		if (code == -1)
 		{
-			builtin_err("exit", "numeric argument required\n");
+			builtin_err("exit", "numeric argument required\n"); //TODO it doesn't have **command
 			// exit with 255 BUT things to free first
 		}
 		free(sub); // needed??

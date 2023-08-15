@@ -129,6 +129,7 @@ typedef struct s_data
 	t_commands			*commands;
 	t_pid				*process;
 	int					nb_cmds;
+//	int					exit_code;
 }t_data;
 
 void return_prompt(void);

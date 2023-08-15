@@ -14,13 +14,17 @@
 #include "../../include/env_var.h"
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
+#include "../../include/errors.h"
 
 int	builtin_env(t_data *mini, char **cmd)
 {
 	int i;
 
 	if (cmd[1] != NULL) // make sense??
-		return (builtin_err(cmd[0], "too many arguments\n"), 1); // check on this
+	{
+		too_many_args(cmd);
+		return (1); // check on this
+	}
 	i = 0;
 	while (mini->mini_envp[i])
 	{

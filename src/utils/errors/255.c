@@ -13,17 +13,20 @@
 
 #include "../../include/minishell.h"
 #include "../../include/I_want_to_break_free.h"
-
-// _: _: no such file or directory
+#include <unistd.h>
+#include "../../Lib42/include/libft.h"
+#include "../../include/exec.h"
 
 extern int g_exit_code;
 
-void numeric_arg_required(t_data *mini_data)
+void numeric_arg_required(char **command)
 {
-	//TODO how?
-//	printf();
+	write(2, "minishell: ", 11);
+	write(2, command[0], ft_strlen(command[0]));
+	write(2, ": ", 2);
+	write(2, command[1], ft_strlen(command[1]));
+	write(2, ": ", 2);
+	write(2, "numeric argument require\n",25);
 	g_exit_code = 255;
-	free_cmd_list(&mini_data->commands);
-	mini_data->commands = NULL; //TODO do we have kids too kill?
-	return_prompt();
+	free_str(command);
 }

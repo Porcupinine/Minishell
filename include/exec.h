@@ -44,6 +44,13 @@ int		builtin_env(t_data *mini, char **cmd);
 int		builtin_echo(t_data *mini, char **cmd);
 
 int		builtin_cd(t_data *mini, char **cmd);
+<<<<<<< HEAD
+=======
+int		search_path_cd(t_data *mini);
+int		change_oldpwd(t_data *mini);
+int		change_pwd(t_data *mini);
+
+>>>>>>> master
 
 /* EXEC */
 int		start(t_data *mini);
