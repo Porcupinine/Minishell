@@ -70,13 +70,13 @@ void	builtin_exit(char **cmd)
 	if (j > 1) // so more than one arg
 	{
 		too_many_args(cmd);
-		return (1);
+		return ;
 //		builtin_err("exit", "too many arguments\n"); //TODO it doesn't have **command
 		// exit with 1 BUT things to free first
 	}
 	else
 	{
-		sub = ft_substr(cmd, 5, ft_strlen(cmd));
+		sub = ft_substr(cmd[0], 5, ft_strlen(cmd[0]));
 		code = ft_atoi_long(sub);
 		if (code == -1)
 		{

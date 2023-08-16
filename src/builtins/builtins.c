@@ -30,7 +30,7 @@ int	builtins(char **cmd, t_data *mini)
 	else if (ft_strncmp(cmd[0], "env", 3) == 0)
 		builtin_env(mini, cmd);
 	else if (ft_strncmp(cmd[0], "exit", 4) == 0)
-		builtin_exit(*cmd); // mini needed here ++ send ddouble pointer so it can be freed
+		builtin_exit(cmd); // mini needed here ++ send ddouble pointer so it can be freed
 	else
 		return (1);
 	return (0);

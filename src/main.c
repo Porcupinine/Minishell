@@ -35,11 +35,9 @@ void return_prompt(void)
 
 void	sigint_handler(int sig)
 {
-//	write(1, "\n", 1);
 	return_prompt();
 	kill(0, SIGQUIT);
-//	//TODO TOP changes the signal, it can b
-//	// reak minishell
+	//TODO TOP changes the signal, it can break minishell
 }
 
 // if (!isatty(STDIN_FILENO))
@@ -74,7 +72,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_error("Data malloc fail!\n");
 	parse_array_envp(mini_data, envp);
 	// parse_list_envp(mini_data, envp);
-	set_signals();
+//	set_signals();
 	if (argc != 1)
 		ft_error("EROOR!!\nWrong amount of args!\n");
 	mini_data->command_line = ft_calloc(1, sizeof(char));
@@ -82,6 +80,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_error("Malloc fail \n");
 	while (1)
 	{
+		set_signals();
 		mini_data->command_line = readline("MINISHELL: ");
 		line_history(mini_data);
 		parse(mini_data);
