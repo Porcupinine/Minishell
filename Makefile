@@ -71,6 +71,7 @@ lib42_build:
 
 $(NAME): lib42_build $(OBJECTS_PREFIXED)
 	@$(CC) $(OBJECTS_PREFIXED) $(LIBS) $(HEADERS) -o $@ -lreadline
+	@echo "MINIHELL is ready!"
 
 clean:
 	@rm -rf $(OBJ_DIR)

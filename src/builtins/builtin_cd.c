@@ -72,7 +72,7 @@ int search_path_cd(t_data *mini, char **cmd)
 
 	str = malloc((ft_strlen(mini->commands->cmd) - 2) * sizeof(char)); // -3 to skip cd and space but + 1 not null term
 	if (str == NULL)
-		return (-1); // TODO check if needs to be NULL
+		ft_error("Malloc fail\n"); // TODO check if needs to be NULL
 	i = 0;
 	while (mini->commands->cmd[i + 3]) // here too +3 right??
 	{
