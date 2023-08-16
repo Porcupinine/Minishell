@@ -49,6 +49,7 @@ $(OBJ_DIR)%.o : %.c
 
 $(NAME): $(OBJECTS_PREFIXED)
 	@ar r $(NAME) $(OBJECTS_PREFIXED)
+	@echo "Lib42 is ready!"
 
 clean:
 	@rm -rf $(OBJ_DIR)

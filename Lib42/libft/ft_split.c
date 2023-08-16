@@ -6,7 +6,7 @@
 /*   By: lpraca-l <lpraca-l@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 13:59:41 by lpraca-l      #+#    #+#                 */
-/*   Updated: 2022/10/31 18:24:52 by lpraca-l      ########   odam.nl         */
+/*   Updated: 2023/08/16 16:25:52 by lpraca-l      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	count_words(char const *s, char c)
 	count = 0;
 	count_words = 0;
 	while (s[count] == c && s[count] != '\0')
-			count++;
+		count++;
 	while (s[count] != '\0')
 	{
 		while (s[count] != c && s[count] != '\0')

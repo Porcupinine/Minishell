@@ -6,7 +6,7 @@
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/11 08:03:05 by laura         #+#    #+#                 */
-/*   Updated: 2023/08/11 08:03:39 by laura         ########   odam.nl         */
+/*   Updated: 2023/08/16 14:37:43 by lpraca-l      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,4 @@ void	parse_array_envp(t_data *mini_data, char **envp)
 		count++;
 	}
 	mini_data->mini_envp[count] = NULL;
-//	print_envp(mini_data->mini_envp);
 }

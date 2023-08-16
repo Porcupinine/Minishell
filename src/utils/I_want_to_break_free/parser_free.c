@@ -6,7 +6,7 @@
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/11 08:04:56 by laura         #+#    #+#                 */
-/*   Updated: 2023/08/11 08:05:41 by laura         ########   odam.nl         */
+/*   Updated: 2023/08/16 14:35:27 by lpraca-l      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	free_cmd_list(t_commands **cmd)
 	tmp = NULL;
 	if (cmd == NULL)
 		return ;
-	while (*cmd) {
+	while (*cmd)
+	{
 		tmp = *cmd;
 		*cmd = (*cmd)->next;
 		free(tmp);

@@ -58,13 +58,13 @@ int	builtin_cd(t_data *mini, char **cmd)
 	}
 	else // a specified path
 	{
-		search_path_cd(mini); // is the below needed then??
+		search_path_cd(mini, cmd); // is the below needed then??
 		return (0);
 	}
 	return (-1); // is this correct
 }
 
-int search_path_cd(t_data *mini)
+int search_path_cd(t_data *mini, char **cmd)
 {
 	int 		i;
 	char 		*str;
@@ -72,7 +72,7 @@ int search_path_cd(t_data *mini)
 
 	str = malloc((ft_strlen(mini->commands->cmd) - 2) * sizeof(char)); // -3 to skip cd and space but + 1 not null term
 	if (str == NULL)
-		return (-1); // TODO check if needs to be NULL
+		ft_error("Malloc fail\n"); // TODO check if needs to be NULL
 	i = 0;
 	while (mini->commands->cmd[i + 3]) // here too +3 right??
 	{
@@ -90,7 +90,11 @@ int search_path_cd(t_data *mini)
 		}
 	}
 	if (chdir(str) != 0)
-		return (builtin_err2("cd", str, "Not a directory\n"), 1); // check
+	{
+		not_directory(cmd);
+		return (1);
+//		return (builtin_err2("cd", str, "Not a directory\n"), 1); // check
+	}
 	change_pwd(mini); // meaning if succeed so we need to undate this 
 		// check on a return value or what??
 	free(str);

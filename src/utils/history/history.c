@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/28 11:50:47 by laura         #+#    #+#                 */
-/*   Updated: 2023/08/11 08:04:43 by laura         ########   odam.nl         */
+/*   Updated: 2023/08/16 14:35:43 by lpraca-l      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "../../include/minishell.h"
 #include "unistd.h"
 
-void line_history(t_data *mini_data)
+void	line_history(t_data *mini_data)
 {
 	if (mini_data->command_line == NULL)
 	{

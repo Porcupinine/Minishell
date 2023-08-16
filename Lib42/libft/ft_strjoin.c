@@ -6,7 +6,7 @@
 /*   By: lpraca-l <lpraca-l@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/17 14:32:37 by lpraca-l      #+#    #+#                 */
-/*   Updated: 2022/10/22 11:59:20 by lpraca-l      ########   odam.nl         */
+/*   Updated: 2023/08/16 16:25:07 by lpraca-l      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,23 +62,12 @@ char	*ft_strjoin_space(char const *s1, char const *s2)
 		join = ft_calloc((len + 2), sizeof(char));
 	if (join == NULL)
 		return (NULL);
-	while (s1[counts1] != '\0')
-	{
+	while (s1[counts1++] != '\0')
 		join[counts1] = s1[counts1];
-		counts1++;
-	}
 	if (ft_strlen(s1) != 0)
-	{
-		join[counts1] = ' ';
-		counts1++;
-	}
+		join[counts1++] = ' ';
 	while (s2[counts2] != '\0')
-	{
-		join[counts1] = s2[counts2];
-		counts1++;
-		counts2++;
-	}
+		join[counts1++] = s2[counts2++];
 	join[counts1] = '\0';
 	return (join);
 }
-//TODO make this norminette

@@ -6,7 +6,7 @@
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/17 17:30:08 by laura         #+#    #+#                 */
-/*   Updated: 2023/08/11 07:57:17 by laura         ########   odam.nl         */
+/*   Updated: 2023/08/16 14:40:14 by lpraca-l      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include "../../include/lexical_analyzer.h"
 #include "../../include/I_want_to_break_free.h"
 
-extern int g_exit_code;
+extern int	g_exit_code;
 
 void	syntax_error(t_state_machine *parser, char c)
 {

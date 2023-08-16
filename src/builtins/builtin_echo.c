@@ -14,6 +14,8 @@
 #include "../../include/env_var.h"
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
+#include "../../include/errors.h"
+
  extern int g_exit_code;
 /*
 	should it also handle echo $?  ??
@@ -42,8 +44,9 @@ int	builtin_echo(t_data *mini, char **cmd)
 			ft_putchar_fd(mini->commands->cmd[i], mini->commands->out);
 			i++;
 		}
+		return (0); // check
 	}
-	else
+	else if (ft_strlen(cmd[0]) == 4)
 	{
 		i = 0;
 		while (cmd[i])
@@ -58,7 +61,9 @@ int	builtin_echo(t_data *mini, char **cmd)
 			i++;
 		}
 		write(mini->commands->out, "\n", 1);
+		return (0); // check
 	}
-	g_exit_code = 999;
-	return (0); // check
+	else
+		no_command(cmd);
+	return (127); // check
 }
