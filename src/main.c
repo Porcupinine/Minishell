@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/17 17:23:55 by laura             #+#    #+#             */
-/*   Updated: 2023/08/14 17:08:59 by dmaessen         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/07/17 17:23:55 by laura         #+#    #+#                 */
+/*   Updated: 2023/08/16 14:31:16 by lpraca-l      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 int g_exit_code;
 
-void return_prompt(void)
+void	return_prompt(void)
 {
 	printf("\n");
 	rl_on_new_line();
@@ -35,7 +35,6 @@ void return_prompt(void)
 
 void	sigint_handler(int sig)
 {
-//	write(1, "\n", 1);
 	return_prompt();
 	kill(0, SIGQUIT);
 //	//TODO TOP changes the signal, it can b
