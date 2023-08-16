@@ -6,7 +6,7 @@
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/11 08:04:28 by laura         #+#    #+#                 */
-/*   Updated: 2023/08/11 08:04:30 by laura         ########   odam.nl         */
+/*   Updated: 2023/08/16 14:36:27 by lpraca-l      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 
 // _: _: no such file or directory
 
-extern int g_exit_code;
+extern int	g_exit_code;
 
-void no_file_directory(char **command)
+void	no_file_directory(char **command)
 {
 	write(2, "minishell: ", 11);
 	write(2, command[0], ft_strlen(command[0]));
@@ -32,7 +32,7 @@ void no_file_directory(char **command)
 	free_str(command);
 }
 
-void not_valid_identifier(char **command)
+void	not_valid_identifier(char **command)
 {
 	write(2, "minishell: ", 11);
 	write(2, command[0], ft_strlen(command[0]));
@@ -44,7 +44,7 @@ void not_valid_identifier(char **command)
 	free_str(command);
 }
 
-void permission_denied(char **command)
+void	permission_denied(char **command)
 {
 	write(2, "minishell: ", 11);
 	write(2, command[0], ft_strlen(command[0]));
@@ -56,7 +56,7 @@ void permission_denied(char **command)
 	free_str(command);
 }
 
-void too_many_args(char **command)
+void	too_many_args(char **command)
 {
 	write(2, "minishell: ", 11);
 	write(2, command[0], ft_strlen(command[0]));
@@ -66,7 +66,7 @@ void too_many_args(char **command)
 	free(command);
 }
 
-void not_directory(char **command)
+void	not_directory(char **command)
 {
 	write(2, "minishell: ", 11);
 	write(2, command[0], ft_strlen(command[0]));

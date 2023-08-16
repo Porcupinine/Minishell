@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/17 17:23:55 by laura             #+#    #+#             */
-/*   Updated: 2023/08/14 17:08:59 by dmaessen         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/07/17 17:23:55 by laura         #+#    #+#                 */
+/*   Updated: 2023/08/16 14:35:04 by lpraca-l      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int	main(int argc, char **argv, char **envp)
 		ft_error("Data malloc fail!\n");
 	parse_array_envp(mini_data, envp);
 	// parse_list_envp(mini_data, envp);
-//	set_signals();
 	if (argc != 1)
 		ft_error("EROOR!!\nWrong amount of args!\n");
 	mini_data->command_line = ft_calloc(1, sizeof(char));
