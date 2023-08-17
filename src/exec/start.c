@@ -6,7 +6,7 @@
 /*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/17 10:50:30 by domi             ###   ########.fr       */
+/*   Updated: 2023/08/17 19:45:46 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ extern int g_exit_code;
 
 void close_fds(t_data *mini)
 {
-	if (mini->commands->in != STDIN_FILENO)
+	// printf("HERE? %d %d\n", mini->commands->in, mini->commands->out);
+	printf("HERE (in close_fds)?\n");
+	if (mini->commands->in != 0)
 		close(mini->commands->in);
-	if (mini->commands->out != STDOUT_FILENO)
+	if (mini->commands->out != 1)
 		close(mini->commands->out);
 	if (access("tmp_file", F_OK) == 0) // does this work?
 		unlink("tmp_file");
@@ -52,8 +54,8 @@ static int	execute_pipe(t_data *mini, int nb_cmds)
 		mini->commands = mini->commands->next;
 	}
 	close_pipe(mini->fd, mini->nb_cmds);
-	free_fd(mini->fd, mini->nb_cmds);
 	close_fds(mini);
+	free_fd(mini->fd, mini->nb_cmds);
 	waitpid(pid, &mini->status, 0);
 	if (WIFEXITED(mini->status))
 		mini->status = WEXITSTATUS(mini->status);
