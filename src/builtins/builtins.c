@@ -38,6 +38,7 @@ int	builtins(char **cmd, t_data *mini)
 
 int check_builtins(char **cmd, t_data *mini)
 {
+	//TODO check if cmd = NULL
 	if (ft_strncmp(cmd[0], "echo", 4) == 0)
 		return (0);
 	else if (ft_strncmp(cmd[0], "cd", 2) == 0)
