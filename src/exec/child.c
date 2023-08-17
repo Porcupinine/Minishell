@@ -6,7 +6,7 @@
 /*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:14 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/17 10:49:50 by domi             ###   ########.fr       */
+/*   Updated: 2023/08/17 16:34:57 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ static void	child_last(int fd_r[], int out_file, t_commands *commands, t_data *m
 		err_msg("", "dup2 failed.\n"); // check -- exit(EXIT_FAILURE);
 	if (dup2(out_file, STDOUT_FILENO) == -1)
 		err_msg("", "dup2 failed.\n"); // check -- exit(EXIT_FAILURE);
-	close(fd_r[1]);
-	if (out_file != STDOUT_FILENO) // or what should be the rule here??
-		close(out_file);
-	close_pipe(mini->fd, mini->nb_cmds);
+	// close(fd_r[1]);
+	// if (out_file != STDOUT_FILENO) // or what should be the rule here??
+	// 	close(out_file);
+	// close_pipe(mini->fd, mini->nb_cmds);
 	split_args(commands->cmd, mini->mini_envp, mini);
 }
 
@@ -50,9 +50,9 @@ static void	child_middle(int fd_r[], int fd_w[], t_commands *commands, t_data *m
 		err_msg("", "dup2 failed.\n"); // check -- exit(EXIT_FAILURE);
 	if (dup2(fd_w[1], STDOUT_FILENO) == -1)
 		err_msg("", "dup2 failed.\n"); // check -- exit(EXIT_FAILURE);
-	close(fd_w[0]);
-	close(fd_r[1]);
-	close_pipe(mini->fd, mini->nb_cmds);
+	// close(fd_w[0]);
+	// close(fd_r[1]);
+	// close_pipe(mini->fd, mini->nb_cmds);
 	split_args(commands->cmd, mini->mini_envp, mini); 
 }
 

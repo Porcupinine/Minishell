@@ -6,7 +6,7 @@
 /*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:09:12 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/17 09:19:00 by domi             ###   ########.fr       */
+/*   Updated: 2023/08/17 16:33:15 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	builtin_cd(t_data *mini, char **cmd)
 	
 	if (*mini->mini_envp == NULL)
 		return (-1); // TODO check if needs to be NULL
-	if (ft_strncmp(cmd[0], "cd\0", 3) || ft_strncmp(cmd[0], "cd ~\0", 5))
+	if ((ft_strncmp(cmd[0], "cd\0", 2) == 0 && !cmd[1])
+ 		|| (ft_strncmp(cmd[1], "~", 1) == 0 && !cmd[2]))
 	{
 		i = 0;
 		while (mini->mini_envp[i])
@@ -46,12 +47,6 @@ int	builtin_cd(t_data *mini, char **cmd)
 					permission_denied(cmd);
 					return (1);
 				}
-//				return (builtin_err2("cd",
-//										 }
-//						ft_substr(mini->mini_envp[i], 6, ft_strlen(mini->mini_envp[i])),
-//						"Permission denied\n"), 1);//TODO **command??
-//				change_pwd(mini); // meaning if succeed so we need to undate this
-//					// check on a return value or what??
 				return (0);
 			}
 			i++;
