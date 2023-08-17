@@ -72,6 +72,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_error("Data malloc fail!\n");
 	parse_array_envp(mini_data, envp);
 	// parse_list_envp(mini_data, envp);
+	set_signals();
 	if (argc != 1)
 		ft_error("EROOR!!\nWrong amount of args!\n");
 	mini_data->command_line = ft_calloc(1, sizeof(char));
@@ -79,7 +80,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_error("Malloc fail \n");
 	while (1)
 	{
-		set_signals();
+//		set_signals();
 		mini_data->command_line = readline("MINISHELL: ");
 		line_history(mini_data);
 		parse(mini_data);
