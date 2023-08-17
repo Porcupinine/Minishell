@@ -6,7 +6,7 @@
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/17 17:28:34 by laura         #+#    #+#                 */
-/*   Updated: 2023/08/11 08:01:01 by laura         ########   odam.nl         */
+/*   Updated: 2023/08/16 14:39:18 by lpraca-l      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include "../../../include/cmd_list_actions.h"
 #include "../../../include/exec.h"
 
-extern int g_exit_code;
+extern int	g_exit_code;
 
 void	token_start(t_state_machine *parser)
 {
@@ -79,6 +79,3 @@ void	parse_machine(t_data *mini_data, t_state_machine *parser)
 	else
 		syntax_error(parser, parser->cmd[(parser->count) - 1]);
 }
-//TODO can end with space but we like to ignore it
-
-

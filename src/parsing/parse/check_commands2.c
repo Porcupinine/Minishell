@@ -6,7 +6,7 @@
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/11 07:55:33 by laura         #+#    #+#                 */
-/*   Updated: 2023/08/11 07:56:53 by laura         ########   odam.nl         */
+/*   Updated: 2023/08/16 14:40:47 by lpraca-l      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include "../../../include/I_want_to_break_free.h"
 #include "../../../include/errors.h"
 
-extern int g_exit_code;
+extern int	g_exit_code;
 
 void	extract_cmd(t_tokens **it_token, t_commands **cmd)
 {

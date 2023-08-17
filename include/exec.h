@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 14:43:48 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/15 16:10:25 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/17 09:13:41 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,17 @@ int		builtin_pwd(t_data *mini);
 
 int     builtin_export(t_data *mini, char **cmd);
 
-void	builtin_exit(char *cmd); // t_data *mini,  needed ??
+void	builtin_exit(char **cmd); // t_data *mini,  needed ??
 
 int		builtin_env(t_data *mini, char **cmd);
 
 int		builtin_echo(t_data *mini, char **cmd);
 
 int		builtin_cd(t_data *mini, char **cmd);
+int		search_path_cd(t_data *mini, char **cmd);
+int		change_oldpwd(t_data *mini);
+int		change_pwd(t_data *mini);
+
 
 /* EXEC */
 int		start(t_data *mini);

@@ -62,6 +62,13 @@ void	too_many_args(char **command);
  * message
  */
 void	numeric_arg_required(char **command);
+/**
+ * writes not a directory error message, set exit code to 1 and free
+ * command array
+ * @param command array of strings containing information for the errror
+ * message
+ */
+void not_directory(char **command);
 
 
 #endif //MINISHELL_ERRORS_H

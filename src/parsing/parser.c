@@ -6,7 +6,7 @@
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/11 08:01:47 by laura         #+#    #+#                 */
-/*   Updated: 2023/08/11 08:01:50 by laura         ########   odam.nl         */
+/*   Updated: 2023/08/16 14:38:40 by lpraca-l      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ void	parse(t_data *mini_data)
 	parse_tokens(parser, mini_data);
 	printf("-------CMD LIST------\n");
 	print_cmd_list(mini_data->commands);
-//	free(mini_data->command_line);
-//	mini_data->command_line = NULL;
+	free(mini_data->command_line);
+	mini_data->command_line = NULL;
 }
