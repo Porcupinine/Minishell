@@ -6,7 +6,7 @@
 /*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:49:01 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/15 21:47:18 by domi             ###   ########.fr       */
+/*   Updated: 2023/08/17 10:37:08 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@
 // 		pos++;
 // 		mini->commands = mini->commands->next;
 // 	}
-// 	close_pipe(mini->commands->fd, mini->nb_cmds);
-// 	free_fd(mini->commands->fd, mini->nb_cmds);
+// 	close_pipe(mini->fd, mini->nb_cmds);
+// 	free_fd(mini->fd, mini->nb_cmds);
 // 	close_fds(mini);
 // 	waitpid(pid, &mini->commands->status, 0); // or w/ mini->process->pid ??
 // 	if (WIFEXITED(mini->commands->status))
@@ -58,8 +58,8 @@ int	exec_fork_onecmd(t_data *mini)
 		ft_error("Fork failed.\n"); // check errno ft_error exits the program 
 	if (pid == 0)
 		run_one_cmd(mini->commands->in, mini->commands->out, mini);
-    close_pipe(mini->commands->fd, mini->nb_cmds);
-	free_fd(mini->commands->fd, mini->nb_cmds);
+    close_pipe(mini->fd, mini->nb_cmds);
+	free_fd(mini->fd, mini->nb_cmds);
 	close_fds(mini);
 	waitpid(pid, &mini->status, 0); // or w/ mini->process->pid ??
 	if (WIFEXITED(mini->status)) // check

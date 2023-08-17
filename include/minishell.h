@@ -6,7 +6,7 @@
 /*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 08:08:41 by laura             #+#    #+#             */
-/*   Updated: 2023/08/15 21:47:26 by domi             ###   ########.fr       */
+/*   Updated: 2023/08/17 10:36:27 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ typedef struct s_commands
 	t_infile			*infiles;
 	int					out;
 	int					in;
-	int					**fd;
+	// int					**fd;
 	// int					status;
 	struct s_commands	*next;
 }t_commands;
@@ -130,6 +130,7 @@ typedef struct s_data
 	t_pid				*process;
 	int					nb_cmds;
 	int					status;
+	int					**fd;
 //	int					exit_code;
 }t_data;
 

@@ -6,7 +6,7 @@
 /*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/15 21:46:09 by domi             ###   ########.fr       */
+/*   Updated: 2023/08/17 10:50:30 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ void close_fds(t_data *mini)
 		close(mini->commands->in);
 	if (mini->commands->out != STDOUT_FILENO)
 		close(mini->commands->out);
-	// if (mini->commands->infiles->file->type == "HEREDOC") // check -- change for int
-	if (access("tmp_file", F_OK) == 0) // does this work? apply to the rest if yes
+	if (access("tmp_file", F_OK) == 0) // does this work?
 		unlink("tmp_file");
 }
 
@@ -45,18 +44,17 @@ static int	execute_pipe(t_data *mini, int nb_cmds)
 		pid = fork();
 		pid_lstadd_back(&mini->process, pid);
 		if (pid == -1)
-			ft_error("Fork failed.\n"); // check errno ft_error exits the program 
+			ft_error("Fork failed.\n");
 		if (pid == 0)
 			which_child(mini, mini->commands, i, pos);
 		i++;
 		pos++;
 		mini->commands = mini->commands->next;
 	}
-	close_pipe(mini->commands->fd, mini->nb_cmds);
-	free_fd(mini->commands->fd, mini->nb_cmds);
+	close_pipe(mini->fd, mini->nb_cmds);
+	free_fd(mini->fd, mini->nb_cmds);
 	close_fds(mini);
-	waitpid(pid, &mini->status, 0); // or w/ mini->process->pid ??
-	// this will become the exit code: SET IT HERE
+	waitpid(pid, &mini->status, 0);
 	if (WIFEXITED(mini->status))
 		mini->status = WEXITSTATUS(mini->status);
 	if (WIFSIGNALED(mini->status))  // check
@@ -103,6 +101,16 @@ void	close_pipe(int **fd, int nb)
 	}
 }
 
+static void multiple_cmd(t_data *mini)
+{
+	mini->fd = open_pipes(mini); // level needs to be changes else fd only stored on the first cmd
+	execute_pipe(mini, mini->nb_cmds); // check if a success
+	// if (execute_pipe(mini, mini->nb_cmds) == errno) // check
+	// 	return (errno); // check what to return here, maybe just 1
+	free_pid_list(&mini->process);
+	mini->process = NULL;
+}
+
 static void one_cmd(t_data *mini)
 {
 	char **command;
@@ -112,8 +120,8 @@ static void one_cmd(t_data *mini)
 		ft_error("Malloc failed\n");
 	input_re(mini->commands, mini); // error checking
 	output_re(mini->commands); // error checking 
-	mini->commands->fd = open_pipes(mini);
-	if (mini->commands->fd == NULL)
+	mini->fd = open_pipes(mini);
+	if (mini->fd == NULL)
 		err_msg("", "pipe opening failed.\n"); // check
 	if (check_builtins(command, mini) == 1) // so not a builtin
 	{
@@ -126,8 +134,8 @@ static void one_cmd(t_data *mini)
 	{
 		free_str(command);
 		run_one_cmd(mini->commands->in, mini->commands->out, mini);
-		close_pipe(mini->commands->fd, mini->nb_cmds);
-		free_fd(mini->commands->fd, mini->nb_cmds);
+		close_pipe(mini->fd, mini->nb_cmds);
+		free_fd(mini->fd, mini->nb_cmds);
 		close_fds(mini);
 	}
 }
@@ -145,13 +153,14 @@ int	start(t_data *mini)
 		one_cmd(mini);
 	else
 	{
-		mini->commands->fd = open_pipes(mini);
-		if (mini->commands->fd == NULL)
-			err_msg("", "pipe opening failed.\n"); // check, might be double now
-		if (execute_pipe(mini, mini->nb_cmds) == errno) // check
-			return (errno); // check what to return here, maybe just 1
-		free_pid_list(&mini->process);
-		mini->process = NULL;
+		multiple_cmd(mini);
+		// mini->fd = open_pipes(mini);
+		// if (mini->fd == NULL)
+		// 	err_msg("", "pipe opening failed.\n"); // check, might be double now
+		// if (execute_pipe(mini, mini->nb_cmds) == errno) // check
+		// 	return (errno); // check what to return here, maybe just 1
+		// free_pid_list(&mini->process);
+		// mini->process = NULL;
 	}
 	free_cmd_list(&mini->commands);
 	mini->commands = NULL;
