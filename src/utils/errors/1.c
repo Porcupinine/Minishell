@@ -73,7 +73,7 @@ void	not_directory(char **command)
 	write(2, ": ", 2);
 	write(2, command[1], ft_strlen(command[1]));
 	write(2, ": ", 2);
-	write(2, "Not a directory\n", 26);
+	write(2, "Not a directory\n", 17);
 	g_exit_code = 1;
 	free_str(command);
 }
