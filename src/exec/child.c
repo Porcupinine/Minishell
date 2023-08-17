@@ -6,7 +6,7 @@
 /*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:14 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/17 16:34:57 by domi             ###   ########.fr       */
+/*   Updated: 2023/08/17 17:04:51 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	which_child(t_data *mini, t_commands *commands, int i, int pos)
 		child_last(mini->fd[pos - 1], commands->out, commands, mini);
 	else
 	{
-	printf("END OF CHILD\n");
+		printf("END OF CHILD\n"); // to rm
 		if (i <= 1024) // think its fine here as you never know if something might break -- max amount pipes
 			child_middle(mini->fd[pos - 1], mini->fd[pos], commands, mini);
 		else
