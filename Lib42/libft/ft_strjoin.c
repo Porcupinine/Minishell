@@ -62,8 +62,11 @@ char	*ft_strjoin_space(char const *s1, char const *s2)
 		join = ft_calloc((len + 2), sizeof(char));
 	if (join == NULL)
 		return (NULL);
-	while (s1[counts1++] != '\0')
+	while (s1[counts1] != '\0')
+	{
 		join[counts1] = s1[counts1];
+		counts1++;
+	}
 	if (ft_strlen(s1) != 0)
 		join[counts1++] = ' ';
 	while (s2[counts2] != '\0')
