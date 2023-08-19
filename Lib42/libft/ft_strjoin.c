@@ -66,7 +66,7 @@ char	*ft_strjoin_space(char const *s1, char const *s2)
 		join[counts1] = s1[counts1];
 		counts1++;
 	}
-	if (ft_strlen(s1) != 0 || ft_strlen(s2) != 0)
+	if (ft_strlen(s1) != 0)
 		join[counts1++] = ' ';
 	while (s2[counts2] != '\0')
 		join[counts1++] = s2[counts2++];

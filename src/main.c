@@ -82,9 +82,12 @@ int	main(int argc, char **argv, char **envp)
 	{
 //		set_signals();
 		mini_data->command_line = readline("MINISHELL: ");
-		line_history(mini_data);
-		parse(mini_data);
-		start(mini_data);
+		if (ft_strncmp(mini_data->command_line, "",1) != 0)
+		{
+			line_history(mini_data);
+			parse(mini_data);
+			start(mini_data);
+		}
 		printf("Exit code: %d\n", g_exit_code);
 	}
 	return (0);
