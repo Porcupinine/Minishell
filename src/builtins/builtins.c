@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 17:07:22 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/15 15:11:21 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/21 09:38:53 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int	builtins(char **cmd, t_data *mini)
 
 int check_builtins(char **cmd, t_data *mini)
 {
-	//TODO check if cmd = NULL
+	if (!cmd[0])// TODO check if cmd = NULL
+		return (1); 
 	if (ft_strncmp(cmd[0], "echo", 4) == 0)
 		return (0);
 	else if (ft_strncmp(cmd[0], "cd", 2) == 0)

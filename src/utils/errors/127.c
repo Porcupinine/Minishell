@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   127.c                                              :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: laura <laura@student.codam.nl>               +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/08/11 08:04:28 by laura         #+#    #+#                 */
-/*   Updated: 2023/08/16 14:37:09 by lpraca-l      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   127.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/11 08:04:28 by laura             #+#    #+#             */
+/*   Updated: 2023/08/21 16:06:20 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ void	no_command(char **command)
 	write(2, command[0], ft_strlen(command[0]));
 	write(2, ": command not found\n", 21);
 	g_exit_code = 127;
-	free_str(command);
+	//free_str(command); // else double free
 }
