@@ -52,4 +52,5 @@ void	parse_array_envp(t_data *mini_data, char **envp)
 		count++;
 	}
 	mini_data->mini_envp[count] = NULL;
+//	print_envp(mini_data->mini_envp);
 }

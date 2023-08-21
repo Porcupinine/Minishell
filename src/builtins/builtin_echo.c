@@ -55,7 +55,7 @@ int	builtin_echo(t_data *mini, char **cmd)
 			i++;
 		}
 		i = 5;
-		while (mini->commands->cmd[i])
+		while (mini->commands->cmd[i]) //TODO echo by itself should print newline but breaks here
 		{
 			ft_putchar_fd(mini->commands->cmd[i], mini->commands->out);
 			i++;

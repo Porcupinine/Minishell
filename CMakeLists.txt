@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.25)
 project(minishell C)
 include_directories(${CMAKE_SOURCE_DIR}/Lib42/include SYSTEM/Users/lpraca-l/.brew/opt/readline/include)
 
-#add_compile_options(-fsanitize=address -g3)
-#add_link_options(-fsanitize=address)
+add_compile_options(-fsanitize=address -g3)
+add_link_options(-fsanitize=address)
 #add_compile_options(-fsanitize=address -fsanitize=address)
 #add_link_options(-fsanitize=address)
 #add_compile_options(-Wall -Werror -Wextra)
@@ -12,8 +12,9 @@ set(CMAKE_C_STANDARD 99)
 
 add_custom_target(
         extern_lib
-        COMMAND make
-        WORKING_DIRECTORY /Lib42
+		BYPRODUCTS ${CMAKE_SOURCE_DIR}/Lib42/libft.a
+		COMMAND make
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/Lib42/
 )
 
 add_executable(minishell src/main.c
@@ -39,3 +40,4 @@ src/utils/token_list_actions/search_token.c)
 
 target_link_libraries(minishell ${CMAKE_SOURCE_DIR}/Lib42/libft.a -lreadline)
 target_link_directories(minishell PRIVATE /Users/lpraca-l/.brew/opt/readline/lib)
+add_dependencies(minishell extern_lib)

@@ -15,6 +15,7 @@
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
 #include "../../include/errors.h"
+#include <stdio.h>
 
 static int	find_path(char **envp)
 {
@@ -88,6 +89,7 @@ char	*split_args(char *cmd, char **envp, t_data *mini)
 			no_command(command); // exit should be with // exit(127);
 		if  (path_to_cmd != NULL && command != NULL)
 			execve(path_to_cmd, command, envp);
+		printf("%s", path_to_cmd);
 		free(path_to_cmd);
 		// throw an error, to check
 	}
