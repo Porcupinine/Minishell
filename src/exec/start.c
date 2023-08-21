@@ -21,7 +21,7 @@ extern int g_exit_code;
 
 void close_fds(t_data *mini)
 {
-	if (mini->commands->in != STDIN_FILENO)
+	if (mini->commands->in != STDIN_FILENO) // where iis this edited ??
 		close(mini->commands->in);
 	if (mini->commands->out != STDOUT_FILENO)
 		close(mini->commands->out);
@@ -42,7 +42,7 @@ static int	execute_pipe(t_data *mini, int nb_cmds)
 		input_re(mini->commands, mini); // error checking
 		output_re(mini->commands); // error checking 
 		pid = fork();
-		pid_lstadd_back(&mini->process, pid);
+//		pid_lstadd_back(&mini->process, pid);
 		if (pid == -1)
 			ft_error("Fork failed.\n");
 		if (pid == 0)

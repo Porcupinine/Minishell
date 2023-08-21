@@ -74,8 +74,6 @@ void	parse_machine(t_data *mini_data, t_state_machine *parser)
 	ft_substr(parser->cmd, parser->start, parser->len), T_CHAR);
 		g_exit_code = 0;
 	}
-	else if (parser->state == S_WHITESPACE)
-		;
-	else
+	else if (parser->state != S_WHITESPACE)
 		syntax_error(parser, parser->cmd[(parser->count) - 1]);
 }

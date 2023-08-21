@@ -14,6 +14,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <signal.h>
+#include <termios.h>
 #include "../Lib42/include/libft.h"
 #include "../include/minishell.h"
 #include "../include/env_var.h"
@@ -54,13 +55,18 @@ void	set_signals(void)
 {
 	struct sigaction	sigint_sa;
 	struct sigaction	sigquit_sa;
-
+	struct termios term;
+//
+	tcgetattr(fileno(stdin), &term);
 	sigemptyset(&sigint_sa.sa_mask);
 	sigemptyset(&sigquit_sa.sa_mask);
 	sigquit_sa.sa_handler = &sigquit_handler;
 	sigint_sa.sa_handler = &sigint_handler;
 	sigaction(SIGQUIT, &sigquit_sa, NULL);
 	sigaction(SIGINT, &sigint_sa, NULL);
+	term.c_lflag &= ~ECHOCTL;
+	tcsetattr(fileno(stdin), 0, &term);
+
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -72,7 +78,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_error("Data malloc fail!\n");
 	parse_array_envp(mini_data, envp);
 	// parse_list_envp(mini_data, envp);
-	set_signals();
+//	set_signals();
 	if (argc != 1)
 		ft_error("EROOR!!\nWrong amount of args!\n");
 	mini_data->command_line = ft_calloc(1, sizeof(char));
@@ -80,7 +86,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_error("Malloc fail \n");
 	while (1)
 	{
-//		set_signals();
+		set_signals();
 		mini_data->command_line = readline("MINISHELL: ");
 		if (ft_strncmp(mini_data->command_line, "",1) != 0)
 		{
@@ -88,7 +94,7 @@ int	main(int argc, char **argv, char **envp)
 			parse(mini_data);
 			start(mini_data);
 		}
-		printf("Exit code: %d\n", g_exit_code);
+//		printf("Exit code: %d\n", g_exit_code);
 	}
 	return (0);
 }

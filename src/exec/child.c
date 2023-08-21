@@ -17,7 +17,7 @@
 
 static void	child_start(int fd_w[], int in_file, t_commands *commands, t_data *mini)
 {
-	printf("FIRST CHILD? fd_w == %d    in_file == %d\n", fd_w[1], in_file);
+//	printf("FIRST CHILD? fd_w == %d    in_file == %d\n", fd_w[1], in_file);
 	if (dup2(in_file, STDIN_FILENO) == -1)
 		err_msg("", "dup2 failed.\n"); // check -- exit(EXIT_FAILURE);
 	if (dup2(fd_w[1], STDOUT_FILENO) == -1)
@@ -45,7 +45,7 @@ static void	child_last(int fd_r[], int out_file, t_commands *commands, t_data *m
 
 static void	child_middle(int fd_r[], int fd_w[], t_commands *commands, t_data *mini)
 {
-	printf("MIDDLE CHILD?\n");
+//	printf("MIDDLE CHILD?\n");
 	if (dup2(fd_r[0], STDIN_FILENO) == -1)
 		err_msg("", "dup2 failed.\n"); // check -- exit(EXIT_FAILURE);
 	if (dup2(fd_w[1], STDOUT_FILENO) == -1)
@@ -58,7 +58,7 @@ static void	child_middle(int fd_r[], int fd_w[], t_commands *commands, t_data *m
 
 void	which_child(t_data *mini, t_commands *commands, int i, int pos)
 {
-	printf("HERE IN CHILD?\n, i == %d pos == %d nb_cmd == %d \n", i, pos, mini->nb_cmds);
+//	printf("HERE IN CHILD?\n, i == %d pos == %d nb_cmd == %d \n", i, pos, mini->nb_cmds);
 	if (i == 1 && pos == 0)
 		child_start(mini->fd[pos], commands->in, commands, mini); 
 	else if (i == mini->nb_cmds)
