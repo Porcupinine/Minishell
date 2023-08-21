@@ -42,7 +42,7 @@ static int	execute_pipe(t_data *mini, int nb_cmds)
 		input_re(mini->commands, mini); // error checking
 		output_re(mini->commands); // error checking 
 		pid = fork();
-//		pid_lstadd_back(&mini->process, pid);
+		pid_lstadd_back(&mini->process, pid);
 		if (pid == -1)
 			ft_error("Fork failed.\n");
 		if (pid == 0)

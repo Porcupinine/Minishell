@@ -50,8 +50,7 @@ void	between_pipes(t_tokens **it_token, t_commands **cmd, t_data *mini_data, \
 		extract_cmd(it_token, cmd);
 		if ((*it_token) && ((*it_token)->type == T_BIG || \
 				(*it_token)->type == T_BIGBIG || \
-				(*it_token)->type == T_SMALL || \
-				(*it_token)->type == T_SMALLSMALL))
+				(*it_token)->type == T_SMALL))
 		{
 			(type) = (*it_token)->type;
 			(*it_token) = (*it_token)->next;
@@ -61,8 +60,12 @@ void	between_pipes(t_tokens **it_token, t_commands **cmd, t_data *mini_data, \
 				(*it_token) = (*it_token)->next;
 			}
 			else
+			{
 				syntax_error_parse(parser, mini_data);
+			}
 		}
+		if ((*it_token) && (*it_token)->type == T_SMALLSMALL)
+			;//TODO we got ourselves a heredoc
 	}
 }
 

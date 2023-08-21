@@ -36,7 +36,7 @@ src/utils/errors/1.c src/utils/errors/127.c src/utils/errors/255.c src/utils/err
 src/utils/history/history.c
 src/utils/I_want_to_break_free/parser_free.c
 src/utils/token_list_actions/add_token.c src/utils/token_list_actions/print_tokens.c
-src/utils/token_list_actions/search_token.c)
+src/utils/token_list_actions/search_token.c src/utils/signal_handlers/signal_handlers.c include/utils.h src/parsing/parse/heredoc.c)
 
 target_link_libraries(minishell ${CMAKE_SOURCE_DIR}/Lib42/libft.a -lreadline)
 target_link_directories(minishell PRIVATE /Users/lpraca-l/.brew/opt/readline/lib)
