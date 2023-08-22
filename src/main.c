@@ -19,11 +19,10 @@
 #include "../include/minishell.h"
 #include "../include/env_var.h"
 #include "../include/lexical_analyzer.h"
-#include "../include/token_list_actions.h"
+#include "../include/utils.h"
 #include "../include/builtins.h"
 #include "../include/exec.h"
-#include "../include/envp_parser.h"
-#include "../../include/utils.h"
+
 int g_exit_code;
 
 void	return_prompt(void)

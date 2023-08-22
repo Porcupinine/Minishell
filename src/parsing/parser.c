@@ -13,8 +13,7 @@
 #include "../../include/minishell.h"
 #include "../../Lib42/include/libft.h"
 #include "../../include/lexical_analyzer.h"
-#include "../../include/token_list_actions.h"
-#include "../../include/cmd_list_actions.h"
+#include "../../include/utils.h"
 #include <stdio.h>
 
 void	parse(t_data *mini_data)

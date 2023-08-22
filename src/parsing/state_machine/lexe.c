@@ -11,12 +11,11 @@
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
-#include "../../../include/token_list_actions.h"
+#include "../../../include/utils.h"
 #include "../../Lib42/include/libft.h"
 #include "../../../include/lexical_analyzer.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include "../../../include/cmd_list_actions.h"
 #include "../../../include/exec.h"
 
 extern int	g_exit_code;

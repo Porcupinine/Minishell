@@ -15,8 +15,7 @@
 //#include "libft.h"
 //#include "../../../include/lexical_analyzer.h"
 //#include "../../../include/env_var.h"
-//#include "../../../include/token_list_actions.h"
-//#include "../../../include/cmd_list_actions.h"
+//#include "../../../include/utils.h"
 //
 //static void	between_pipes(char *temp, enum s_type *type, t_commands **cmd, \
 //t_tokens **it_token)

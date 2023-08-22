@@ -95,7 +95,7 @@ void	read_stdin(t_commands *commands, t_data *mini)
 static void handle_heredoc(t_commands *commands, t_data *mini)
 {
 	commands->in = open("tmp_file", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	read_stdin(commands, mini);
+	read_stdin(commands, mini); //TODO heredoc function
 	close(commands->in);
 	commands->in = open("tmp_file", O_RDONLY);
 }
