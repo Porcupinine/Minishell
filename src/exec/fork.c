@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:49:01 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/21 16:36:51 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/22 10:49:32 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ int	exec_fork_onecmd(t_data *mini)
     close_pipe(mini->fd, mini->nb_cmds);
 	free_fd(mini->fd, mini->nb_cmds);
 	//close_fds(mini);
-	waitpid(pid, &mini->status, 0);
-	if (WIFEXITED(mini->status))
-		mini->status = WEXITSTATUS(mini->status);
-	if (WIFSIGNALED(mini->status))  // check
-		mini->status = 128 + WTERMSIG(mini->status);  // check
+	waitpid(pid, &mini->exit_code, 0);
+	if (WIFEXITED(mini->exit_code))
+		mini->exit_code = WEXITSTATUS(mini->exit_code);
+	if (WIFSIGNALED(mini->exit_code))  // check
+		mini->exit_code = 128 + WTERMSIG(mini->exit_code);  // check
 	return (0); // check
 }
 
@@ -62,11 +62,11 @@ int	exec_fork(t_data *mini, int nb_cmds)
 	close_pipe(mini->fd, mini->nb_cmds);
 	free_fd(mini->fd, mini->nb_cmds);
 	//close_fds(mini); // then maybe this one not needed if exits/execve
-	waitpid(pid, &mini->status, 0);
-	if (WIFEXITED(mini->status))
-		mini->status = WEXITSTATUS(mini->status);
-	if (WIFSIGNALED(mini->status))  // check
-		mini->status = 128 + WTERMSIG(mini->status);  // check
+	waitpid(pid, &mini->exit_code, 0);
+	if (WIFEXITED(mini->exit_code))
+		mini->exit_code = WEXITSTATUS(mini->exit_code);
+	if (WIFSIGNALED(mini->exit_code))  // check
+		mini->exit_code = 128 + WTERMSIG(mini->exit_code); // check
 	return (0); // check
 }
 
@@ -84,8 +84,8 @@ int	exec_fork(t_data *mini, int nb_cmds)
 //     close_pipe(mini->fd, mini->nb_cmds);
 // 	free_fd(mini->fd, mini->nb_cmds);
 // 	close_fds(mini);
-// 	waitpid(pid, &mini->status, 0); // or w/ mini->process->pid ??
-// 	if (WIFEXITED(mini->status)) // check
-// 		mini->status = WEXITSTATUS(mini->status); // check
+// 	waitpid(pid, &mini->exit_code, 0); // or w/ mini->process->pid ??
+// 	if (WIFEXITED(mini->exit_code)) // check
+// 		mini->exit_code = WEXITSTATUS(mini->exit_code); // check
 // 	return (0); // check
 // }

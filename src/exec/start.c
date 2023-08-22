@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/21 16:44:44 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/22 10:50:43 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	start(t_data *mini)
 			-- ++ send double pointer to cd and exit
 			-- rework cd (its all broke..)
 			-- add mini to exit
-		-- adapt the location to find $? --> WE LEAVE AS IS FOR NOW
+		-- adapt the location to find $? --> DONE
 		-- check and change all the error functions
 		-- add the right exit_code everywhere 
 			-- rm g_exit_code

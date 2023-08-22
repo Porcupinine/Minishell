@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   errors.h                                           :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: laura <laura@student.codam.nl>               +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/08/11 08:32:27 by laura         #+#    #+#                 */
-/*   Updated: 2023/08/11 08:33:04 by laura         ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   errors.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/11 08:32:27 by laura             #+#    #+#             */
+/*   Updated: 2023/08/22 14:35:13 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ void	numeric_arg_required(char **command);
  * @param command array of strings containing information for the errror
  * message
  */
-void not_directory(char **command);
+void    not_directory(char **command);
+void	no_filedir(char *command);
 
 
 #endif //MINISHELL_ERRORS_H

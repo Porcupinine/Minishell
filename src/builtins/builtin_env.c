@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:13:30 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/07/31 14:46:54 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/22 14:35:40 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ int	builtin_env(t_data *mini, char **cmd)
 
 	if (cmd[1] != NULL) // make sense??
 	{
-		too_many_args(cmd);
-		return (1); // check on this
+		// too_many_args(cmd); // CANNOT REPLICATE THE TO MANY ARGS ANYMORE
+		// return (1); // check on this
+		no_filedir(cmd[1]);
+		return (127);
 	}
 	i = 0;
 	while (mini->mini_envp[i])
