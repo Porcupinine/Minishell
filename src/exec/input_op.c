@@ -92,13 +92,13 @@ void	read_stdin(t_commands *commands, t_data *mini)
 		free_stdin(line, str);
 }
 
-static void handle_heredoc(t_commands *commands, t_data *mini)
-{
-	commands->in = open("tmp_file", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	read_stdin(commands, mini); //TODO heredoc function
-	close(commands->in);
-	commands->in = open("tmp_file", O_RDONLY);
-}
+//static void handle_heredoc(t_commands *commands, t_data *mini)
+//{
+//	commands->in = open("tmp_file", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+//	read_stdin(commands, mini); //TODO heredoc function
+//	close(commands->in);
+//	commands->in = open("tmp_file", O_RDONLY);
+//}
 
 void input_re(t_commands *commands, t_data *mini)
 {
@@ -107,10 +107,7 @@ void input_re(t_commands *commands, t_data *mini)
 		// commands->in = NULL; // check
 	while (commands->infiles)
 	{
-		if (commands->infiles->type == HEREDOC)
-			handle_heredoc(commands, mini);
-		else
-			commands->in = open(commands->infiles->file, O_RDONLY, 0644);
+		commands->in = open(commands->infiles->file, O_RDONLY, 0644);
 		if (commands->in < 0)
 		{
 			builtin_err(commands->infiles->file, "No such file or directory"); // return?

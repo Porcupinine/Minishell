@@ -43,7 +43,7 @@ void	between_pipes(t_tokens **it_token, t_commands **cmd, t_data *mini_data, \
 	enum s_type	type;
 	int count_here;
 
-	count_here = count_heredocs(it_token);
+	count_here = count_heredocs(*it_token);
 	while ((*it_token) && (*it_token)->type != T_PIPE)
 	{
 		extract_cmd(it_token, cmd);
@@ -62,7 +62,15 @@ void	between_pipes(t_tokens **it_token, t_commands **cmd, t_data *mini_data, \
 				syntax_error_parse(parser, mini_data);
 		}
 		if ((*it_token) && (*it_token)->type == T_SMALLSMALL)
-			;//TODO we got ourselves a heredoc
+		{
+			if (count_here > 1)
+			{
+				(*it_token) = (*it_token)->next->next;
+				count_here--;
+			}
+			else
+				handle_heredoc(it_token, cmd, mini_data);
+		};//TODO we got ourselves a heredoc
 	}
 }
 

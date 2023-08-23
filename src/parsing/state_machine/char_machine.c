@@ -74,7 +74,7 @@ void	found_dquote(t_state_machine *parser)
 		parser->len++;
 	parser->state = S_CHAR;
 }
-
+//TODO check " ' '
 void	found_quotes(t_state_machine *parser)
 {
 	if (parser->cmd[parser->count] == '\'')

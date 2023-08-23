@@ -5,6 +5,9 @@
 #ifndef MINISHELL_UTILS_H
 #define MINISHELL_UTILS_H
 
+#include "minishell.h"
+#include "lexical_analyzer.h"
+
 //-------------------------------------------------------------signal_handlers
 void	sigint_handler(int sig);
 void	sigquit_handler(int sig);
