@@ -53,7 +53,7 @@ static char *search_in_path(char **mini_envp, char *arg) {
 	return (NULL);
 }
 
-char *new_str(char *str, char *exp, char **mini_envp)
+char *expand_str(char *str, char **mini_envp)
 {
 	char *new_str;
 	int count_str;
@@ -63,14 +63,14 @@ char *new_str(char *str, char *exp, char **mini_envp)
 	count_new = 0;
 	count_str = 0;
 	count_exp = 0;
-	new_str = ft_calloc((ft_strlen(str) + ft_strlen(exp)), sizeof (char)); //remover arg
-	if (new_str == NULL)
-		ft_error("malloc fail!\n");
 	while (str[count_str] != '\0')
 	{
 		if(str[count_str] == '$')
 		{
-			exp = search_in_path(mini_envp, )
+			exp_line = search_in_path(mini_data->mini_envp, arg);
+			new_str = ft_calloc((ft_strlen(str) + ft_strlen(exp)), sizeof (char)); //remover arg
+			if (new_str == NULL)
+				ft_error("malloc fail!\n");
 			while (exp[count_exp] != '\0')
 			{
 				new_str[count_new] = exp[count_exp];
@@ -90,33 +90,30 @@ char *new_str(char *str, char *exp, char **mini_envp)
 	return (new_str);
 }
 
-void check_for_exp(char **str, t_data *mini_data)
+char *check_for_exp(char *str)
 {
-	char *exp_line;
 	int count;
 	char *arg;
 	int start;
 
 	start = 0;
 	count = 0;
-	exp_line = NULL;
 	arg = NULL;
-	if (ft_strchr((*str), '$') != 0)
+	if (ft_strchr(str, '$') != 0)
 	{
-		while ((*str)[count] != '\0')
+		while (str[count] != '\0')
 		{
-			if ((*str)[count] == '$')
+			if (str[count] == '$')
 			{
 				start = count;
-				while ((*str)[count] != ' ' && (*str)[count] != '\0')
+				while (str[count] != ' ' && str[count] != '\0')
 					count++;
-				arg = ft_substr((*str), start + 1, (count - start) - 1);
-				exp_line = search_in_path(mini_data->mini_envp, arg);
-				(*str) = new_str((*str), exp_line, mini_data->mini_envp);
+				arg = ft_substr(str, start + 1, (count - start) - 1);
 			}
 			count++;
 		}
 	}
+	return(arg);
 }
 
 char *no_quotes_lim(char *str)
@@ -165,7 +162,7 @@ void heredoc(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
 			ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
 			break;
 		if (quotes == false)
-			check_for_exp(&line, mini_data);
+			line = expand_str(line, mini_data->mini_envp);
 		write ((*cmd)->in,line, ft_strlen(line));
 		write ((*cmd)->in, "\n", 1);
 		line = readline("> ");
