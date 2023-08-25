@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:09:31 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/22 14:23:04 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/25 13:14:12 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 		// else needs to read from stdin
 */
 
-static void echo_n(t_data *mini, char **cmd, int j, int i)
+static void echo_n(t_data *mini, char **cmd, int j, size_t i)
 {
 	while (cmd[j])
 	{
@@ -86,6 +86,6 @@ int	builtin_echo(t_data *mini, char **cmd)
 		return (0); // check
 	}
 	else
-		no_command(cmd);
+		no_command(cmd, mini);
 	return (127); // check
 }

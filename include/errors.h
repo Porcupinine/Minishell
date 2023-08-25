@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 08:32:27 by laura             #+#    #+#             */
-/*   Updated: 2023/08/22 14:35:13 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/25 13:34:23 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	no_file_directory(char **command);
  * @param command array of strings containing information for the errror
  * message
  */
-void	no_command(char **command);
+void	no_command(char **command, t_data *mini);
 /**
  * writes permission denied error message, set exit code to 1 and free
  * command array
@@ -69,7 +69,8 @@ void	numeric_arg_required(char **command);
  * message
  */
 void    not_directory(char **command);
-void	no_filedir(char *command);
+void	no_filedir(char *str, char *command);
+void	not_valid_identifier_s(char **command);
 
 
 #endif //MINISHELL_ERRORS_H

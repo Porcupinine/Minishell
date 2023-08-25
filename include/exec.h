@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 14:43:48 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/21 16:24:55 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/25 13:17:15 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 /* BUILTINS */
 int		builtins(char **cmd, t_data *mini);
-int		check_builtins(char **cmd, t_data *mini);
+int		check_builtins(char **cmd);
 
 int		builtin_unset(t_data *mini, char **arg);
 int 	find_envp(t_data *mini, char *arg);

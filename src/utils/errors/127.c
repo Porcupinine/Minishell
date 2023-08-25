@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 08:04:28 by laura             #+#    #+#             */
-/*   Updated: 2023/08/22 14:38:52 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/25 13:35:12 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 
 extern int	g_exit_code;
 
-void	no_command(char **command)
+void	no_command(char **command, t_data *mini)
 {
 	write(2, "minishell: ", 11);
 	if (ft_strncmp(command[0], "$?", 2) == 0)
-		write(2, "0", 1);
+		write(2, ft_itoa(mini->exit_code), ft_strlen(ft_itoa(mini->exit_code))); // doesn't seem to work properly
 	else
 		write(2, command[0], ft_strlen(command[0]));
 	write(2, ": command not found\n", 21);
@@ -30,9 +30,10 @@ void	no_command(char **command)
 	//free_str(command); // else double free
 }
 
-void	no_filedir(char *command)
+void	no_filedir(char *str, char *command)
 {
-	write(2, "env: ", 5);
+	write(2, str, ft_strlen(str));
+	write(2, ": ", 2);
 	write(2, command, ft_strlen(command));
 	write(2, ": No such file or directory\n", 28);
 	g_exit_code = 127;

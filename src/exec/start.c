@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/22 10:50:43 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/25 13:17:26 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void one_cmd(t_data *mini)
 	mini->fd = open_pipes(mini);
 	if (mini->fd == NULL)
 		err_msg("", "pipe opening failed.\n"); // check
-	if (check_builtins(command, mini) == 1) // so not a builtin
+	if (check_builtins(command) == 1) // so not a builtin
 	{
 		free_str(command);
 		exec_fork_onecmd(mini);

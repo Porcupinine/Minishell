@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 17:07:22 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/21 09:38:53 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/25 13:16:54 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	builtins(char **cmd, t_data *mini)
 	return (0);
 }
 
-int check_builtins(char **cmd, t_data *mini)
+int check_builtins(char **cmd)
 {
 	if (!cmd[0])// TODO check if cmd = NULL
 		return (1); 
