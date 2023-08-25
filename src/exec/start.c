@@ -13,7 +13,7 @@
 #include "../../include/minishell.h"
 #include "../../include/env_var.h"
 #include "../../include/exec.h"
-#include "../../include/I_want_to_break_free.h"
+#include "../../include/utils.h"
 #include "../../Lib42/include/libft.h"
 #include <sys/wait.h>
 
@@ -46,7 +46,7 @@ static void one_cmd(t_data *mini)
 		free_pid_list(&mini->process);
 		mini->process = NULL;
 	}
-	else 
+	else
 	{
 		free_str(command);
 		run_one_cmd(mini);
@@ -59,7 +59,7 @@ static void one_cmd(t_data *mini)
 int	start(t_data *mini)
 {
 	mini->nb_cmds = lst_size(mini->commands);
-	if (mini->nb_cmds == 1 && !mini->commands->cmd) 
+	if (mini->nb_cmds == 1 && !mini->commands->cmd)
 	{
 		input_re(mini->commands, mini); // error checking
 		output_re(mini->commands); // error checking 

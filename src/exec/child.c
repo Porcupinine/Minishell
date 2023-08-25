@@ -22,7 +22,7 @@ void child_dup2(t_data *mini, t_commands *commands, int i, int pos)
 	else
 	{
 		input_re(mini->commands, mini); // error checking
-		output_re(mini->commands); // error checking 
+		output_re(mini->commands); // error checking
 		if (i > 1) // if no the first cmd | stored from the prev cmd;
 		{
 			if (dup2(mini->fd[pos - 1][0], STDIN_FILENO) == -1) // to read from the prev cmd
@@ -53,7 +53,7 @@ void child_dup2(t_data *mini, t_commands *commands, int i, int pos)
 void	run_one_cmd(t_data *mini)
 {
 	input_re(mini->commands, mini); // error checking
-	output_re(mini->commands); // error checking 
+	output_re(mini->commands); // error checking
 	if (dup2(mini->commands->in, STDIN_FILENO) == -1) // to read from the prev cmd
 		err_msg("", "dup2 failed.\n"); // check -- exit(EXIT_FAILURE);
 	if (dup2(mini->commands->out, STDOUT_FILENO) == -1) // to read from the prev cmd
@@ -66,10 +66,10 @@ void	run_one_cmd(t_data *mini)
 	split_args(mini->commands->cmd, mini->mini_envp, mini);
 }
 
-// OLD 
+// OLD
 // void	run_one_cmd(int in_file, int out_file, t_data *mini)
 // {
-// 	if (dup2(in_file, STDIN_FILENO) == -1) 
+// 	if (dup2(in_file, STDIN_FILENO) == -1)
 // 		err_msg("", "dup2 failed.\n"); // check -- exit(EXIT_FAILURE);
 // 	if (dup2(out_file, STDOUT_FILENO) == -1)
 // 		err_msg("", "dup2 failed.\n"); // check -- exit(EXIT_FAILURE);

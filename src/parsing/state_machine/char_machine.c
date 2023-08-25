@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
-#include "../../../include/token_list_actions.h"
+#include "../../../include/utils.h"
 #include "libft.h"
 #include "../../../include/lexical_analyzer.h"
 #include <stdlib.h>
@@ -74,7 +74,7 @@ void	found_dquote(t_state_machine *parser)
 		parser->len++;
 	parser->state = S_CHAR;
 }
-
+//TODO check " ' '
 void	found_quotes(t_state_machine *parser)
 {
 	if (parser->cmd[parser->count] == '\'')

@@ -11,12 +11,11 @@
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
-#include "../../../include/token_list_actions.h"
+#include "../../../include/utils.h"
 #include "../../Lib42/include/libft.h"
 #include "../../../include/lexical_analyzer.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include "../../../include/cmd_list_actions.h"
 #include "../../../include/exec.h"
 
 extern int	g_exit_code;
@@ -74,8 +73,6 @@ void	parse_machine(t_data *mini_data, t_state_machine *parser)
 	ft_substr(parser->cmd, parser->start, parser->len), T_CHAR);
 		g_exit_code = 0;
 	}
-	else if (parser->state == S_WHITESPACE)
-		;
-	else
+	else if (parser->state != S_WHITESPACE)
 		syntax_error(parser, parser->cmd[(parser->count) - 1]);
 }

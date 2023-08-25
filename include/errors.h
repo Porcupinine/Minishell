@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 08:32:27 by laura             #+#    #+#             */
-/*   Updated: 2023/08/25 13:34:23 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/25 14:55:07 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,3 +74,4 @@ void	not_valid_identifier_s(char **command);
 
 
 #endif //MINISHELL_ERRORS_H
+

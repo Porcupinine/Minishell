@@ -14,7 +14,7 @@
 #include "../../include/env_var.h"
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
-#include "../../include/errors.h"
+#include "../../include/utils.h"
 
  extern int g_exit_code;
 /*

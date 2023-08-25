@@ -198,4 +198,6 @@ void	unclosed_error(t_state_machine *parser);
 */
 void	parse(t_data *mini_data);
 
+void handle_heredoc(t_tokens **it_token, t_commands **cmd, t_data *mini_data);
+
 #endif //MINISHELL_LEXICAL_ANALYZER_H

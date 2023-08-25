@@ -15,10 +15,7 @@
 #include "libft.h"
 #include "../../../include/lexical_analyzer.h"
 #include "../../../include/env_var.h"
-#include "../../../include/token_list_actions.h"
-#include "../../../include/cmd_list_actions.h"
-#include "../../../include/I_want_to_break_free.h"
-#include "../../../include/errors.h"
+#include "../../../include/utils.h"
 
 extern int	g_exit_code;
 
@@ -44,14 +41,15 @@ void	between_pipes(t_tokens **it_token, t_commands **cmd, t_data *mini_data, \
 	t_state_machine *parser)
 {
 	enum s_type	type;
+	int count_here;
 
+	count_here = count_heredocs(*it_token);
 	while ((*it_token) && (*it_token)->type != T_PIPE)
 	{
 		extract_cmd(it_token, cmd);
 		if ((*it_token) && ((*it_token)->type == T_BIG || \
-				(*it_token)->type == T_BIGBIG || \
-				(*it_token)->type == T_SMALL || \
-				(*it_token)->type == T_SMALLSMALL))
+		(*it_token)->type == T_BIGBIG || \
+				(*it_token)->type == T_SMALL))
 		{
 			(type) = (*it_token)->type;
 			(*it_token) = (*it_token)->next;
@@ -63,6 +61,16 @@ void	between_pipes(t_tokens **it_token, t_commands **cmd, t_data *mini_data, \
 			else
 				syntax_error_parse(parser, mini_data);
 		}
+		if ((*it_token) && (*it_token)->type == T_SMALLSMALL)
+		{
+			if (count_here > 1)
+			{
+				(*it_token) = (*it_token)->next->next;
+				count_here--;
+			}
+			else
+				handle_heredoc(it_token, cmd, mini_data);
+		};//TODO we got ourselves a heredoc
 	}
 }
 

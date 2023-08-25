@@ -14,7 +14,7 @@
 #include "../../include/env_var.h"
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
-#include "../../include/errors.h"
+#include "../../include/utils.h"
 
 static int	ft_atoi_long(char *str)
 {
@@ -87,5 +87,5 @@ void	builtin_exit(char **cmd)
 		code = code % 256;
 	}
 	// do we also maybe need to use rl_clear_history ??
-	exit(code); // only this?? ++ things to be freed
+	exit(code); // only this?? ++ things to be freed // should this be 0 ? as it was successfully exited ?
 }
