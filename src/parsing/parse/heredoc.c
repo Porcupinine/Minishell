@@ -18,6 +18,7 @@
 #include "../../../include/utils.h"
 #include <readline/readline.h>
 #include <readline/history.h>
+#include "../../include/exec.h"
 
 static char *search_in_path(char **mini_envp, char *arg) {
 	int count;
@@ -163,7 +164,8 @@ void heredoc(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
 		if (ft_strlen(line) == ft_strlen(limiter) &&
 			ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
 			break;
-		check_for_exp(&line, mini_data);//replace
+		line = expand_dollar(line, mini_data);
+//		check_for_exp(&line, mini_data);//replace
 		write ((*cmd)->in,line, ft_strlen(line));
 		write ((*cmd)->in, "\n", 1);
 		line = readline("> ");
