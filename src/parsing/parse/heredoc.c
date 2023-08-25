@@ -53,7 +53,7 @@ static char *search_in_path(char **mini_envp, char *arg) {
 	return (NULL);
 }
 
-char *new_str(char *str, char *exp)
+char *new_str(char *str, char *exp, char **mini_envp)
 {
 	char *new_str;
 	int count_str;
@@ -70,6 +70,7 @@ char *new_str(char *str, char *exp)
 	{
 		if(str[count_str] == '$')
 		{
+			exp = search_in_path(mini_envp, )
 			while (exp[count_exp] != '\0')
 			{
 				new_str[count_new] = exp[count_exp];
@@ -109,9 +110,9 @@ void check_for_exp(char **str, t_data *mini_data)
 				start = count;
 				while ((*str)[count] != ' ' && (*str)[count] != '\0')
 					count++;
-				arg = ft_substr((*str), start + 1, count - start);
+				arg = ft_substr((*str), start + 1, (count - start) - 1);
 				exp_line = search_in_path(mini_data->mini_envp, arg);
-				(*str) = new_str((*str), exp_line);
+				(*str) = new_str((*str), exp_line, mini_data->mini_envp);
 			}
 			count++;
 		}
@@ -163,8 +164,8 @@ void heredoc(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
 		if (ft_strlen(line) == ft_strlen(limiter) &&
 			ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
 			break;
-//		line = expand_dollar(line, mini_data);
-		check_for_exp(&line, mini_data);//replace
+		if (quotes == false)
+			check_for_exp(&line, mini_data);
 		write ((*cmd)->in,line, ft_strlen(line));
 		write ((*cmd)->in, "\n", 1);
 		line = readline("> ");
@@ -172,11 +173,12 @@ void heredoc(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
 	free(limiter);
 	limiter = NULL;
 }
-//if quotes is false, aply expansion otherwise easy
 
 void handle_heredoc(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
 {
 	(*cmd)->in = open("tmp_file", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	add_inout(cmd, "tmp_file", (*it_token)->type);
 	heredoc(it_token, cmd, mini_data);
 	close((*cmd)->in);
+	(*it_token) = (*it_token)->next;
 }
