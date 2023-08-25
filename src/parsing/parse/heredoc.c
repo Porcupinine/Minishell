@@ -19,28 +19,102 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-static int search_in_path(char **mini_envp)
-{
+static char *search_in_path(char **mini_envp, char *arg) {
 	int count;
+	char *exp;
+	int count_exp;
+	int count_char;
 
+	count_exp = 0;
+	count_char = 0;
+	exp = NULL;
 	count = 0;
-	while (mini_envp[count])
+	while (mini_envp[count] != NULL)
 	{
-
+		if (ft_strncmp(mini_envp[count], arg, ft_strlen(arg)) == 0 && mini_envp[count][ft_strlen(arg)] == '=')
+		{
+			exp = ft_calloc(ft_strlen(mini_envp[count]) - ft_strlen(arg), sizeof(char));
+			if (exp == NULL)
+				ft_error("malloc fail\n");
+			while (mini_envp[count][count_char] != '=')
+				count_char++;
+			count_char++;
+			while(mini_envp[count][count_char] != '\0')
+			{
+				exp[count_exp] = mini_envp[count][count_char];
+				count_char++;
+				count_exp++;
+			}
+			return(exp);
+		}
+		count++;
 	}
-{
-
+	return (NULL);
 }
+
+char *new_str(char *str, char *exp)
+{
+	char *new_str;
+	int count_str;
+	int count_exp;
+	int count_new;
+
+	count_new = 0;
+	count_str = 0;
+	count_exp = 0;
+	new_str = ft_calloc((ft_strlen(str) + ft_strlen(exp)), sizeof (char)); //remover arg
+	if (new_str == NULL)
+		ft_error("malloc fail!\n");
+	while (str[count_str] != '\0')
+	{
+		if(str[count_str] == '$')
+		{
+			while (exp[count_exp] != '\0')
+			{
+				new_str[count_new] = exp[count_exp];
+				count_exp++;
+				count_new++;
+			}
+
+			while (str[count_str] != ' ' && str[count_str] != '\0')
+				count_str++;
+		}
+		if (str[count_str] == '\0')
+			return (new_str);
+		new_str[count_new] = str[count_str];
+		count_new++;
+		count_str++;
+	}
+	return (new_str);
 }
 
 void check_for_exp(char *str, t_data *mini_data)
 {
 	char *exp_line;
+	int count;
+	char *arg;
+	int start;
+	int exp_len;
 
+	start = 0;
+	count = 0;
 	exp_line = NULL;
+	arg = NULL;
 	if (ft_strchr(str, '$') != 0)
 	{
-		search_in_path(mini_data->mini_envp);
+		while (str[count] != '\0')
+		{
+			if (str[count] == '$')
+			{
+				start = count;
+				while (str[count] != ' ' && str[count] != '\0')
+					count++;
+				arg = ft_substr(str, start + 1, count - start);
+				exp_line = search_in_path(mini_data->mini_envp, arg);
+				str = new_str(str, exp_line);
+			}
+			count++;
+		}
 	}
 }
 
@@ -89,6 +163,7 @@ void heredoc(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
 		if (ft_strlen(line) == ft_strlen(limiter) &&
 			ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
 			break;
+		check_for_exp(&line, mini_data);//replace
 		write ((*cmd)->in,line, ft_strlen(line));
 		write ((*cmd)->in, "\n", 1);
 		line = readline("> ");
