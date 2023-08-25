@@ -89,30 +89,29 @@ char *new_str(char *str, char *exp)
 	return (new_str);
 }
 
-void check_for_exp(char *str, t_data *mini_data)
+void check_for_exp(char **str, t_data *mini_data)
 {
 	char *exp_line;
 	int count;
 	char *arg;
 	int start;
-	int exp_len;
 
 	start = 0;
 	count = 0;
 	exp_line = NULL;
 	arg = NULL;
-	if (ft_strchr(str, '$') != 0)
+	if (ft_strchr((*str), '$') != 0)
 	{
-		while (str[count] != '\0')
+		while ((*str)[count] != '\0')
 		{
-			if (str[count] == '$')
+			if ((*str)[count] == '$')
 			{
 				start = count;
-				while (str[count] != ' ' && str[count] != '\0')
+				while ((*str)[count] != ' ' && (*str)[count] != '\0')
 					count++;
-				arg = ft_substr(str, start + 1, count - start);
+				arg = ft_substr((*str), start + 1, count - start);
 				exp_line = search_in_path(mini_data->mini_envp, arg);
-				str = new_str(str, exp_line);
+				(*str) = new_str((*str), exp_line);
 			}
 			count++;
 		}
@@ -164,8 +163,8 @@ void heredoc(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
 		if (ft_strlen(line) == ft_strlen(limiter) &&
 			ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
 			break;
-		line = expand_dollar(line, mini_data);
-//		check_for_exp(&line, mini_data);//replace
+//		line = expand_dollar(line, mini_data);
+		check_for_exp(&line, mini_data);//replace
 		write ((*cmd)->in,line, ft_strlen(line));
 		write ((*cmd)->in, "\n", 1);
 		line = readline("> ");

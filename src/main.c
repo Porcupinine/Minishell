@@ -72,6 +72,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_data				*mini_data;
 
+	(void)argv;
 	mini_data = ft_calloc(1, sizeof(t_data));
 	if (mini_data == NULL)
 		ft_error("Data malloc fail!\n");
