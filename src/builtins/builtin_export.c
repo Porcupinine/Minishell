@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:25:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/25 12:59:54 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/25 14:56:58 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../../include/env_var.h"
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
-#include "../../include/errors.h"
+#include "../../include/utils.h"
 
 /*
 	using export should add the mentionned variable to envp

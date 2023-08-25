@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:11 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/25 13:36:41 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/25 15:19:23 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	*split_args(char *cmd, char **envp, t_data *mini)
 		paths = ft_split(envp[find_path(envp)] + 5, ':');
 		if (!paths || find_path(envp) == 0)
 		{
-			no_filedir("unset", command[]);
+			no_filedir("minishell", command[0], mini);
 			// no_command(command, mini); // exit with // exit(127);
 			exit(0); 
 		}

@@ -66,7 +66,7 @@ void	no_file_directory(char **command);
  * @param command array of strings containing information for the errror
  * message
  */
-void	no_command(char **command);
+void	no_command(char **command, t_data *mini);
 /**
  * writes permission denied error message, set exit code to 1 and free
  * command array
@@ -106,7 +106,8 @@ void not_directory(char **command);
  *
  * @param command
  */
-void	no_filedir(char *command);
+void	no_filedir(char *str, char *command, t_data *mini);
+void	not_valid_identifier_s(char **command);
 
 //--------------------------------------------------------------------history
 void	line_history(t_data *mini_data);
