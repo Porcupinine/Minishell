@@ -6,7 +6,7 @@
 #    By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/07 11:56:57 by dmaessen          #+#    #+#              #
-#    Updated: 2023/08/15 12:08:33 by dmaessen         ###   ########.fr        #
+#    Updated: 2023/08/21 16:25:16 by dmaessen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ SRC     := src/main.c \
 	   src/builtins/builtin_unset.c src/builtins/builtins.c \
 	   src/exec/child.c src/exec/dollarsign.c src/exec/errors.c src/exec/input_op.c \
 	   src/exec/output_op.c src/exec/path.c src/exec/start.c src/exec/utils.c \
-	   src/exec/fork.c \
+	   src/exec/fork.c src/exec/pipes.c \
 	   src/parsing/parse/check_commands2.c src/parsing/state_machine/char_machine.c \
 	   src/parsing/state_machine/error_machine.c src/parsing/state_machine/lexe.c \
 	   src/parsing/state_machine/meta_machine.c src/parsing/state_machine/space_machine.c \

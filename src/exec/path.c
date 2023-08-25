@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:11 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/14 15:56:24 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/21 16:20:37 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,10 @@ char	*split_args(char *cmd, char **envp, t_data *mini)
 			exit(127); // TODO check as we don't want to exit
 		paths = ft_split(envp[find_path(envp)] + 5, ':');
 		if (!paths)
-			no_command(command); // exit should be with // exit(127);
+			no_command(command); // exit with // exit(127);
 		path_to_cmd = join_path(command, paths, 0);
 		if (!path_to_cmd)
-			no_command(command); // exit should be with // exit(127);
+			no_command(command); // exit with // exit(127);
 		if  (path_to_cmd != NULL && command != NULL)
 			execve(path_to_cmd, command, envp);
 		printf("%s", path_to_cmd);
@@ -94,5 +94,7 @@ char	*split_args(char *cmd, char **envp, t_data *mini)
 		// throw an error, to check
 	}
 	free_str(command);
-	return (0); // check, what happens if something goes wrong in builtins??
+	if (mini->nb_cmds != 1)
+		exit (0);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:54:29 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/15 15:10:40 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/22 13:50:47 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char *search_envp(char *var, t_data *mini)
 
 	i = 0;
 	if (var[i] == '?')
-		return (ft_itoa(g_exit_code)); // change this
+		return (ft_itoa(mini->exit_code)); // is this right?
 	while (mini->mini_envp[i])
 	{
 		if (ft_strncmp(mini->mini_envp[i], var, ft_strlen(var)) == 0)
@@ -112,13 +112,18 @@ int expand_var(char **line, t_data *mini, int start)
 char *expand_dollar(char *line, t_data *mini)
 {
 	int 	i;
-	i = 0;
-	while (line[i])
+
+	if (ft_strchr(line, '~') != NULL && ft_strlen(line) == 1)
+		line = ft_strdup("$HOME");
+	while (ft_strchr(line, '$') != NULL)
 	{
-		if (line[i] == '$')
-			i = expand_var(&line, mini, i + 1);
-		i++;
+		i = 0;
+		while (line[i])
+		{
+			if (line[i] == '$')
+				i = expand_var(&line, mini, i + 1);
+			i++;
+		}
 	}
 	return (line);
 }
-// edgecase: $? and $_ (automatic? shows last command but a newline if multiple commands ran)

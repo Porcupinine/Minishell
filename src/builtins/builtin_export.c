@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:25:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/14 16:34:25 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/22 15:20:55 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static int len_equal(char *cmd)
 	return (i);
 }
 
-static char **add_line_envp(char **envp, char *cmd, int size)
+static char **add_line_envp(char **envp, char *cmd, int size, t_data *mini)
 {
 	char **new;
 	int i;
@@ -100,6 +100,7 @@ static char **add_line_envp(char **envp, char *cmd, int size)
 		new[i] = ft_strdup(envp[i]); // what if it returns NULL here??
 		i++;
 	}
+	cmd = expand_dollar(cmd, mini);
 	new[i] = ft_strdup(cmd); // what if it returns NULL here??
 	new[size] = NULL;
 	free(envp); // needed?? recursively??
@@ -130,7 +131,7 @@ static int go_export(t_data *mini, char *cmd)
 	}
 	free(name);
 	size = size_envp(mini);
-	new = add_line_envp(mini->mini_envp, cmd, size + 1);
+	new = add_line_envp(mini->mini_envp, cmd, size + 1, mini);
 	mini->mini_envp = new;
 	return (0);
 }
@@ -144,11 +145,15 @@ int builtin_export(t_data *mini, char **cmd)
 	i = 1;
 	while (cmd[i])
 	{
-		if (check_cmd(cmd[i]) == true)
+		if (ft_strchr(cmd[i], '=') == NULL)
+			i++;
+		else if (check_cmd(cmd[i]) == true)
+		{
 			go_export(mini, cmd[i]);
+			i++;
+		}
 		else
 			return (builtin_err2(cmd[0], cmd[i], "not a valid identifier\n") , 1); // exit code should be 1 
-		i++;
 	}
 	return (0);
 }

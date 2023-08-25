@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 14:43:48 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/17 09:13:41 by domi             ###   ########.fr       */
+/*   Updated: 2023/08/21 16:24:55 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ int		change_pwd(t_data *mini);
 
 /* EXEC */
 int		start(t_data *mini);
+
 void	close_pipe(int **fd, int nb);
 void	close_fds(t_data *mini);
+int	    **open_pipes(t_data *mini);
 
 int		lst_size(t_commands *lst);
 void	free_str(char **str);
@@ -62,8 +64,8 @@ void	free_fd(int **fd, int nb_cmds);
 
 char	*split_args(char *cmd, char **envp, t_data *mini);
 
-void	which_child(t_data *mini, t_commands *commands, int i, int pos);
-void	run_one_cmd(int in_file, int out_file, t_data *mini); // check
+void	run_one_cmd(t_data *mini);
+void    child_dup2(t_data *mini, t_commands *commands, int i, int pos);
 
 void    output_re(t_commands *commands);
 
@@ -84,5 +86,6 @@ char 	*search_envp(char *var, t_data *mini);
 char	*var_replace(char **line, char *var_exp, int start, int end);
 
 int		exec_fork_onecmd(t_data *mini);
+int	    exec_fork(t_data *mini, int nb_cmds);
 
 #endif

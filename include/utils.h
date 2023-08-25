@@ -102,6 +102,11 @@ void	numeric_arg_required(char **command);
  * message
  */
 void not_directory(char **command);
+/**
+ *
+ * @param command
+ */
+void	no_filedir(char *command);
 
 //--------------------------------------------------------------------history
 void	line_history(t_data *mini_data);

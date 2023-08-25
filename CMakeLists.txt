@@ -17,7 +17,7 @@ add_custom_target(
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/Lib42/
 )
 
-add_executable(minishell src/main.c
+add_executable(src/main.c
 src/builtins/builtin_cd.c src/builtins/builtin_echo.c src/builtins/builtin_env.c
 src/builtins/builtin_exit.c src/builtins/builtin_export.c src/builtins/builtin_pwd.c
 src/builtins/builtin_unset.c src/builtins/builtins.c
