@@ -18,7 +18,6 @@
 #include "../../../include/utils.h"
 #include <readline/readline.h>
 #include <readline/history.h>
-#include "../../include/exec.h"
 
 static char *search_in_path(char **mini_envp, char *arg) {
 	int count;
@@ -53,7 +52,7 @@ static char *search_in_path(char **mini_envp, char *arg) {
 	return (NULL);
 }
 
-char *expand_str(char *str, char **mini_envp)
+char *new_str(char *str, char *exp)
 {
 	char *new_str;
 	int count_str;
@@ -63,23 +62,29 @@ char *expand_str(char *str, char **mini_envp)
 	count_new = 0;
 	count_str = 0;
 	count_exp = 0;
+	new_str = ft_calloc((ft_strlen(str) + ft_strlen(exp)), sizeof (char)); //remover arg
+	if (new_str == NULL)
+		ft_error("malloc fail!\n");
+	//new string must be old string puls current expansion
 	while (str[count_str] != '\0')
 	{
 		if(str[count_str] == '$')
 		{
-			exp_line = search_in_path(mini_data->mini_envp, arg);
-			new_str = ft_calloc((ft_strlen(str) + ft_strlen(exp)), sizeof (char)); //remover arg
-			if (new_str == NULL)
-				ft_error("malloc fail!\n");
 			while (exp[count_exp] != '\0')
 			{
 				new_str[count_new] = exp[count_exp];
 				count_exp++;
 				count_new++;
 			}
-
 			while (str[count_str] != ' ' && str[count_str] != '\0')
 				count_str++;
+			while (str[count_str] != '\0')
+			{
+				new_str[count_new] = str[count_str];
+				count_str++;
+				count_new++;
+			}
+			return (new_str);
 		}
 		if (str[count_str] == '\0')
 			return (new_str);
@@ -90,14 +95,16 @@ char *expand_str(char *str, char **mini_envp)
 	return (new_str);
 }
 
-char *check_for_exp(char *str)
+char *check_for_exp(char *str, t_data *mini_data)
 {
+	char *exp_line;
 	int count;
 	char *arg;
 	int start;
 
 	start = 0;
 	count = 0;
+	exp_line = NULL;
 	arg = NULL;
 	if (ft_strchr(str, '$') != 0)
 	{
@@ -108,12 +115,17 @@ char *check_for_exp(char *str)
 				start = count;
 				while (str[count] != ' ' && str[count] != '\0')
 					count++;
-				arg = ft_substr(str, start + 1, (count - start) - 1);
+				arg = ft_substr(str, start + 1, (count - start)-1);
+				exp_line = search_in_path(mini_data->mini_envp, arg);
+				str = new_str(str, exp_line);
+				free(arg);
+				free(exp_line);
+				return(str);
 			}
 			count++;
 		}
 	}
-	return(arg);
+	return (str);
 }
 
 char *no_quotes_lim(char *str)
@@ -162,14 +174,19 @@ void heredoc(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
 			ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
 			break;
 		if (quotes == false)
-			line = expand_str(line, mini_data->mini_envp);
+		{
+			while (ft_strchr(line, '$') != 0)
+				line = check_for_exp(line, mini_data);
+		}
 		write ((*cmd)->in,line, ft_strlen(line));
 		write ((*cmd)->in, "\n", 1);
 		line = readline("> ");
 	}
 	free(limiter);
+	free(line);
 	limiter = NULL;
 }
+//if quotes is false, aply expansion otherwise easy
 
 void handle_heredoc(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
 {

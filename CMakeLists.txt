@@ -2,10 +2,8 @@ cmake_minimum_required(VERSION 3.25)
 project(minishell C)
 include_directories(${CMAKE_SOURCE_DIR}/Lib42/include SYSTEM/Users/lpraca-l/.brew/opt/readline/include)
 
-add_compile_options(-fsanitize=address -g3)
-add_link_options(-fsanitize=address)
-#add_compile_options(-fsanitize=address -fsanitize=address)
-#add_link_options(-fsanitize=address)
+add_compile_options(-fsanitize=address -fsanitize=leak -g3)
+add_link_options(-fsanitize=address -fsanitize=leak)
 #add_compile_options(-Wall -Werror -Wextra)
 
 set(CMAKE_C_STANDARD 99)
@@ -38,7 +36,8 @@ add_executable(minishell src/main.c
 		src/utils/I_want_to_break_free/parser_free.c
 		src/utils/signal_handlers/signal_handlers.c
 		src/utils/token_list_actions/add_token.c src/utils/token_list_actions/print_tokens.c
-		src/utils/token_list_actions/search_token.c)
+		src/utils/token_list_actions/search_token.c
+		src/parsing/parse/here_ult.c)
 
 target_link_libraries(minishell ${CMAKE_SOURCE_DIR}/Lib42/libft.a -lreadline)
 target_link_directories(minishell PRIVATE /Users/lpraca-l/.brew/opt/readline/lib)
