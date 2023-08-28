@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 14:43:48 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/21 16:24:55 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/28 11:15:43 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 /* BUILTINS */
 int		builtins(char **cmd, t_data *mini);
-int		check_builtins(char **cmd, t_data *mini);
+int		check_builtins(char **cmd);
 
 int		builtin_unset(t_data *mini, char **arg);
 int 	find_envp(t_data *mini, char *arg);
@@ -44,9 +44,10 @@ int		builtin_env(t_data *mini, char **cmd);
 int		builtin_echo(t_data *mini, char **cmd);
 
 int		builtin_cd(t_data *mini, char **cmd);
-int		search_path_cd(t_data *mini, char **cmd);
+int		search_specific_path(t_data *mini, char *cmd);
 int		change_oldpwd(t_data *mini);
 int		change_pwd(t_data *mini);
+char	*search_path(t_data *mini, char *target);
 
 
 /* EXEC */
@@ -61,6 +62,7 @@ void	free_str(char **str);
 t_pid	*pid_lstlast(t_pid *lst); // USING??
 void	pid_lstadd_back(t_pid **lst, pid_t content); // USING??
 void	free_fd(int **fd, int nb_cmds);
+int		array_size(char **envp);
 
 char	*split_args(char *cmd, char **envp, t_data *mini);
 

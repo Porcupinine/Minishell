@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:11 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/21 16:20:37 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/25 15:19:23 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 static int	find_path(char **envp)
 {
 	int	i;
+	int j;
 
 	i = 0;
 	while (envp[i])
@@ -28,6 +29,11 @@ static int	find_path(char **envp)
 			break ;
 		i++;
 	}
+	j = 0;
+	while (envp[j])
+		j++;
+	if (i == j)
+		return (0);
 	return (i);
 }
 
@@ -82,14 +88,18 @@ char	*split_args(char *cmd, char **envp, t_data *mini)
 		if (*envp == NULL)
 			exit(127); // TODO check as we don't want to exit
 		paths = ft_split(envp[find_path(envp)] + 5, ':');
-		if (!paths)
-			no_command(command); // exit with // exit(127);
+		if (!paths || find_path(envp) == 0)
+		{
+			no_filedir("minishell", command[0], mini);
+			// no_command(command, mini); // exit with // exit(127);
+			exit(0); 
+		}
 		path_to_cmd = join_path(command, paths, 0);
 		if (!path_to_cmd)
-			no_command(command); // exit with // exit(127);
-		if  (path_to_cmd != NULL && command != NULL)
+			no_command(command, mini); // exit with // exit(127);
+		if (path_to_cmd != NULL && command != NULL)
 			execve(path_to_cmd, command, envp);
-		printf("%s", path_to_cmd);
+		//printf("%s", path_to_cmd);
 		free(path_to_cmd);
 		// throw an error, to check
 	}

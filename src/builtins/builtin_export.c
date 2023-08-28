@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:25:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/22 15:20:55 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/25 14:56:58 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../../include/env_var.h"
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
+#include "../../include/utils.h"
 
 /*
 	using export should add the mentionned variable to envp
@@ -62,8 +63,25 @@ static bool check_cmd(char *cmd)
 	i = 0;
 	while (cmd[i] && cmd[i] != '=')
 	{
-		if (ft_isalnum(cmd[i]) == 0 && cmd[i] != '=' && cmd[i] != '_')
+		if (ft_isalnum(cmd[i]) == 0 && cmd[i] != '=' && cmd[i] != '_' && cmd[i] != '$')
 			return (false);
+		i++;
+	}
+	return (true);
+}
+
+static bool is_valid_noerror(char *cmd)
+{
+	int i;
+
+	i = 0;
+	while (cmd[i])
+	{
+		if (ft_isalnum(cmd[i]) == 0)
+		{
+			if (cmd[i] != '$')
+				return (false);
+		}
 		i++;
 	}
 	return (true);
@@ -101,6 +119,8 @@ static char **add_line_envp(char **envp, char *cmd, int size, t_data *mini)
 		i++;
 	}
 	cmd = expand_dollar(cmd, mini);
+	if (cmd[0] == '=')
+		return (not_valid_identifier_s(&cmd), free(new), NULL);
 	new[i] = ft_strdup(cmd); // what if it returns NULL here??
 	new[size] = NULL;
 	free(envp); // needed?? recursively??
@@ -132,6 +152,8 @@ static int go_export(t_data *mini, char *cmd)
 	free(name);
 	size = size_envp(mini);
 	new = add_line_envp(mini->mini_envp, cmd, size + 1, mini);
+	if (new == NULL)
+		return (1);
 	mini->mini_envp = new;
 	return (0);
 }
@@ -140,12 +162,14 @@ int builtin_export(t_data *mini, char **cmd)
 {
 	int i;
 
-	if (!cmd[1])
+	if (!cmd[1] && ft_strlen(cmd[0]) == 6)
 		print_xenv(mini);
+	if (!cmd[1] && ft_strlen(cmd[0]) > 6)
+		no_command(cmd, mini);
 	i = 1;
 	while (cmd[i])
 	{
-		if (ft_strchr(cmd[i], '=') == NULL)
+		if (ft_strchr(cmd[i], '=') == NULL && is_valid_noerror(cmd[i]) == true)
 			i++;
 		else if (check_cmd(cmd[i]) == true)
 		{
@@ -153,7 +177,7 @@ int builtin_export(t_data *mini, char **cmd)
 			i++;
 		}
 		else
-			return (builtin_err2(cmd[0], cmd[i], "not a valid identifier\n") , 1); // exit code should be 1 
+			return (not_valid_identifier(cmd), 1); // exit code should be 1 
 	}
 	return (0);
 }

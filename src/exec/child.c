@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:14 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/21 16:13:00 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/28 11:56:22 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,21 @@ void child_dup2(t_data *mini, t_commands *commands, int i, int pos)
 			if (dup2(mini->fd[pos][1], STDOUT_FILENO) == -1) // to write to
 				err_msg("", "dup2 failed.\n"); // check -- exit(EXIT_FAILURE);
 		}
-		if (commands->infiles != NULL) // or should this be part of a if // else is ??
+		// if (commands->infiles != NULL)
+		if (commands->in != STDIN_FILENO)
 		{
 			if (dup2(mini->commands->in, STDIN_FILENO) == -1) // to read from the prev cmd
 				err_msg("", "dup2 failed.\n"); // check -- exit(EXIT_FAILURE);
 		}
-		if (commands->outfiles != NULL) // or should this be part of a if // else is ??
+		// if (commands->outfiles != NULL)
+		if (commands->out != STDOUT_FILENO)
 		{
 			if (dup2(mini->commands->out, STDOUT_FILENO) == -1) // to read from the prev cmd
 				err_msg("", "dup2 failed.\n"); // check -- exit(EXIT_FAILURE);
 		}
 		close(mini->fd[pos][1]); // is this correct??
-		//close(mini->fd[pos][0]); // not this right?
+		close(mini->fd[pos][0]); // not this right?
+		close_fds(mini);
 		split_args(commands->cmd, mini->mini_envp, mini);
 		// mini->fd[pos][0] || store for next cmd
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 12:19:38 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/07 11:12:33 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/28 11:14:38 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ void	free_str(char **str)
 		i++;
 	}
 	free(str);
+}
+
+int array_size(char **envp)
+{
+	int size;
+
+	size = 0;
+	while (envp[size] != NULL)
+		size++;
+	return(size);
 }
 
 int	lst_size(t_commands *lst)

@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 12:32:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/15 17:18:21 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/25 15:45:11 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,22 @@
 #include "../../include/env_var.h"
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
+
+static bool is_exact_match(char *to_compare, char *arg)
+{
+	int i;
+
+	i = 0;
+	while (arg[i])
+	{
+		if (to_compare[i] == '=')
+			break ;
+		if (arg[i] != to_compare[i])
+			return (false);
+		i++;
+	}
+	return (true);
+}
 
 char **update_envp(char **envp, char *arg, int size)
 {
@@ -28,9 +44,10 @@ char **update_envp(char **envp, char *arg, int size)
 	j = 0;
 	while (envp[i] && i < size + 1)
 	{
-		if (ft_strncmp(envp[i], arg, ft_strlen(arg)) == 0)
-			i++;
-			// free(envp[i]);
+		if (ft_strncmp(envp[i], arg, ft_strlen(arg)) == 0
+			&& is_exact_match(arg, envp[i]) == true)
+			free(envp[i]);
+			//i++;
 		else
 		{
 			new[j] = ft_strdup(envp[i]);
