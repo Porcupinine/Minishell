@@ -1,0 +1,29 @@
+"hello"
+[?2004hMINISHELL: ^C[?2004l
+MINISHELL: [?2004h^C[?2004l
+MINISHELL: [?2004h^C[?2004l
+MINISHELL: [?2004h^C[?2004l
+MINISHELL: [?2004h^C[?2004l
+MINISHELL: [?2004h^C[?2004l
+MINISHELL: [?2004h^C[?2004l
+MINISHELL: [?2004h^C[?2004l
+MINISHELL: [?2004h^C[?2004l
+MINISHELL: [?2004h[?2004l
+hi
+[?2004hMINISHELL: ls
+[?2004lCMakeLists.txt
+Lib42
+Makefile
+cmake-build-debug
+include
+minishell
+objs
+scraps.txt
+src
+test
+test.sh
+testMakefile
+test_folder
+[?2004hMINISHELL: uname
+[?2004lDarwin
+[?2004hMINISHELL: [?2004l

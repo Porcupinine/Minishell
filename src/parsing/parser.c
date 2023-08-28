@@ -29,6 +29,7 @@ void	parse(t_data *mini_data)
 	parse_tokens(parser, mini_data);
 //	printf("-------CMD LIST------\n");
 //	print_cmd_list(mini_data->commands);
+	mini_data->exit_code = parser->exit_code;
 	free(mini_data->command_line);
 	mini_data->command_line = NULL;
 }

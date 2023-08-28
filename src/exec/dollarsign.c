@@ -118,10 +118,12 @@ char *expand_dollar(char *line, t_data *mini)
 	while (ft_strchr(line, '$') != NULL)
 	{
 		i = 0;
-		while (line[i])
+		while (line[i] != '\0')
 		{
 			if (line[i] == '$')
 				i = expand_var(&line, mini, i + 1);
+			if (line[i] == '\0')
+				break ;
 			i++;
 		}
 	}

@@ -19,8 +19,8 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "../../include/exec.h"
-
-static char *search_in_path(char **mini_envp, char *arg) {
+static char *search_in_path(char **mini_envp, char *arg)
+{
 	int count;
 	char *exp;
 	int count_exp;
@@ -32,64 +32,64 @@ static char *search_in_path(char **mini_envp, char *arg) {
 	count = 0;
 	while (mini_envp[count] != NULL)
 	{
-		if (ft_strncmp(mini_envp[count], arg, ft_strlen(arg)) == 0 && mini_envp[count][ft_strlen(arg)] == '=')
+		if (ft_strncmp(mini_envp[count], arg, ft_strlen(arg)) == 0
+		&& mini_envp[count][ft_strlen(arg)] == '=')
 		{
-			exp = ft_calloc(ft_strlen(mini_envp[count]) - ft_strlen(arg), sizeof(char));
-			if (exp == NULL)
-				ft_error("malloc fail\n");
+			exp = ft_calloc_exit(ft_strlen(mini_envp[count]) - ft_strlen(arg),
+								 sizeof(char));
 			while (mini_envp[count][count_char] != '=')
 				count_char++;
 			count_char++;
 			while(mini_envp[count][count_char] != '\0')
-			{
-				exp[count_exp] = mini_envp[count][count_char];
-				count_char++;
-				count_exp++;
-			}
+				exp[count_exp++] = mini_envp[count][count_char++];
 			return(exp);
 		}
 		count++;
 	}
-	return (NULL);
+	return (ft_strdup(""));
+}
+
+void put_exp(const char *str, const char *exp, char **new_str, int count_new)
+{
+	int count_exp;
+	int count_str;
+
+	count_str = 0;
+	count_exp = 0;
+	while (exp[count_exp] != '\0')
+		(*new_str)[count_new++] = exp[count_exp++];
+	while (str[count_str] != ' ' && str[count_str] != '\0')
+		count_str++;
+	while (str[count_str] != '\0')
+		(*new_str)[count_new++] = str[count_str++];
 }
 
 char *new_str(char *str, char *exp)
 {
 	char *new_str;
 	int count_str;
-	int count_exp;
 	int count_new;
 
 	count_new = 0;
 	count_str = 0;
-	count_exp = 0;
-	new_str = ft_calloc((ft_strlen(str) + ft_strlen(exp)), sizeof (char)); //remover arg
-	if (new_str == NULL)
-		ft_error("malloc fail!\n");
+	new_str = ft_calloc_exit((ft_strlen(str) + ft_strlen(exp)),
+						sizeof (char)); //remover arg
 	while (str[count_str] != '\0')
 	{
 		if(str[count_str] == '$')
 		{
-			while (exp[count_exp] != '\0')
-			{
-				new_str[count_new] = exp[count_exp];
-				count_exp++;
-				count_new++;
-			}
-
-			while (str[count_str] != ' ' && str[count_str] != '\0')
-				count_str++;
+			put_exp(str + count_str, exp, &new_str, count_new);
+			break;
 		}
 		if (str[count_str] == '\0')
-			return (new_str);
-		new_str[count_new] = str[count_str];
-		count_new++;
-		count_str++;
+			break;
+		new_str[count_new++] = str[count_str++];
 	}
 	return (new_str);
 }
 
-void check_for_exp(char **str, t_data *mini_data)
+//TODO fails in case exp is not found or $USER$PATH
+char *check_for_exp(char *str, t_data *mini_data)
 {
 	char *exp_line;
 	int count;
@@ -100,22 +100,26 @@ void check_for_exp(char **str, t_data *mini_data)
 	count = 0;
 	exp_line = NULL;
 	arg = NULL;
-	if (ft_strchr((*str), '$') != 0)
+	if (ft_strchr(str, '$') != 0)
 	{
-		while ((*str)[count] != '\0')
+		while (str[count] != '\0')
 		{
-			if ((*str)[count] == '$')
+			if (str[count] == '$')
 			{
 				start = count;
-				while ((*str)[count] != ' ' && (*str)[count] != '\0')
+				while (str[count] != ' ' && str[count] != '\0')
 					count++;
-				arg = ft_substr((*str), start + 1, count - start);
+				arg = ft_substr(str, start + 1, (count - start)-1);
 				exp_line = search_in_path(mini_data->mini_envp, arg);
-				(*str) = new_str((*str), exp_line);
+				str = new_str(str, exp_line);
+				free(arg);
+				free(exp_line);
+				return(str);
 			}
 			count++;
 		}
 	}
+	return (str);
 }
 
 char *no_quotes_lim(char *str)
@@ -126,9 +130,7 @@ char *no_quotes_lim(char *str)
 
 	count = 0;
 	count_lim = 0;
-	lim = ft_calloc((ft_strlen(str) - 1), sizeof (char));
-	if (lim == NULL)
-		ft_error("Malloc fail!\n");
+	lim = ft_calloc_exit((ft_strlen(str) - 1), sizeof (char));
 	while (str[count] != '\0')
 	{
 		if (str[count] != '\'' && str[count] != '"')
@@ -140,6 +142,28 @@ char *no_quotes_lim(char *str)
 	}
 	lim[count] = '\0';
 	return(lim);
+}
+
+void	get_line(t_commands *const *cmd, t_data *mini_data, const char *limiter, bool quotes)
+{
+	char *line;
+
+	line = readline("> ");
+	while (line != NULL)
+	{
+		if (ft_strlen(line) == ft_strlen(limiter) &&
+			ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
+			break;
+		if (quotes == false)
+		{
+			while (ft_strchr(line, '$') != 0)
+				line = expand_dollar(line, mini_data);
+		}
+		write ((*cmd)->in,line, ft_strlen(line));
+		write ((*cmd)->in, "\n", 1);
+		line = readline("> ");
+	}
+	free(line);
 }
 
 void heredoc(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
@@ -157,18 +181,7 @@ void heredoc(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
 	}
 	else
 		limiter = ft_strdup((*it_token)->str);
-	line = readline("> ");
-	while (line != NULL)
-	{
-		if (ft_strlen(line) == ft_strlen(limiter) &&
-			ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
-			break;
-//		line = expand_dollar(line, mini_data);
-		check_for_exp(&line, mini_data);//replace
-		write ((*cmd)->in,line, ft_strlen(line));
-		write ((*cmd)->in, "\n", 1);
-		line = readline("> ");
-	}
+	get_line(cmd, mini_data, limiter, quotes);
 	free(limiter);
 	limiter = NULL;
 }
@@ -177,6 +190,8 @@ void heredoc(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
 void handle_heredoc(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
 {
 	(*cmd)->in = open("tmp_file", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	add_inout(cmd, "tmp_file", (*it_token)->type);
 	heredoc(it_token, cmd, mini_data);
 	close((*cmd)->in);
+	(*it_token) = (*it_token)->next;
 }
