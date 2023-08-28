@@ -59,7 +59,7 @@ static void one_cmd(t_data *mini)
 int	start(t_data *mini)
 {
 	mini->nb_cmds = lst_size(mini->commands);
-	if (mini->nb_cmds == 1 && !mini->commands->cmd)
+	if (mini->nb_cmds == 1 && ft_strlen(mini->commands->cmd) == 0)
 	{
 		input_re(mini->commands, mini); // error checking
 		output_re(mini->commands); // error checking 

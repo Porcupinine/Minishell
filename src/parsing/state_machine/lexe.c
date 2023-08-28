@@ -29,6 +29,7 @@ void	token_start(t_state_machine *parser)
 	{
 		parser->state = S_CHAR;
 		parser->status = S_WORD;
+		parser->len++;
 	}
 	else if (c == ' ')
 		parser->state = S_WHITESPACE;
@@ -38,6 +39,7 @@ void	token_start(t_state_machine *parser)
 		parser->state = S_SMALL;
 	else
 		syntax_error(parser, c);
+	parser->count++;
 }
 
 void	populate_function_ptrs(void (**functions)(t_state_machine *))
@@ -76,3 +78,4 @@ void	parse_machine(t_data *mini_data, t_state_machine *parser)
 	else if (parser->state != S_WHITESPACE)
 		syntax_error(parser, parser->cmd[(parser->count) - 1]);
 }
+//TODO >>test not sintas error
