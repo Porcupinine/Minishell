@@ -18,7 +18,7 @@
 #include "../../../include/utils.h"
 #include <readline/readline.h>
 #include <readline/history.h>
-
+#include "../../include/exec.h"
 static char *search_in_path(char **mini_envp, char *arg) {
 	int count;
 	char *exp;
@@ -41,9 +41,7 @@ static char *search_in_path(char **mini_envp, char *arg) {
 			count_char++;
 			while(mini_envp[count][count_char] != '\0')
 			{
-				exp[count_exp] = mini_envp[count][count_char];
-				count_char++;
-				count_exp++;
+				exp[count_exp++] = mini_envp[count][count_char++];
 			}
 			return(exp);
 		}
@@ -62,39 +60,28 @@ char *new_str(char *str, char *exp)
 	count_new = 0;
 	count_str = 0;
 	count_exp = 0;
-	new_str = ft_calloc((ft_strlen(str) + ft_strlen(exp)), sizeof (char)); //remover arg
-	if (new_str == NULL)
-		ft_error("malloc fail!\n");
-	//new string must be old string puls current expansion
+	new_str = ft_calloc_exit((ft_strlen(str) + ft_strlen(exp)),
+						sizeof (char)); //remover arg
 	while (str[count_str] != '\0')
 	{
 		if(str[count_str] == '$')
 		{
 			while (exp[count_exp] != '\0')
-			{
-				new_str[count_new] = exp[count_exp];
-				count_exp++;
-				count_new++;
-			}
+				new_str[count_new++] = exp[count_exp++];
 			while (str[count_str] != ' ' && str[count_str] != '\0')
 				count_str++;
 			while (str[count_str] != '\0')
-			{
-				new_str[count_new] = str[count_str];
-				count_str++;
-				count_new++;
-			}
-			return (new_str);
+				new_str[count_new++] = str[count_str++];
+			break;
 		}
 		if (str[count_str] == '\0')
-			return (new_str);
-		new_str[count_new] = str[count_str];
-		count_new++;
-		count_str++;
+			break;
+		new_str[count_new++] = str[count_str++];
 	}
 	return (new_str);
 }
 
+//TODO fails in case exp is not found or $USER$PATH
 char *check_for_exp(char *str, t_data *mini_data)
 {
 	char *exp_line;
@@ -165,7 +152,7 @@ void	get_line(t_commands *const *cmd, t_data *mini_data, const char *limiter, bo
 		if (quotes == false)
 		{
 			while (ft_strchr(line, '$') != 0)
-				line = check_for_exp(line, mini_data);
+				line = expand_dollar(line, mini_data);
 		}
 		write ((*cmd)->in,line, ft_strlen(line));
 		write ((*cmd)->in, "\n", 1);
