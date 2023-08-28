@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:54:29 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/22 13:50:47 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:44:06 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char *search_envp(char *var, t_data *mini)
 				ft_strlen(mini->mini_envp[i]) - ft_strlen(var)));
 		i++;
 	}
-	return (ft_strdup(""));
+	return (ft_strdup("")); // protect this
 }
 
 char *var_replace(char **line, char *var_exp, int start, int end)
@@ -87,7 +87,7 @@ char *var_replace(char **line, char *var_exp, int start, int end)
 	free(sub);
 	free(join);
 	free(sub2);
-	// free(*line); // needed?
+	//free(*line); // needed?
 	return (newline);
 }
 
@@ -113,8 +113,8 @@ char *expand_dollar(char *line, t_data *mini)
 {
 	int 	i;
 
-	if (ft_strchr(line, '~') != NULL && ft_strlen(line) == 1)
-		line = ft_strdup("$HOME");
+	// if (ft_strchr(line, '~') != NULL && ft_strlen(line) == 1)
+	// 	line = ft_strdup("$HOME");
 	while (ft_strchr(line, '$') != NULL)
 	{
 		i = 0;

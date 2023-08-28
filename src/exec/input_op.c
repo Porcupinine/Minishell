@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:19:42 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/07 17:29:13 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:03:03 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	read_stdin(t_commands *commands, t_data *mini)
 //	commands->in = open("tmp_file", O_RDONLY);
 //}
 
-void input_re(t_commands *commands, t_data *mini)
+void input_re(t_commands *commands)
 {
     if (commands->infiles == NULL)
 		commands->in = STDIN_FILENO; // test this

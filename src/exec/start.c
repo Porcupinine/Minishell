@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/25 13:17:26 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:56:39 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,24 @@ static void one_cmd(t_data *mini)
 	command = ft_split(mini->commands->cmd, ' ');
 	if (!command)
 		ft_error("Malloc failed\n");
-	mini->fd = open_pipes(mini);
-	if (mini->fd == NULL)
-		err_msg("", "pipe opening failed.\n"); // check
 	if (check_builtins(command) == 1) // so not a builtin
 	{
+		mini->fd = open_pipes(mini);
+		if (mini->fd == NULL)
+			err_msg("", "pipe opening failed.\n"); // check
 		free_str(command);
 		exec_fork_onecmd(mini);
 		free_pid_list(&mini->process);
 		mini->process = NULL;
 	}
-	else
+	else // its a builtin
 	{
 		free_str(command);
-		run_one_cmd(mini);
-		close_pipe(mini->fd, mini->nb_cmds);
-		free_fd(mini->fd, mini->nb_cmds);
+		input_re(mini->commands); // error checking
+		output_re(mini->commands);
+		split_args(mini->commands->cmd, mini->mini_envp, mini);
+		// close_pipe(mini->fd, mini->nb_cmds);
+		// free_fd(mini->fd, mini->nb_cmds);
 		close_fds(mini); // only place i need it right??
 	}
 }
@@ -61,7 +63,7 @@ int	start(t_data *mini)
 	mini->nb_cmds = lst_size(mini->commands);
 	if (mini->nb_cmds == 1 && ft_strlen(mini->commands->cmd) == 0)
 	{
-		input_re(mini->commands, mini); // error checking
+		input_re(mini->commands); // error checking
 		output_re(mini->commands); // error checking 
 		close_fds(mini);
 	}

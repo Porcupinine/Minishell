@@ -6,7 +6,7 @@
 #    By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/07 11:56:57 by dmaessen          #+#    #+#              #
-#    Updated: 2023/08/25 13:17:58 by dmaessen         ###   ########.fr        #
+#    Updated: 2023/08/28 15:19:19 by dmaessen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CC 	:=  -gcc
 
 #-------------------------------------------------------------------------Flags
 CFLAGS	+= -Wextra -Wall -Werror
-ASANFLAGS += -fsanitize=address -fsanitize=leak
+ASANFLAGS += -fsanitize=address -g #-fsanitize=leak
 
 #----------------------------------------------------------------Libraries path
 LIB42   := ./Lib42
@@ -72,7 +72,7 @@ lib42_build:
 	@$(MAKE) -C $(LIB42)
 
 $(NAME): lib42_build $(OBJECTS_PREFIXED)
-	@$(CC) $(OBJECTS_PREFIXED) $(LIBS) $(HEADERS) -o $@ -lreadline
+	@$(CC) $(ASANFLAGS) $(OBJECTS_PREFIXED) $(LIBS) $(HEADERS) -o $@ -lreadline
 	@echo "MINIHELL is ready!"
 
 clean:
