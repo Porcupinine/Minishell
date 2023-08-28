@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:09:12 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/28 14:28:26 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:02:09 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
 
 int	builtin_cd(t_data *mini, char **cmd)
 {
-	int i;
 	char *path;
 	int		res;
 	
@@ -74,7 +73,6 @@ char *search_path(t_data *mini, char *target)
 
 int search_specific_path(t_data *mini, char *cmd)
 {
-	int 		i;
 	char *tmp;
 	struct stat info;
 

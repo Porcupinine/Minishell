@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 14:43:48 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/28 11:15:43 by domi             ###   ########.fr       */
+/*   Updated: 2023/08/28 15:03:36 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void    child_dup2(t_data *mini, t_commands *commands, int i, int pos);
 
 void    output_re(t_commands *commands);
 
-void    input_re(t_commands *commands, t_data *mini);
+void    input_re(t_commands *commands);
 void	read_stdin(t_commands *commands, t_data *mini);
 
 int	    cmd_err(char *str, int error);
