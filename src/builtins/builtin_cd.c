@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:09:12 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/28 11:19:12 by domi             ###   ########.fr       */
+/*   Updated: 2023/08/28 14:28:26 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int search_specific_path(t_data *mini, char *cmd)
 				tmp = ft_strjoin(tmp, "/");
 		}
 		if (chdir(tmp) != 0)
-			return (free(tmp), not_directory_cd(cmd), 1);
+			return (not_directory_cd(cmd), 1);
 		free(tmp);
 	}
 //		return (builtin_err2("cd", str, "Not a directory\n"), 1); // check
