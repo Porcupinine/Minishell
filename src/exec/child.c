@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:14 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/28 15:43:21 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:01:30 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,16 @@ void	run_one_cmd(t_data *mini)
 {
 	input_re(mini->commands); // error checking
 	output_re(mini->commands); // error checking
-	if (dup2(mini->commands->in, STDIN_FILENO) == -1) // to read from the prev cmd
-		err_msg("", "dup2 failed.\n"); // check -- exit(EXIT_FAILURE);
-	if (dup2(mini->commands->out, STDOUT_FILENO) == -1) // to read from the prev cmd
-		err_msg("", "dup2 failed.\n"); // check -- exit(EXIT_FAILURE);
+	if (mini->commands->in != STDIN_FILENO)
+	{
+		if (dup2(mini->commands->in, STDIN_FILENO) == -1) // to read from the prev cmd
+			err_msg("", "dup2 failed.\n"); // check -- exit(EXIT_FAILURE);
+	}
+	if (mini->commands->out != STDOUT_FILENO)
+	{
+		if (dup2(mini->commands->out, STDOUT_FILENO) == -1) // to read from the prev cmd
+			err_msg("", "dup2 failed.\n"); // check -- exit(EXIT_FAILURE);
+	}
 	// if (in_file != STDIN_FILENO)
 	// 	close(in_file); // this one needed tho??
 	// if (out_file != STDOUT_FILENO)

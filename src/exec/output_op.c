@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   output_op.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:21:59 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/17 19:23:46 by domi             ###   ########.fr       */
+/*   Updated: 2023/08/28 16:20:45 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,15 @@
 static void open_lastfile(t_commands *commands, t_outfile *last_out)
 {
 	if (last_out->type == APPEND_OUTPUT)
+	{
+		printf("%s %d ARE WE HERE 4??\n", last_out->file, last_out->type);
 		commands->out = open(last_out->file, O_CREAT | O_WRONLY | O_APPEND, 0644);
+	}
 	else
+	{
+		printf("ARE WE HERE 5??\n");
 		commands->out = open(last_out->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	}
 }
 
 void output_re(t_commands *commands)
@@ -43,7 +49,9 @@ void output_re(t_commands *commands)
 			}	
 			else
 			{
+				printf("ARE WE HERE 2??\n");
 				open_lastfile(commands, commands->outfiles); 
+				printf("out??\n");
 				if (commands->out < 0)
  					builtin_err(commands->outfiles->file, "No such file or directory"); // return?
 				break ;
