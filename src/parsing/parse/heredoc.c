@@ -19,7 +19,8 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "../../include/exec.h"
-static char *search_in_path(char **mini_envp, char *arg) {
+static char *search_in_path(char **mini_envp, char *arg)
+{
 	int count;
 	char *exp;
 	int count_exp;
@@ -31,47 +32,53 @@ static char *search_in_path(char **mini_envp, char *arg) {
 	count = 0;
 	while (mini_envp[count] != NULL)
 	{
-		if (ft_strncmp(mini_envp[count], arg, ft_strlen(arg)) == 0 && mini_envp[count][ft_strlen(arg)] == '=')
+		if (ft_strncmp(mini_envp[count], arg, ft_strlen(arg)) == 0
+		&& mini_envp[count][ft_strlen(arg)] == '=')
 		{
-			exp = ft_calloc(ft_strlen(mini_envp[count]) - ft_strlen(arg), sizeof(char));
-			if (exp == NULL)
-				ft_error("malloc fail\n");
+			exp = ft_calloc_exit(ft_strlen(mini_envp[count]) - ft_strlen(arg),
+								 sizeof(char));
 			while (mini_envp[count][count_char] != '=')
 				count_char++;
 			count_char++;
 			while(mini_envp[count][count_char] != '\0')
-			{
 				exp[count_exp++] = mini_envp[count][count_char++];
-			}
 			return(exp);
 		}
 		count++;
 	}
-	return (NULL);
+	return (ft_strdup(""));
+}
+
+void put_exp(const char *str, const char *exp, char **new_str, int count_new)
+{
+	int count_exp;
+	int count_str;
+
+	count_str = 0;
+	count_exp = 0;
+	while (exp[count_exp] != '\0')
+		(*new_str)[count_new++] = exp[count_exp++];
+	while (str[count_str] != ' ' && str[count_str] != '\0')
+		count_str++;
+	while (str[count_str] != '\0')
+		(*new_str)[count_new++] = str[count_str++];
 }
 
 char *new_str(char *str, char *exp)
 {
 	char *new_str;
 	int count_str;
-	int count_exp;
 	int count_new;
 
 	count_new = 0;
 	count_str = 0;
-	count_exp = 0;
 	new_str = ft_calloc_exit((ft_strlen(str) + ft_strlen(exp)),
 						sizeof (char)); //remover arg
 	while (str[count_str] != '\0')
 	{
 		if(str[count_str] == '$')
 		{
-			while (exp[count_exp] != '\0')
-				new_str[count_new++] = exp[count_exp++];
-			while (str[count_str] != ' ' && str[count_str] != '\0')
-				count_str++;
-			while (str[count_str] != '\0')
-				new_str[count_new++] = str[count_str++];
+			put_exp(str + count_str, exp, &new_str, count_new);
 			break;
 		}
 		if (str[count_str] == '\0')
@@ -123,9 +130,7 @@ char *no_quotes_lim(char *str)
 
 	count = 0;
 	count_lim = 0;
-	lim = ft_calloc((ft_strlen(str) - 1), sizeof (char));
-	if (lim == NULL)
-		ft_error("Malloc fail!\n");
+	lim = ft_calloc_exit((ft_strlen(str) - 1), sizeof (char));
 	while (str[count] != '\0')
 	{
 		if (str[count] != '\'' && str[count] != '"')
