@@ -108,6 +108,8 @@ void not_directory(char **command);
  */
 void	no_filedir(char *str, char *command, t_data *mini);
 void	not_valid_identifier_s(char **command);
+void	not_set(char *command, char *str);
+void	not_directory_cd(char *command);
 
 //--------------------------------------------------------------------history
 void	line_history(t_data *mini_data);

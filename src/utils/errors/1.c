@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   1.c                                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 08:04:28 by laura             #+#    #+#             */
-/*   Updated: 2023/08/25 12:52:42 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/28 11:18:57 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,23 @@ void	not_directory(char **command)
 	write(2, "Not a directory\n", 17);
 	g_exit_code = 1;
 	free_str(command);
+}
+
+void	not_set(char *command, char *str)
+{
+	write(2, "minishell: ", 11);
+	write(2, command, ft_strlen(command));
+	write(2, ": ", 2);
+	write(2, str, ft_strlen(str));
+	g_exit_code = 1;
+}
+
+void	not_directory_cd(char *command)
+{
+	write(2, "minishell: ", 11);
+	write(2, "cd: ", 4);
+	write(2, command, ft_strlen(command));
+	write(2, ": ", 2);
+	write(2, "Not a directory\n", 17);
+	g_exit_code = 1;
 }
