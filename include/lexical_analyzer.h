@@ -113,6 +113,7 @@ typedef struct s_state_machine
 	int			count;
 	int			start;
 	int			len;
+	int			exit_code;
 }t_state_machine;
 
 /**

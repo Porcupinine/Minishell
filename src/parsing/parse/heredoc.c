@@ -152,21 +152,10 @@ char *no_quotes_lim(char *str)
 	return(lim);
 }
 
-void heredoc(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
+void	get_line(t_commands *const *cmd, t_data *mini_data, const char *limiter, bool quotes)
 {
-	char	*limiter;
-	char 	*line;
-	bool	quotes;
+	char *line;
 
-	quotes = false;
-	(*it_token) = (*it_token)->next;
-	if(ft_strchr((*it_token)->str, '\'') != 0 || ft_strchr((*it_token)->str, '"') != 0)
-	{
-		limiter = no_quotes_lim((*it_token)->str);
-		quotes = true;
-	}
-	else
-		limiter = ft_strdup((*it_token)->str);
 	line = readline("> ");
 	while (line != NULL)
 	{
@@ -182,8 +171,26 @@ void heredoc(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
 		write ((*cmd)->in, "\n", 1);
 		line = readline("> ");
 	}
-	free(limiter);
 	free(line);
+}
+
+void heredoc(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
+{
+	char	*limiter;
+	char 	*line;
+	bool	quotes;
+
+	quotes = false;
+	(*it_token) = (*it_token)->next;
+	if(ft_strchr((*it_token)->str, '\'') != 0 || ft_strchr((*it_token)->str, '"') != 0)
+	{
+		limiter = no_quotes_lim((*it_token)->str);
+		quotes = true;
+	}
+	else
+		limiter = ft_strdup((*it_token)->str);
+	get_line(cmd, mini_data, limiter, quotes);
+	free(limiter);
 	limiter = NULL;
 }
 //if quotes is false, aply expansion otherwise easy
