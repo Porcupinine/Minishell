@@ -7,7 +7,7 @@ void	sigint_handler(int sig)
 {
 	return_prompt();
 	kill(0, SIGQUIT);
-	//TODO TOP changes the signal, it can break minishell
+	//TODO TOP changes the signal, it can break minishell WE DONT CARE!
 }
 
 // if (!isatty(STDIN_FILENO))
