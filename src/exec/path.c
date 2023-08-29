@@ -33,7 +33,7 @@ static int	find_path(char **envp)
 	while (envp[j])
 		j++;
 	if (i == j)
-		return (0);
+		return (-1);
 	return (i);
 }
 
@@ -88,8 +88,9 @@ char	*split_args(char *cmd, char **envp, t_data *mini)
 		if (*envp == NULL)
 			exit(127); // TODO check as we don't want to exit
 		paths = ft_split(envp[find_path(envp)] + 5, ':');
-		if (!paths || find_path(envp) == 0)
+		if (!paths || find_path(envp) == -1)
 		{
+			printf("%p %s going wrong here?? 2\n", paths, paths[0]);
 			no_filedir("minishell", command[0], mini);
 			// no_command(command, mini); // exit with // exit(127);
 			exit(0); 

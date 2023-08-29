@@ -38,9 +38,7 @@ static void	add_envp_node(t_mini_envp_list **envp_list, char *str)
 	t_mini_envp_list	*last_node;
 
 	last_node = NULL;
-	new_envp = malloc(sizeof(t_mini_envp_list));
-	if (new_envp == NULL)
-		ft_error("Malloc token fail\n");
+	new_envp = ft_calloc_exit(1, sizeof(t_mini_envp_list));
 	new_envp->str = str;
 	new_envp->next = NULL;
 	if (*envp_list == NULL)

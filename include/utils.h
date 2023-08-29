@@ -13,6 +13,7 @@ void	sigint_handler(int sig);
 void	sigquit_handler(int sig);
 void	set_signals(void);
 void	return_prompt(void);
+void	unset_signals(void );
 
 //------------------------------------------------------------cmd_list_actions
 /**
