@@ -60,7 +60,7 @@ void	syntax_error_parse(t_state_machine *parser, t_data *mini_data);
  * @param command array of strings containing information for the errror
  * message
  */
-void	no_file_directory(char **command);
+void	no_file_directory(char **command, t_data *mini);
 /**
  * writes command not found, change exit code to 127 and free command
  * @param command array of strings containing information for the errror
@@ -73,43 +73,43 @@ void	no_command(char **command, t_data *mini);
  * @param command array of strings containing information for the errror
  * message
  */
-void	permission_denied(char **command);
+void	permission_denied(char **command, t_data *mini);
 /**
  * writes not valid identifier  error message, set exit code to 1 and free
  * command array
  * @param command array of strings containing information for the errror
  * message
  */
-void	not_valid_identifier(char **command);
+void	not_valid_identifier(char **command, t_data *mini);
 /**
  * writes too many args error message, set exit code to 1 and free
  * command array
  * @param command array of strings containing information for the errror
  * message
  */
-void	too_many_args(char **command);
+void	too_many_args(char **command, t_data *mini);
 /**
  * writes numeric arg required error message, set exit code to 255 and free
  * command array
  * @param command array of strings containing information for the errror
  * message
  */
-void	numeric_arg_required(char **command);
+void	numeric_arg_required(char **command, t_data *mini);
 /**
  * writes not a directory error message, set exit code to 1 and free
  * command array
  * @param command array of strings containing information for the errror
  * message
  */
-void not_directory(char **command);
+void not_directory(char **command, t_data *mini);
 /**
  *
  * @param command
  */
 void	no_filedir(char *str, char *command, t_data *mini);
-void	not_valid_identifier_s(char **command);
-void	not_set(char *command, char *str);
-void	not_directory_cd(char *command);
+void	not_valid_identifier_s(char **command, t_data *mini);
+void	not_set(char *command, char *str, t_data *mini);
+void	not_directory_cd(char *command, t_data *mini);
 
 //--------------------------------------------------------------------history
 void	line_history(t_data *mini_data);

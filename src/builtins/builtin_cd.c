@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:09:12 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/29 10:46:16 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/29 19:01:09 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,6 @@
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
 #include "../../include/utils.h"
-
-/*
-	abs path describe the location from the root directory
-	relative path takes you below your current one
-
-	if only cd --> takes you back to home directory
-	if cd . --> don't implement
-	if cd .. --> don't implement
-	if cd ../../.. --> check if backslash present else add it yoruself
-	if cd xx/ --> check if backslash present else add it yoruself
-*/
 
 int	builtin_cd(t_data *mini, char **cmd)
 {
@@ -40,15 +29,15 @@ int	builtin_cd(t_data *mini, char **cmd)
 		path = search_path(mini, "HOME=");
 		if (path != NULL)
 			if (change_oldpwd(mini) == 1)
-				return (not_set("cd", "OLDPWD not set"), 1);
+				return (not_set("cd", "OLDPWD not set", mini), 1);
 		res = chdir(path);
 		free(path);
 		if (res != 0)
-			return (not_set("cd", "HOME not set"), 1);
+			return (not_set("cd", "HOME not set", mini), 1);
 		change_pwd(mini);
 		return (0);
 	}
-	else // a specified path
+	else
 	{
 		search_specific_path(mini, cmd[1]); // is the below needed then??
 		return (0); // check
@@ -56,7 +45,7 @@ int	builtin_cd(t_data *mini, char **cmd)
 	return (-1); // is this correct
 }
 
-char *search_path(t_data *mini, char *target)
+char	*search_path(t_data *mini, char *target)
 {
 	int i;
 
@@ -80,23 +69,23 @@ int search_specific_path(t_data *mini, char *cmd)
 	if (stat(tmp, &info) == 0)
 	{
 		if (change_oldpwd(mini) == 1)
-			return (not_set("cd", "OLDPWD not set"), 1);
+			return (not_set("cd", "OLDPWD not set", mini), 1);
 		if (S_ISDIR(info.st_mode))
 		{
 			if (tmp[ft_strlen(tmp)] != '/')
 				tmp = ft_strjoin(tmp, "/");
 		}
 		if (chdir(tmp) != 0)
-			return (not_directory_cd(cmd), 1);
+			return (not_directory_cd(cmd, mini), 1);
 		free(tmp);
 		change_pwd(mini); 
 	}
 	else
-		return (not_directory_cd(cmd), 1);
+		return (not_directory_cd(cmd, mini), 1);
 	return (0);
 }
 
-int change_oldpwd(t_data *mini)
+int	change_oldpwd(t_data *mini)
 {
 	char *pwd;
 	char *tmp;
@@ -127,7 +116,7 @@ int change_oldpwd(t_data *mini)
 	return (0);
 }
 
-int change_pwd(t_data *mini) // can this one error??
+int	change_pwd(t_data *mini)
 {
 	char *pwd;
 	int i;
@@ -153,76 +142,3 @@ int change_pwd(t_data *mini) // can this one error??
 	free(pwd);
 	return (0);
 }
-
-// static int search_path_cd(t_data *mini)
-// {
-// 	int 		i;
-// 	char 		*str;
-// 	struct stat info;
-
-// 	str = malloc((ft_strlen(mini->commands->cmd) - 2) * sizeof(char)); // -3 to skip cd and space but + 1 not null term
-// 	if (str == NULL)
-// 		ft_error("Malloc fail\n"); // TODO check if needs to be NULL
-// 	i = 0;
-// 	while (mini->commands->cmd[i + 3]) // here too +3 right??
-// 	{
-// 		str[i] = mini->commands->cmd[i + 3];
-// 		i++;
-// 	}
-// 	// str[i] = '\0'; // needed??
-// 	if (stat(str, &info) == 0) // do something if != 0 ??
-// 	{
-// 		change_oldpwd(mini); // check on a return value of what??
-// 		if (S_ISDIR(info.st_mode)) // check if the path leads is a directory
-// 		{
-// 			if (str[ft_strlen(str)] != '/')
-// 				str = ft_strjoin(str, "/");
-// 		}
-// 	}
-// 	if (chdir(str) != 0)
-// 	{
-// 		not_directory(cmd);
-// 		return (1);
-// //		return (builtin_err2("cd", str, "Not a directory\n"), 1); // check
-// 	}
-// 	change_pwd(mini); // meaning if succeed so we need to undate this 
-// 		// check on a return value or what??
-// 	free(str);
-// 	return (0); // check
-	
-// }
-
-// int	builtin_cd(t_data *mini, char **cmd)
-// {
-// 	int i;
-	
-// 	if (*mini->mini_envp == NULL)
-// 		return (-1); // TODO check if needs to be NULL
-// 	if ((ft_strncmp(cmd[0], "cd\0", 2) == 0 && !cmd[1])
-// 		|| (ft_strncmp(cmd[1], "~", 1) == 0 && !cmd[2]))
-// 	{
-// 		i = 0;
-// 		while (mini->mini_envp[i])
-// 		{
-// 			if (ft_strncmp(mini->mini_envp[i], "HOME=", 5) == 0) // all good also if unset HOME as should error
-// 			{
-// 				change_oldpwd(mini); // meaning if succeed so we need to undate this 
-// 				if (chdir(ft_substr(mini->mini_envp[i], 6, ft_strlen(mini->mini_envp[i]))) != 0)
-// 				{
-// 					permission_denied(cmd);
-// 					return (1);
-// 				}
-// 				change_pwd(mini); // meaning if succeed so we need to undate this
-// //					// check on a return value or what??
-// 				return (0);
-// 			}
-// 			i++;
-// 		}
-// 	}
-// 	else // a specified path
-// 	{
-// 		search_path_cd(mini); // is the below needed then??
-// 		return (0);
-// 	}
-// 	return (-1); // is this correct
-// }
