@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:09:12 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/28 15:02:09 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/29 10:46:16 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ int search_specific_path(t_data *mini, char *cmd)
 	struct stat info;
 
 	tmp = cmd;
-	if (stat(tmp, &info) == 0) // do something if != 0 ??
+	if (stat(tmp, &info) == 0)
 	{
 		if (change_oldpwd(mini) == 1)
 			return (not_set("cd", "OLDPWD not set"), 1);
-		if (S_ISDIR(info.st_mode)) // check if the path leads is a directory
+		if (S_ISDIR(info.st_mode))
 		{
 			if (tmp[ft_strlen(tmp)] != '/')
 				tmp = ft_strjoin(tmp, "/");
@@ -89,10 +89,11 @@ int search_specific_path(t_data *mini, char *cmd)
 		if (chdir(tmp) != 0)
 			return (not_directory_cd(cmd), 1);
 		free(tmp);
+		change_pwd(mini); 
 	}
-//		return (builtin_err2("cd", str, "Not a directory\n"), 1); // check
-	change_pwd(mini); 
-	return (0); // check
+	else
+		return (not_directory_cd(cmd), 1);
+	return (0);
 }
 
 int change_oldpwd(t_data *mini)
