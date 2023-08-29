@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:25:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/25 14:56:58 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/29 16:39:25 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,10 @@
 #include "../../Lib42/include/libft.h"
 #include "../../include/utils.h"
 
-/*
-	using export should add the mentionned variable to envp
-	(not the same as our local arg list)
-
-	// export a variable
-	// do we support the = something ??
-	// access envp
-	// open with write rights and add a line for it
-*/
-// deal with the below
-// eg. just "export" and its printing the whole env with 'declare -x' in front of each line
-// eg. "export =hey" --> minishell: export: '=hey': not a valid identifier
-// eg. "export hey" --> does nothing
-
-// NEW VERSION
-static void print_xenv(t_data *mini)
+static void	print_xenv(t_data *mini)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (mini->mini_envp[i])
@@ -54,25 +39,26 @@ static void print_xenv(t_data *mini)
 	}
 }
 
-static bool check_cmd(char *cmd)
+static bool	check_cmd(char *cmd)
 {
-	int i;
+	int	i;
 
 	if (cmd[0] == '=')
 		return (false);
 	i = 0;
 	while (cmd[i] && cmd[i] != '=')
 	{
-		if (ft_isalnum(cmd[i]) == 0 && cmd[i] != '=' && cmd[i] != '_' && cmd[i] != '$')
+		if (ft_isalnum(cmd[i]) == 0 && cmd[i] != '='
+			&& cmd[i] != '_' && cmd[i] != '$')
 			return (false);
 		i++;
 	}
 	return (true);
 }
 
-static bool is_valid_noerror(char *cmd)
+static bool	is_valid_noerror(char *cmd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (cmd[i])
@@ -87,9 +73,9 @@ static bool is_valid_noerror(char *cmd)
 	return (true);
 }
 
-static int len_equal(char *cmd)
+static int	len_equal(char *cmd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (cmd[i])
@@ -104,10 +90,10 @@ static int len_equal(char *cmd)
 	return (i);
 }
 
-static char **add_line_envp(char **envp, char *cmd, int size, t_data *mini)
+static char	**add_line_envp(char **envp, char *cmd, int size, t_data *mini)
 {
-	char **new;
-	int i;
+	char	**new;
+	int		i;
 
 	new = malloc((size + 1) * sizeof(char *));
 	if (new == NULL)
@@ -115,15 +101,16 @@ static char **add_line_envp(char **envp, char *cmd, int size, t_data *mini)
 	i = 0;
 	while (envp[i] && i < size - 1)
 	{
-		new[i] = ft_strdup(envp[i]); // what if it returns NULL here??
+		new[i] = ft_strdup(envp[i]);
+		// if (new[i] == NULL) // this needs to be checked
 		i++;
 	}
 	cmd = expand_dollar(cmd, mini);
 	if (cmd[0] == '=')
-		return (not_valid_identifier_s(&cmd), free(new), NULL);
+		return (not_valid_identifier_s(&cmd, mini), free(new), NULL);
 	new[i] = ft_strdup(cmd); // what if it returns NULL here??
 	new[size] = NULL;
-	free(envp); // needed?? recursively??
+	free(envp);
 	return (new);
 }
 
@@ -177,7 +164,7 @@ int builtin_export(t_data *mini, char **cmd)
 			i++;
 		}
 		else
-			return (not_valid_identifier(cmd), 1); // exit code should be 1 
+			return (not_valid_identifier(cmd, mini), 1); // exit code should be 1 
 	}
 	return (0);
 }

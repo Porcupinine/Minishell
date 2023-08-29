@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/28 15:56:39 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:21:49 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void one_cmd(t_data *mini)
 		split_args(mini->commands->cmd, mini->mini_envp, mini);
 		// close_pipe(mini->fd, mini->nb_cmds);
 		// free_fd(mini->fd, mini->nb_cmds);
-		close_fds(mini); // only place i need it right??
+		close_fds(mini);
 	}
 }
 
@@ -73,7 +73,7 @@ int	start(t_data *mini)
 		multiple_cmd(mini);
 	free_cmd_list(&mini->commands);
 	mini->commands = NULL;
-	if (access("tmp_file", F_OK) == 0) // does this work?
+	if (access("tmp_file", F_OK) == 0)
 		unlink("tmp_file");
 	return (0);
 }
@@ -84,12 +84,14 @@ int	start(t_data *mini)
 		-- fork even with one command --> DONE
 		-- rework the whole child process to create one for all --> DONE
 		-- go through all the builtins
-			-- ++ send double pointer to cd and exit
-			-- rework cd (its all broke..)
+			-- ++ send double pointer to cd and exit --> DONE
+			-- rework cd (its all broke..) --> DONE
 			-- add mini to exit
 		-- adapt the location to find $? --> DONE
 		-- check and change all the error functions
 		-- add the right exit_code everywhere 
 			-- rm g_exit_code
+		-- look into run minishell inside minishell , increase SHVL each time -->DONE
+		-- ./test.sh doesn't run the bash script inside of it -->DONE
 	
 */

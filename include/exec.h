@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 14:43:48 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/28 15:03:36 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/29 12:23:42 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		builtin_pwd(t_data *mini);
 
 int     builtin_export(t_data *mini, char **cmd);
 
-void	builtin_exit(char **cmd); // t_data *mini,  needed ??
+void	builtin_exit(t_data *mini, char **cmd);
 
 int		builtin_env(t_data *mini, char **cmd);
 

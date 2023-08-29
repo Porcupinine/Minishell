@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 12:32:30 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/21 16:41:38 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/29 16:32:46 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,27 @@
 #include "../../Lib42/include/libft.h"
 #include "../../include/utils.h"
 
-static int	ft_atoi_long(char *str)
+#define LONG_MAXX 9223372036854775807
+
+static void	throw_error(t_data *mini, char **cmd, long long nb, int i)
 {
-	int		i;
-	int		sign;
-	long	nb;
+	if (i == 1)
+	{
+		numeric_arg_required(cmd, mini);
+		mini->exit_code = nb % 256;
+	}
+	if (i == 2)
+	{
+		numeric_arg_required(cmd, mini);
+		if (ft_strncmp(cmd[1], "-9223372036854775808", 20) == 0)
+			mini->exit_code = 0;
+	}
+}
+
+static long	ft_atoi_long(char *str, t_data *mini, char **cmd, long long nb)
+{
+	long		i;
+	long		sign;
 
 	nb = 0;
 	i = 0;
@@ -37,55 +53,39 @@ static int	ft_atoi_long(char *str)
 			nb = (nb * 10) + (str[i] - 48);
 		else
 			return (-1);
-		if (nb > INT_MAX || (nb * -1) < INT_MIN) // is this right??
-			return (-1);
+		if (nb > LONG_MAXX)
+			return (throw_error(mini, cmd, nb, 1), -1);
 		i++;
 	}
-	return ((int)(sign * nb));
+	if (nb < 0)
+		return (throw_error(mini, cmd, nb, 2), -1);
+	return ((long)(sign * nb));
 }
 
-// void	builtin_exit(t_data *mini, char *cmd)
-void	builtin_exit(char **cmd)
+void	builtin_exit(t_data *mini, char **cmd)
 {
-	int i;
-	int j;
-	char *sub;
-	long long code;
+	long long	code;
 
-	code = 0; // right?
-	i = 0;
-	while(cmd[i])
-		i++;
-	if (i == 4 && ft_strncmp(cmd[0], "exit", ft_strlen(cmd[0])) == 0)
-		ft_putstr_fd("exit\n", 2); 
-		// and exit with 0 (right??) but things need to be freed first
-	i = 0;
-	j = 0;
-	while(cmd[0][i])
+	code = mini->exit_code;
+	if (ft_strncmp(cmd[0], "exit", ft_strlen(cmd[0])) == 0 && cmd[1] == NULL)
 	{
-		if (cmd[0][i] == ' ')
-			j++;
-		i++;
+		if (mini->nb_cmds == 1)
+			ft_putstr_fd("exit\n", 2);
+		exit(code);
 	}
-	if (j > 1) // so more than one arg
+	if (cmd[2] != NULL)
 	{
-		too_many_args(cmd);
-		return ;
-//		builtin_err("exit", "too many arguments\n"); //TODO it doesn't have **command
-		// exit with 1 BUT things to free first
+		ft_putstr_fd("exit\n", 2);
+		too_many_args(cmd, mini);
 	}
 	else
 	{
-		sub = ft_substr(cmd[0], 5, ft_strlen(cmd[0]));
-		code = ft_atoi_long(sub);
+		ft_putstr_fd("exit\n", 2);
+		code = ft_atoi_long(cmd[1], mini, cmd, 0);
 		if (code == -1)
-		{
-			builtin_err("exit", "numeric argument required\n"); //TODO it doesn't have **command
-			// exit with 255 BUT things to free first
-		}
-		free(sub); // needed??
+			exit(mini->exit_code);
 		code = code % 256;
+		mini->exit_code = code;
+		exit(code);
 	}
-	// do we also maybe need to use rl_clear_history ??
-	exit(code); // only this?? ++ things to be freed // should this be 0 ? as it was successfully exited ?
 }
