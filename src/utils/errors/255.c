@@ -19,14 +19,14 @@
 
 extern int	g_exit_code;
 
-void	numeric_arg_required(char **command)
+void	numeric_arg_required(char **command, t_data *mini)
 {
 	write(2, "minishell: ", 11);
 	write(2, command[0], ft_strlen(command[0]));
 	write(2, ": ", 2);
 	write(2, command[1], ft_strlen(command[1]));
 	write(2, ": ", 2);
-	write(2, "numeric argument require\n",25);
-	g_exit_code = 255;
-	free_str(command);
+	write(2, "numeric argument required\n",26);
+	mini->exit_code = 255;
+	//free_str(command);
 }
