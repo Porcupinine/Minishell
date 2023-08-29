@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/29 14:21:49 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/29 16:45:15 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void one_cmd(t_data *mini)
 	else // its a builtin
 	{
 		free_str(command);
-		input_re(mini->commands); // error checking
+		input_re(mini->commands);
 		output_re(mini->commands);
 		split_args(mini->commands->cmd, mini->mini_envp, mini);
 		// close_pipe(mini->fd, mini->nb_cmds);
@@ -63,8 +63,8 @@ int	start(t_data *mini)
 	mini->nb_cmds = lst_size(mini->commands);
 	if (mini->nb_cmds == 1 && ft_strlen(mini->commands->cmd) == 0)
 	{
-		input_re(mini->commands); // error checking
-		output_re(mini->commands); // error checking 
+		input_re(mini->commands);
+		output_re(mini->commands);
 		close_fds(mini);
 	}
 	else if (mini->nb_cmds == 1)
@@ -83,15 +83,16 @@ int	start(t_data *mini)
 	TO WORK ON:
 		-- fork even with one command --> DONE
 		-- rework the whole child process to create one for all --> DONE
-		-- go through all the builtins
+		-- go through all the builtins --> DONE
 			-- ++ send double pointer to cd and exit --> DONE
 			-- rework cd (its all broke..) --> DONE
-			-- add mini to exit
+			-- add mini to exit --> DONE
 		-- adapt the location to find $? --> DONE
+		-- look into run minishell inside minishell , increase SHVL each time -->DONE
+		-- ./test.sh doesn't run the bash script inside of it -->DONE
 		-- check and change all the error functions
 		-- add the right exit_code everywhere 
 			-- rm g_exit_code
-		-- look into run minishell inside minishell , increase SHVL each time -->DONE
-		-- ./test.sh doesn't run the bash script inside of it -->DONE
+		-- start norminetting
 	
 */

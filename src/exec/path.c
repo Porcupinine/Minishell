@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:11 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/29 14:16:53 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/29 16:44:53 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void modif_env(t_data *mini, char *cmd)
 				res = ft_strtrim(mini->mini_envp[i], "SHLVL=");
 				count = ft_atoi(res);
 				count += 1;
-				mini->mini_envp[i] = ft_strjoin("SHLVL=", ft_itoa(count)); // or itoa here?
+				mini->mini_envp[i] = ft_strjoin("SHLVL=", ft_itoa(count));
 				free(res);
 				break ;
 			}
