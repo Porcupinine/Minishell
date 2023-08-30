@@ -18,7 +18,15 @@
 #include "../../../include/env_var.h"
 #include "../../../include/utils.h"
 
-extern int	g_exit_code;
+void	kill_heredoc_clean(t_state_machine *parser, t_data *mini_data, t_commands **cmd)
+{
+	free_token_list(&parser->tokens_list);
+	parser->tokens_list = NULL;
+	free_cmd_list(&mini_data->commands);
+	mini_data->commands = NULL;
+	free(cmd);
+	parser->exit_code = 1;
+}
 
 void	extract_cmd(t_tokens **it_token, t_commands **cmd)
 {
@@ -36,7 +44,8 @@ void	extract_cmd(t_tokens **it_token, t_commands **cmd)
 	(*cmd)->cmd = temp;
 }
 
-static int	found_here(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
+static int	found_here(t_tokens **it_token, t_commands **cmd, t_data *mini_data,
+						 t_state_machine *parser)
 {
 	pid_t 	pid;
 	int stat;
@@ -51,7 +60,10 @@ static int	found_here(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
 	}
 	waitpid(pid, &stat, 0);
 	if (WIFSIGNALED(stat))
+	{
+		kill_heredoc_clean(parser, mini_data, cmd);
 		return (-1) ;
+	}
 	add_inout(cmd, "tmp_file", (*it_token)->type);
 	(*it_token) = (*it_token)->next->next;
 		return (0);
@@ -80,20 +92,13 @@ int	between_pipes(t_tokens **it_token, t_commands **cmd, t_data *mini_data, \
 				syntax_error_parse(parser, mini_data);
 		}
 		if ((*it_token) && (*it_token)->type == T_SMALLSMALL)
-			if(found_here(it_token, cmd, mini_data) == -1)
+			if(found_here(it_token, cmd, mini_data, parser) == -1)
 				return (-1);
 	}
 	return (0);
 }
 //TODO remove quotes for echo
-void	kill_herdoc_clean(t_state_machine *parser, t_data *mini_data, t_commands **cmd)
-{
-	free_token_list(&parser->tokens_list);
-	parser->tokens_list = NULL;
-	free_cmd_list(&mini_data->commands);
-	mini_data->commands = NULL;
-	free(cmd);
-}
+
 
 void	parse_tokens(t_state_machine *parser, t_data *mini_data)
 {
@@ -111,12 +116,7 @@ void	parse_tokens(t_state_machine *parser, t_data *mini_data)
 			ft_error("Malloc fail\n");
 		if (between_pipes(&it_token, &cmd, mini_data, parser) == -1)
 		{
-			kill_herdoc_clean(parser, mini_data, &cmd);
-//			free_token_list(&parser->tokens_list);
-//			parser->tokens_list = NULL;
-//			free_cmd_list(&mini_data->commands);
-//			mini_data->commands = NULL;
-//			free(cmd);
+//			kill_heredoc_clean(parser, mini_data, cmd);
 			return;
 		}
 		if ((cmd) != NULL)

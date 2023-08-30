@@ -38,6 +38,7 @@ SRC     := src/main.c \
 	   src/exec/output_op.c src/exec/path.c src/exec/start.c src/exec/utils.c \
 	   src/exec/fork.c src/exec/pipes.c src/exec/utils2.c \
 	   src/parsing/parse/check_commands2.c src/parsing/parse/heredoc.c \
+	   src/parsing/parse/quotes.c \
 	   src/parsing/state_machine/char_machine.c \
 	   src/parsing/state_machine/error_machine.c src/parsing/state_machine/lexe.c \
 	   src/parsing/state_machine/meta_machine.c src/parsing/state_machine/space_machine.c \

@@ -39,7 +39,6 @@ char *no_quotes_lim(char *str)
 		}
 		count++;
 	}
-	lim[count] = '\0';
 	return(lim);
 }
 

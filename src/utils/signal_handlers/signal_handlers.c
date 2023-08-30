@@ -6,7 +6,7 @@
 
 void	sigint_handler(int sig)
 {
-	return_prompt();
+//	return_prompt();
 }
 
 // if (!isatty(STDIN_FILENO))
@@ -29,6 +29,7 @@ void	set_term(void)
 void	unset_signals(void )
 {
 	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 }
 
 void	set_signals(void)
@@ -36,7 +37,7 @@ void	set_signals(void)
 	struct sigaction	sigint_sa;
 	struct sigaction	sigquit_sa;
 
-//	set_term();
+	set_term();
 	sigemptyset(&sigint_sa.sa_mask);
 	sigemptyset(&sigquit_sa.sa_mask);
 	sigquit_sa.sa_handler = &sigquit_handler;
