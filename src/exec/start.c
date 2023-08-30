@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/30 10:54:05 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:04:25 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,11 @@ static void multiple_cmd(t_data *mini)
 	mini->process = NULL;
 }
 
-static void one_cmd(t_data *mini)
+static void	one_cmd(t_data *mini)
 {
-	char **command;
+	char	**command;
 
 	command = ft_split(mini->commands->cmd, ' ');
-	if (!command)
-		ft_error("Malloc failed\n");
 	if (check_builtins(command) == 1)
 	{
 		mini->fd = open_pipes(mini);
@@ -49,8 +47,14 @@ static void one_cmd(t_data *mini)
 	else
 	{
 		free_str(command);
-		input_re(mini->commands);
+		input_re(mini->commands, mini);
 		output_re(mini->commands);
+		if (mini->commands->out < 0 || mini->commands->in < 0)
+		{
+			set_exit_code(mini, 1);
+			close_fds(mini);
+			return ;
+		}
 		split_args(mini->commands->cmd, mini->mini_envp, mini);
 		// close_pipe(mini->fd, mini->nb_cmds);
 		// free_fd(mini->fd, mini->nb_cmds);
@@ -63,9 +67,14 @@ int	start(t_data *mini)
 	mini->nb_cmds = lst_size(mini->commands);
 	if (mini->nb_cmds == 1 && ft_strlen(mini->commands->cmd) == 0)
 	{
-		input_re(mini->commands);
+		input_re(mini->commands, mini);
+		if (mini->commands->in < 0)
+			return (set_exit_code(mini, 1), 1);
 		output_re(mini->commands);
+		if (mini->commands->out < 0)
+			return (set_exit_code(mini, 1), 1);
 		close_fds(mini);
+		set_exit_code(mini, 0);
 	}
 	else if (mini->nb_cmds == 1)
 		one_cmd(mini);
@@ -75,7 +84,7 @@ int	start(t_data *mini)
 	mini->commands = NULL;
 	if (access("tmp_file", F_OK) == 0)
 		unlink("tmp_file");
-	return (0);
+	return (mini->exit_code);
 }
 
 
