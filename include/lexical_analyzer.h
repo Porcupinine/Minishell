@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   lexical_analyzer.h                                 :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: laura <laura@student.codam.nl>               +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/07/17 17:34:36 by laura         #+#    #+#                 */
-/*   Updated: 2023/08/11 08:27:28 by laura         ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   lexical_analyzer.h                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/17 17:34:36 by laura             #+#    #+#             */
+/*   Updated: 2023/08/30 16:33:35 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ void	unclosed_error(t_state_machine *parser);
 */
 void	parse(t_data *mini_data);
 
-void handle_heredoc(t_tokens **it_token, t_commands **cmd, t_data *mini_data);
+void	handle_heredoc(t_tokens **it_token, t_commands **cmd, t_data *mini_data);
+char	*remove_quotes(char *str);
 
 #endif //MINISHELL_LEXICAL_ANALYZER_H
