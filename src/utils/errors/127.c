@@ -16,7 +16,6 @@
 #include "../../Lib42/include/libft.h"
 #include "../../include/exec.h"
 
-extern int	g_exit_code;
 
 void	no_command(char **command, t_data *mini)
 {

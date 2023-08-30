@@ -17,8 +17,6 @@
 #include "../../Lib42/include/libft.h"
 #include "../../include/exec.h"
 
-extern int	g_exit_code;
-
 void	numeric_arg_required(char **command, t_data *mini)
 {
 	write(2, "minishell: ", 11);

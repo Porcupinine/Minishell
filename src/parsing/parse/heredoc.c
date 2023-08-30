@@ -68,7 +68,6 @@ void	get_line(t_commands *const *cmd, t_data *mini_data, const char *limiter, bo
 void heredoc(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
 {
 	char	*limiter;
-	char 	*line;
 	bool	quotes;
 
 	quotes = false;
@@ -84,7 +83,6 @@ void heredoc(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
 	free(limiter);
 	limiter = NULL;
 }
-//if quotes is false, aply expansion otherwise easy
 
 void handle_heredoc(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
 {

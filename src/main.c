@@ -23,8 +23,6 @@
 #include "../include/builtins.h"
 #include "../include/exec.h"
 
-int g_exit_code;
-
 void	return_prompt(void)
 {
 	printf("\n");
@@ -32,41 +30,6 @@ void	return_prompt(void)
 	rl_replace_line("", 0);
 	rl_redisplay();
 }
-
-//void	sigint_handler(int sig)
-//{
-//	return_prompt();
-//	kill(0, SIGQUIT);
-//	//TODO TOP changes the signal, it can break minishell
-//}
-//
-//// if (!isatty(STDIN_FILENO))
-////      rl_outstream = stdin;
-//
-//void	sigquit_handler(int sig)
-//{
-////	rl_on_new_line();
-////	rl_replace_line("", 0);
-////	rl_redisplay();
-//}
-//void
-//void	set_signals(void)
-//{
-//	struct sigaction	sigint_sa;
-//	struct sigaction	sigquit_sa;
-//	struct termios term;
-////
-//	tcgetattr(fileno(stdin), &term);
-//	sigemptyset(&sigint_sa.sa_mask);
-//	sigemptyset(&sigquit_sa.sa_mask);
-//	sigquit_sa.sa_handler = &sigquit_handler;
-//	sigint_sa.sa_handler = &sigint_handler;
-//	sigaction(SIGQUIT, &sigquit_sa, NULL);
-//	sigaction(SIGINT, &sigint_sa, NULL);
-//	term.c_lflag &= ~ECHOCTL;
-//	tcsetattr(fileno(stdin), 0, &term);
-//
-//}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -90,7 +53,6 @@ int	main(int argc, char **argv, char **envp)
 			parse(mini_data);
 			start(mini_data);
 		}
-//		printf("Exit code: %d\n", g_exit_code);
 	}
 	return (0);
 }

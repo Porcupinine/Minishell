@@ -18,8 +18,6 @@
 #include <stdio.h>
 #include "../../../include/exec.h"
 
-extern int	g_exit_code;
-
 void	token_start(t_state_machine *parser)
 {
 	char	c;
