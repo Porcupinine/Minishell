@@ -47,12 +47,10 @@ static void	add_outfile(t_outfile **outfile, enum s_type type, char *str)
 	t_outfile	*last;
 
 	last = NULL;
-	new_out = ft_calloc(1, sizeof (t_outfile));
-	if (new_out == NULL)
-		ft_error("Malloc fail\n");
+	new_out = ft_calloc_exit(1, sizeof (t_outfile));
 	if (type == T_BIG)
 		new_out->type = REDIRECT_OUTPUT;
-	if (type == T_BIGBIG)
+	if (typ == T_BIGBIG)
 		new_out->type = APPEND_OUTPUT;
 	new_out->file = str;
 	new_out->next = NULL;
