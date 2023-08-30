@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 08:04:28 by laura             #+#    #+#             */
-/*   Updated: 2023/08/30 13:50:30 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/30 16:09:57 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,15 @@ void	no_file_directory(char **command, t_data *mini)
 	write(2, "No such file or directory\n", 26);
 	mini->exit_code = 1;
 	free_str(command); // test if needed
+}
+
+void	no_filedirectory(char *file, t_data *mini)
+{
+	write(2, "minishell: ", 11);
+	write(2, file, ft_strlen(file));
+	write(2, ": ", 2);
+	write(2, "No such file or directory\n", 26);
+	mini->exit_code = 1;
 }
 
 void	not_valid_identifier(char **command, t_data *mini)

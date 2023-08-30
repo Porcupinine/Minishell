@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/30 10:54:05 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/30 16:26:10 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,13 @@ static void one_cmd(t_data *mini)
 	else
 	{
 		free_str(command);
-		input_re(mini->commands);
-		output_re(mini->commands);
+		input_re(mini->commands, mini); // error checking
+		output_re(mini->commands); // error checking
+		if (mini->commands->out < 0 || mini->commands->in < 0)
+		{
+			close_fds(mini);
+			return ;
+		}
 		split_args(mini->commands->cmd, mini->mini_envp, mini);
 		// close_pipe(mini->fd, mini->nb_cmds);
 		// free_fd(mini->fd, mini->nb_cmds);
@@ -63,8 +68,12 @@ int	start(t_data *mini)
 	mini->nb_cmds = lst_size(mini->commands);
 	if (mini->nb_cmds == 1 && ft_strlen(mini->commands->cmd) == 0)
 	{
-		input_re(mini->commands);
+		input_re(mini->commands, mini);
+		if (mini->commands->in < 0)
+			return (1); // set exit code?
 		output_re(mini->commands);
+		if (mini->commands->out < 0)
+			return (1); // set exit code?
 		close_fds(mini);
 	}
 	else if (mini->nb_cmds == 1)
