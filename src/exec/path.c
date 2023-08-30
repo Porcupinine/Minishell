@@ -77,7 +77,10 @@ static char	*join_path(char **command, char **paths, int i, t_data *mini)
 	while (paths[i])
 	{
 		the_path = ft_strjoin(paths[i], "/");
+		char *tmp;
+		tmp = the_path;
 		the_path = ft_strjoin(the_path, cmd);
+		free(tmp);
 		if (!the_path)
 			return (free(the_path), NULL);
 		// if (access(the_path, F_OK) != 0 || access(the_path, X_OK) != 0)

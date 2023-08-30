@@ -38,8 +38,6 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	mini_data = ft_calloc_exit(1, sizeof(t_data));
 	parse_array_envp(mini_data, envp);
-	// parse_list_envp(mini_data, envp);
-//	set_signals();
 	if (argc != 1)
 		ft_error("EROOR!!\nWrong amount of args!\n");
 	mini_data->command_line = ft_calloc_exit(1, sizeof(char));
@@ -54,5 +52,7 @@ int	main(int argc, char **argv, char **envp)
 			start(mini_data);
 		}
 	}
+	free(mini_data->command_line);
+	free(mini_data);
 	return (0);
 }

@@ -25,7 +25,7 @@ void	token_pipe(t_state_machine *parser)
 	if (c == '|' || c == '<' || c == '>')
 		syntax_error(parser, c);
 	else
-		add_token(&parser->tokens_list, "|", T_PIPE);
+		add_token(&parser->tokens_list, ft_strdup("|"), T_PIPE);
 	if (ft_strchr(METACHAR, c) == 0)
 		found_char(parser);
 	if (c == ' ' || c == '\n')
@@ -41,14 +41,14 @@ void	token_bigger(t_state_machine *parser)
 		syntax_error(parser, c);
 	else if (c == '>')
 	{
-		add_token(&parser->tokens_list, ">>", T_BIGBIG);
+		add_token(&parser->tokens_list, ft_strdup(">>"), T_BIGBIG);
 		parser->state = S_BIGBIG;
 	}
 	else if (ft_strchr(QUOTES, parser->cmd[parser->count]) != 0)
 		found_quotes(parser);
 	else
 	{
-		add_token(&parser->tokens_list, ">", T_BIG);
+		add_token(&parser->tokens_list, ft_strdup(">"), T_BIG);
 		if (c == '<')
 			parser->state = S_SMALL;
 		if (ft_strchr(METACHAR, c) == 0)
@@ -65,19 +65,19 @@ void	token_smaller(t_state_machine *parser)
 	c = parser->cmd[parser->count];
 	if (c == '|')
 	{
-		add_token(&parser->tokens_list, "<", T_SMALL);
+		add_token(&parser->tokens_list, ft_strdup("<"), T_SMALL);
 		parser->state = S_PIPE;
 	}
 	else if (c == '<')
 	{
-		add_token(&parser->tokens_list, "<<", T_SMALLSMALL);
+		add_token(&parser->tokens_list, ft_strdup("<<"), T_SMALLSMALL);
 		parser->state = S_SMALSMAL;
 	}
 	else if (ft_strchr(QUOTES, parser->cmd[parser->count]) != 0)
 		found_quotes(parser);
 	else
 	{
-		add_token(&parser->tokens_list, "<", T_SMALL);
+		add_token(&parser->tokens_list, ft_strdup("<"), T_SMALL);
 		if (c == '>')
 			parser->state = S_SMALL;
 		if (ft_strchr(METACHAR, c) == 0)

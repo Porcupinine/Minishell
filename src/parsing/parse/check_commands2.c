@@ -13,6 +13,7 @@
 #include "../../../include/minishell.h"
 #include <unistd.h>
 #include <stdlib.h>
+#include <sys/wait.h>
 #include "libft.h"
 #include "../../../include/lexical_analyzer.h"
 #include "../../../include/env_var.h"
@@ -111,14 +112,9 @@ void	parse_tokens(t_state_machine *parser, t_data *mini_data)
 		return ;
 	while ((it_token))
 	{
-		(cmd) = ft_calloc(1, sizeof(t_commands));
-		if ((cmd) == NULL)
-			ft_error("Malloc fail\n");
+		(cmd) = ft_calloc_exit(1, sizeof(t_commands));
 		if (between_pipes(&it_token, &cmd, mini_data, parser) == -1)
-		{
-//			kill_heredoc_clean(parser, mini_data, cmd);
 			return;
-		}
 		if ((cmd) != NULL)
 		{
 			add_cmd_node(&mini_data->commands, (cmd));

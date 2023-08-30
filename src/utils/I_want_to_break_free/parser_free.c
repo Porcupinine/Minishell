@@ -19,12 +19,51 @@ void	free_token_list(t_tokens **tokens)
 	t_tokens	*tmp;
 
 	tmp = NULL;
-	if (tokens == NULL)
+	if (*tokens == NULL)
 		return ;
-	while (*tokens)
+	tmp = *tokens;
+	while (tmp != NULL) {
+		printf("%s\n", tmp->str);
+		free(tmp->str);
+		tmp = tmp->next;
+	}
+
+	while ((*tokens) != NULL)
 	{
+		if((*tokens)->str != NULL)
+			free((*tokens)->str);
 		tmp = *tokens;
 		*tokens = (*tokens)->next;
+		//free(tmp);
+	}
+}
+
+void	free_infiles_list(t_infile **infiles)
+{
+	t_infile *tmp;
+
+	tmp = NULL;
+	if (infiles == NULL)
+		return;
+	while(*infiles)
+	{
+		tmp = *infiles;
+		*infiles = (*infiles)->next;
+		free(tmp);
+	}
+}
+
+void	free_outfiles_list(t_outfile **outfiles)
+{
+	t_outfile *tmp;
+
+	tmp = NULL;
+	if (outfiles == NULL)
+		return;
+	while(*outfiles)
+	{
+		tmp = *outfiles;
+		*outfiles = (*outfiles)->next;
 		free(tmp);
 	}
 }
@@ -40,6 +79,8 @@ void	free_cmd_list(t_commands **cmd)
 	{
 		tmp = *cmd;
 		*cmd = (*cmd)->next;
+//		free_infiles_list(&((*cmd)->infiles));
+//		free_outfiles_list(&((*cmd)->outfiles));
 		free(tmp);
 	}
 }

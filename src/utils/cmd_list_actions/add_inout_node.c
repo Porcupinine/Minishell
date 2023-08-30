@@ -50,7 +50,7 @@ static void	add_outfile(t_outfile **outfile, enum s_type type, char *str)
 	new_out = ft_calloc_exit(1, sizeof (t_outfile));
 	if (type == T_BIG)
 		new_out->type = REDIRECT_OUTPUT;
-	if (typ == T_BIGBIG)
+	if (type == T_BIGBIG)
 		new_out->type = APPEND_OUTPUT;
 	new_out->file = str;
 	new_out->next = NULL;
