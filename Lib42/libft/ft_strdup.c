@@ -28,9 +28,7 @@ char	*ft_strdup(const char *s1)
 	count = 0;
 	if (s1 == NULL)
 		return (NULL);
-	dup = malloc((ft_strlen(s1) + 1) * (sizeof(char)));
-	if (dup == NULL)
-		return (NULL);
+	dup = ft_calloc_exit((ft_strlen(s1) + 1), (sizeof(char)));
 	while (s1[count] != '\0')
 	{
 		dup[count] = s1[count];
