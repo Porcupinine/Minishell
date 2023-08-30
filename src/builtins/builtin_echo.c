@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:09:31 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/29 16:24:50 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:49:30 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ static void	echo_n(t_data *mini, char **cmd, int j, size_t i)
 {
 	while (cmd[j])
 	{
-		if (ft_strncmp(cmd[j], "-n", 2) == 0)
+		if (ft_strncmp(cmd[j], "-", 1) == 0)
 		{
-			i = 2;
+			i = 1;
 			while (cmd[j] && cmd[j][i] == 'n')
 				i++;
 		}
@@ -57,7 +57,7 @@ int	builtin_echo(t_data *mini, char **cmd)
 	if (ft_strncmp(mini->commands->cmd, "echo -n", 7) == 0)
 	{
 		echo_n(mini, cmd, 1, 0);
-		return (0); // check
+		set_exit_code(mini, 0);
 	}
 	else if (ft_strlen(cmd[0]) == 4)
 	{
@@ -69,9 +69,9 @@ int	builtin_echo(t_data *mini, char **cmd)
 		}
 		write_echo(1, cmd, mini);
 		write(mini->commands->out, "\n", 1);
-		return (0); // check
+		set_exit_code(mini, 0);
 	}
 	else
 		no_command(cmd, mini);
-	return (127); // check
+	return (mini->exit_code);
 }

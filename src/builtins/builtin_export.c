@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:25:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/29 16:39:25 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/30 14:39:44 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,57 +37,7 @@ static void	print_xenv(t_data *mini)
 		ft_putstr_fd("\"\n", 2);
 		i++;
 	}
-}
-
-static bool	check_cmd(char *cmd)
-{
-	int	i;
-
-	if (cmd[0] == '=')
-		return (false);
-	i = 0;
-	while (cmd[i] && cmd[i] != '=')
-	{
-		if (ft_isalnum(cmd[i]) == 0 && cmd[i] != '='
-			&& cmd[i] != '_' && cmd[i] != '$')
-			return (false);
-		i++;
-	}
-	return (true);
-}
-
-static bool	is_valid_noerror(char *cmd)
-{
-	int	i;
-
-	i = 0;
-	while (cmd[i])
-	{
-		if (ft_isalnum(cmd[i]) == 0)
-		{
-			if (cmd[i] != '$')
-				return (false);
-		}
-		i++;
-	}
-	return (true);
-}
-
-static int	len_equal(char *cmd)
-{
-	int	i;
-
-	i = 0;
-	while (cmd[i])
-	{
-		if (cmd[i] == '=')
-		{
-			i++;
-			break ;
-		}
-		i++;
-	}
-	return (i);
+	set_exit_code(mini, 0);
 }
 
 static char	**add_line_envp(char **envp, char *cmd, int size, t_data *mini)
@@ -95,44 +45,39 @@ static char	**add_line_envp(char **envp, char *cmd, int size, t_data *mini)
 	char	**new;
 	int		i;
 
-	new = malloc((size + 1)* sizeof(char *));
-	if (new == NULL)
-		return (ft_error("Malloc failed.\n"), NULL);
+	new = ft_calloc_exit((size + 1), sizeof(char *));
 	i = 0;
 	while (envp[i] && i < size - 1)
 	{
 		new[i] = ft_strdup(envp[i]);
-		// if (new[i] == NULL) // this needs to be checked
 		i++;
 	}
 	cmd = expand_dollar(cmd, mini);
 	if (cmd[0] == '=')
 		return (not_valid_identifier_s(&cmd, mini), free(new), NULL);
-	new[i] = ft_strdup(cmd); // what if it returns NULL here??
+	new[i] = ft_strdup(cmd);
 	new[size] = NULL;
 	free(envp);
 	return (new);
 }
 
-static int go_export(t_data *mini, char *cmd)
+static int	go_export(t_data *mini, char *cmd)
 {
-	char *name;
-	int i;
-	char **new;
-	int size;
+	char	*name;
+	int		i;
+	char	**new;
+	int		size;
 
-	i = len_equal(cmd);
-	name = ft_substr(cmd, 0, i);
-	if (name == NULL)
-		ft_error("Malloc failed.\n"); // check
+	name = ft_substr(cmd, 0, len_equal(cmd));
 	i = 0;
 	while (mini->mini_envp[i])
 	{
-		if (ft_strncmp(mini->mini_envp[i], name, ft_strlen(name) - 1) == 0) // skipping the \0 ??
+		if (ft_strncmp(mini->mini_envp[i], name,
+				ft_strlen(name) - 1) == 0)
 		{
-			ft_strlcpy(mini->mini_envp[i], cmd, ft_strlen(cmd)); // or +1?
-			free(name);
-			return (0);
+			mini->mini_envp[i] = ft_strdup("");
+			mini->mini_envp[i] = ft_strjoin(mini->mini_envp[i], cmd);
+			return (free(name), set_exit_code(mini, 0), 0);
 		}
 		i++;
 	}
@@ -140,14 +85,14 @@ static int go_export(t_data *mini, char *cmd)
 	size = size_envp(mini);
 	new = add_line_envp(mini->mini_envp, cmd, size + 1, mini);
 	if (new == NULL)
-		return (1);
+		return (mini->exit_code);
 	mini->mini_envp = new;
-	return (0);
+	return (set_exit_code(mini, 0), 0);
 }
 
-int builtin_export(t_data *mini, char **cmd)
+int	builtin_export(t_data *mini, char **cmd)
 {
-	int i;
+	int	i;
 
 	if (!cmd[1] && ft_strlen(cmd[0]) == 6)
 		print_xenv(mini);
@@ -164,7 +109,7 @@ int builtin_export(t_data *mini, char **cmd)
 			i++;
 		}
 		else
-			return (not_valid_identifier(cmd, mini), 1); // exit code should be 1 
+			return (not_valid_identifier(cmd, mini), 1);
 	}
-	return (0);
+	return (mini->exit_code);
 }

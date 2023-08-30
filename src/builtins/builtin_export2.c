@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2.c                                           :+:      :+:    :+:   */
+/*   builtin_export2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/30 10:56:37 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/30 15:35:52 by dmaessen         ###   ########.fr       */
+/*   Created: 2023/08/30 12:53:54 by dmaessen          #+#    #+#             */
+/*   Updated: 2023/08/30 15:31:04 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,47 +14,55 @@
 #include "../../include/env_var.h"
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
+#include "../../include/utils.h"
 
-void	free_fd(int **fd, int nb_cmds)
+bool	check_cmd(char *cmd)
 {
-	int	nb;
 	int	i;
 
-	nb = nb_cmds;
+	if (cmd[0] == '=')
+		return (false);
 	i = 0;
-	while (i < nb)
+	while (cmd[i] && cmd[i] != '=')
 	{
-		free(fd[i]);
+		if (ft_isalnum(cmd[i]) == 0 && cmd[i] != '='
+			&& cmd[i] != '_' && cmd[i] != '$' && cmd[i] != 92)
+			return (false);
 		i++;
 	}
-	free(fd);
+	return (true);
 }
 
-void    set_exit_code(t_data *mini, int code)
+bool	is_valid_noerror(char *cmd)
 {
-	mini->exit_code = code;
+	int	i;
+
+	i = 0;
+	while (cmd[i])
+	{
+		if (ft_isalnum(cmd[i]) == 0)
+		{
+			if (cmd[i] != '$' && cmd[i] != 92)
+				return (false);
+		}
+		i++;
+	}
+	return (true);
 }
 
-int	size_envp(t_data *mini)
+int	len_equal(char *cmd)
 {
-	int size;
+	int	i;
 
-	size = 0;
-	while (mini->mini_envp[size])
-		size++;
-	return(size);
-}
-
-int not_alphanum(char *str)
-{
-    int i;
-
-    i = 0;
-    while (str[i])
-    {
-        if (ft_isalnum(str[i]) == 0)
-            return (1);
-        i++;
-    }
-    return (0);
+	i = 0;
+	while (cmd[i])
+	{
+		if (cmd[i] == '=')
+		{
+			i++;
+			break ;
+		}
+		i++;
+	}
+	return (i);
 }

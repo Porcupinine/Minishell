@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 12:32:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/25 15:45:11 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:40:17 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 #include "../../include/env_var.h"
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
+#include "../../include/utils.h"
 
-static bool is_exact_match(char *to_compare, char *arg)
+static bool	is_exact_match(char *to_compare, char *arg)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (arg[i])
@@ -31,15 +32,13 @@ static bool is_exact_match(char *to_compare, char *arg)
 	return (true);
 }
 
-char **update_envp(char **envp, char *arg, int size)
+char	**update_envp(char **envp, char *arg, int size)
 {
-	char **new;
-	int i;
-	int j;
+	char	**new;
+	int		i;
+	int		j;
 
-	new = malloc((size + 1) * sizeof(char *));
-	if (new == NULL)
-		ft_error("Malloc failed.\n"); // check
+	new = ft_calloc_exit((size + 1), sizeof(char *));
 	i = 0;
 	j = 0;
 	while (envp[i] && i < size + 1)
@@ -47,7 +46,6 @@ char **update_envp(char **envp, char *arg, int size)
 		if (ft_strncmp(envp[i], arg, ft_strlen(arg)) == 0
 			&& is_exact_match(arg, envp[i]) == true)
 			free(envp[i]);
-			//i++;
 		else
 		{
 			new[j] = ft_strdup(envp[i]);
@@ -56,41 +54,27 @@ char **update_envp(char **envp, char *arg, int size)
 		i++;
 	}
 	new[size] = NULL;
-	//free(envp); // needed??
-	// free(arg); // needed??
 	return (new);
 }
 
-int	size_envp(t_data *mini)
+static int	unset_arg(t_data *mini, char *arg)
 {
-	int size;
-
-	size = 0;
-	while (mini->mini_envp[size])
-		size++;
-	return(size);
-}
-
-static int unset_arg(t_data *mini, char *arg)
-{
-	char **new;
-	char *to_unset;
-	int size;
+	char	**new;
+	char	*to_unset;
+	int		size;
 
 	to_unset = ft_strjoin(arg, "=");
-	if (to_unset == NULL)
-		return (-1);
 	size = size_envp(mini);
 	new = update_envp(mini->mini_envp, to_unset, size - 1);
 	if (new == NULL)
-		return (free(to_unset), -1); // check
+		return (free(to_unset), -1);
 	mini->mini_envp = new;
-	return (0);
+	return (set_exit_code(mini, 0), 0);
 }
 
-int find_envp(t_data *mini, char *arg)
+int	find_envp(t_data *mini, char *arg)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (mini->mini_envp[i])
@@ -104,9 +88,9 @@ int find_envp(t_data *mini, char *arg)
 
 int	builtin_unset(t_data *mini, char **arg)
 {
-	int pos;
-	int i;
-	
+	int	pos;
+	int	i;
+
 	i = 1;
 	while (arg[i])
 	{
@@ -118,12 +102,18 @@ int	builtin_unset(t_data *mini, char **arg)
 			if (pos != -1)
 			{
 				if (mini->mini_envp[pos])
-					unset_arg(mini, arg[i]); // could this fail??
+					if (unset_arg(mini, arg[i]) == -1)
+						return (error_msg("failed to update envp\n", mini), -1);
+				i++;
 			}
+			else if (not_alphanum(arg[i]) != 0)// only if there is an equal in there else ignore and exit 0
+			{
+				not_valid_identifier(arg, mini);
+				i++;
+			}	
 			else
-				return (builtin_err2("unset", arg[i], "not a valid identifier\n"), 1);
-			i++;
+				i++;
 		}
 	}
-	return (0);
+	return (mini->exit_code);
 }

@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:20:42 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/30 11:11:00 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:43:38 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,26 +61,3 @@ void	error_msg(char *str, t_data *mini)
 	write(2, str, ft_strlen(str));
 	mini->mini_envp = 0; // or -1??
 }
-
-// void	no_perm_err(int argc, char *argv[]) // from pipex -- RM/REWORK
-// {
-// 	if (access(argv[1], F_OK) == -1)
-// 	{
-// 		write(2, "pipex: ", 7);
-// 		write(2, argv[1], ft_strlen(argv[1]));
-// 		write(2, ": No such file or directory\n", 29);
-// 	}
-// 	else if (access(argv[1], R_OK) == -1)
-// 	{
-// 		write(2, "pipex: ", 7);
-// 		write(2, argv[1], ft_strlen(argv[1]));
-// 		write(2, ": permission denied\n", 21);
-// 	}
-// 	if (access(argv[argc - 1], W_OK | R_OK) == -1)
-// 	{
-// 		write(2, "pipex: ", 7);
-// 		write(2, argv[argc - 1], ft_strlen(argv[argc - 1]));
-// 		write(2, ": permission denied\n", 21);
-// 		exit(errno);
-// 	}
-// }
