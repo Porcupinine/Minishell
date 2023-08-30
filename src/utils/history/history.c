@@ -18,7 +18,7 @@
 
 void	line_history(t_data *mini_data)
 {
-	if (mini_data->command_line == NULL)
+	if (mini_data->command_line == NULL) //check if erno is 0 for readline
 	{
 		write(1, "exit\n", 5);
 		exit(0);

@@ -26,7 +26,10 @@ int	exec_fork_onecmd(t_data *mini)
 	if (pid == -1)
 		ft_error("Fork failed.\n"); // check errno ft_error exits the program 
 	if (pid == 0)
+	{
+		unset_signals();
 		run_one_cmd(mini);
+	}
     close_pipe(mini->fd, mini->nb_cmds);
 	free_fd(mini->fd, mini->nb_cmds);
 	//close_fds(mini);
@@ -53,7 +56,10 @@ int	exec_fork(t_data *mini, int nb_cmds)
 		if (pid == -1)
 			ft_error("Fork failed.\n");
 		if (pid == 0)
+		{
+			unset_signals();
 			child_dup2(mini, mini->commands, i, pos);
+		}
 		if (i != nb_cmds)
 			mini->commands = mini->commands->next;
 		i++;

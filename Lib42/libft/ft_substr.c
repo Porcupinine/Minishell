@@ -31,9 +31,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		final_string_len = s_len - start;
 	if (final_string_len > len)
 		final_string_len = len;
-	sub = malloc((final_string_len + 1) * sizeof(char));
-	if (sub == NULL)
-		return (NULL);
+	sub = ft_calloc_exit((final_string_len + 1), sizeof(char));
 	ft_strlcpy(sub, &(s[start]), final_string_len + 1);
 	return (sub);
 }

@@ -115,6 +115,7 @@ char	*split_args(char *cmd, char **envp, t_data *mini)
 		paths = ft_split(envp[find_path(envp)] + 5, ':');
 		if (!paths || find_path(envp) == -1)
 		{
+			printf("%p %s going wrong here?? 2\n", paths, paths[0]);
 			no_filedir("minishell", command[0], mini);
 			exit(mini->exit_code);
 		}

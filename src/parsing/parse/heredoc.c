@@ -89,8 +89,7 @@ void heredoc(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
 void handle_heredoc(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
 {
 	(*cmd)->in = open("tmp_file", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	add_inout(cmd, "tmp_file", (*it_token)->type);
 	heredoc(it_token, cmd, mini_data);
 	close((*cmd)->in);
-	(*it_token) = (*it_token)->next;
+	exit(0);
 }

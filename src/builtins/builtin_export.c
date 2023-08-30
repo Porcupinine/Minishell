@@ -95,7 +95,7 @@ static char	**add_line_envp(char **envp, char *cmd, int size, t_data *mini)
 	char	**new;
 	int		i;
 
-	new = malloc((size + 1) * sizeof(char *));
+	new = malloc((size + 1)* sizeof(char *));
 	if (new == NULL)
 		return (ft_error("Malloc failed.\n"), NULL);
 	i = 0;

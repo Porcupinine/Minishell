@@ -80,9 +80,7 @@ char	**ft_split(char const *s, char c)
 	count_str = 0;
 	count_arr = 0;
 	words = count_words(s, c);
-	arr = ft_calloc((words + 1), sizeof(char *));
-	if (arr == NULL)
-		return (NULL);
+	arr = ft_calloc_exit((words + 1), sizeof(char *));
 	while (count_arr < words)
 	{
 		arr[count_arr] = get_string((char *)s, c, &count_str);
