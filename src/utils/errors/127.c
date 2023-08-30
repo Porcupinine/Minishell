@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 08:04:28 by laura             #+#    #+#             */
-/*   Updated: 2023/08/25 15:19:35 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:47:06 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "../../Lib42/include/libft.h"
 #include "../../include/exec.h"
 
-
 void	no_command(char **command, t_data *mini)
 {
 	write(2, "minishell: ", 11);
@@ -25,8 +24,7 @@ void	no_command(char **command, t_data *mini)
 	else
 		write(2, command[0], ft_strlen(command[0]));
 	write(2, ": command not found\n", 21);
-	g_exit_code = 127;
-	//free_str(command); // else double free
+	mini->exit_code = 127;
 }
 
 void	no_filedir(char *str, char *command, t_data *mini)
@@ -38,5 +36,5 @@ void	no_filedir(char *str, char *command, t_data *mini)
 	else
 		write(2, command, ft_strlen(command));
 	write(2, ": No such file or directory\n", 28);
-	g_exit_code = 127;
+	mini->exit_code = 127;
 }

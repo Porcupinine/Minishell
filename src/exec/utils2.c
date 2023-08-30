@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/27 13:11:06 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/30 14:16:36 by dmaessen         ###   ########.fr       */
+/*   Created: 2023/08/30 10:56:37 by dmaessen          #+#    #+#             */
+/*   Updated: 2023/08/30 15:35:52 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,46 @@
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
 
-int	builtin_pwd(t_data *mini)
+void	free_fd(int **fd, int nb_cmds)
 {
-	char	*pwd_path;
-	char	*pwd;
-	int		len;
+	int	nb;
+	int	i;
 
-	pwd_path = getcwd(NULL, 0);
-	if (pwd_path == NULL)
-		return (set_exit_code(mini, errno),
-			err_msg("getcwd", "failed"), -1);
-	pwd = ft_calloc_exit((ft_strlen(pwd_path) + 2), sizeof(char));
-	ft_memmove(pwd, pwd_path, ft_strlen(pwd_path));
-	len = ft_strlen(pwd);
-	pwd[len] = '\n';
-	ft_putstr_fd(pwd, mini->commands->out);
-	free(pwd_path);
-	free(pwd);
-	return (set_exit_code(mini, 0), 0);
+	nb = nb_cmds;
+	i = 0;
+	while (i < nb)
+	{
+		free(fd[i]);
+		i++;
+	}
+	free(fd);
+}
+
+void    set_exit_code(t_data *mini, int code)
+{
+	mini->exit_code = code;
+}
+
+int	size_envp(t_data *mini)
+{
+	int size;
+
+	size = 0;
+	while (mini->mini_envp[size])
+		size++;
+	return(size);
+}
+
+int not_alphanum(char *str)
+{
+    int i;
+
+    i = 0;
+    while (str[i])
+    {
+        if (ft_isalnum(str[i]) == 0)
+            return (1);
+        i++;
+    }
+    return (0);
 }

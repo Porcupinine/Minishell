@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 08:04:28 by laura             #+#    #+#             */
-/*   Updated: 2023/08/29 14:23:59 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:50:30 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	not_valid_identifier(char **command, t_data *mini)
 	write(2, "': ", 3);
 	write(2, "not a valid identifier\n", 23);
 	mini->exit_code = 1;
-	// free_str(command);
 }
 
 void	not_valid_identifier_s(char **command, t_data *mini)
@@ -51,7 +50,6 @@ void	not_valid_identifier_s(char **command, t_data *mini)
 	write(2, "': ", 3);
 	write(2, "not a valid identifier\n", 23);
 	mini->exit_code = 1;
-	// free_str(command);
 }
 
 void	permission_denied(char **command, t_data *mini)

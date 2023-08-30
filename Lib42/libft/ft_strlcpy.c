@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_strlcpy.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: lpraca-l <lpraca-l@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/10 20:05:14 by lpraca-l      #+#    #+#                 */
-/*   Updated: 2022/10/21 11:01:27 by lpraca-l      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/10 20:05:14 by lpraca-l          #+#    #+#             */
+/*   Updated: 2023/08/30 14:00:57 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char	*dst, const char	*src, size_t dstsize)
+size_t	ft_strlcpy(char	*dst, const char *src, size_t dstsize)
 {
 	size_t	count;
 	char	*alias;

@@ -6,7 +6,7 @@
 #    By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/07 11:56:57 by dmaessen          #+#    #+#              #
-#    Updated: 2023/08/28 15:19:19 by dmaessen         ###   ########.fr        #
+#    Updated: 2023/08/30 12:54:47 by dmaessen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,10 +33,10 @@ LIBS	:= $(LIB42)/libft.a -L/Users/$(USER)/.brew/opt/readline/lib
 SRC     := src/main.c \
 	   src/builtins/builtin_cd.c src/builtins/builtin_echo.c src/builtins/builtin_env.c \
 	   src/builtins/builtin_exit.c src/builtins/builtin_export.c src/builtins/builtin_pwd.c \
-	   src/builtins/builtin_unset.c src/builtins/builtins.c \
+	   src/builtins/builtin_unset.c src/builtins/builtins.c src/builtins/builtin_export2.c \
 	   src/exec/child.c src/exec/dollarsign.c src/exec/errors.c src/exec/input_op.c \
 	   src/exec/output_op.c src/exec/path.c src/exec/start.c src/exec/utils.c \
-	   src/exec/fork.c src/exec/pipes.c \
+	   src/exec/fork.c src/exec/pipes.c src/exec/utils2.c \
 	   src/parsing/parse/check_commands2.c src/parsing/parse/heredoc.c \
 	   src/parsing/state_machine/char_machine.c \
 	   src/parsing/state_machine/error_machine.c src/parsing/state_machine/lexe.c \
