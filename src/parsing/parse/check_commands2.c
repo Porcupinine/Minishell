@@ -74,13 +74,14 @@ int	between_pipes(t_tokens **it_token, t_commands **cmd, t_data *mini_data, \
 				int stat;
 				//stat = NULL;
 				pid = fork();
-				if (pid != 0)
-					waitpid(pid, &stat, 0);
+				if (pid == -1)
+					ft_error("Fork failed.\n"); // check
 				if(pid == 0)
 				{
 					unset_signals();
 					handle_heredoc(it_token, cmd, mini_data);
 				}
+				waitpid(pid, &stat, 0);
 				if (WIFSIGNALED(stat))
 				{
 					// exit code should be 1
