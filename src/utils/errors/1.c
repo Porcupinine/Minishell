@@ -18,8 +18,6 @@
 
 // _: _: no such file or directory
 
-extern int	g_exit_code;
-
 void	no_file_directory(char **command, t_data *mini)
 {
 	write(2, "minishell: ", 11);
