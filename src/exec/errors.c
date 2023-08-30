@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:20:42 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/02 08:55:16 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/30 11:11:00 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,13 @@ void	err_msg(char *cmd, char *str) // combine with builtin_err ??
 	write(2, cmd, ft_strlen(cmd));
 	write(2, ": ", 2);
 	write(2, str, ft_strlen(str));
+}
+
+void	error_msg(char *str, t_data *mini)
+{
+	write(2, "minishell: ", 11);
+	write(2, str, ft_strlen(str));
+	mini->mini_envp = 0; // or -1??
 }
 
 // void	no_perm_err(int argc, char *argv[]) // from pipex -- RM/REWORK

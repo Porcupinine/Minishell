@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 14:43:48 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/29 12:23:42 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/30 11:11:08 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ t_pid	*pid_lstlast(t_pid *lst); // USING??
 void	pid_lstadd_back(t_pid **lst, pid_t content); // USING??
 void	free_fd(int **fd, int nb_cmds);
 int		array_size(char **envp);
+void	set_exit_code(t_data *mini, int code);
 
 char	*split_args(char *cmd, char **envp, t_data *mini);
 
@@ -79,6 +80,7 @@ void	builtin_err(char *cmd, char *str);
 void	err_msg(char *cmd, char *str); // combine with the above ??
 void	builtin_err2(char *cmd, char *arg, char *str);
 void	err_cmd_not_found(char **command);
+void	error_msg(char *str, t_data *mini);
 
 char	*expand_dollar(char *line, t_data *mini);
 int 	expand_var(char **line, t_data *mini, int start);

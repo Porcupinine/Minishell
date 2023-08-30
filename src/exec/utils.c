@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 12:19:38 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/28 11:14:38 by domi             ###   ########.fr       */
+/*   Updated: 2023/08/30 10:56:35 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,19 +84,4 @@ t_pid	*pid_lstlast(t_pid *lst)
 		lst = lst->next;
 	}
 	return (lst);
-}
-
-void	free_fd(int **fd, int nb_cmds)
-{
-	int	nb;
-	int	i;
-
-	nb = nb_cmds;
-	i = 0;
-	while (i < nb)
-	{
-		free(fd[i]);
-		i++;
-	}
-	free(fd);
 }

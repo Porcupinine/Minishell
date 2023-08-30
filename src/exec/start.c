@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/29 16:45:15 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/30 10:54:05 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void one_cmd(t_data *mini)
 	command = ft_split(mini->commands->cmd, ' ');
 	if (!command)
 		ft_error("Malloc failed\n");
-	if (check_builtins(command) == 1) // so not a builtin
+	if (check_builtins(command) == 1)
 	{
 		mini->fd = open_pipes(mini);
 		if (mini->fd == NULL)
@@ -46,7 +46,7 @@ static void one_cmd(t_data *mini)
 		free_pid_list(&mini->process);
 		mini->process = NULL;
 	}
-	else // its a builtin
+	else
 	{
 		free_str(command);
 		input_re(mini->commands);

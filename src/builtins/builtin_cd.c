@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:09:12 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/29 19:01:09 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/30 11:32:07 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,36 +18,33 @@
 
 int	builtin_cd(t_data *mini, char **cmd)
 {
-	char *path;
+	char	*path;
 	int		res;
 	
 	if (*mini->mini_envp == NULL)
-		return (-1); // TODO check if needs to be NULL
+		return (error_msg("envp not found\n", mini), -1); // TODO laura is this okay?
 	if ((ft_strncmp(cmd[0], "cd\0", 2) == 0 && !cmd[1])
  		|| (ft_strncmp(cmd[1], "~", 1) == 0 && !cmd[2]))
 	{
 		path = search_path(mini, "HOME=");
 		if (path != NULL)
-			if (change_oldpwd(mini) == 1)
-				return (not_set("cd", "OLDPWD not set", mini), 1);
+			if (change_oldpwd(mini) != 0)
+				return (mini->exit_code);
 		res = chdir(path);
 		free(path);
 		if (res != 0)
 			return (not_set("cd", "HOME not set", mini), 1);
 		change_pwd(mini);
-		return (0);
+		return (set_exit_code(mini, 0), 0);
 	}
 	else
-	{
 		search_specific_path(mini, cmd[1]); // is the below needed then??
-		return (0); // check
-	}
-	return (-1); // is this correct
+	return (mini->exit_code);
 }
 
 char	*search_path(t_data *mini, char *target)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (mini->mini_envp[i])
@@ -60,10 +57,10 @@ char	*search_path(t_data *mini, char *target)
 	return (NULL);
 }
 
-int search_specific_path(t_data *mini, char *cmd)
+int	search_specific_path(t_data *mini, char *cmd)
 {
-	char *tmp;
-	struct stat info;
+	char		*tmp;
+	struct stat	info;
 
 	tmp = cmd;
 	if (stat(tmp, &info) == 0)
@@ -82,7 +79,7 @@ int search_specific_path(t_data *mini, char *cmd)
 	}
 	else
 		return (not_directory_cd(cmd, mini), 1);
-	return (0);
+	return (set_exit_code(mini, 0), 0);
 }
 
 int	change_oldpwd(t_data *mini)
@@ -94,7 +91,8 @@ int	change_oldpwd(t_data *mini)
 
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
-		return (-1); // TODO check if needs to be NULL
+		return (set_exit_code(mini, errno),
+			err_msg("getcwd", "failed"), -1);
 	i = 0;
 	while (mini->mini_envp[i])
 	{
@@ -104,16 +102,16 @@ int	change_oldpwd(t_data *mini)
 			mini->mini_envp[i] = ft_strjoin("OLDPWD=", pwd);
 			free(tmp);
 			if (mini->mini_envp[i] == NULL)
-				return (-1); // TODO check if needs to be NULL
+				return (-1); // TODO check
 			break ;
 		}
 		i++;
 	}
 	len = array_size(mini->mini_envp);
 	if (len == i)
-		return (1);
+		return (not_set("cd", "OLDPWD not set", mini), 1);
 	free(pwd);
-	return (0);
+	return (set_exit_code(mini, 0), 0);
 }
 
 int	change_pwd(t_data *mini)
