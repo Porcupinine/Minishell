@@ -43,9 +43,8 @@ void	parse_array_envp(t_data *mini_data, char **envp)
 	int		count;
 
 	count = 0;
-	mini_data->mini_envp = ft_calloc(count_envp(envp) + 1, sizeof (char *));
-	if (mini_data->mini_envp == NULL)
-		ft_error("Malloc fail\n");
+	mini_data->mini_envp = ft_calloc_exit(count_envp(envp) + 1,
+										  sizeof (char *));
 	while (envp[count] != NULL)
 	{
 		mini_data->mini_envp[count] = ft_strdup(envp[count]);

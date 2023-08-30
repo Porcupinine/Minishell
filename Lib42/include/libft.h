@@ -188,9 +188,19 @@ char	*ft_strdup(const char *s1);
  * zero.
  * @param count how much
  * @param size type
- * @return NULL if it fails
+ * @return allocated memory or NULL if it fails
  */
 void	*ft_calloc(size_t count, size_t size);
+/**
+ * Contiguously allocates enough space for count
+ * objects that are size bytes of memory each and returns a pointer to the
+ * allocated memory.  The allocated memory is filled with bytes of value
+ * zero. This version exits with a malloc fail in case it doesn't work
+ * @param count how much
+ * @param size type
+ * @return allocated memory
+ */
+void	*ft_calloc_exit(size_t count, size_t size);
 /**
  * Allocates (with malloc(3)) and returns a substring from the string ’s’.
  * The substring begins at index ’start’ and is ofmaximum size ’len’.
@@ -199,7 +209,7 @@ void	*ft_calloc(size_t count, size_t size);
  * @param len how long the new string willl be
  * @return new string or NULL if it fails
  */
-char	*ft_substr(char const *s, unsigned int start, size_t len);
+		char	*ft_substr(char const *s, unsigned int start, size_t len);
 /**
  * Allocates (with malloc(3)) and returns a new
  * string, which is the result of the concatenation

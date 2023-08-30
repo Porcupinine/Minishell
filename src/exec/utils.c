@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 12:19:38 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/07 11:12:33 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/30 10:56:35 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ void	free_str(char **str)
 		i++;
 	}
 	free(str);
+}
+
+int array_size(char **envp)
+{
+	int size;
+
+	size = 0;
+	while (envp[size] != NULL)
+		size++;
+	return(size);
 }
 
 int	lst_size(t_commands *lst)
@@ -74,19 +84,4 @@ t_pid	*pid_lstlast(t_pid *lst)
 		lst = lst->next;
 	}
 	return (lst);
-}
-
-void	free_fd(int **fd, int nb_cmds)
-{
-	int	nb;
-	int	i;
-
-	nb = nb_cmds;
-	i = 0;
-	while (i < nb)
-	{
-		free(fd[i]);
-		i++;
-	}
-	free(fd);
 }

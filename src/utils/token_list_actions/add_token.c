@@ -36,9 +36,7 @@ void	add_token(t_tokens **tokens, char *token, t_type type)
 	t_tokens	*last_node;
 
 	last_node = NULL;
-	new_token = malloc(sizeof(t_tokens));
-	if (new_token == NULL)
-		ft_error("Malloc token fail\n");
+	new_token = ft_calloc_exit(1, sizeof(t_tokens));
 	new_token->str = token;
 	new_token->type = type;
 	new_token->next = NULL;

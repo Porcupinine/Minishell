@@ -30,3 +30,16 @@ void	*ft_calloc(size_t count, size_t size)
 	ft_bzero(call, (count * size));
 	return (call);
 }
+
+void	*ft_calloc_exit(size_t count, size_t size)
+{
+	void	*call;
+
+	call = malloc(count * size);
+	if (call == NULL)
+		ft_error("MALLOC fail!\n");
+	ft_bzero(call, (count * size));
+	return (call);
+}
+
+//TODO check malloc exit code maybe?

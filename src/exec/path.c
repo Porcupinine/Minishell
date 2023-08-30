@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:11 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/14 15:56:24 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/29 19:02:24 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,38 @@
 #include "../../include/env_var.h"
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
-#include "../../include/errors.h"
+#include "../../include/utils.h"
 #include <stdio.h>
+
+static void modif_env(t_data *mini, char *cmd)
+{
+	int i;
+	char *res;
+	int count;
+	
+	i = 0;
+	if (ft_strncmp(cmd, "./minishell", 11) == 0)
+	{
+		while (mini->mini_envp[i])
+		{
+			if (ft_strncmp(mini->mini_envp[i], "SHLVL=", 6) == 0)
+			{
+				res = ft_strtrim(mini->mini_envp[i], "SHLVL=");
+				count = ft_atoi(res);
+				count += 1;
+				mini->mini_envp[i] = ft_strjoin("SHLVL=", ft_itoa(count));
+				free(res);
+				break ;
+			}
+			i++;
+		}
+	}
+}
 
 static int	find_path(char **envp)
 {
 	int	i;
+	int j;
 
 	i = 0;
 	while (envp[i])
@@ -28,10 +54,15 @@ static int	find_path(char **envp)
 			break ;
 		i++;
 	}
+	j = 0;
+	while (envp[j])
+		j++;
+	if (i == j)
+		return (-1);
 	return (i);
 }
 
-static char	*join_path(char **command, char **paths, int i)
+static char	*join_path(char **command, char **paths, int i, t_data *mini)
 {
 	char	*the_path;
 	char	*cmd;
@@ -54,7 +85,7 @@ static char	*join_path(char **command, char **paths, int i)
 		{
 			if (access(the_path, X_OK) != 0)
 			{
-				permission_denied(command);
+				permission_denied(command, mini);
 				//return ; // check as should: exit(127);
 			}
 			free_str(paths);
@@ -82,17 +113,32 @@ char	*split_args(char *cmd, char **envp, t_data *mini)
 		if (*envp == NULL)
 			exit(127); // TODO check as we don't want to exit
 		paths = ft_split(envp[find_path(envp)] + 5, ':');
-		if (!paths)
-			no_command(command); // exit should be with // exit(127);
-		path_to_cmd = join_path(command, paths, 0);
+		if (!paths || find_path(envp) == -1)
+		{
+			printf("%p %s going wrong here?? 2\n", paths, paths[0]);
+			no_filedir("minishell", command[0], mini);
+			exit(mini->exit_code);
+		}
+		path_to_cmd = join_path(command, paths, 0, mini);
 		if (!path_to_cmd)
-			no_command(command); // exit should be with // exit(127);
-		if  (path_to_cmd != NULL && command != NULL)
+		{
+			if (!path_to_cmd && ft_strncmp(command[0], "./", 2) == 0)
+			{
+				modif_env(mini, command[0]);
+				execve(command[0], &command[0], envp);
+			}
+			else
+			{
+				no_command(command, mini);
+				exit(mini->exit_code);
+			}
+		}
+		if (path_to_cmd != NULL && command != NULL)
 			execve(path_to_cmd, command, envp);
-		printf("%s", path_to_cmd);
 		free(path_to_cmd);
-		// throw an error, to check
 	}
 	free_str(command);
-	return (0); // check, what happens if something goes wrong in builtins??
+	if (mini->nb_cmds != 1)
+		exit (0);
+	return (0);
 }

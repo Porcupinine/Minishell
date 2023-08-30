@@ -11,15 +11,12 @@
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
-#include "../../../include/token_list_actions.h"
+#include "../../../include/utils.h"
 #include "../../Lib42/include/libft.h"
 #include "../../../include/lexical_analyzer.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include "../../../include/cmd_list_actions.h"
 #include "../../../include/exec.h"
-
-extern int	g_exit_code;
 
 void	token_start(t_state_machine *parser)
 {
@@ -30,6 +27,7 @@ void	token_start(t_state_machine *parser)
 	{
 		parser->state = S_CHAR;
 		parser->status = S_WORD;
+		parser->len++;
 	}
 	else if (c == ' ')
 		parser->state = S_WHITESPACE;
@@ -39,6 +37,7 @@ void	token_start(t_state_machine *parser)
 		parser->state = S_SMALL;
 	else
 		syntax_error(parser, c);
+	parser->count++;
 }
 
 void	populate_function_ptrs(void (**functions)(t_state_machine *))
@@ -72,10 +71,9 @@ void	parse_machine(t_data *mini_data, t_state_machine *parser)
 	{
 		add_token(&parser->tokens_list, \
 	ft_substr(parser->cmd, parser->start, parser->len), T_CHAR);
-		g_exit_code = 0;
+				  parser->exit_code = 0;
 	}
-	else if (parser->state == S_WHITESPACE)
-		;
-	else
+	else if (parser->state != S_WHITESPACE)
 		syntax_error(parser, parser->cmd[(parser->count) - 1]);
 }
+//TODO >>test not sintas error

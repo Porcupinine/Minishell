@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
-#include "../../../include/token_list_actions.h"
+#include "../../../include/utils.h"
 #include "libft.h"
 #include "../../../include/lexical_analyzer.h"
 #include <stdlib.h>
@@ -107,7 +107,7 @@ void	token_smallsmall(t_state_machine *parser)
 	char	c;
 
 	c = parser->cmd[parser->count];
-	if (c == '>' || c == '|' || c == '<')
+	if (c == '>' || c == '|')
 		syntax_error(parser, c);
 	else if (ft_strchr(METACHAR, c) == 0)
 		found_char(parser);

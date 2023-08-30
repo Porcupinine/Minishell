@@ -24,3 +24,17 @@ int	find_size(t_tokens *tokens)
 	}
 	return (count);
 }
+
+int count_heredocs(t_tokens *tokens)
+{
+	int count_here;
+
+	count_here = 0;
+	while (tokens != NULL)
+	{
+		if (tokens->type == T_SMALLSMALL)
+			count_here++;
+		tokens = tokens->next;
+	}
+	return (count_here);
+}

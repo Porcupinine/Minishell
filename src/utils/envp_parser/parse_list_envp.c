@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   parse_list_envp.c                                  :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: laura <laura@student.codam.nl>               +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/08/11 08:03:49 by laura         #+#    #+#                 */
-/*   Updated: 2023/08/11 08:04:14 by laura         ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   parse_list_envp.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/11 08:03:49 by laura             #+#    #+#             */
+/*   Updated: 2023/08/25 13:16:18 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 #include "../../Lib42/include/libft.h"
 #include <stdio.h>
 
-static void	print_envp_list(t_mini_envp_list *mini_envp_list)
-{
-	while (mini_envp_list != NULL)
-	{
-		printf("%s\n", mini_envp_list->str);
-		mini_envp_list = mini_envp_list->next;
-	}
-}
+// static void	print_envp_list(t_mini_envp_list *mini_envp_list)
+// {
+// 	while (mini_envp_list != NULL)
+// 	{
+// 		printf("%s\n", mini_envp_list->str);
+// 		mini_envp_list = mini_envp_list->next;
+// 	}
+// }
 
 static t_mini_envp_list	*find_last_envp(t_mini_envp_list *mini_envp_list)
 {
@@ -38,9 +38,7 @@ static void	add_envp_node(t_mini_envp_list **envp_list, char *str)
 	t_mini_envp_list	*last_node;
 
 	last_node = NULL;
-	new_envp = malloc(sizeof(t_mini_envp_list));
-	if (new_envp == NULL)
-		ft_error("Malloc token fail\n");
+	new_envp = ft_calloc_exit(1, sizeof(t_mini_envp_list));
 	new_envp->str = str;
 	new_envp->next = NULL;
 	if (*envp_list == NULL)

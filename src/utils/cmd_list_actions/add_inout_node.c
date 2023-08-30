@@ -15,7 +15,7 @@
 #include "libft.h"
 #include "../../../include/lexical_analyzer.h"
 #include "../../../include/env_var.h"
-#include "../../../include/token_list_actions.h"
+#include "../../../include/utils.h"
 
 static t_outfile	*find_last_out(t_outfile *out)
 {
@@ -71,9 +71,7 @@ static void	add_infile(t_infile **infile, enum s_type type, char *str)
 	t_infile	*last;
 
 	last = NULL;
-	new_in = ft_calloc(1, sizeof (t_infile));
-	if (new_in == NULL)
-		ft_error("Malloc fail\n");
+	new_in = ft_calloc_exit(1, sizeof (t_infile));
 	if (type == T_SMALL)
 		new_in->type = REDIRECT_INPUT;
 	if (type == T_SMALLSMALL)

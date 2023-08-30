@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_env.c                                      :+:      :+:    :+:   */
+/*   builtin_export2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/27 13:13:30 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/30 12:51:35 by dmaessen         ###   ########.fr       */
+/*   Created: 2023/08/30 12:53:54 by dmaessen          #+#    #+#             */
+/*   Updated: 2023/08/30 15:31:04 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,53 @@
 #include "../../Lib42/include/libft.h"
 #include "../../include/utils.h"
 
-int	builtin_env(t_data *mini, char **cmd)
+bool	check_cmd(char *cmd)
 {
 	int	i;
 
-	if (cmd[1] != NULL)
-	{
-		no_filedir("env", cmd[1], mini);
-		return (mini->exit_code);
-	}
+	if (cmd[0] == '=')
+		return (false);
 	i = 0;
-	while (mini->mini_envp[i])
+	while (cmd[i] && cmd[i] != '=')
 	{
-		ft_putstr_fd(mini->mini_envp[i], 1);
-		ft_putchar_fd('\n', 1);
+		if (ft_isalnum(cmd[i]) == 0 && cmd[i] != '='
+			&& cmd[i] != '_' && cmd[i] != '$' && cmd[i] != 92)
+			return (false);
 		i++;
 	}
-	set_exit_code(mini, 0);
-	return (mini->exit_code);
+	return (true);
+}
+
+bool	is_valid_noerror(char *cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd[i])
+	{
+		if (ft_isalnum(cmd[i]) == 0)
+		{
+			if (cmd[i] != '$' && cmd[i] != 92)
+				return (false);
+		}
+		i++;
+	}
+	return (true);
+}
+
+int	len_equal(char *cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd[i])
+	{
+		if (cmd[i] == '=')
+		{
+			i++;
+			break ;
+		}
+		i++;
+	}
+	return (i);
 }

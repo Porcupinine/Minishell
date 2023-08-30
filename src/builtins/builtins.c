@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 17:07:22 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/15 15:11:21 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/29 16:08:06 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	builtins(char **cmd, t_data *mini)
 	if (ft_strncmp(cmd[0], "echo", 4) == 0)
 		builtin_echo(mini, cmd);
 	else if (ft_strncmp(cmd[0], "cd", 2) == 0)
-		builtin_cd(mini, cmd); // send ddouble pointer so it can be freed
+		builtin_cd(mini, cmd);
 	else if (ft_strncmp(cmd[0], "pwd", 3) == 0)
 		builtin_pwd(mini);
 	else if (ft_strncmp(cmd[0], "export", 6) == 0)
@@ -30,15 +30,16 @@ int	builtins(char **cmd, t_data *mini)
 	else if (ft_strncmp(cmd[0], "env", 3) == 0)
 		builtin_env(mini, cmd);
 	else if (ft_strncmp(cmd[0], "exit", 4) == 0)
-		builtin_exit(cmd); // mini needed here ++ send ddouble pointer so it can be freed
+		builtin_exit(mini, cmd);
 	else
 		return (1);
 	return (0);
 }
 
-int check_builtins(char **cmd, t_data *mini)
+int	check_builtins(char **cmd)
 {
-	//TODO check if cmd = NULL
+	if (!cmd[0])
+		return (1); 
 	if (ft_strncmp(cmd[0], "echo", 4) == 0)
 		return (0);
 	else if (ft_strncmp(cmd[0], "cd", 2) == 0)
