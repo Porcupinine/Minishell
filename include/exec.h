@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exec.h                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/31 14:43:48 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/30 16:24:10 by dmaessen         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   exec.h                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/07/31 14:43:48 by dmaessen      #+#    #+#                 */
+/*   Updated: 2023/08/31 14:33:56 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <limits.h>
-#include <errno.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/param.h>
-#include "minishell.h"
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <limits.h>
+# include <errno.h>
+# include <string.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <sys/param.h>
+# include "minishell.h"
 
 /* BUILTINS */
 int		builtins(char **cmd, t_data *mini);

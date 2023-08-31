@@ -6,7 +6,7 @@
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/11 07:55:33 by laura         #+#    #+#                 */
-/*   Updated: 2023/08/16 14:40:47 by lpraca-l      ########   odam.nl         */
+/*   Updated: 2023/08/31 14:23:56 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 #include <sys/wait.h>
 #include "libft.h"
 #include "../../../include/lexical_analyzer.h"
-#include "../../../include/env_var.h"
 #include "../../../include/utils.h"
 
-void	kill_heredoc_clean(t_state_machine *parser, t_data *mini_data, t_commands **cmd)
+void	kill_heredoc_clean(t_state_machine *parser, \
+		t_data *mini_data, t_commands **cmd)
 {
 	free_token_list(&parser->tokens_list);
 	parser->tokens_list = NULL;
@@ -40,7 +40,6 @@ void	extract_cmd(t_tokens **it_token, t_commands **cmd)
 		temp2 = temp;
 		temp = ft_strjoin_space(temp2, (*it_token)->str);
 		free(temp2);
-		printf("tmp2: %p\n", temp2);
 		temp2 = NULL;
 		(*it_token) = (*it_token)->next;
 	}
@@ -48,16 +47,16 @@ void	extract_cmd(t_tokens **it_token, t_commands **cmd)
 	printf("extract: %p  ---   %p\n", (*cmd)->cmd, temp);
 }
 
-static int	found_here(t_tokens **it_token, t_commands **cmd, t_data *mini_data,
-						 t_state_machine *parser)
+static int	found_here(t_tokens **it_token, t_commands **cmd, \
+	t_data *mini_data, t_state_machine *parser)
 {
-	pid_t 	pid;
-	int stat;
+	pid_t	pid;
+	int		stat;
 
 	pid = fork();
 	if (pid == -1)
-		ft_error("Fork failed.\n"); // check
-	if(pid == 0)
+		ft_error("Fork failed.\n");
+	if (pid == 0)
 	{
 		unset_signals();
 		handle_heredoc(it_token, cmd, mini_data);
@@ -66,11 +65,11 @@ static int	found_here(t_tokens **it_token, t_commands **cmd, t_data *mini_data,
 	if (WIFSIGNALED(stat))
 	{
 		kill_heredoc_clean(parser, mini_data, cmd);
-		return (-1) ;
+		return (-1);
 	}
 	add_inout(cmd, "tmp_file", (*it_token)->type);
 	(*it_token) = (*it_token)->next->next;
-		return (0);
+	return (0);
 }
 
 int	between_pipes(t_tokens **it_token, t_commands **cmd, t_data *mini_data, \
@@ -96,7 +95,7 @@ int	between_pipes(t_tokens **it_token, t_commands **cmd, t_data *mini_data, \
 				syntax_error_parse(parser, mini_data);
 		}
 		if ((*it_token) && (*it_token)->type == T_SMALLSMALL)
-			if(found_here(it_token, cmd, mini_data, parser) == -1)
+			if (found_here(it_token, cmd, mini_data, parser) == -1)
 				return (-1);
 	}
 	return (0);
@@ -117,7 +116,7 @@ void	parse_tokens(t_state_machine *parser, t_data *mini_data)
 	{
 		(cmd) = ft_calloc_exit(1, sizeof(t_commands));
 		if (between_pipes(&it_token, &cmd, mini_data, parser) == -1)
-			return;
+			return ;
 		if ((cmd) != NULL)
 		{
 			add_cmd_node(&mini_data->commands, (cmd));

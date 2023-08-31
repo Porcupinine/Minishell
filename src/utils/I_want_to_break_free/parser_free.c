@@ -6,7 +6,7 @@
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/11 08:04:56 by laura         #+#    #+#                 */
-/*   Updated: 2023/08/16 14:35:27 by lpraca-l      ########   odam.nl         */
+/*   Updated: 2023/08/31 14:08:37 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ void	free_token_list(t_tokens **tokens)
 
 void	free_infiles_list(t_infile *infiles)
 {
-	t_infile *tmp;
+	t_infile	*tmp;
 
 	tmp = NULL;
 	if (infiles == NULL)
-		return;
-	while(infiles)
+		return ;
+	while (infiles)
 	{
 		tmp = infiles;
 		free(tmp->file);
@@ -49,12 +49,12 @@ void	free_infiles_list(t_infile *infiles)
 
 void	free_outfiles_list(t_outfile *outfiles)
 {
-	t_outfile *tmp;
+	t_outfile	*tmp;
 
 	tmp = NULL;
 	if (outfiles == NULL)
-		return;
-	while(outfiles)
+		return ;
+	while (outfiles)
 	{
 		tmp = outfiles;
 		free(tmp->file);
@@ -67,19 +67,21 @@ void	free_cmd_list(t_commands **cmd)
 {
 	t_commands	*tmp;
 
+	// what if cmd is null but we have in/out
 	tmp = NULL;
 	if (cmd == NULL)
 		return ;
-	while (*cmd)
+	while (*cmd != NULL)
 	{
 		tmp = *cmd;
 		*cmd = (*cmd)->next;
 		if (tmp->infiles != NULL)
 			free_infiles_list((tmp->infiles));
-		if(tmp->outfiles != NULL )
+		if (tmp->outfiles != NULL )
 			free_outfiles_list((tmp->outfiles));
 		printf("free: %p\n", tmp->cmd);
 		free(tmp);
+		tmp = NULL;
 	}
 }
 
@@ -96,18 +98,4 @@ void	free_pid_list(t_pid **lst)
 		*lst = (*lst)->next;
 		free(tmp);
 	}
-}
-
-void 	free_envp_array(char **envp)
-{
-	int i;
-
-	i =0;
-	while (envp[i] != NULL)
-	{
-		free(envp[i]);
-		i++;
-	}
-	free(envp);
-	envp = NULL;
 }

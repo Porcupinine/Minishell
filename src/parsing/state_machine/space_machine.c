@@ -10,11 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
 #include "../../../include/utils.h"
 #include "libft.h"
-#include "../../../include/lexical_analyzer.h"
-#include <stdlib.h>
 
 void	token_space_newline(t_state_machine *parser)
 {

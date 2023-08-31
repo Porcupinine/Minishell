@@ -6,17 +6,13 @@
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/17 17:28:34 by laura         #+#    #+#                 */
-/*   Updated: 2023/08/16 14:39:18 by lpraca-l      ########   odam.nl         */
+/*   Updated: 2023/08/31 14:31:10 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 #include "../../../include/utils.h"
 #include "../../Lib42/include/libft.h"
-#include "../../../include/lexical_analyzer.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include "../../../include/exec.h"
 
 void	token_start(t_state_machine *parser)
 {
@@ -71,9 +67,8 @@ void	parse_machine(t_data *mini_data, t_state_machine *parser)
 	{
 		add_token(&parser->tokens_list, \
 	ft_substr(parser->cmd, parser->start, parser->len), T_CHAR);
-				  parser->exit_code = 0;
+		parser->exit_code = 0;
 	}
 	else if (parser->state != S_WHITESPACE)
 		syntax_error(parser, parser->cmd[(parser->count) - 1]);
 }
-//TODO >>test not sintas error

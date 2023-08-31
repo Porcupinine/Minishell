@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   signal_handlers.c                                  :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: laura <laura@student.codam.nl>               +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/08/31 14:06:41 by laura         #+#    #+#                 */
+/*   Updated: 2023/08/31 14:06:42 by laura         ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <signal.h>
 #include <termios.h>
 #include <stdio.h>
 #include "../../include/utils.h"
-#include <stdlib.h>
 
 void	sigint_handler(int sig)
 {
-//	return_prompt();
 	(void)sig;
 }
+
+//TODO exit code
 
 // if (!isatty(STDIN_FILENO))
 //      rl_outstream = stdin;
@@ -20,7 +32,7 @@ void	sigquit_handler(int sig)
 
 void	set_term(void)
 {
-	struct termios term;
+	struct termios	term;
 
 	tcgetattr(fileno(stdin), &term);
 	term.c_lflag &= ~ECHOCTL;

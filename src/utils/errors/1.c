@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   1.c                                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/11 08:04:28 by laura             #+#    #+#             */
-/*   Updated: 2023/08/30 16:09:57 by dmaessen         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   1.c                                                :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/08/11 08:04:28 by laura         #+#    #+#                 */
+/*   Updated: 2023/08/31 14:10:29 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #include "../../include/exec.h"
 #include <unistd.h>
 #include "../../Lib42/include/libft.h"
-
-// _: _: no such file or directory
 
 void	no_file_directory(char **command, t_data *mini)
 {

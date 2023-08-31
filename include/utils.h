@@ -1,12 +1,20 @@
-//
-// Created by Laura Praca Lacerda on 8/21/23.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   utils.h                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: laura <laura@student.codam.nl>               +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/08/31 14:31:57 by laura         #+#    #+#                 */
+/*   Updated: 2023/08/31 14:32:45 by laura         ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 
-#ifndef MINISHELL_UTILS_H
-#define MINISHELL_UTILS_H
+#ifndef UTILS_H
+# define UTILS_H
 
-#include "minishell.h"
-#include "lexical_analyzer.h"
+# include "minishell.h"
+# include "lexical_analyzer.h"
 
 //-------------------------------------------------------------signal_handlers
 void	sigint_handler(int sig);
@@ -117,7 +125,7 @@ void	no_filedirectory(char *file, t_data *mini);
 void	line_history(t_data *mini_data);
 
 //--------------------------------------------------------i_want_to_break_free
-void 	free_envp_array(char **envp);
+void	free_envp_array(char **envp);
 /**
  * frees token list
  * @param tokens pointer to the head of the list to be freed
@@ -159,6 +167,6 @@ int		find_size(t_tokens *tokens);
  * @param tokens head of token list
  * @return amount of heredoc occurences
  */
-int count_heredocs(t_tokens *tokens);
+int		count_heredocs(t_tokens *tokens);
 
 #endif //MINISHELL_UTILS_H

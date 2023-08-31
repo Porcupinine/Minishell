@@ -6,7 +6,7 @@
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/11 08:03:05 by laura         #+#    #+#                 */
-/*   Updated: 2023/08/16 14:37:43 by lpraca-l      ########   odam.nl         */
+/*   Updated: 2023/08/31 14:11:11 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,12 @@ void	parse_array_envp(t_data *mini_data, char **envp)
 	int		count;
 
 	count = 0;
-	mini_data->mini_envp = ft_calloc_exit(count_envp(envp) + 1,
-										  sizeof (char *));
+	mini_data->mini_envp = ft_calloc_exit(count_envp(envp) + 1, \
+		sizeof (char *));
 	while (envp[count] != NULL)
 	{
 		mini_data->mini_envp[count] = ft_strdup(envp[count]);
 		count++;
 	}
 	mini_data->mini_envp[count] = NULL;
-//	print_envp(mini_data->mini_envp);
 }
