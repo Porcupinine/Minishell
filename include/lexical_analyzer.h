@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   lexical_analyzer.h                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/17 17:34:36 by laura             #+#    #+#             */
-/*   Updated: 2023/08/30 16:33:35 by dmaessen         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   lexical_analyzer.h                                 :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: lpraca-l <lpraca-l@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/08/31 16:15:36 by lpraca-l      #+#    #+#                 */
+/*   Updated: 2023/08/31 16:18:59 by lpraca-l      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,14 +199,19 @@ void	unclosed_error(t_state_machine *parser);
 */
 void	parse(t_data *mini_data);
 /**
- * creates a temporary folder with the content given to STDIN until the
- * given limiter is found.
- * @param it_token
- * @param cmd
- * @param mini_data
+ * creates a temporary folder with the content given to STDIN.
+ * STDIN remains open with readline until the given limiter is found.
+ * @param it_token pointer to the list of tokens
+ * @param cmd cmd node 
+ * @param mini_data main struct where the command list is going to be stored
  */
-void handle_heredoc(t_tokens **it_token, t_commands **cmd, t_data *mini_data);
-void	handle_heredoc(t_tokens **it_token, t_commands **cmd, t_data *mini_data);
+void	handle_heredoc(t_tokens **it_token, t_commands **cmd, \
+		t_data *mini_data);
+/**
+ * Allocate memory for a quoteless string, coppy given string ignoring quotes
+ * @param str 
+ * @return char* unquoted string
+ */
 char	*remove_quotes(char *str);
 
 #endif //MINISHELL_LEXICAL_ANALYZER_H

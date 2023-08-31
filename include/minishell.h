@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/11 08:08:41 by laura             #+#    #+#             */
-/*   Updated: 2023/08/29 13:52:05 by dmaessen         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   minishell.h                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/08/11 08:08:41 by laura         #+#    #+#                 */
+/*   Updated: 2023/08/31 16:19:35 by lpraca-l      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,9 @@ typedef struct s_data
 	int					**fd;
 	int					exit_code;
 }t_data;
-
-void return_prompt(void);
+/**
+ * returns readline prompt 
+ */
+void	return_prompt(void);
 
 #endif //MINISHELL_MINISHELL_H

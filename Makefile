@@ -37,7 +37,7 @@ SRC     := src/main.c \
 	   src/exec/child.c src/exec/dollarsign.c src/exec/errors.c src/exec/input_op.c \
 	   src/exec/output_op.c src/exec/path.c src/exec/start.c src/exec/utils.c \
 	   src/exec/fork.c src/exec/pipes.c src/exec/utils2.c \
-	   src/parsing/parse/check_commands2.c src/parsing/parse/heredoc.c \
+	   src/parsing/parse/check_commands.c src/parsing/parse/heredoc.c \
 	   src/parsing/parse/quotes.c \
 	   src/parsing/state_machine/char_machine.c \
 	   src/parsing/state_machine/error_machine.c src/parsing/state_machine/lexe.c \
@@ -49,7 +49,7 @@ SRC     := src/main.c \
 	   src/utils/envp_parser/parse_list_envp.c src/utils/envp_parser/parse_array_envp.c \
 	   src/utils/errors/1.c src/utils/errors/127.c src/utils/errors/255.c src/utils/errors/258.c \
 	   src/utils/history/history.c \
-	   src/utils/I_want_to_break_free/parser_free.c \
+	   src/utils/I_want_to_break_free/parser_free.c src/utils/I_want_to_break_free/parser_free_array.c \
 	   src/utils/signal_handlers/signal_handlers.c \
 	   src/utils/token_list_actions/add_token.c src/utils/token_list_actions/print_tokens.c \
 	   src/utils/token_list_actions/search_token.c

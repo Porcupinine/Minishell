@@ -10,12 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
 #include "../../../include/utils.h"
 #include "libft.h"
-#include "../../../include/lexical_analyzer.h"
-#include <stdlib.h>
-#include <stdio.h>
 
 void	token_pipe(t_state_machine *parser)
 {

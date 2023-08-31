@@ -26,5 +26,4 @@ void	numeric_arg_required(char **command, t_data *mini)
 	write(2, ": ", 2);
 	write(2, "numeric argument required\n",26);
 	mini->exit_code = 255;
-	//free_str(command);
 }

@@ -14,6 +14,7 @@
 #include "../../include/env_var.h"
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
+#include "../../include/utils.h"
 
 void child_dup2(t_data *mini, t_commands *commands, int i, int pos)
 {

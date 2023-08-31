@@ -12,9 +12,6 @@
 
 #include "../../../include/minishell.h"
 #include <stdlib.h>
-#include "libft.h"
-#include "../../../include/lexical_analyzer.h"
-#include "../../../include/env_var.h"
 #include "../../../include/utils.h"
 
 static t_commands	*find_last_cmd(t_commands *cmd)

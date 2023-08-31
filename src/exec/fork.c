@@ -46,7 +46,9 @@ int	exec_fork(t_data *mini, int nb_cmds)
 	pid_t	pid;
 	int		i;
 	int 	pos;
+	t_commands *tmp;
 
+	tmp = mini->commands;
 	i = 1;
 	pos = 0;
 	while (i <= nb_cmds)
@@ -59,10 +61,10 @@ int	exec_fork(t_data *mini, int nb_cmds)
 		if (pid == 0)
 		{
 			unset_signals();
-			child_dup2(mini, mini->commands, i, pos);
+			child_dup2(mini, tmp, i, pos);
 		}
 		if (i != nb_cmds)
-			mini->commands = mini->commands->next;
+			tmp = tmp;
 		i++;
 		pos++;
 	}

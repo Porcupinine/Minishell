@@ -1,21 +1,22 @@
-///* ************************************************************************** */
-///*                                                                            */
-///*                                                        ::::::::            */
-///*   get_next_line.c                                    :+:    :+:            */
-///*                                                     +:+                    */
-///*   By: lpraca-l <lpraca-l@student.codam.nl>         +#+                     */
-///*                                                   +#+                      */
-///*   Created: 2022/11/04 19:17:01 by lpraca-l      #+#    #+#                 */
-///*   Updated: 2023/07/20 11:42:18 by laura         ########   odam.nl         */
-///*                                                                            */
-///* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   get_next_line.c                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: lpraca-l <lpraca-l@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/11/04 19:17:01 by lpraca-l      #+#    #+#                 */
+/*   Updated: 2023/07/20 11:42:18 by laura         ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 //
 ///*Write a function that returns a line read from a file descriptor
 // Repeated calls (e.g., using a loop) to your get_next_line() function should
 //let you read the text file pointed to by the file descriptor, one line at a
 //time.
 //• Your function should return the line that was read.
-//If there is nothing else to read or if an error occurred, it should return NULL.
+//If there is nothing else to read or if an error occurred, it should return
+// NULL.
 //• Make sure that your function works as expected both when reading a file and
 //whenreading from the standard input.
 //• Please note that the returned line should include the terminating \n
@@ -34,7 +35,8 @@
 //• We consider that get_next_line() has an undefined behavior if the file
 //pointed to by the file descriptor changed since the last call whereas read()
 //didn’t reach theend of file.
-//• We also consider that get_next_line() has an undefined behavior when reading
+//• We also consider that get_next_line() has an undefined behavior when
+// reading
 //a binary file. However, you can implement a logical way to handle this
 //behavior if you want to.
 //*/

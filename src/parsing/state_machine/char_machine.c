@@ -6,15 +6,12 @@
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/17 17:30:22 by laura         #+#    #+#                 */
-/*   Updated: 2023/07/28 11:57:43 by laura         ########   odam.nl         */
+/*   Updated: 2023/08/31 14:24:16 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
 #include "../../../include/utils.h"
-#include "libft.h"
-#include "../../../include/lexical_analyzer.h"
-#include <stdlib.h>
+#include "../../Lib42/include/libft.h"
 
 void	found_char(t_state_machine *parser)
 {
@@ -74,7 +71,7 @@ void	found_dquote(t_state_machine *parser)
 		parser->len++;
 	parser->state = S_CHAR;
 }
-//TODO check " ' '
+
 void	found_quotes(t_state_machine *parser)
 {
 	if (parser->cmd[parser->count] == '\'')

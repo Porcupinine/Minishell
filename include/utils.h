@@ -1,18 +1,43 @@
-//
-// Created by Laura Praca Lacerda on 8/21/23.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   utils.h                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: laura <laura@student.codam.nl>               +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/08/31 14:31:57 by laura         #+#    #+#                 */
+/*   Updated: 2023/08/31 16:20:10 by lpraca-l      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 
-#ifndef MINISHELL_UTILS_H
-#define MINISHELL_UTILS_H
+#ifndef UTILS_H
+# define UTILS_H
 
-#include "minishell.h"
-#include "lexical_analyzer.h"
+# include "minishell.h"
+# include "lexical_analyzer.h"
 
 //-------------------------------------------------------------signal_handlers
+/**
+ * set parameters for SIGINT
+ * @param sig
+ */
 void	sigint_handler(int sig);
+/**
+ * set parameters for SIGQUIT
+ * @param sig
+ */
 void	sigquit_handler(int sig);
+/**
+ * set all signals for minishell
+ */
 void	set_signals(void);
+/**
+ * returns the readline prompt
+ */
 void	return_prompt(void);
+/**
+ * set signals back to default
+ */
 void	unset_signals(void );
 
 //------------------------------------------------------------cmd_list_actions
@@ -102,11 +127,7 @@ void	numeric_arg_required(char **command, t_data *mini);
  * @param command array of strings containing information for the errror
  * message
  */
-void not_directory(char **command, t_data *mini);
-/**
- *
- * @param command
- */
+void	not_directory(char **command, t_data *mini);
 void	no_filedir(char *str, char *command, t_data *mini);
 void	not_valid_identifier_s(char **command, t_data *mini);
 void	not_set(char *command, char *str, t_data *mini);
@@ -117,7 +138,11 @@ void	no_filedirectory(char *file, t_data *mini);
 void	line_history(t_data *mini_data);
 
 //--------------------------------------------------------i_want_to_break_free
-void 	free_envp_array(char **envp);
+/**
+ * free array of strings
+ * @param envp array of strings
+ */
+void	free_envp_array(char **envp);
 /**
  * frees token list
  * @param tokens pointer to the head of the list to be freed
@@ -159,6 +184,6 @@ int		find_size(t_tokens *tokens);
  * @param tokens head of token list
  * @return amount of heredoc occurences
  */
-int count_heredocs(t_tokens *tokens);
+int		count_heredocs(t_tokens *tokens);
 
 #endif //MINISHELL_UTILS_H

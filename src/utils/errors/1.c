@@ -16,8 +16,6 @@
 #include <unistd.h>
 #include "../../Lib42/include/libft.h"
 
-// _: _: no such file or directory
-
 void	no_file_directory(char **command, t_data *mini)
 {
 	write(2, "minishell: ", 11);
