@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:49:01 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/28 16:03:59 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:09:16 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	exec_fork_onecmd(t_data *mini)
 	pid = fork();
 	pid_lstadd_back(&mini->process, pid);
 	if (pid == -1)
-		ft_error("Fork failed.\n"); // check errno ft_error exits the program 
+		return (err_msg("", "fork failed.\n"),
+				set_exit_code(mini, 1), 1);
 	if (pid == 0)
 	{
 		unset_signals();
@@ -32,13 +33,12 @@ int	exec_fork_onecmd(t_data *mini)
 	}
     close_pipe(mini->fd, mini->nb_cmds);
 	free_fd(mini->fd, mini->nb_cmds);
-	//close_fds(mini);
 	waitpid(pid, &mini->exit_code, 0);
 	if (WIFEXITED(mini->exit_code))
 		mini->exit_code = WEXITSTATUS(mini->exit_code);
-	if (WIFSIGNALED(mini->exit_code))  // check
-		mini->exit_code = 128 + WTERMSIG(mini->exit_code);  // check
-	return (0); // check
+	if (WIFSIGNALED(mini->exit_code))
+		mini->exit_code = 128 + WTERMSIG(mini->exit_code);
+	return (mini->exit_code);
 }
 
 int	exec_fork(t_data *mini, int nb_cmds)
@@ -54,7 +54,8 @@ int	exec_fork(t_data *mini, int nb_cmds)
 		pid = fork();
 		pid_lstadd_back(&mini->process, pid);
 		if (pid == -1)
-			ft_error("Fork failed.\n");
+			return (err_msg("", "fork failed.\n"),
+				set_exit_code(mini, 1), 1);
 		if (pid == 0)
 		{
 			unset_signals();
@@ -67,31 +68,10 @@ int	exec_fork(t_data *mini, int nb_cmds)
 	}
 	close_pipe(mini->fd, mini->nb_cmds);
 	free_fd(mini->fd, mini->nb_cmds);
-	//close_fds(mini); // then maybe this one not needed if exits/execve
 	waitpid(pid, &mini->exit_code, 0);
 	if (WIFEXITED(mini->exit_code))
 		mini->exit_code = WEXITSTATUS(mini->exit_code);
-	if (WIFSIGNALED(mini->exit_code))  // check
-		mini->exit_code = 128 + WTERMSIG(mini->exit_code); // check
+	if (WIFSIGNALED(mini->exit_code))
+		mini->exit_code = 128 + WTERMSIG(mini->exit_code);
 	return (0); // check
 }
-
-// OLD
-// int	exec_fork_onecmd(t_data *mini)
-// {
-// 	pid_t	pid;
-
-// 	pid = fork();
-// 	pid_lstadd_back(&mini->process, pid);
-// 	if (pid == -1)
-// 		ft_error("Fork failed.\n"); // check errno ft_error exits the program 
-// 	if (pid == 0)
-// 		run_one_cmd(mini->commands->in, mini->commands->out, mini);
-//     close_pipe(mini->fd, mini->nb_cmds);
-// 	free_fd(mini->fd, mini->nb_cmds);
-// 	close_fds(mini);
-// 	waitpid(pid, &mini->exit_code, 0); // or w/ mini->process->pid ??
-// 	if (WIFEXITED(mini->exit_code)) // check
-// 		mini->exit_code = WEXITSTATUS(mini->exit_code); // check
-// 	return (0); // check
-// }

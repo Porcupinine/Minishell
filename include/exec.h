@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 14:43:48 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/30 16:24:10 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:21:37 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int		array_size(char **envp);
 void	set_exit_code(t_data *mini, int code);
 int		size_envp(t_data *mini);
 int		not_alphanum(char *str);
+int     find_path(char **envp);
 
 char	*split_args(char *cmd, char **envp, t_data *mini);
 

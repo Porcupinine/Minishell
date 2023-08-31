@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/30 17:04:25 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:10:44 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,19 @@
 #include "../../Lib42/include/libft.h"
 #include <sys/wait.h>
 
-extern int g_exit_code;
+static void	reset_cmdlist(t_data *mini)
+{
+	free_cmd_list(&mini->commands);
+	mini->commands = NULL;
+}
 
 static void multiple_cmd(t_data *mini)
 {
 	mini->fd = open_pipes(mini);
-	exec_fork(mini, mini->nb_cmds); // check if a success
-	// if (exec_fork(mini, mini->nb_cmds) == errno) // check
-	// 	return (errno); // check what to return here, maybe just 1
+	if (mini->fd == NULL)
+		return (err_msg("", "pipe opening failed.\n"),
+			set_exit_code(mini, 1));
+	exec_fork(mini, mini->nb_cmds);
 	free_pid_list(&mini->process);
 	mini->process = NULL;
 }
@@ -38,7 +43,8 @@ static void	one_cmd(t_data *mini)
 	{
 		mini->fd = open_pipes(mini);
 		if (mini->fd == NULL)
-			err_msg("", "pipe opening failed.\n"); // check
+			return (free(command), err_msg("", "pipe opening failed.\n"),
+				set_exit_code(mini, 1));
 		free_str(command);
 		exec_fork_onecmd(mini);
 		free_pid_list(&mini->process);
@@ -50,14 +56,8 @@ static void	one_cmd(t_data *mini)
 		input_re(mini->commands, mini);
 		output_re(mini->commands);
 		if (mini->commands->out < 0 || mini->commands->in < 0)
-		{
-			set_exit_code(mini, 1);
-			close_fds(mini);
-			return ;
-		}
+			return (set_exit_code(mini, 1), close_fds(mini));
 		split_args(mini->commands->cmd, mini->mini_envp, mini);
-		// close_pipe(mini->fd, mini->nb_cmds);
-		// free_fd(mini->fd, mini->nb_cmds);
 		close_fds(mini);
 	}
 }
@@ -69,10 +69,10 @@ int	start(t_data *mini)
 	{
 		input_re(mini->commands, mini);
 		if (mini->commands->in < 0)
-			return (set_exit_code(mini, 1), 1);
+			return (reset_cmdlist(mini), set_exit_code(mini, 1), 1);
 		output_re(mini->commands);
 		if (mini->commands->out < 0)
-			return (set_exit_code(mini, 1), 1);
+			return (reset_cmdlist(mini), set_exit_code(mini, 1), 1);
 		close_fds(mini);
 		set_exit_code(mini, 0);
 	}

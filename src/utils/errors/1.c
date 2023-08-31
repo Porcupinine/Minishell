@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 08:04:28 by laura             #+#    #+#             */
-/*   Updated: 2023/08/30 16:09:57 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:19:01 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	permission_denied(char **command, t_data *mini)
 	write(2, ": ", 2);
 	write(2, "permission denied\n", 18);
 	mini->exit_code = 1;
-	free_str(command); // test if needed
+	// free_str(command); // test if needed
 }
 
 void	too_many_args(char **command, t_data *mini)

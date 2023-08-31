@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:20:42 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/30 12:43:38 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:36:18 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	    cmd_err(char *str, int error)
 	return (error); // but return as an exit
 }
 
-void	builtin_err(char *cmd, char *str)
+void	builtin_err(char *cmd, char *str) // USING
 {
 	write(2, "minishell: ", 11);
 	write(2, cmd, ft_strlen(cmd));
@@ -47,7 +47,7 @@ void	err_cmd_not_found(char **command)
 	free_str(command);
 }
 
-void	err_msg(char *cmd, char *str) // combine with builtin_err ??
+void	err_msg(char *cmd, char *str) // combine with builtin_err ?? // USING FOR PIPE ERROR
 {
 	write(2, "minishell: ", 11);
 	write(2, cmd, ft_strlen(cmd));

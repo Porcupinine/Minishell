@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:22:16 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/30 16:42:32 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:25:32 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 #include "../../include/utils.h"
 #include "../../Lib42/include/libft.h"
 #include <sys/wait.h>
-
-extern int g_exit_code;
 
 void close_fds(t_data *mini)
 {
@@ -45,7 +43,7 @@ int	**open_pipes(t_data *mini)
 	while (i < nb)
 	{
 		if (pipe(fd[i]) < 0)
-			ft_error("Pipe failed.\n"); // check
+			return (NULL);
 		i++;
 	}
 	return (fd);
