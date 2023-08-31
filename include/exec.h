@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/31 14:43:48 by dmaessen      #+#    #+#                 */
-/*   Updated: 2023/08/31 14:33:56 by laura         ########   odam.nl         */
+/*   Updated: 2023/08/31 16:15:08 by lpraca-l      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int		builtins(char **cmd, t_data *mini);
 int		check_builtins(char **cmd);
 
 int		builtin_unset(t_data *mini, char **arg);
-int 	find_envp(t_data *mini, char *arg);
-char 	**update_envp(char **envp, char *arg, int size);
+int		find_envp(t_data *mini, char *arg);
+char	**update_envp(char **envp, char *arg, int size);
 
 int		builtin_pwd(t_data *mini);
 
@@ -51,13 +51,12 @@ int		change_oldpwd(t_data *mini);
 int		change_pwd(t_data *mini);
 char	*search_path(t_data *mini, char *target);
 
-
 /* EXEC */
 int		start(t_data *mini);
 
 void	close_pipe(int **fd, int nb);
 void	close_fds(t_data *mini);
-int	    **open_pipes(t_data *mini);
+int		**open_pipes(t_data *mini);
 
 int		lst_size(t_commands *lst);
 void	free_str(char **str);
@@ -72,13 +71,13 @@ int		not_alphanum(char *str);
 char	*split_args(char *cmd, char **envp, t_data *mini);
 
 void	run_one_cmd(t_data *mini);
-void    child_dup2(t_data *mini, t_commands *commands, int i, int pos);
+void	child_dup2(t_data *mini, t_commands *commands, int i, int pos);
 
-void    output_re(t_commands *commands);
+void	output_re(t_commands *commands);
 
 void	input_re(t_commands *commands, t_data *mini);
 
-int	    cmd_err(char *str, int error); // USING??
+int		cmd_err(char *str, int error); // USING??
 void	builtin_err(char *cmd, char *str); // USING??
 void	err_msg(char *cmd, char *str); // combine with the above ?? // USING??
 void	builtin_err2(char *cmd, char *arg, char *str); // USING??
@@ -86,13 +85,13 @@ void	err_cmd_not_found(char **command); // USING??
 void	error_msg(char *str, t_data *mini); // USING??
 
 char	*expand_dollar(char *line, t_data *mini);
-int 	expand_var(char **line, t_data *mini, int start);
-int 	var_len(char *line, int start);
-char 	*var_name(char *line, int start, int end);
-char 	*search_envp(char *var, t_data *mini);
+int		expand_var(char **line, t_data *mini, int start);
+int		var_len(char *line, int start);
+char	*var_name(char *line, int start, int end);
+char	*search_envp(char *var, t_data *mini);
 char	*var_replace(char **line, char *var_exp, int start, int end);
 
 int		exec_fork_onecmd(t_data *mini);
-int	    exec_fork(t_data *mini, int nb_cmds);
+int		exec_fork(t_data *mini, int nb_cmds);
 
 #endif

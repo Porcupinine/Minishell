@@ -6,7 +6,7 @@
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 14:31:57 by laura         #+#    #+#                 */
-/*   Updated: 2023/08/31 14:32:45 by laura         ########   odam.nl         */
+/*   Updated: 2023/08/31 16:20:10 by lpraca-l      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,27 @@
 # include "lexical_analyzer.h"
 
 //-------------------------------------------------------------signal_handlers
+/**
+ * set parameters for SIGINT
+ * @param sig
+ */
 void	sigint_handler(int sig);
+/**
+ * set parameters for SIGQUIT
+ * @param sig
+ */
 void	sigquit_handler(int sig);
+/**
+ * set all signals for minishell
+ */
 void	set_signals(void);
+/**
+ * returns the readline prompt
+ */
 void	return_prompt(void);
+/**
+ * set signals back to default
+ */
 void	unset_signals(void );
 
 //------------------------------------------------------------cmd_list_actions
@@ -110,11 +127,7 @@ void	numeric_arg_required(char **command, t_data *mini);
  * @param command array of strings containing information for the errror
  * message
  */
-void not_directory(char **command, t_data *mini);
-/**
- *
- * @param command
- */
+void	not_directory(char **command, t_data *mini);
 void	no_filedir(char *str, char *command, t_data *mini);
 void	not_valid_identifier_s(char **command, t_data *mini);
 void	not_set(char *command, char *str, t_data *mini);
@@ -125,6 +138,10 @@ void	no_filedirectory(char *file, t_data *mini);
 void	line_history(t_data *mini_data);
 
 //--------------------------------------------------------i_want_to_break_free
+/**
+ * free array of strings
+ * @param envp array of strings
+ */
 void	free_envp_array(char **envp);
 /**
  * frees token list
