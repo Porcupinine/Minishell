@@ -31,16 +31,16 @@ void	return_prompt(void)
 	rl_redisplay();
 }
 
-void f(void)
-{
-	system("leaks -q minishell");
-}
+//void f(void)
+//{
+//	system("leaks -q minishell");
+//}
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_data				*mini_data;
 
-	atexit(f);
+//	atexit(f);
 	(void)argv;
 	mini_data = ft_calloc_exit(1, sizeof(t_data));
 	parse_array_envp(mini_data, envp);

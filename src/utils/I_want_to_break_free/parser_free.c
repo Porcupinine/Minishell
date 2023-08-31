@@ -80,6 +80,7 @@ void	free_cmd_list(t_commands **cmd)
 		if (tmp->outfiles != NULL )
 			free_outfiles_list((tmp->outfiles));
 		printf("free: %p\n", tmp->cmd);
+		free(tmp->cmd);
 		free(tmp);
 		tmp = NULL;
 	}
