@@ -23,19 +23,19 @@ void	free_token_list(t_tokens **tokens)
 		return ;
 	tmp = *tokens;
 	while (tmp != NULL) {
-		printf("%s\n", tmp->str);
+//		printf("%s\n", tmp->str);
 		free(tmp->str);
 		tmp = tmp->next;
 	}
 
-	while ((*tokens) != NULL)
-	{
-		if((*tokens)->str != NULL)
-			free((*tokens)->str);
-		tmp = *tokens;
-		*tokens = (*tokens)->next;
-		//free(tmp);
-	}
+//	while ((*tokens) != NULL)
+//	{
+//		if((*tokens)->str != NULL)
+//			free((*tokens)->str);
+//		tmp = *tokens;
+//		*tokens = (*tokens)->next;
+//		//free(tmp);
+//	}
 }
 
 void	free_infiles_list(t_infile **infiles)
@@ -43,11 +43,12 @@ void	free_infiles_list(t_infile **infiles)
 	t_infile *tmp;
 
 	tmp = NULL;
-	if (infiles == NULL)
+	if (*infiles == NULL)
 		return;
 	while(*infiles)
 	{
 		tmp = *infiles;
+		free(tmp->file);
 		*infiles = (*infiles)->next;
 		free(tmp);
 	}
@@ -58,11 +59,12 @@ void	free_outfiles_list(t_outfile **outfiles)
 	t_outfile *tmp;
 
 	tmp = NULL;
-	if (outfiles == NULL)
+	if (*outfiles == NULL)
 		return;
 	while(*outfiles)
 	{
 		tmp = *outfiles;
+		free(tmp->file);
 		*outfiles = (*outfiles)->next;
 		free(tmp);
 	}
@@ -79,8 +81,8 @@ void	free_cmd_list(t_commands **cmd)
 	{
 		tmp = *cmd;
 		*cmd = (*cmd)->next;
-//		free_infiles_list(&((*cmd)->infiles));
-//		free_outfiles_list(&((*cmd)->outfiles));
+		free_infiles_list(&((*cmd)->infiles));
+		free_outfiles_list(&((*cmd)->outfiles));
 		free(tmp);
 	}
 }
@@ -98,4 +100,18 @@ void	free_pid_list(t_pid **lst)
 		*lst = (*lst)->next;
 		free(tmp);
 	}
+}
+
+void 	free_envp_array(char **envp)
+{
+	int i;
+
+	i =0;
+	while (envp[i] != NULL)
+	{
+		free(envp[i]);
+		i++;
+	}
+	free(envp);
+	envp = NULL;
 }

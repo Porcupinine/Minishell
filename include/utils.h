@@ -116,6 +116,7 @@ void	not_directory_cd(char *command, t_data *mini);
 void	line_history(t_data *mini_data);
 
 //--------------------------------------------------------i_want_to_break_free
+void 	free_envp_array(char **envp);
 /**
  * frees token list
  * @param tokens pointer to the head of the list to be freed

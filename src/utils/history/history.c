@@ -14,12 +14,18 @@
 #include <readline/history.h>
 #include <stdlib.h>
 #include "../../include/minishell.h"
+#include "../../include/utils.h"
 #include "unistd.h"
 
 void	line_history(t_data *mini_data)
 {
 	if (mini_data->command_line == NULL) //check if erno is 0 for readline
 	{
+		free_envp_array(mini_data->mini_envp);
+		free(mini_data->command_line);
+		mini_data->command_line = NULL;
+		free(mini_data);
+		mini_data = NULL;
 		write(1, "exit\n", 5);
 		exit(0);
 	}

@@ -21,7 +21,7 @@
 
 
 extern int	g_exit_code;
-
+//TODO change to write
 void	syntax_error(t_state_machine *parser, char c)
 {
 	if (c == '\n')

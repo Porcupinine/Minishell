@@ -52,6 +52,7 @@ int	main(int argc, char **argv, char **envp)
 			start(mini_data);
 		}
 	}
+	printf("hi\n");
 	free(mini_data->command_line);
 	free(mini_data);
 	return (0);
