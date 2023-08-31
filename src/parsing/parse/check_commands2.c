@@ -38,11 +38,14 @@ void	extract_cmd(t_tokens **it_token, t_commands **cmd)
 	while ((*it_token) && (*it_token)->type == T_CHAR)
 	{
 		temp2 = temp;
-		temp = ft_strjoin_space(temp, (*it_token)->str);
+		temp = ft_strjoin_space(temp2, (*it_token)->str);
 		free(temp2);
+		printf("tmp2: %p\n", temp2);
+		temp2 = NULL;
 		(*it_token) = (*it_token)->next;
 	}
 	(*cmd)->cmd = temp;
+	printf("extract: %p  ---   %p\n", (*cmd)->cmd, temp);
 }
 
 static int	found_here(t_tokens **it_token, t_commands **cmd, t_data *mini_data,

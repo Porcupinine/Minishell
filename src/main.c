@@ -40,7 +40,7 @@ int	main(int argc, char **argv, char **envp)
 	parse_array_envp(mini_data, envp);
 	if (argc != 1)
 		ft_error("EROOR!!\nWrong amount of args!\n");
-	mini_data->command_line = ft_calloc_exit(1, sizeof(char));
+//	mini_data->command_line = ft_calloc_exit(1, sizeof(char));
 	while (1)
 	{
 		set_signals();

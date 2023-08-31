@@ -198,7 +198,6 @@ void	unclosed_error(t_state_machine *parser);
  * main parser function
 */
 void	parse(t_data *mini_data);
-<<<<<<< HEAD
 /**
  * creates a temporary folder with the content given to STDIN until the
  * given limiter is found.

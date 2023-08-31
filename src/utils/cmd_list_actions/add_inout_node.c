@@ -52,7 +52,7 @@ static void	add_outfile(t_outfile **outfile, enum s_type type, char *str)
 		new_out->type = REDIRECT_OUTPUT;
 	if (type == T_BIGBIG)
 		new_out->type = APPEND_OUTPUT;
-	new_out->file = str;
+	new_out->file = ft_strdup(str);
 	new_out->next = NULL;
 	if (*outfile == NULL)
 		*outfile = new_out;
@@ -74,7 +74,7 @@ static void	add_infile(t_infile **infile, enum s_type type, char *str)
 		new_in->type = REDIRECT_INPUT;
 	if (type == T_SMALLSMALL)
 		new_in->type = HEREDOC;
-	new_in->file = str;
+	new_in->file = ft_strdup(str);
 	new_in->next = NULL;
 	if (*infile == NULL)
 		*infile = new_in;
