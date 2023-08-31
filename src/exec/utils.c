@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 12:19:38 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/30 10:56:35 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:48:37 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ void	free_str(char **str)
 	free(str);
 }
 
-int array_size(char **envp)
+int	array_size(char **envp)
 {
-	int size;
+	int	size;
 
 	size = 0;
 	while (envp[size] != NULL)
 		size++;
-	return(size);
+	return (size);
 }
 
 int	lst_size(t_commands *lst)
@@ -58,12 +58,7 @@ void	pid_lstadd_back(t_pid **lst, pid_t content)
 	t_pid	*last_node;
 	t_pid	*new_node;
 
-	new_node = malloc(1 * sizeof(t_pid));
-	if (new_node == NULL)
-	{
-		ft_error("Malloc failed.\n");
-		// return (NULL); // check
-	}
+	new_node = ft_calloc_exit(1, sizeof(t_pid));
 	new_node->pid = content;
 	new_node->next = NULL;
 	if (*lst == NULL)

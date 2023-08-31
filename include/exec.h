@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 14:43:48 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/30 15:36:13 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/30 16:24:10 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,14 @@ void    child_dup2(t_data *mini, t_commands *commands, int i, int pos);
 
 void    output_re(t_commands *commands);
 
-void    input_re(t_commands *commands);
-void	read_stdin(t_commands *commands, t_data *mini);
+void	input_re(t_commands *commands, t_data *mini);
 
-int	    cmd_err(char *str, int error);
-void	builtin_err(char *cmd, char *str);
-void	err_msg(char *cmd, char *str); // combine with the above ??
-void	builtin_err2(char *cmd, char *arg, char *str);
-void	err_cmd_not_found(char **command);
-void	error_msg(char *str, t_data *mini);
+int	    cmd_err(char *str, int error); // USING??
+void	builtin_err(char *cmd, char *str); // USING??
+void	err_msg(char *cmd, char *str); // combine with the above ?? // USING??
+void	builtin_err2(char *cmd, char *arg, char *str); // USING??
+void	err_cmd_not_found(char **command); // USING??
+void	error_msg(char *str, t_data *mini); // USING??
 
 char	*expand_dollar(char *line, t_data *mini);
 int 	expand_var(char **line, t_data *mini, int start);

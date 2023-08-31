@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 10:56:37 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/30 15:35:52 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:50:36 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,31 +30,31 @@ void	free_fd(int **fd, int nb_cmds)
 	free(fd);
 }
 
-void    set_exit_code(t_data *mini, int code)
+void	set_exit_code(t_data *mini, int code)
 {
 	mini->exit_code = code;
 }
 
 int	size_envp(t_data *mini)
 {
-	int size;
+	int	size;
 
 	size = 0;
 	while (mini->mini_envp[size])
 		size++;
-	return(size);
+	return (size);
 }
 
-int not_alphanum(char *str)
+int	not_alphanum(char *str)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (str[i])
-    {
-        if (ft_isalnum(str[i]) == 0)
-            return (1);
-        i++;
-    }
-    return (0);
+	i = 0;
+	while (str[i])
+	{
+		if (ft_isalnum(str[i]) == 0)
+			return (1);
+		i++;
+	}
+	return (0);
 }

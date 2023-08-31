@@ -7,6 +7,7 @@
 void	sigint_handler(int sig)
 {
 //	return_prompt();
+	(void)sig;
 }
 
 // if (!isatty(STDIN_FILENO))
@@ -14,7 +15,7 @@ void	sigint_handler(int sig)
 
 void	sigquit_handler(int sig)
 {
-
+	(void)sig;
 }
 
 void	set_term(void)

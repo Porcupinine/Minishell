@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:22:16 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/21 16:38:12 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/30 16:42:32 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,11 @@ int	**open_pipes(t_data *mini)
 	int		i;
 
 	nb = mini->nb_cmds;
-	fd = (int **)malloc((nb) * sizeof(int *));
-	if (fd == NULL)
-		ft_error("Malloc failed.\n"); // check
+	fd = ft_calloc_exit(nb, sizeof(int *));
 	i = 0;
 	while (i < nb)
 	{
-		fd[i] = (int *)malloc(2 * sizeof(int));
+		fd[i] = ft_calloc_exit(2, sizeof(int));
 		i++;
 	}
 	i = 0;

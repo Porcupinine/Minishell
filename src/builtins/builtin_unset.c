@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 12:32:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/30 15:40:17 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:45:16 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,15 +104,10 @@ int	builtin_unset(t_data *mini, char **arg)
 				if (mini->mini_envp[pos])
 					if (unset_arg(mini, arg[i]) == -1)
 						return (error_msg("failed to update envp\n", mini), -1);
-				i++;
 			}
-			else if (not_alphanum(arg[i]) != 0)// only if there is an equal in there else ignore and exit 0
-			{
+			else if (not_alphanum(arg[i]) != 0)
 				not_valid_identifier(arg, mini);
-				i++;
-			}	
-			else
-				i++;
+			i++;
 		}
 	}
 	return (mini->exit_code);

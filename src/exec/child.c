@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:14 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/28 16:01:30 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/08/30 16:29:59 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@ void child_dup2(t_data *mini, t_commands *commands, int i, int pos)
 		err_msg("", "max amount of pipes reached.\n");// NEEDED ?? idk -- error of some sort;
 	else
 	{
-		input_re(mini->commands); // error checking
+		input_re(mini->commands, mini); // error checking
+		if (mini->commands->in < 0)
+			return ;
 		output_re(mini->commands); // error checking
+		if (mini->commands->out < 0)
+			return ;
 		if (i > 1) // if no the first cmd | stored from the prev cmd;
 		{
 			if (dup2(mini->fd[pos - 1][0], STDIN_FILENO) == -1) // to read from the prev cmd
@@ -55,8 +59,13 @@ void child_dup2(t_data *mini, t_commands *commands, int i, int pos)
 
 void	run_one_cmd(t_data *mini)
 {
-	input_re(mini->commands); // error checking
-	output_re(mini->commands); // error checking
+	input_re(mini->commands, mini);
+	output_re(mini->commands);
+	if (mini->commands->out < 0 || mini->commands->in < 0)
+	{
+		exit (1);
+		return ;
+	}
 	if (mini->commands->in != STDIN_FILENO)
 	{
 		if (dup2(mini->commands->in, STDIN_FILENO) == -1) // to read from the prev cmd
