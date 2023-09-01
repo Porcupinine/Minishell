@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   history.c                                          :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/07/28 11:50:47 by laura         #+#    #+#                 */
-/*   Updated: 2023/08/31 14:09:33 by laura         ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   history.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/28 11:50:47 by laura             #+#    #+#             */
+/*   Updated: 2023/09/01 10:37:39 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <readline/history.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <readline/history.h>
 #include "../../include/minishell.h"
 #include "../../include/utils.h"
 #include "unistd.h"

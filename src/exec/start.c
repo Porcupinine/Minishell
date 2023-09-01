@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/31 16:10:44 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/01 13:55:14 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,15 @@ static void	reset_cmdlist(t_data *mini)
 	mini->commands = NULL;
 }
 
-static void multiple_cmd(t_data *mini)
+static void	multiple_cmd(t_data *mini)
 {
+	printf("EVEN multiple_cmd??\n");
 	mini->fd = open_pipes(mini);
 	if (mini->fd == NULL)
 		return (err_msg("", "pipe opening failed.\n"),
 			set_exit_code(mini, 1));
-	exec_fork(mini, mini->nb_cmds);
+	printf("EVEN multiple_cmd beofr exec_fork??\n");
+	exec_fork(mini, mini->nb_cmds); // what do we do when dup2 fails??
 	free_pid_list(&mini->process);
 	mini->process = NULL;
 }
@@ -64,6 +66,7 @@ static void	one_cmd(t_data *mini)
 
 int	start(t_data *mini)
 {
+	set_exit_code(mini, 0);
 	mini->nb_cmds = lst_size(mini->commands);
 	if (mini->nb_cmds == 1 && ft_strlen(mini->commands->cmd) == 0)
 	{
@@ -74,7 +77,6 @@ int	start(t_data *mini)
 		if (mini->commands->out < 0)
 			return (reset_cmdlist(mini), set_exit_code(mini, 1), 1);
 		close_fds(mini);
-		set_exit_code(mini, 0);
 	}
 	else if (mini->nb_cmds == 1)
 		one_cmd(mini);
@@ -86,22 +88,3 @@ int	start(t_data *mini)
 		unlink("tmp_file");
 	return (mini->exit_code);
 }
-
-
-/*
-	TO WORK ON:
-		-- fork even with one command --> DONE
-		-- rework the whole child process to create one for all --> DONE
-		-- go through all the builtins --> DONE
-			-- ++ send double pointer to cd and exit --> DONE
-			-- rework cd (its all broke..) --> DONE
-			-- add mini to exit --> DONE
-		-- adapt the location to find $? --> DONE
-		-- look into run minishell inside minishell , increase SHVL each time -->DONE
-		-- ./test.sh doesn't run the bash script inside of it -->DONE
-		-- check and change all the error functions
-		-- add the right exit_code everywhere 
-			-- rm g_exit_code
-		-- start norminetting
-	
-*/

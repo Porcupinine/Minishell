@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:21:59 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/31 15:37:43 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/01 13:19:49 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	output_re(t_commands *commands)
 			{
 				open_close_file(commands);
 				if (commands->out < 0)
-					return (builtin_err(commands->outfiles->file,
+					return (err_msg(commands->outfiles->file,
 							"No such file or directory"));
 				close(commands->out);
 			}
@@ -55,7 +55,7 @@ void	output_re(t_commands *commands)
 			{
 				open_lastfile(commands, commands->outfiles); 
 				if (commands->out < 0)
-					return (builtin_err(commands->outfiles->file,
+					return (err_msg(commands->outfiles->file,
 							"No such file or directory"));
 				break ;
 			}

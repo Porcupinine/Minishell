@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   exec.h                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/07/31 14:43:48 by dmaessen      #+#    #+#                 */
-/*   Updated: 2023/08/31 16:15:08 by lpraca-l      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   exec.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/31 14:43:48 by dmaessen          #+#    #+#             */
+/*   Updated: 2023/09/01 13:20:42 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int		**open_pipes(t_data *mini);
 
 int		lst_size(t_commands *lst);
 void	free_str(char **str);
-t_pid	*pid_lstlast(t_pid *lst); // USING??
-void	pid_lstadd_back(t_pid **lst, pid_t content); // USING??
+t_pid	*pid_lstlast(t_pid *lst);
+void	pid_lstadd_back(t_pid **lst, pid_t content);
 void	free_fd(int **fd, int nb_cmds);
 int		array_size(char **envp);
 void	set_exit_code(t_data *mini, int code);
@@ -78,12 +78,8 @@ void	output_re(t_commands *commands);
 
 void	input_re(t_commands *commands, t_data *mini);
 
-int		cmd_err(char *str, int error); // USING??
-void	builtin_err(char *cmd, char *str); // USING??
-void	err_msg(char *cmd, char *str); // combine with the above ?? // USING??
-void	builtin_err2(char *cmd, char *arg, char *str); // USING??
-void	err_cmd_not_found(char **command); // USING??
-void	error_msg(char *str, t_data *mini); // USING??
+void	err_msg(char *cmd, char *str);
+void	error_msg(char *str, t_data *mini);
 
 char	*expand_dollar(char *line, t_data *mini);
 int		expand_var(char **line, t_data *mini, int start);

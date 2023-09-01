@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   dollarsign2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/25 13:20:42 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/01 13:20:08 by dmaessen         ###   ########.fr       */
+/*   Created: 2023/09/01 13:22:13 by dmaessen          #+#    #+#             */
+/*   Updated: 2023/09/01 13:48:18 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,29 @@
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
 
-void	err_msg(char *cmd, char *str)
+int	var_len(char *line, int start)
 {
-	write(2, "minishell: ", 11);
-	write(2, cmd, ft_strlen(cmd));
-	write(2, ": ", 2);
-	write(2, str, ft_strlen(str));
+	int	i;
+
+	i = 0;
+	if (line[start] == '?')
+		return (start + 1);
+	while (ft_isalnum(line[start + i]) || line[start + i] == '_')
+	{
+		if (line[start + i] == ' ')
+			break ;
+		i++;
+	}
+	return (start + i);
 }
 
-void	error_msg(char *str, t_data *mini)
+char	*var_name(char *line, int start, int end)
 {
-	write(2, "minishell: ", 11);
-	write(2, str, ft_strlen(str));
-	mini->mini_envp = 0; // or -1??
+	char	*sub;
+	char	*name;
+
+	sub = ft_substr(line, start, end);
+	name = ft_strjoin(sub, "=");
+	free(sub);
+	return (name);
 }

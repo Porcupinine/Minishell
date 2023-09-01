@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:11 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/31 16:25:22 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/01 11:39:59 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static char	*join_path(char **command, char **paths, int i, t_data *mini)
 			if (access(the_path, X_OK) != 0)
 			{
 				permission_denied(command, mini);
-				//return ; // check as should: exit(127);
+				exit(126);
 			}
 			return (free_str(paths), the_path);
 		}
@@ -93,6 +93,11 @@ static void	no_pathtocmd(char *path_to_cmd, t_data *mini, char **command, char *
 	if (!path_to_cmd && ft_strncmp(command[0], "./", 2) == 0)
 	{
 		modif_env(mini, command[0]);
+		if (access(command[0], X_OK) != 0)
+		{
+			permission_denied(command, mini);
+			exit (126);
+		}
 		execve(command[0], &command[0], envp);
 	}
 	else
@@ -113,12 +118,13 @@ char	*split_args(char *cmd, char **envp, t_data *mini)
 	{
 		if (*envp == NULL)
 			return (ft_error("Envp not found\n"), NULL);
+		if (find_path(envp) <= 0)
+			return (no_filedir("minishell", command[0], mini),
+				exit(mini->exit_code), NULL);
 		paths = ft_split(envp[find_path(envp)] + 5, ':');
-		if (!paths || find_path(envp) == -1)
-		{
-			no_filedir("minishell", command[0], mini);
-			exit(mini->exit_code);
-		}
+		if (!paths)
+			return (no_filedir("minishell", command[0], mini),
+				exit(mini->exit_code), NULL);
 		path_to_cmd = join_path(command, paths, 0, mini);
 		if (!path_to_cmd)
 			no_pathtocmd(path_to_cmd, mini, command, envp);
@@ -126,8 +132,7 @@ char	*split_args(char *cmd, char **envp, t_data *mini)
 			execve(path_to_cmd, command, envp);
 		free(path_to_cmd);
 	}
-	free_str(command);
 	if (mini->nb_cmds != 1)
 		exit(0);
-	return (NULL);
+	return (free_str(command), NULL);
 }

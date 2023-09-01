@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:09:31 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/30 12:49:30 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/01 12:11:10 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
 #include "../../include/utils.h"
+#include "../../include/lexical_analyzer.h"
 
 static void	write_echo(int i, char **cmd, t_data *mini)
 {
 	while (cmd[i])
 	{
+		cmd[i] = remove_quotes(cmd[i]);
 		ft_putstr_fd(cmd[i], mini->commands->out);
 		if (cmd[i + 1] != NULL)
 			ft_putchar_fd(' ', mini->commands->out);

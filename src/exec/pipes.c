@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:22:16 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/31 14:25:32 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/01 13:16:26 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "../../Lib42/include/libft.h"
 #include <sys/wait.h>
 
-void close_fds(t_data *mini)
+void	close_fds(t_data *mini)
 {
 	if (mini->commands->in != 0)
 		close(mini->commands->in);

@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:49:01 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/31 16:09:16 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/01 13:55:36 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ int	exec_fork_onecmd(t_data *mini)
 	pid_lstadd_back(&mini->process, pid);
 	if (pid == -1)
 		return (err_msg("", "fork failed.\n"),
-				set_exit_code(mini, 1), 1);
+			set_exit_code(mini, 1), 1);
 	if (pid == 0)
 	{
 		unset_signals();
 		run_one_cmd(mini);
 	}
-    close_pipe(mini->fd, mini->nb_cmds);
+	close_pipe(mini->fd, mini->nb_cmds);
 	free_fd(mini->fd, mini->nb_cmds);
 	waitpid(pid, &mini->exit_code, 0);
 	if (WIFEXITED(mini->exit_code))
@@ -43,10 +43,10 @@ int	exec_fork_onecmd(t_data *mini)
 
 int	exec_fork(t_data *mini, int nb_cmds)
 {
-	pid_t	pid;
-	int		i;
-	int 	pos;
-	t_commands *tmp;
+	pid_t		pid;
+	int			i;
+	int			pos;
+	t_commands	*tmp;
 
 	tmp = mini->commands;
 	i = 1;
@@ -61,10 +61,11 @@ int	exec_fork(t_data *mini, int nb_cmds)
 		if (pid == 0)
 		{
 			unset_signals();
-			child_dup2(mini, tmp, i, pos);
+			printf("EVEN bef child_dup2??\n");
+			child_dup2(mini, tmp, i, pos); // because what happens when it returns here with an error
 		}
 		if (i != nb_cmds)
-			tmp = tmp;
+			tmp = tmp->next;
 		i++;
 		pos++;
 	}
@@ -75,5 +76,5 @@ int	exec_fork(t_data *mini, int nb_cmds)
 		mini->exit_code = WEXITSTATUS(mini->exit_code);
 	if (WIFSIGNALED(mini->exit_code))
 		mini->exit_code = 128 + WTERMSIG(mini->exit_code);
-	return (0); // check
+	return (mini->exit_code);
 }

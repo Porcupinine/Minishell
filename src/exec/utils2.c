@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 10:56:37 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/31 16:21:24 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/01 13:14:21 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,9 @@ int	not_alphanum(char *str)
 	return (0);
 }
 
-int find_path(char **envp)
+int	find_path(char **envp)
 {
 	int	i;
-	int j;
 
 	i = 0;
 	while (envp[i])
@@ -71,10 +70,7 @@ int find_path(char **envp)
 			break ;
 		i++;
 	}
-	j = 0;
-	while (envp[j])
-		j++;
-	if (i == j)
+	if (envp[i] == NULL)
 		return (-1);
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:54:29 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/31 16:28:25 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/01 13:24:07 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,56 +15,29 @@
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
 
-int var_len(char *line, int start)
+char	*search_envp(char *var, t_data *mini)
 {
-	int i;
-
-	i = 0;
-	if (line[start] == '?')
-		return (start + 1);
-	while (ft_isalnum(line[start + i]) || line[start + i] == '_')
-	{
-		if (line[start + i] == ' ')
-			break ;
-		i++;
-	}
-	return (start + i);
-}
-
-char *var_name(char *line, int start, int end)
-{
-	char *sub;
-	char *name;
-
-	sub = ft_substr(line, start, end);
-	name = ft_strjoin(sub, "=");
-	free(sub);
-	return (name);
-}
-
-char *search_envp(char *var, t_data *mini)
-{
-	int i;
+	int	i;
 
 	i = 0;
 	if (var[i] == '?')
-		return (ft_itoa(mini->exit_code)); // is this right?
+		return (ft_itoa(mini->exit_code));
 	while (mini->mini_envp[i])
 	{
 		if (ft_strncmp(mini->mini_envp[i], var, ft_strlen(var)) == 0)
 			return (ft_substr(mini->mini_envp[i], ft_strlen(var),
-				ft_strlen(mini->mini_envp[i]) - ft_strlen(var)));
+					ft_strlen(mini->mini_envp[i]) - ft_strlen(var)));
 		i++;
 	}
 	return (ft_strdup(""));
 }
 
-char *var_replace(char **line, char *var_exp, int start, int end)
+char	*var_replace(char **line, char *var_exp, int start, int end)
 {
-	char *sub;
-	char *sub2;
-	char *join;
-	char *newline;
+	char	*sub;
+	char	*sub2;
+	char	*join;
+	char	*newline;
 
 	sub = ft_substr(*line, 0, start - 1);
 	join = ft_strjoin(sub, var_exp);
@@ -76,11 +49,11 @@ char *var_replace(char **line, char *var_exp, int start, int end)
 	return (newline);
 }
 
-int expand_var(char **line, t_data *mini, int start)
+int	expand_var(char **line, t_data *mini, int start)
 {
-	int 	end;
-	int 	new_len_line;
-	char 	*var;
+	int		end;
+	int		new_len_line;
+	char	*var;
 	char	*var_exp;
 
 	end = var_len(*line, start);
@@ -94,9 +67,9 @@ int expand_var(char **line, t_data *mini, int start)
 	return (new_len_line);
 }
 
-char *expand_dollar(char *line, t_data *mini)
+char	*expand_dollar(char *line, t_data *mini)
 {
-	int 	i;
+	int	i;
 
 	while (ft_strchr(line, '$') != NULL)
 	{
