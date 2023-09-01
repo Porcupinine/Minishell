@@ -14,10 +14,17 @@
 #include <termios.h>
 #include <stdio.h>
 #include "../../include/utils.h"
+#include <stdlib.h>
+#include <readline/readline.h>
+#include <unistd.h>
+
 
 void	sigint_handler(int sig)
 {
-	(void)sig;
+//	write(1, "\n", 1);
+//	rl_redisplay();
+	return_prompt();
+//	(void)sig;
 }
 
 //TODO exit code
@@ -27,7 +34,7 @@ void	sigint_handler(int sig)
 
 void	sigquit_handler(int sig)
 {
-	(void)sig;
+//	(void)sig;
 }
 
 void	set_term(void)
@@ -42,19 +49,28 @@ void	set_term(void)
 void	unset_signals(void )
 {
 	signal(SIGINT, SIG_DFL);
+//	write(1, "\n", 1);
 	signal(SIGQUIT, SIG_DFL);
+}
+
+void	ignore_signals(void)
+{
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 void	set_signals(void)
 {
-	struct sigaction	sigint_sa;
-	struct sigaction	sigquit_sa;
-
+	signal(SIGINT, sigint_handler);
+	signal(SIGQUIT, sigquit_handler);
+//	struct sigaction	sigint_sa;
+//	struct sigaction	sigquit_sa;
+//
 	set_term();
-	sigemptyset(&sigint_sa.sa_mask);
-	sigemptyset(&sigquit_sa.sa_mask);
-	sigquit_sa.sa_handler = &sigquit_handler;
-	sigint_sa.sa_handler = &sigint_handler;
-	sigaction(SIGQUIT, &sigquit_sa, NULL);
-	sigaction(SIGINT, &sigint_sa, NULL);
+//	sigemptyset(&sigint_sa.sa_mask);
+//	sigemptyset(&sigquit_sa.sa_mask);
+//	sigquit_sa.sa_handler = &sigquit_handler;
+//	sigint_sa.sa_handler = &sigint_handler;
+//	sigaction(SIGQUIT, &sigquit_sa, NULL);
+//	sigaction(SIGINT, &sigint_sa, NULL);
 }
