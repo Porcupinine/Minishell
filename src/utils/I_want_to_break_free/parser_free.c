@@ -79,7 +79,6 @@ void	free_cmd_list(t_commands **cmd)
 			free_infiles_list((tmp->infiles));
 		if (tmp->outfiles != NULL )
 			free_outfiles_list((tmp->outfiles));
-		printf("free: %p\n", tmp->cmd);
 		free(tmp->cmd);
 		free(tmp);
 		tmp = NULL;

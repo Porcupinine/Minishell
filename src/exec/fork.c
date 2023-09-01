@@ -63,7 +63,7 @@ int	exec_fork(t_data *mini, int nb_cmds)
 			child_dup2(mini, tmp, i, pos);
 		}
 		if (i != nb_cmds)
-			tmp = tmp;
+			tmp = tmp->next;
 		i++;
 		pos++;
 	}

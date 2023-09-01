@@ -45,7 +45,6 @@ void	extract_cmd(t_tokens **it_token, t_commands **cmd)
 	}
 	(*cmd)->cmd = temp;
 	temp = NULL;
-	printf("extract: %p  ---   %p\n", (*cmd)->cmd, temp);
 }
 
 static int	found_here(t_tokens **it_token, t_commands **cmd, \
@@ -116,13 +115,11 @@ void	parse_tokens(t_state_machine *parser, t_data *mini_data)
 	while ((it_token))
 	{
 		(cmd) = ft_calloc_exit(1, sizeof(t_commands));
-		printf("cmd_calloc: %p\n", cmd);
 		if (between_pipes(&it_token, &cmd, mini_data, parser) == -1)
 			return ;
 		if ((cmd) != NULL)
 		{
 			add_cmd_node(&mini_data->commands, (cmd));
-			printf("cms_str: %s --- %p\n", cmd->cmd, cmd->cmd);
 			(cmd) = NULL;
 
 			if ((it_token))

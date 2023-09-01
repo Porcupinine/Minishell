@@ -14,10 +14,13 @@
 #include <termios.h>
 #include <stdio.h>
 #include "../../include/utils.h"
+#include <stdlib.h>
+
 
 void	sigint_handler(int sig)
 {
-	(void)sig;
+	return_prompt();
+//	(void)sig;
 }
 
 //TODO exit code
@@ -27,7 +30,7 @@ void	sigint_handler(int sig)
 
 void	sigquit_handler(int sig)
 {
-	(void)sig;
+//	(void)sig;
 }
 
 void	set_term(void)

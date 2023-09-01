@@ -12,6 +12,7 @@
 
 #include <readline/history.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "../../include/minishell.h"
 #include "../../include/utils.h"
 #include "unistd.h"
