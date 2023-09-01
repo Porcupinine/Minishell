@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   signal_handlers.c                                  :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: laura <laura@student.codam.nl>               +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/08/31 14:06:41 by laura         #+#    #+#                 */
-/*   Updated: 2023/08/31 14:06:42 by laura         ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   signal_handlers.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/31 14:06:41 by laura             #+#    #+#             */
+/*   Updated: 2023/09/01 17:36:33 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	sigint_handler(int sig)
 //	write(1, "\n", 1);
 //	rl_redisplay();
 	return_prompt();
-//	(void)sig;
+	(void)sig;
 }
 
 //TODO exit code
@@ -34,7 +34,7 @@ void	sigint_handler(int sig)
 
 void	sigquit_handler(int sig)
 {
-//	(void)sig;
+	(void)sig;
 }
 
 void	set_term(void)
