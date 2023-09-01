@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:49:01 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/01 13:55:36 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/01 17:07:10 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	exec_fork(t_data *mini, int nb_cmds)
 		if (pid == 0)
 		{
 			unset_signals();
-			printf("EVEN bef child_dup2??\n");
 			child_dup2(mini, tmp, i, pos); // because what happens when it returns here with an error
 		}
 		if (i != nb_cmds)

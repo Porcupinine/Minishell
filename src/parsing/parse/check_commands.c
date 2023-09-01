@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   check_commands2.c                                  :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: laura <laura@student.codam.nl>               +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/08/11 07:55:33 by laura         #+#    #+#                 */
-/*   Updated: 2023/08/31 14:23:56 by laura         ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   check_commands.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/11 07:55:33 by laura             #+#    #+#             */
+/*   Updated: 2023/09/01 17:01:09 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	kill_heredoc_clean(t_state_machine *parser, \
 	parser->tokens_list = NULL;
 	free_cmd_list(&mini_data->commands);
 	mini_data->commands = NULL;
-	free(cmd);
+	free_cmd_list(cmd);
 	parser->exit_code = 1;
 }
 

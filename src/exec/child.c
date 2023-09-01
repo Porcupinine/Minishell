@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:14 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/01 13:53:22 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/01 17:26:35 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ void	child_dup2(t_data *mini, t_commands *commands, int i, int pos)
 {
 	input_re(mini->commands, mini);
 	if (mini->commands->in < 0)
-		return (set_exit_code(mini, 1));
+		return (set_exit_code(mini, 1), exit(1)); // added exit
 	output_re(mini->commands);
 	if (mini->commands->out < 0)
-		return (set_exit_code(mini, 1));
+		return (set_exit_code(mini, 1), exit(1)); // added exit
 	child_dup(mini, commands, i, pos);
 	if (mini->exit_code == 1)
 	{
-		printf("returning here right\n");
+		exit (1); // added exit
 		return ;
 	}
 	close(mini->fd[pos][1]);

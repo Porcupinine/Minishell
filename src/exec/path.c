@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:11 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/01 11:39:59 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/01 17:30:26 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 #include "../../include/utils.h"
 #include <stdio.h>
 
-static void modif_env(t_data *mini, char *cmd)
+static void	modif_env(t_data *mini, char *cmd)
 {
-	int i;
-	char *res;
-	int count;
-	
+	int		i;
+	char	*res;
+	int		count;
+
 	i = 0;
 	if (ft_strncmp(cmd, "./minishell", 11) == 0)
 	{
@@ -42,7 +42,7 @@ static void modif_env(t_data *mini, char *cmd)
 	}
 }
 
-static char *first_command(char **command)
+static char	*first_command(char **command)
 {
 	char	*cmd;
 
@@ -76,10 +76,7 @@ static char	*join_path(char **command, char **paths, int i, t_data *mini)
 		if (access(the_path, F_OK) == 0)
 		{
 			if (access(the_path, X_OK) != 0)
-			{
-				permission_denied(command, mini);
-				exit(126);
-			}
+				return (permission_denied(command, mini), exit(126), NULL);
 			return (free_str(paths), the_path);
 		}
 		free(the_path);
@@ -88,11 +85,17 @@ static char	*join_path(char **command, char **paths, int i, t_data *mini)
 	return (free_str(paths), free(cmd), NULL);
 }
 
-static void	no_pathtocmd(char *path_to_cmd, t_data *mini, char **command, char **envp)
+static void	no_pathtocmd(char *path_to_cmd, t_data *mini, \
+	char **command, char **envp)
 {
 	if (!path_to_cmd && ft_strncmp(command[0], "./", 2) == 0)
 	{
 		modif_env(mini, command[0]);
+		if (access(command[0], F_OK) != 0)
+		{
+			no_filedir("minishell :", command[0], mini);
+			exit (127);
+		}
 		if (access(command[0], X_OK) != 0)
 		{
 			permission_denied(command, mini);
@@ -113,6 +116,7 @@ char	*split_args(char *cmd, char **envp, t_data *mini)
 	char	*path_to_cmd;
 	char	**paths;
 
+	printf("cmd == %s IN %d OUT %d\n", cmd, mini->commands->in, mini->commands->out);
 	command = ft_split(cmd, ' ');
 	if (builtins(command, mini) == 1)
 	{
