@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:14 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/01 17:43:04 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/01 18:02:30 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,13 @@ static void	child_dup(t_data *mini, t_commands *commands, int i, int pos)
 	}
 	if (commands->in != STDIN_FILENO)
 	{
+		// PRINTF HERE TO SEE IF IT GOES IN
 		if (dup2(mini->commands->in, STDIN_FILENO) == -1)
 			return (err_msg("", "dup2 failed.\n"), set_exit_code(mini, 1));
 	}
 	if (commands->out != STDOUT_FILENO)
 	{
+		// PRINTF HERE TO SEE IF IT GOES IN
 		if (dup2(mini->commands->out, STDOUT_FILENO) == -1)
 			return (err_msg("", "dup2 failed.\n"), set_exit_code(mini, 1));
 	}
