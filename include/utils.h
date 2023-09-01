@@ -39,6 +39,7 @@ void	return_prompt(void);
  * set signals back to default
  */
 void	unset_signals(void );
+void	ignore_signals(void);
 
 //------------------------------------------------------------cmd_list_actions
 /**

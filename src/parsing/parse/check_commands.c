@@ -25,7 +25,7 @@ void	kill_heredoc_clean(t_state_machine *parser, \
 	parser->tokens_list = NULL;
 	free_cmd_list(&mini_data->commands);
 	mini_data->commands = NULL;
-	free(cmd);
+	free_cmd_list(cmd);
 	parser->exit_code = 1;
 }
 
@@ -43,9 +43,14 @@ void	extract_cmd(t_tokens **it_token, t_commands **cmd)
 		temp2 = NULL;
 		(*it_token) = (*it_token)->next;
 	}
-	(*cmd)->cmd = temp;
+	if ((*cmd)->cmd != NULL)
+	{
+		(*cmd)->cmd = ft_strjoin_space((*cmd)->cmd, temp);
+		free(temp);
+	}
+	else
+		(*cmd)->cmd = temp;
 	temp = NULL;
-	printf("extract: %p  ---   %p\n", (*cmd)->cmd, temp);
 }
 
 static int	found_here(t_tokens **it_token, t_commands **cmd, \
@@ -55,6 +60,7 @@ static int	found_here(t_tokens **it_token, t_commands **cmd, \
 	int		stat;
 
 	pid = fork();
+	ignore_signals();
 	if (pid == -1)
 		ft_error("Fork failed.\n");
 	if (pid == 0)
@@ -68,6 +74,7 @@ static int	found_here(t_tokens **it_token, t_commands **cmd, \
 		kill_heredoc_clean(parser, mini_data, cmd);
 		return (-1);
 	}
+	set_signals();
 	add_inout(cmd, "tmp_file", (*it_token)->type);
 	(*it_token) = (*it_token)->next->next;
 	return (0);
@@ -80,7 +87,8 @@ int	between_pipes(t_tokens **it_token, t_commands **cmd, t_data *mini_data, \
 
 	while ((*it_token) && (*it_token)->type != T_PIPE)
 	{
-		extract_cmd(it_token, cmd);
+		if ((*it_token)->type == T_CHAR)
+			extract_cmd(it_token, cmd);
 		if ((*it_token) && ((*it_token)->type == T_BIG || \
 		(*it_token)->type == T_BIGBIG || \
 				(*it_token)->type == T_SMALL))
@@ -116,13 +124,11 @@ void	parse_tokens(t_state_machine *parser, t_data *mini_data)
 	while ((it_token))
 	{
 		(cmd) = ft_calloc_exit(1, sizeof(t_commands));
-		printf("cmd_calloc: %p\n", cmd);
 		if (between_pipes(&it_token, &cmd, mini_data, parser) == -1)
 			return ;
 		if ((cmd) != NULL)
 		{
 			add_cmd_node(&mini_data->commands, (cmd));
-			printf("cms_str: %s --- %p\n", cmd->cmd, cmd->cmd);
 			(cmd) = NULL;
 
 			if ((it_token))
