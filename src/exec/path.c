@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:11 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/01 17:39:39 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/01 20:32:27 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,10 @@ char	*split_args(char *cmd, char **envp, t_data *mini)
 		if (!path_to_cmd)
 			no_pathtocmd(path_to_cmd, mini, command, envp);
 		if (path_to_cmd != NULL && command != NULL)
+		{
+			printf("getting here right??????\n");
 			execve(path_to_cmd, command, envp);
+		}
 		free(path_to_cmd);
 	}
 	if (mini->nb_cmds != 1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:14 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/01 18:02:30 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/01 22:32:24 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,24 @@
 
 static void	child_dup(t_data *mini, t_commands *commands, int i, int pos)
 {
-	if (i > 1)
+	if (i > 1 && commands->in == STDIN_FILENO) // added here && commands->in == STDIN_FILENO
 	{
 		if (dup2(mini->fd[pos - 1][0], STDIN_FILENO) == -1)
 			return (err_msg("", "dup2 failed.\n"), set_exit_code(mini, 1));
 	}
-	if (i != mini->nb_cmds)
+	if (i != mini->nb_cmds && commands->out == STDOUT_FILENO) // added here && commands->out == STDOUT_FILENO
 	{
 		if (dup2(mini->fd[pos][1], STDOUT_FILENO) == -1)
 			return (err_msg("", "dup2 failed.\n"), set_exit_code(mini, 1));
 	}
 	if (commands->in != STDIN_FILENO)
 	{
-		// PRINTF HERE TO SEE IF IT GOES IN
+		printf("IN DUP2 IN %d OUT %d\n", mini->commands->in, mini->commands->out);
 		if (dup2(mini->commands->in, STDIN_FILENO) == -1)
 			return (err_msg("", "dup2 failed.\n"), set_exit_code(mini, 1));
 	}
 	if (commands->out != STDOUT_FILENO)
 	{
-		// PRINTF HERE TO SEE IF IT GOES IN
 		if (dup2(mini->commands->out, STDOUT_FILENO) == -1)
 			return (err_msg("", "dup2 failed.\n"), set_exit_code(mini, 1));
 	}
@@ -44,7 +43,8 @@ static void	child_dup(t_data *mini, t_commands *commands, int i, int pos)
 
 void	child_dup2(t_data *mini, t_commands *commands, int i, int pos)
 {
-	
+	// if (i != mini->nb_cmds) // new -- needed?
+	// 	close(mini->fd[pos][0]); // ou pas - 1 jsp
 	input_re(mini->commands, mini);
 	if (mini->commands->in < 0)
 		return (set_exit_code(mini, 1), exit(1)); // added exit
@@ -58,8 +58,12 @@ void	child_dup2(t_data *mini, t_commands *commands, int i, int pos)
 		exit (1); // added exit
 		return ;
 	}
-	close(mini->fd[pos][1]);
-	close(mini->fd[pos][0]);
+	// if (mini->commands->in >= 0) // new -- needed?
+	// 	close(mini->commands->in);
+	if (i != mini->nb_cmds)  // new -- needed?
+		close(mini->fd[pos][1]);
+	if (i > 1) // new -- needed?
+		close(mini->fd[pos][0]);
 	close_fds(mini);
 	split_args(commands->cmd, mini->mini_envp, mini);
 }
@@ -85,3 +89,7 @@ void	run_one_cmd(t_data *mini)
 	}
 	split_args(mini->commands->cmd, mini->mini_envp, mini);
 }
+
+
+// fd0 -- read
+// fd1 -- write
