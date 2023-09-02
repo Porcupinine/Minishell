@@ -1,14 +1,7 @@
-lkjoihgiy
-hello
-cmd == cat IN 0 OUT 9
+cmd == && commands- == STDOUT_FILENO IN 0 OUT 5
+gets to the dup??
+cmd == cat IN 0 OUT 0
 getting here right??????
-IN DUP2 IN 3 OUT 1
-cmd == cat IN 3 OUT 1
+gets to the dup??
+cmd == cat IN 0 OUT 0
 getting here right??????
-k,kfdg
-cmd == cat IN 0 OUT 9
-getting here right??????
-IN DUP2 IN 9 OUT 1
-cmd == cat IN 9 OUT 1
-getting here right??????
-,kk``

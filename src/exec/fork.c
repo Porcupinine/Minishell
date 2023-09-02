@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:49:01 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/01 22:03:22 by domi             ###   ########.fr       */
+/*   Updated: 2023/09/02 14:44:38 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,12 @@ int	exec_fork(t_data *mini, int nb_cmds)
 			child_dup2(mini, tmp, i, pos); // because what happens when it returns here with an error
 		}
 		if (i != nb_cmds)
-		{
-//			mini->commands = mini->commands->next;
-//			tmp = mini->commands;
 			tmp = tmp->next;
-		}
 		i++;
 		pos++;
 	}
 	close_pipe(mini->fd, mini->nb_cmds);
 	free_fd(mini->fd, mini->nb_cmds);
-	printf("here??\n");
 	waitpid(pid, &mini->exit_code, 0);
 	if (WIFEXITED(mini->exit_code))
 		mini->exit_code = WEXITSTATUS(mini->exit_code);
