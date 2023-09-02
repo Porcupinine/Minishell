@@ -47,7 +47,7 @@ void	populate_function_ptrs(void (**functions)(t_state_machine *))
 	(functions)[S_CHAR] = &token_str;
 }
 
-void	parse_machine(t_data *mini_data, t_state_machine *parser)
+int	parse_machine(t_data *mini_data, t_state_machine *parser)
 {
 	void			(*functions[7])(t_state_machine*);
 
@@ -62,13 +62,14 @@ void	parse_machine(t_data *mini_data, t_state_machine *parser)
 		parser->count++;
 	}
 	if (parser->status == S_DQUOTES || parser->status == S_SQUOTES)
-		unclosed_error(parser);
-	if (parser->state == S_CHAR)
 	{
+		unclosed_error(parser);
+		return (1);
+	}
+	else if (parser->state == S_CHAR)
 		add_token(&parser->tokens_list, \
 	ft_substr(parser->cmd, parser->start, parser->len), T_CHAR);
-		parser->exit_code = 0;
-	}
 	else if (parser->state != S_WHITESPACE)
 		syntax_error(parser, parser->cmd[(parser->count) - 1]);
+	return (0);
 }

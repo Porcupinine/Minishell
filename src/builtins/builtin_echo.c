@@ -19,9 +19,15 @@
 
 static void	write_echo(int i, char **cmd, t_data *mini)
 {
+	char *tmp;
+
+	tmp = NULL;
 	while (cmd[i])
 	{
+		tmp = cmd[i];
 		cmd[i] = remove_quotes(cmd[i]);
+		free(tmp);
+		tmp = NULL;
 		ft_putstr_fd(cmd[i], mini->commands->out);
 		if (cmd[i + 1] != NULL)
 			ft_putchar_fd(' ', mini->commands->out);
@@ -66,7 +72,8 @@ int	builtin_echo(t_data *mini, char **cmd)
 		i = 1;
 		while (cmd[i])
 		{
-			cmd[i] = expand_dollar(cmd[i], mini);
+			if (ft_strchr(cmd[i], '\'') == 0)
+				cmd[i] = expand_dollar(cmd[i], mini);
 			i++;
 		}
 		write_echo(1, cmd, mini);

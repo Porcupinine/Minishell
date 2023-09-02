@@ -29,7 +29,6 @@ void	syntax_error(t_state_machine *parser, char c)
 	parser->state = S_ERROR;
 	free_token_list(&parser->tokens_list);
 	parser->tokens_list = NULL;
-	return_prompt();
 }
 
 void	syntax_error_parse(t_state_machine *parser, t_data *mini_data)
@@ -40,7 +39,6 @@ void	syntax_error_parse(t_state_machine *parser, t_data *mini_data)
 	parser->tokens_list = NULL;
 	free_cmd_list(&mini_data->commands);
 	mini_data->commands = NULL;
-	return_prompt();
 }
 
 void	unclosed_error(t_state_machine *parser)
@@ -57,5 +55,4 @@ void	unclosed_error(t_state_machine *parser)
 	parser->exit_code = 258;
 	free_token_list(&parser->tokens_list);
 	parser->tokens_list = NULL;
-	return_prompt();
 }

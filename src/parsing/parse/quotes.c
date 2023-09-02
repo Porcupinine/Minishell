@@ -22,21 +22,22 @@ char	*remove_quotes(char *str)
 	count_tmp = 0;
 	count = 0;
 	count_quotes = 0;
-	while (str[count++] != '\0')
+	while (str[count] != '\0')
 	{
 		if (str[count] == '\'' || str[count] == '"')
 			count_quotes++;
 		count++;
 	}
-	count = 0;
+	count = -1;
 	tmp = ft_calloc_exit(((ft_strlen(str) - count_quotes) + 1), sizeof (char));
-	while (str[count++] != '\0')
+	while (str[++count] != '\0')
 	{
 		if (str[count] != '\'' && str[count] != '"')
 		{
 			tmp[count_tmp] = str[count];
 			count_tmp++;
 		}
+		// count++;
 	}
 	return (tmp);
 }

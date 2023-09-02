@@ -64,7 +64,6 @@ static void	one_cmd(t_data *mini)
 
 int	start(t_data *mini)
 {
-	set_exit_code(mini, 0);
 	mini->nb_cmds = lst_size(mini->commands);
 	if (mini->nb_cmds == 1 && ft_strlen(mini->commands->cmd) == 0)
 	{

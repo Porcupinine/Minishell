@@ -21,7 +21,7 @@ add_executable(minishell src/main.c
 		src/builtins/builtin_cd.c src/builtins/builtin_echo.c src/builtins/builtin_env.c
 		src/builtins/builtin_exit.c src/builtins/builtin_export.c src/builtins/builtin_pwd.c
 		src/builtins/builtin_unset.c src/builtins/builtins.c src/builtins/builtin_export2.c
-		src/exec/child.c src/exec/dollarsign.c src/exec/errors.c src/exec/input_op.c
+		src/exec/child.c src/exec/dollarsign.c src/exec/dollarsign2.c src/exec/errors.c src/exec/input_op.c
 		src/exec/output_op.c src/exec/path.c src/exec/start.c src/exec/utils.c
 		src/exec/fork.c src/exec/pipes.c
 		src/exec/utils2.c

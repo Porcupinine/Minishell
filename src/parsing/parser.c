@@ -15,16 +15,26 @@
 #include "../../include/lexical_analyzer.h"
 #include <stdio.h>
 
-void	parse(t_data *mini_data)
+int	parse(t_data *mini_data)
 {
 	t_state_machine	*parser;
 
 	parser = ft_calloc_exit(1, sizeof (t_state_machine));
-	parse_machine(mini_data, parser);
-	parse_tokens(parser, mini_data);
+	if (parse_machine(mini_data, parser) == 1)
+	{
+
+		return (1);
+	}
 	mini_data->exit_code = parser->exit_code;
+	parser->exit_code = 0;
+	if (mini_data->exit_code == 0)
+	{
+		parse_tokens(parser, mini_data);
+		mini_data->exit_code = parser->exit_code;
+	}
 	free(mini_data->command_line);
 	mini_data->command_line = NULL;
 	free(parser);
 	parser = NULL;
+	return (0);
 }

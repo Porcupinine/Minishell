@@ -53,8 +53,8 @@ int	main(int argc, char **argv, char **envp)
 		line_history(mini_data);
 		if (ft_strncmp(mini_data->command_line, "", 1) != 0)
 		{
-			parse(mini_data);
-			start(mini_data);
+			if (parse(mini_data) == 0)
+				start(mini_data);
 		}
 	}
 	printf("hi\n");

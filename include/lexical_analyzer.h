@@ -121,7 +121,7 @@ typedef struct s_state_machine
  * the data struct and break it into tokens
  * @param mini_data data struct
  */
-void	parse_machine(t_data *mini_data, t_state_machine *parser);
+int	parse_machine(t_data *mini_data, t_state_machine *parser);
 /**
  * operates on S_WHITESPACE state
  * @param parser
@@ -197,7 +197,7 @@ void	unclosed_error(t_state_machine *parser);
 /**
  * main parser function
 */
-void	parse(t_data *mini_data);
+int		parse(t_data *mini_data);
 /**
  * creates a temporary folder with the content given to STDIN.
  * STDIN remains open with readline until the given limiter is found.

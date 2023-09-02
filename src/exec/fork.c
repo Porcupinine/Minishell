@@ -65,9 +65,9 @@ int	exec_fork(t_data *mini, int nb_cmds)
 		}
 		if (i != nb_cmds)
 		{
-			mini->commands = mini->commands->next;
-			tmp = mini->commands;
-			//tmp = tmp->next;
+//			mini->commands = mini->commands->next;
+//			tmp = mini->commands;
+			tmp = tmp->next;
 		}
 		i++;
 		pos++;
