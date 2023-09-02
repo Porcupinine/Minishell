@@ -85,3 +85,19 @@ char	*expand_dollar(char *line, t_data *mini)
 	}
 	return (line);
 }
+
+char *expanded(char *str, t_data *mini_data)
+{
+	char	*exp_str;
+
+	exp_str = NULL;
+	if (ft_strchr(str, '\'') == 0 || (ft_strchr(str, '"') != 0 \
+	&& ft_strchr_position(str, '\'') > ft_strchr_position(str, '"')))
+	{
+		exp_str = expand_dollar(str, mini_data);
+		free(str);
+		return (exp_str);
+	}
+	else
+		return (str);
+}

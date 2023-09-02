@@ -113,10 +113,12 @@ static void	no_pathtocmd(char *path_to_cmd, t_data *mini, \
 char	*split_args(char *cmd, char **envp, t_data *mini)
 {
 	char	**command;
+
 	char	*path_to_cmd;
 	char	**paths;
 
-	printf("cmd == %s IN %d OUT %d\n", cmd, mini->commands->in, mini->commands->out);
+//	printf("cmd == %s IN %d OUT %d\n", cmd, mini->commands->in, mini->commands->out);
+//	expand_dollar(cmd, mini);
 	command = ft_split(cmd, ' ');
 	if (builtins(command, mini) == 1)
 	{

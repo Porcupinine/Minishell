@@ -50,11 +50,11 @@ static void	echo_n(t_data *mini, char **cmd, int j, size_t i)
 		j++;
 	}
 	i = j;
-	while (cmd[i])
-	{
-		cmd[i] = expand_dollar(cmd[i], mini);
-		i++;
-	}
+//	while (cmd[i])
+//	{
+//		cmd[i] = expand_dollar(cmd[i], mini);
+//		i++;
+//	}
 	write_echo(j, cmd, mini);
 }
 
@@ -70,12 +70,12 @@ int	builtin_echo(t_data *mini, char **cmd)
 	else if (ft_strlen(cmd[0]) == 4)
 	{
 		i = 1;
-		while (cmd[i])
-		{
-			if (ft_strchr(cmd[i], '\'') == 0)
-				cmd[i] = expand_dollar(cmd[i], mini);
-			i++;
-		}
+//		while (cmd[i])
+//		{
+//			if (ft_strchr(cmd[i], '\'') == 0)
+//				cmd[i] = expand_dollar(cmd[i], mini);
+//			i++;
+//		}
 		write_echo(1, cmd, mini);
 		write(mini->commands->out, "\n", 1);
 		set_exit_code(mini, 0);

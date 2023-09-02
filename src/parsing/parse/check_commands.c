@@ -17,6 +17,7 @@
 #include "libft.h"
 #include "../../../include/lexical_analyzer.h"
 #include "../../../include/utils.h"
+#include "../../include/exec.h"
 
 void	kill_heredoc_clean(t_state_machine *parser, \
 		t_data *mini_data, t_commands **cmd)
@@ -29,7 +30,7 @@ void	kill_heredoc_clean(t_state_machine *parser, \
 	parser->exit_code = 1;
 }
 
-void	extract_cmd(t_tokens **it_token, t_commands **cmd)
+void	extract_cmd(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
 {
 	char		*temp;
 	char		*temp2;
@@ -43,12 +44,13 @@ void	extract_cmd(t_tokens **it_token, t_commands **cmd)
 		temp2 = NULL;
 		(*it_token) = (*it_token)->next;
 	}
-	if ((*cmd)->cmd != NULL)
-	{
-		(*cmd)->cmd = ft_strjoin_space((*cmd)->cmd, temp);
-		free(temp);
-	}
-	else
+//	if ((*cmd)->cmd != NULL)
+//	{
+//		(*cmd)->cmd = ft_strjoin_space((*cmd)->cmd, temp);
+//		free(temp);
+//	}
+//	else
+		temp = expanded(temp, mini_data);
 		(*cmd)->cmd = temp;
 	temp = NULL;
 }
@@ -88,7 +90,7 @@ int	between_pipes(t_tokens **it_token, t_commands **cmd, t_data *mini_data, \
 	while ((*it_token) && (*it_token)->type != T_PIPE)
 	{
 		if ((*it_token)->type == T_CHAR)
-			extract_cmd(it_token, cmd);
+			extract_cmd(it_token, cmd, mini_data);
 		if ((*it_token) && ((*it_token)->type == T_BIG || \
 		(*it_token)->type == T_BIGBIG || \
 				(*it_token)->type == T_SMALL))

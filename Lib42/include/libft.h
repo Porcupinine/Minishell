@@ -135,6 +135,13 @@ char	*ft_strchr(const char *s, int c);
  */
 char	*ft_strrchr(const char *s, int c);
 /**
+ *
+ * @param s
+ * @param c
+ * @return
+ */
+int	ft_strchr_position(const char *s, int c);
+/**
  * Compare n bytes from two strings
  * @param s1 string 1
  * @param s2 string 2
