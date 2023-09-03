@@ -26,11 +26,35 @@ char	*search_envp(char *var, t_data *mini)
 	{
 		if (ft_strncmp(mini->mini_envp[i], var, ft_strlen(var)) == 0)
 			return (ft_substr(mini->mini_envp[i], ft_strlen(var),
-					ft_strlen(mini->mini_envp[i]) - ft_strlen(var)));
+							  ft_strlen(mini->mini_envp[i]) - ft_strlen(var)));
 		i++;
 	}
 	return (ft_strdup(""));
 }
+
+//char	*search_envp(char *var, t_data *mini)
+//{
+//	int	i;
+//	char *tmp;
+//
+//	tmp = NULL;
+//	i = 0;
+//	if (var[i] == '?')
+//		return (ft_itoa(mini->exit_code));
+//	while (mini->mini_envp[i])
+//	{
+//		if (ft_strncmp(mini->mini_envp[i], var, ft_strlen(var)) == 0)
+//		{
+////			tmp = ft_substr(mini->mini_envp[i], ft_strlen(var),
+////							  ft_strlen(mini->mini_envp[i]) - ft_strlen(var));
+////			return(tmp);
+//			return (ft_substr(mini->mini_envp[i], ft_strlen(var),
+//							 ft_strlen(mini->mini_envp[i]) - ft_strlen(var)));
+//		}
+//		i++;
+//	}
+//	return (ft_strdup(""));
+//}
 
 char	*var_replace(char **line, char *var_exp, int start, int end)
 {
@@ -83,7 +107,7 @@ char	*expand_dollar(char *line, t_data *mini)
 			i++;
 		}
 	}
-	return (line);
+	return (ft_strdup(line));
 }
 
 char *expanded(char *str, t_data *mini_data)
