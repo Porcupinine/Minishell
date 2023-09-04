@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   history.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/28 11:50:47 by laura             #+#    #+#             */
-/*   Updated: 2023/09/01 10:37:39 by dmaessen         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   history.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/07/28 11:50:47 by laura         #+#    #+#                 */
+/*   Updated: 2023/09/04 14:13:24 by lpraca-l      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 void	line_history(t_data *mini_data)
 {
-	if (mini_data->command_line == NULL) //TODO check if erno is 0 for readline
+	if (mini_data->command_line == NULL)
 	{
 		free_envp_array(mini_data->mini_envp);
 		free(mini_data->command_line);

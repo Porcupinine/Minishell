@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/17 17:23:55 by laura         #+#    #+#                 */
-/*   Updated: 2023/08/31 14:05:22 by laura         ########   odam.nl         */
+/*   Updated: 2023/09/04 14:12:16 by lpraca-l      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,10 @@ void	return_prompt(void)
 	rl_redisplay();
 }
 
-//void f(void)
-//{
-//	system("leaks -q minishell");
-//}
-
 int	main(int argc, char **argv, char **envp)
 {
 	t_data				*mini_data;
 
-//	atexit(f);
 	(void)argv;
 	mini_data = ft_calloc_exit(1, sizeof(t_data));
 	parse_array_envp(mini_data, envp);

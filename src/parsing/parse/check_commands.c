@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   check_commands.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/11 07:55:33 by laura             #+#    #+#             */
-/*   Updated: 2023/09/01 17:01:09 by dmaessen         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   check_commands.c                                   :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/08/11 07:55:33 by laura         #+#    #+#                 */
+/*   Updated: 2023/09/04 14:18:43 by lpraca-l      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,8 @@ void	extract_cmd(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
 		temp2 = NULL;
 		(*it_token) = (*it_token)->next;
 	}
-//	if ((*cmd)->cmd != NULL)
-//	{
-//		(*cmd)->cmd = ft_strjoin_space((*cmd)->cmd, temp);
-//		free(temp);
-//	}
-//	else
-		temp = expanded(temp, mini_data);
-		(*cmd)->cmd = temp;
+	temp = expanded(temp, mini_data);
+	(*cmd)->cmd = temp;
 	temp = NULL;
 }
 
@@ -111,8 +105,6 @@ int	between_pipes(t_tokens **it_token, t_commands **cmd, t_data *mini_data, \
 	}
 	return (0);
 }
-//TODO remove quotes for echo
-
 
 void	parse_tokens(t_state_machine *parser, t_data *mini_data)
 {

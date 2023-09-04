@@ -6,7 +6,7 @@
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/11 08:04:56 by laura         #+#    #+#                 */
-/*   Updated: 2023/08/31 14:08:37 by laura         ########   odam.nl         */
+/*   Updated: 2023/09/04 14:13:07 by lpraca-l      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	free_cmd_list(t_commands **cmd)
 {
 	t_commands	*tmp;
 
-	// what if cmd is null but we have in/out
 	tmp = NULL;
 	if (cmd == NULL)
 		return ;

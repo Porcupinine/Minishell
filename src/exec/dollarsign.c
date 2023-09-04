@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   dollarsign.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/25 13:54:29 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/01 13:24:07 by dmaessen         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   dollarsign.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/07/25 13:54:29 by dmaessen      #+#    #+#                 */
+/*   Updated: 2023/09/04 14:20:53 by lpraca-l      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,36 +25,12 @@ char	*search_envp(char *var, t_data *mini)
 	while (mini->mini_envp[i])
 	{
 		if (ft_strncmp(mini->mini_envp[i], var, ft_strlen(var)) == 0)
-			return (ft_substr(mini->mini_envp[i], ft_strlen(var),
-							  ft_strlen(mini->mini_envp[i]) - ft_strlen(var)));
+			return (ft_substr(mini->mini_envp[i], ft_strlen(var), \
+				ft_strlen(mini->mini_envp[i]) - ft_strlen(var)));
 		i++;
 	}
 	return (ft_strdup(""));
 }
-
-//char	*search_envp(char *var, t_data *mini)
-//{
-//	int	i;
-//	char *tmp;
-//
-//	tmp = NULL;
-//	i = 0;
-//	if (var[i] == '?')
-//		return (ft_itoa(mini->exit_code));
-//	while (mini->mini_envp[i])
-//	{
-//		if (ft_strncmp(mini->mini_envp[i], var, ft_strlen(var)) == 0)
-//		{
-////			tmp = ft_substr(mini->mini_envp[i], ft_strlen(var),
-////							  ft_strlen(mini->mini_envp[i]) - ft_strlen(var));
-////			return(tmp);
-//			return (ft_substr(mini->mini_envp[i], ft_strlen(var),
-//							 ft_strlen(mini->mini_envp[i]) - ft_strlen(var)));
-//		}
-//		i++;
-//	}
-//	return (ft_strdup(""));
-//}
 
 char	*var_replace(char **line, char *var_exp, int start, int end)
 {
@@ -80,19 +56,15 @@ int	expand_var(char **line, t_data *mini, int start)
 	char	*var;
 	char	*var_exp;
 
-
 	end = var_len(*line, start);
 	if (end == start)
 		return (start);
 	var = var_name(*line, start, end - start);
 	var_exp = search_envp(var, mini);
 	new_len_line = (start - 1) + (int)ft_strlen(var_exp);
-	printf("\n\nline: %s --- %p\n", *line, line);
 	*line = var_replace(line, var_exp, start, end);
-	printf("var: %p\nvar_exp: %p\nline: %p\n\n\n", var, var_exp, line);
 	free(var_exp);
 	free(var);
-
 	return (new_len_line);
 }
 
@@ -104,7 +76,6 @@ char	*expand_dollar(char *line, t_data *mini)
 	tmp = NULL;
 	while (ft_strchr(line, '$') != NULL)
 	{
-		printf("expand dollar -> line: %s --- %p\n", line, line);
 		i = 0;
 		tmp = line;
 		while (line[i] != '\0')
@@ -117,11 +88,10 @@ char	*expand_dollar(char *line, t_data *mini)
 		}
 	}
 	free (tmp);
-	printf("line: %s --- %p\n\n", line, line);
 	return (line);
 }
 
-char *expanded(char *str, t_data *mini_data)
+char	*expanded(char *str, t_data *mini_data)
 {
 	char	*exp_str;
 
@@ -131,8 +101,6 @@ char *expanded(char *str, t_data *mini_data)
 	&& ft_strchr(str, '$') != 0)
 	{
 		exp_str = expand_dollar(str, mini_data);
-		printf("exp_str: %p\nstr: %p\n\n\n", exp_str, str);
-//		free(str);
 		return (exp_str);
 	}
 	else
