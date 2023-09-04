@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 14:43:48 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/01 13:20:42 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/03 18:08:50 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,6 @@ char	*search_envp(char *var, t_data *mini);
 char	*var_replace(char **line, char *var_exp, int start, int end);
 
 int		exec_fork_onecmd(t_data *mini);
-int		exec_fork(t_data *mini, int nb_cmds);
+int		exec_fork(t_data *mini);
 
 #endif

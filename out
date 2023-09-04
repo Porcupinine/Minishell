@@ -1,7 +1,1 @@
-cmd == && commands- == STDOUT_FILENO IN 0 OUT 5
-gets to the dup??
-cmd == cat IN 0 OUT 0
-getting here right??????
-gets to the dup??
-cmd == cat IN 0 OUT 0
-getting here right??????
+last one, read end= 0
