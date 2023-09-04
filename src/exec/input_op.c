@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:19:42 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/02 14:26:47 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/04 13:38:01 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	input_re(t_commands *commands, t_data *mini)
 		}
 		else
 			set_exit_code(mini, 0);
-		printf("IN INPUT_RE %d FILE NAME %s\n", commands->in, commands->infiles->file);
 		if (commands->infiles->next != NULL)
 			close(commands->in);
 		commands->infiles = commands->infiles->next;

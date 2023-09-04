@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 14:43:48 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/04 10:05:54 by domi             ###   ########.fr       */
+/*   Updated: 2023/09/04 14:34:37 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int     find_path(char **envp);
 char	*split_args(char *cmd, char **envp, t_data *mini);
 
 void	run_one_cmd(t_data *mini);
-void	child_dup2(t_data *mini, t_commands *commands, int i, int pos);
+int		exec_fork_onecmd(t_data *mini);
 
 void	output_re(t_commands *commands);
 
@@ -88,8 +88,9 @@ char	*var_name(char *line, int start, int end);
 char	*search_envp(char *var, t_data *mini);
 char	*var_replace(char **line, char *var_exp, int start, int end);
 
-int		exec_fork_onecmd(t_data *mini);
-int	exec_fork(t_data *mini);
-// void pid_exit_code(t_data *mini, pid_t pid);
+int	    exec_fork(t_data *mini);
+void    pid_exit_code(t_data *mini, pid_t pid);
+int     forkfork(t_data *mini, t_commands *commands, int read_end, int *p_fd);
+void	childchild(t_data *mini, t_commands *commands, int read_end, int *p_fd);
 
 #endif

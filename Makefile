@@ -6,7 +6,7 @@
 #    By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/07 11:56:57 by dmaessen          #+#    #+#              #
-#    Updated: 2023/09/01 13:22:43 by dmaessen         ###   ########.fr        #
+#    Updated: 2023/09/04 14:19:23 by dmaessen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ SRC     := src/main.c \
 	   src/builtins/builtin_cd.c src/builtins/builtin_echo.c src/builtins/builtin_env.c \
 	   src/builtins/builtin_exit.c src/builtins/builtin_export.c src/builtins/builtin_pwd.c \
 	   src/builtins/builtin_unset.c src/builtins/builtins.c src/builtins/builtin_export2.c \
-	   src/exec/child.c src/exec/dollarsign.c src/exec/errors.c src/exec/input_op.c \
+	   src/exec/fork2.c src/exec/dollarsign.c src/exec/errors.c src/exec/input_op.c \
 	   src/exec/output_op.c src/exec/path.c src/exec/start.c src/exec/utils.c \
 	   src/exec/fork.c src/exec/pipes.c src/exec/utils2.c src/exec/dollarsign2.c \
 	   src/parsing/parse/check_commands.c src/parsing/parse/heredoc.c \

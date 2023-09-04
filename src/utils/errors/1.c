@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 08:04:28 by laura             #+#    #+#             */
-/*   Updated: 2023/09/01 11:38:55 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/04 14:26:04 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	no_file_directory(char **command, t_data *mini)
 	write(2, ": ", 2);
 	write(2, "No such file or directory\n", 26);
 	mini->exit_code = 1;
-	free_str(command); // test if needed
 }
 
 void	no_filedirectory(char *file, t_data *mini)
@@ -93,7 +92,6 @@ void	not_directory(char **command, t_data *mini)
 	write(2, ": ", 2);
 	write(2, "Not a directory\n", 17);
 	mini->exit_code = 1;
-	free_str(command); // test if needed
 }
 
 void	not_set(char *command, char *str, t_data *mini)

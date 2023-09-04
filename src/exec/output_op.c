@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   output_op.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:21:59 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/03 20:53:08 by domi             ###   ########.fr       */
+/*   Updated: 2023/09/04 13:38:09 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ void	output_re(t_commands *commands)
 			}
 			else
 			{
-				open_lastfile(commands, commands->outfiles); 
-				printf("IN OUTPUT_RE %d FILE NAME %s\n", commands->out, commands->outfiles->file);
+				open_lastfile(commands, commands->outfiles);
 				if (commands->out < 0)
 					return (err_msg(commands->outfiles->file,
 							"No such file or directory"));

@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:09:31 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/01 12:11:10 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/04 14:43:46 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 static void	write_echo(int i, char **cmd, t_data *mini)
 {
-	char *tmp;
+	char	*tmp;
 
 	tmp = NULL;
 	while (cmd[i])
