@@ -87,21 +87,26 @@ int	expand_var(char **line, t_data *mini, int start)
 	var = var_name(*line, start, end - start);
 	var_exp = search_envp(var, mini);
 	new_len_line = (start - 1) + (int)ft_strlen(var_exp);
-	printf("\n\nline: %p\n", line);
+	printf("\n\nline: %s --- %p\n", *line, line);
 	*line = var_replace(line, var_exp, start, end);
 	printf("var: %p\nvar_exp: %p\nline: %p\n\n\n", var, var_exp, line);
 	free(var_exp);
 	free(var);
+
 	return (new_len_line);
 }
 
 char	*expand_dollar(char *line, t_data *mini)
 {
-	int	i;
+	int		i;
+	char	*tmp;
 
+	tmp = NULL;
 	while (ft_strchr(line, '$') != NULL)
 	{
+		printf("expand dollar -> line: %s --- %p\n", line, line);
 		i = 0;
+		tmp = line;
 		while (line[i] != '\0')
 		{
 			if (line[i] == '$')
@@ -111,8 +116,9 @@ char	*expand_dollar(char *line, t_data *mini)
 			i++;
 		}
 	}
-	printf("line: %p\n\n", line);
-	return (ft_strdup(line));
+	free (tmp);
+	printf("line: %s --- %p\n\n", line, line);
+	return (line);
 }
 
 char *expanded(char *str, t_data *mini_data)
@@ -120,12 +126,13 @@ char *expanded(char *str, t_data *mini_data)
 	char	*exp_str;
 
 	exp_str = NULL;
-	if (ft_strchr(str, '\'') == 0 || (ft_strchr(str, '"') != 0 \
-	&& ft_strchr_position(str, '\'') > ft_strchr_position(str, '"')))
+	if ((ft_strchr(str, '\'') == 0 || (ft_strchr(str, '"') != 0 \
+	&& ft_strchr_position(str, '\'') > ft_strchr_position(str, '"'))) \
+	&& ft_strchr(str, '$') != 0)
 	{
 		exp_str = expand_dollar(str, mini_data);
 		printf("exp_str: %p\nstr: %p\n\n\n", exp_str, str);
-		free(str);
+//		free(str);
 		return (exp_str);
 	}
 	else

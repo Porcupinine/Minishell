@@ -52,7 +52,7 @@ static char	**add_line_envp(char **envp, char *cmd, int size, t_data *mini)
 		new[i] = ft_strdup(envp[i]);
 		i++;
 	}
-	cmd = expand_dollar(cmd, mini);
+//	cmd = expand_dollar(cmd, mini);
 	if (cmd[0] == '=')
 		return (not_valid_identifier_s(&cmd, mini), free(new), NULL);
 	new[i] = ft_strdup(cmd);
