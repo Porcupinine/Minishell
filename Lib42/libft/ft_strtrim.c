@@ -37,3 +37,20 @@ char	*ft_strtrim(char const *s1, char const *set)
 	trimmed = ft_substr(s1, count_start, (trimlen + 1));
 	return (trimmed);
 }
+
+char	*ft_strtrim_one(char const *s1, char const set)
+{
+	size_t	count_start;
+	char	*trimmed;
+	size_t	count_end;
+	size_t	trimlen;
+
+	count_start = ft_strchr_position(s1, set) + 1;
+	count_end = ft_strrchr_position(s1, set) - 1;
+	trimlen = 0;
+	if (count_start == count_end)
+		return (ft_strdup(""));
+	trimlen = count_end - count_start;
+	trimmed = ft_substr(s1, count_start, (trimlen + 1));
+	return (trimmed);
+}

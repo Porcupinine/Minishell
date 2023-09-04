@@ -15,29 +15,19 @@
 char	*remove_quotes(char *str)
 {
 	char	*tmp;
-	int		count_quotes;
-	int		count;
-	int		count_tmp;
 
-	count_tmp = 0;
-	count = 0;
-	count_quotes = 0;
-	while (str[count] != '\0')
+	tmp = str;
+	if (ft_strchr(str, '\'') != 0 && ft_strchr(str, '"') != 0)
 	{
-		if (str[count] == '\'' || str[count] == '"')
-			count_quotes++;
-		count++;
+		if (ft_strchr_position(str, '\'') < ft_strchr_position(str, '"'))
+			tmp = ft_strtrim_one(str, '\'');
+		else
+			tmp = ft_strtrim_one(str, '"');
 	}
-	count = -1;
-	tmp = ft_calloc_exit(((ft_strlen(str) - count_quotes) + 1), sizeof (char));
-	while (str[++count] != '\0')
-	{
-		if (str[count] != '\'' && str[count] != '"')
-		{
-			tmp[count_tmp] = str[count];
-			count_tmp++;
-		}
-		// count++;
-	}
+	else if (ft_strchr(str, '\'') != 0)
+		tmp = ft_strtrim_one(str, '\'');
+	else if (ft_strchr(str, '"') != 0)
+		tmp = ft_strtrim_one(str, '"');
 	return (tmp);
 }
+//TODO rework

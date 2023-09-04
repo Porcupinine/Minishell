@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   check_commands.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/11 07:55:33 by laura             #+#    #+#             */
-/*   Updated: 2023/09/01 17:01:09 by dmaessen         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   check_commands.c                                   :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/08/11 07:55:33 by laura         #+#    #+#                 */
+/*   Updated: 2023/09/04 14:18:43 by lpraca-l      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "libft.h"
 #include "../../../include/lexical_analyzer.h"
 #include "../../../include/utils.h"
+#include "../../include/exec.h"
 
 void	kill_heredoc_clean(t_state_machine *parser, \
 		t_data *mini_data, t_commands **cmd)
@@ -29,27 +30,25 @@ void	kill_heredoc_clean(t_state_machine *parser, \
 	parser->exit_code = 1;
 }
 
-void	extract_cmd(t_tokens **it_token, t_commands **cmd)
+void	extract_cmd(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
 {
 	char		*temp;
 	char		*temp2;
+	char		*exun;
 
 	temp = ft_calloc_exit(1, sizeof(char));
 	while ((*it_token) && (*it_token)->type == T_CHAR)
 	{
+		exun = expanded((*it_token)->str, mini_data);
+		if (ft_strncmp(temp, "export", 6) != 0)
+			exun = remove_quotes(exun);
 		temp2 = temp;
-		temp = ft_strjoin_space(temp2, (*it_token)->str);
+		temp = ft_strjoin_space(temp2, exun);
 		free(temp2);
 		temp2 = NULL;
 		(*it_token) = (*it_token)->next;
 	}
-	if ((*cmd)->cmd != NULL)
-	{
-		(*cmd)->cmd = ft_strjoin_space((*cmd)->cmd, temp);
-		free(temp);
-	}
-	else
-		(*cmd)->cmd = temp;
+	(*cmd)->cmd = temp;
 	temp = NULL;
 }
 
@@ -88,7 +87,7 @@ int	between_pipes(t_tokens **it_token, t_commands **cmd, t_data *mini_data, \
 	while ((*it_token) && (*it_token)->type != T_PIPE)
 	{
 		if ((*it_token)->type == T_CHAR)
-			extract_cmd(it_token, cmd);
+			extract_cmd(it_token, cmd, mini_data);
 		if ((*it_token) && ((*it_token)->type == T_BIG || \
 		(*it_token)->type == T_BIGBIG || \
 				(*it_token)->type == T_SMALL))
@@ -109,8 +108,6 @@ int	between_pipes(t_tokens **it_token, t_commands **cmd, t_data *mini_data, \
 	}
 	return (0);
 }
-//TODO remove quotes for echo
-
 
 void	parse_tokens(t_state_machine *parser, t_data *mini_data)
 {

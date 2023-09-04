@@ -153,3 +153,9 @@ char *check_for_exp(char *str, t_data *mini_data)
 	}
 	return (str);
 }
+
+
+//TODO exit code
+
+// if (!isatty(STDIN_FILENO))
+//      rl_outstream = stdin;

@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include "../../../include/lexical_analyzer.h"
 
-static t_tokens	*find_last(t_tokens *token)
+t_tokens	*find_last_token(t_tokens *token)
 {
 	t_tokens	*temp;
 
@@ -44,7 +44,7 @@ void	add_token(t_tokens **tokens, char *token, t_type type)
 		*tokens = new_token;
 	else
 	{
-		last_node = find_last(*tokens);
+		last_node = find_last_token(*tokens);
 		last_node->next = new_token;
 	}
 }

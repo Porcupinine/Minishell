@@ -39,3 +39,24 @@ char	*ft_strchr(const char *s, int c)
 	}
 	return (0);
 }
+
+int	ft_strchr_position(const char *s, int c)
+{
+	int		count;
+	int		len;
+	char	*alias;
+	char	compare_char;
+
+	compare_char = c;
+	count = 0;
+	alias = (char *) s;
+	len = ft_strlen(s);
+	while (count < (len + 1))
+	{
+		if (alias[count] != compare_char)
+			count++;
+		else if (alias[count] == compare_char)
+			return (count);
+	}
+	return (-1);
+}

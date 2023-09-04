@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   signal_handlers.c                                  :+:    :+:            */
+/*   signal_handlers2.c                                 :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
+/*   By: lpraca-l <lpraca-l@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/08/31 14:06:41 by laura         #+#    #+#                 */
-/*   Updated: 2023/09/04 14:11:27 by lpraca-l      ########   odam.nl         */
+/*   Created: 2023/09/04 14:10:43 by lpraca-l      #+#    #+#                 */
+/*   Updated: 2023/09/04 14:11:07 by lpraca-l      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,34 +18,11 @@
 #include <readline/readline.h>
 #include <unistd.h>
 
-
-void	sigint_handler(int sig)
+void	set_term(void)
 {
-	return_prompt();
-	(void)sig;
-}
+	struct termios	term;
 
-void	sigquit_handler(int sig)
-{
-	(void)sig;
-}
-
-void	unset_signals(void )
-{
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
-}
-
-void	ignore_signals(void)
-{
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
-}
-
-void	set_signals(void)
-{
-	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, sigquit_handler);
-
-	set_term();
+	tcgetattr(fileno(stdin), &term);
+	term.c_lflag &= ~ECHOCTL;
+	tcsetattr(fileno(stdin), 0, &term);
 }

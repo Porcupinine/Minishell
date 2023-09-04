@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include "../../include/env_var.h"
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
 #include "../../include/utils.h"
@@ -24,10 +23,13 @@ static void	write_echo(int i, char **cmd, t_data *mini)
 	tmp = NULL;
 	while (cmd[i])
 	{
-		tmp = cmd[i];
-		cmd[i] = remove_quotes(cmd[i]);
-		free(tmp);
-		tmp = NULL;
+//		if (ft_strchr(cmd[i], '\'') != 0 || ft_strchr(cmd[i], '"') != 0)
+//		{
+//			tmp = cmd[i];
+//			cmd[i] = remove_quotes(cmd[i]);
+//			free(tmp);
+//			tmp = NULL;
+//		}
 		ft_putstr_fd(cmd[i], mini->commands->out);
 		if (cmd[i + 1] != NULL)
 			ft_putchar_fd(' ', mini->commands->out);
@@ -50,11 +52,11 @@ static void	echo_n(t_data *mini, char **cmd, int j, size_t i)
 		j++;
 	}
 	i = j;
-	while (cmd[i])
-	{
-		cmd[i] = expand_dollar(cmd[i], mini);
-		i++;
-	}
+//	while (cmd[i])
+//	{
+//		cmd[i] = expand_dollar(cmd[i], mini);
+//		i++;
+//	}
 	write_echo(j, cmd, mini);
 }
 
@@ -70,12 +72,12 @@ int	builtin_echo(t_data *mini, char **cmd)
 	else if (ft_strlen(cmd[0]) == 4)
 	{
 		i = 1;
-		while (cmd[i])
-		{
-			if (ft_strchr(cmd[i], '\'') == 0)
-				cmd[i] = expand_dollar(cmd[i], mini);
-			i++;
-		}
+//		while (cmd[i])
+//		{
+//			if (ft_strchr(cmd[i], '\'') == 0)
+//				cmd[i] = expand_dollar(cmd[i], mini);
+//			i++;
+//		}
 		write_echo(1, cmd, mini);
 		write(mini->commands->out, "\n", 1);
 		set_exit_code(mini, 0);

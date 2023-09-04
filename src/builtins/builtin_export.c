@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include "../../include/env_var.h"
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
 #include "../../include/utils.h"
@@ -67,7 +66,11 @@ static int	go_export(t_data *mini, char *cmd)
 	int		i;
 	char	**new;
 	int		size;
+<<<<<<< HEAD
 	char 	*tmp;
+=======
+	char *tmp;
+>>>>>>> lpraca-l
 
 	name = ft_substr(cmd, 0, len_equal(cmd));
 	i = 0;

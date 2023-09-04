@@ -42,7 +42,9 @@ void	get_line(t_commands *const *cmd, t_data *mini_data, \
 	const char *limiter, bool quotes)
 {
 	char	*line;
+	char	*tmp;
 
+	tmp = NULL;
 	line = readline("> ");
 	while (line != NULL)
 	{
@@ -52,7 +54,11 @@ void	get_line(t_commands *const *cmd, t_data *mini_data, \
 		if (quotes == false)
 		{
 			while (ft_strchr(line, '$') != 0)
+			{
+				tmp = line;
 				line = expand_dollar(line, mini_data);
+				free(tmp);
+			}
 		}
 		write ((*cmd)->in, line, ft_strlen(line));
 		write ((*cmd)->in, "\n", 1);

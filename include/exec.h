@@ -80,13 +80,16 @@ void	input_re(t_commands *commands, t_data *mini);
 
 void	err_msg(char *cmd, char *str);
 void	error_msg(char *str, t_data *mini);
-
+char	*expanded(char *str, t_data *mini_data);
 char	*expand_dollar(char *line, t_data *mini);
+void	expansions(char *commands);
 int		expand_var(char **line, t_data *mini, int start);
 int		var_len(char *line, int start);
 char	*var_name(char *line, int start, int end);
 char	*search_envp(char *var, t_data *mini);
-char	*var_replace(char **line, char *var_exp, int start, int end);
+char	*var_replace(char *line, char *var_exp, int start, int end);
+char	*char_expand_var(char *line, t_data *mini, int start);
+
 
 int	    exec_fork(t_data *mini);
 void    pid_exit_code(t_data *mini, pid_t pid);

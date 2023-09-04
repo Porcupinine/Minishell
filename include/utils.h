@@ -6,7 +6,7 @@
 /*   By: laura <laura@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 14:31:57 by laura         #+#    #+#                 */
-/*   Updated: 2023/08/31 16:20:10 by lpraca-l      ########   odam.nl         */
+/*   Updated: 2023/09/04 14:21:42 by lpraca-l      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,11 @@ void	return_prompt(void);
  * set signals back to default
  */
 void	unset_signals(void );
+/**
+ * ignore parent signals 
+ */
 void	ignore_signals(void);
+void	set_term(void);
 
 //------------------------------------------------------------cmd_list_actions
 /**
@@ -161,6 +165,7 @@ void	free_cmd_list(t_commands **cmd);
 void	free_pid_list(t_pid **lst);
 
 //----------------------------------------------------------token_list_actions
+t_tokens	*find_last_token(t_tokens *token);
 /**
  * adds a new token to the list
  * @param tokens list of tokens

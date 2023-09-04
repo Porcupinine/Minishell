@@ -6,7 +6,7 @@
 /*   By: lpraca-l <lpraca-l@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 16:15:36 by lpraca-l      #+#    #+#                 */
-/*   Updated: 2023/08/31 16:18:59 by lpraca-l      ########   odam.nl         */
+/*   Updated: 2023/09/04 14:22:11 by lpraca-l      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ typedef struct s_state_machine
  * the data struct and break it into tokens
  * @param mini_data data struct
  */
-int	parse_machine(t_data *mini_data, t_state_machine *parser);
+int		parse_machine(t_data *mini_data, t_state_machine *parser);
 /**
  * operates on S_WHITESPACE state
  * @param parser

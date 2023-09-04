@@ -135,6 +135,20 @@ char	*ft_strchr(const char *s, int c);
  */
 char	*ft_strrchr(const char *s, int c);
 /**
+ *
+ * @param s
+ * @param c
+ * @return
+ */
+int	ft_strrchr_position(const char *s, int c);
+/**
+ *
+ * @param s
+ * @param c
+ * @return
+ */
+int	ft_strchr_position(const char *s, int c);
+/**
  * Compare n bytes from two strings
  * @param s1 string 1
  * @param s2 string 2
@@ -237,6 +251,13 @@ char	*ft_strjoin_space(char const *s1, char const *s2);
  * @return trimed string or NULL if fails
  */
 char	*ft_strtrim(char const *s1, char const *set);
+/**
+ *
+ * @param s1
+ * @param set
+ * @return
+ */
+char	*ft_strtrim_one(char const *s1, char const set);
 /**
  * Writes string s on chosen file descriptor fd
  * @param s string

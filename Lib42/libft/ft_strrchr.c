@@ -40,3 +40,22 @@ char	*ft_strrchr(const char *s, int c)
 	}
 	return (0);
 }
+
+int	ft_strrchr_position(const char *s, int c)
+{
+	char	*alias;
+	int		len;
+	char	compare_char;
+
+	compare_char = c;
+	alias = (char *) s;
+	len = ft_strlen(s);
+	while (len != (-1))
+	{
+		if (alias[len] == compare_char)
+			return (len);
+		else
+			len--;
+	}
+	return (0);
+}

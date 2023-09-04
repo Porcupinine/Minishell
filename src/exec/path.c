@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   path.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/21 11:43:11 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/04 14:43:22 by dmaessen         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   path.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/07/21 11:43:11 by dmaessen      #+#    #+#                 */
+/*   Updated: 2023/09/04 14:49:25 by lpraca-l      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include "../../include/env_var.h"
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
 #include "../../include/utils.h"
@@ -116,9 +115,12 @@ static void	no_pathtocmd(char *path_to_cmd, t_data *mini, \
 char	*split_args(char *cmd, char **envp, t_data *mini)
 {
 	char	**command;
+
 	char	*path_to_cmd;
 	char	**paths;
 
+//	printf("cmd == %s IN %d OUT %d\n", cmd, mini->commands->in, mini->commands->out);
+//	expand_dollar(cmd, mini);
 	command = ft_split(cmd, ' ');
 	if (builtins(command, mini) == 1)
 	{
