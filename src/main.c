@@ -17,10 +17,8 @@
 #include <termios.h>
 #include "../Lib42/include/libft.h"
 #include "../include/minishell.h"
-#include "../include/env_var.h"
 #include "../include/lexical_analyzer.h"
 #include "../include/utils.h"
-#include "../include/builtins.h"
 #include "../include/exec.h"
 
 void	return_prompt(void)
