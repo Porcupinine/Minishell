@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:48:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/01 15:46:33 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/04 14:37:58 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,7 @@ static void	reset_cmdlist(t_data *mini)
 
 static void	multiple_cmd(t_data *mini)
 {
-	mini->fd = open_pipes(mini);
-	if (mini->fd == NULL)
-		return (err_msg("", "pipe opening failed.\n"),
-			set_exit_code(mini, 1));
-	exec_fork(mini, mini->nb_cmds); // what do we do when dup2 fails??
+	exec_fork(mini);
 	free_pid_list(&mini->process);
 	mini->process = NULL;
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   path.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/21 11:43:11 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/01 20:32:27 by domi             ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   path.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/07/21 11:43:11 by dmaessen      #+#    #+#                 */
+/*   Updated: 2023/09/04 14:49:25 by lpraca-l      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,25 +88,28 @@ static char	*join_path(char **command, char **paths, int i, t_data *mini)
 static void	no_pathtocmd(char *path_to_cmd, t_data *mini, \
 	char **command, char **envp)
 {
-	if (!path_to_cmd && ft_strncmp(command[0], "./", 2) == 0)
+	if (!path_to_cmd)
 	{
-		modif_env(mini, command[0]);
-		if (access(command[0], F_OK) != 0)
+		if (!path_to_cmd && ft_strncmp(command[0], "./", 2) == 0)
 		{
-			no_filedir("minishell :", command[0], mini);
-			exit (127);
+			modif_env(mini, command[0]);
+			if (access(command[0], F_OK) != 0)
+			{
+				no_filedir("minishell :", command[0], mini);
+				exit (127);
+			}
+			if (access(command[0], X_OK) != 0)
+			{
+				permission_denied(command, mini);
+				exit (126);
+			}
+			execve(command[0], &command[0], envp);
 		}
-		if (access(command[0], X_OK) != 0)
+		else
 		{
-			permission_denied(command, mini);
-			exit (126);
+			no_command(command, mini);
+			exit(mini->exit_code);
 		}
-		execve(command[0], &command[0], envp);
-	}
-	else
-	{
-		no_command(command, mini);
-		exit(mini->exit_code);
 	}
 }
 
@@ -132,13 +135,9 @@ char	*split_args(char *cmd, char **envp, t_data *mini)
 			return (no_filedir("minishell", command[0], mini),
 				exit(mini->exit_code), NULL);
 		path_to_cmd = join_path(command, paths, 0, mini);
-		if (!path_to_cmd)
-			no_pathtocmd(path_to_cmd, mini, command, envp);
+		no_pathtocmd(path_to_cmd, mini, command, envp);
 		if (path_to_cmd != NULL && command != NULL)
-		{
-			printf("getting here right??????\n");
 			execve(path_to_cmd, command, envp);
-		}
 		free(path_to_cmd);
 	}
 	if (mini->nb_cmds != 1)
