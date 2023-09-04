@@ -36,7 +36,10 @@ int	parse(t_data *mini_data)
 		return (1);
 	}
 	if (parse_tokens(parser, mini_data) == 1)
+	{
+		free_parser(mini_data, parser);
 		return (1);
+	}
 	free_parser(mini_data, parser);
 	return (0);
 }
