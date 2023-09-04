@@ -34,17 +34,20 @@ void	extract_cmd(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
 {
 	char		*temp;
 	char		*temp2;
+	char		*exun;
 
 	temp = ft_calloc_exit(1, sizeof(char));
 	while ((*it_token) && (*it_token)->type == T_CHAR)
 	{
+		exun = expanded((*it_token)->str, mini_data);
+		if (ft_strncmp(temp, "export", 6) != 0)
+			exun = remove_quotes(exun);
 		temp2 = temp;
-		temp = ft_strjoin_space(temp2, (*it_token)->str);
+		temp = ft_strjoin_space(temp2, exun);
 		free(temp2);
 		temp2 = NULL;
 		(*it_token) = (*it_token)->next;
 	}
-	temp = expanded(temp, mini_data);
 	(*cmd)->cmd = temp;
 	temp = NULL;
 }

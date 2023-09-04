@@ -14,6 +14,7 @@
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
 #include "../../include/utils.h"
+#include <sys/wait.h>
 
 void	run_one_cmd(t_data *mini)
 {

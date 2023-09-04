@@ -13,6 +13,7 @@
 #include "../../include/minishell.h"
 #include "../../Lib42/include/libft.h"
 #include "../../include/lexical_analyzer.h"
+#include "../../include/utils.h"
 #include <stdio.h>
 
 static void	free_parser(t_data *mini_data, t_state_machine *parser)

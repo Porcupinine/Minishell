@@ -16,7 +16,7 @@ char	*remove_quotes(char *str)
 {
 	char	*tmp;
 
-	tmp = NULL;
+	tmp = str;
 	if (ft_strchr(str, '\'') != 0 && ft_strchr(str, '"') != 0)
 	{
 		if (ft_strchr_position(str, '\'') < ft_strchr_position(str, '"'))
@@ -30,4 +30,4 @@ char	*remove_quotes(char *str)
 		tmp = ft_strtrim_one(str, '"');
 	return (tmp);
 }
-
+//TODO rework

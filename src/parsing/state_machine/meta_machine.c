@@ -19,7 +19,9 @@ void	token_pipe(t_state_machine *parser)
 
 	c = parser->cmd[parser->count];
 	if (c == '|' || c == '<' || c == '>')
-		syntax_error(parser, c);
+		return (syntax_error(parser, c));
+	if (find_last_token(parser->tokens_list)->type == T_PIPE)
+		return (syntax_error(parser, c));
 	else
 		add_token(&parser->tokens_list, ft_strdup("|"), T_PIPE);
 	if (ft_strchr(METACHAR, c) == 0)
@@ -34,7 +36,7 @@ void	token_bigger(t_state_machine *parser)
 
 	c = parser->cmd[parser->count];
 	if (c == '|')
-		syntax_error(parser, c);
+		return (syntax_error(parser, c));
 	else if (c == '>')
 	{
 		add_token(&parser->tokens_list, ft_strdup(">>"), T_BIGBIG);
@@ -89,7 +91,7 @@ void	token_bigbig(t_state_machine *parser)
 
 	c = parser->cmd[parser->count];
 	if (c == '>' || c == '|' || c == '<')
-		syntax_error(parser, c);
+		return (syntax_error(parser, c));
 	else if (ft_strchr(QUOTES, parser->cmd[parser->count]) != 0)
 		found_quotes(parser);
 	else if (ft_strchr(METACHAR, c) == 0)
@@ -104,7 +106,7 @@ void	token_smallsmall(t_state_machine *parser)
 
 	c = parser->cmd[parser->count];
 	if (c == '>' || c == '|')
-		syntax_error(parser, c);
+		return (syntax_error(parser, c));
 	else if (ft_strchr(METACHAR, c) == 0)
 		found_char(parser);
 	else if (ft_strchr(QUOTES, parser->cmd[parser->count]) != 0)

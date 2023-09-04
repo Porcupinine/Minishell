@@ -51,7 +51,6 @@ static char	**add_line_envp(char **envp, char *cmd, int size, t_data *mini)
 		new[i] = ft_strdup(envp[i]);
 		i++;
 	}
-//	cmd = expand_dollar(cmd, mini);
 	if (cmd[0] == '=')
 		return (not_valid_identifier_s(&cmd, mini), free(new), NULL);
 	new[i] = ft_strdup(cmd);
@@ -66,6 +65,7 @@ static int	go_export(t_data *mini, char *cmd)
 	int		i;
 	char	**new;
 	int		size;
+	char *tmp;
 
 	name = ft_substr(cmd, 0, len_equal(cmd));
 	i = 0;
@@ -74,9 +74,9 @@ static int	go_export(t_data *mini, char *cmd)
 		if (ft_strncmp(mini->mini_envp[i], name,
 				ft_strlen(name) - 1) == 0)
 		{
-			mini->mini_envp[i] = ft_strdup("");
-			mini->mini_envp[i] = ft_strjoin(mini->mini_envp[i], cmd);
-			return (free(name), set_exit_code(mini, 0), 0);
+			tmp = ft_strdup("");
+			mini->mini_envp[i] = ft_strjoin(tmp, cmd);
+			return (free(tmp), free(name), set_exit_code(mini, 0), 0);
 		}
 		i++;
 	}
