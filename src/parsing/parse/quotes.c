@@ -12,6 +12,29 @@
 
 #include "../../Lib42/include/libft.h"
 
+static char	*remove(char *str, char c)
+{
+	char	*new_str;
+	int		count;
+	int		count_str;
+
+	count = 0;
+	count_str = 0;
+	new_str = ft_calloc_exit((ft_strlen(str) - 1), sizeof (char));
+	while (str[count_str] != '\0' && str[count_str] != c)
+		new_str[count++] = str[count_str++];
+	count_str++;
+	while (str[count_str] != '\0')
+		new_str[count++] = str[count_str++];
+	count = (int)ft_strlen(str) - 2;
+	count_str = (int)ft_strlen(str);
+	while (count_str > 0 && str[count_str] != c)
+		new_str[count--] = str[count_str--];
+	count_str--;
+	new_str[count--] = str[count_str--];
+	return(new_str);
+}
+
 char	*remove_quotes(char *str)
 {
 	char	*tmp;
@@ -20,14 +43,18 @@ char	*remove_quotes(char *str)
 	if (ft_strchr(str, '\'') != 0 && ft_strchr(str, '"') != 0)
 	{
 		if (ft_strchr_position(str, '\'') < ft_strchr_position(str, '"'))
-			tmp = ft_strtrim_one(str, '\'');
+			tmp = remove(str, '\'');
 		else
-			tmp = ft_strtrim_one(str, '"');
+			tmp = remove(str, '"');
 	}
 	else if (ft_strchr(str, '\'') != 0)
-		tmp = ft_strtrim_one(str, '\'');
+		tmp = remove(str, '\'');
 	else if (ft_strchr(str, '"') != 0)
-		tmp = ft_strtrim_one(str, '"');
+		tmp = remove(str, '"');
+	if (tmp != str)
+	{
+		free(str);
+	}
 	return (tmp);
 }
 //TODO rework

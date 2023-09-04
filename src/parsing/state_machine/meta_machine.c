@@ -21,7 +21,7 @@ void	token_pipe(t_state_machine *parser)
 	if (c == '|' || c == '<' || c == '>')
 		return (syntax_error(parser, c));
 	if (find_last_token(parser->tokens_list)->type == T_PIPE)
-		return (syntax_error(parser, c));
+		return (syntax_error(parser, '|'));
 	else
 		add_token(&parser->tokens_list, ft_strdup("|"), T_PIPE);
 	if (ft_strchr(METACHAR, c) == 0)

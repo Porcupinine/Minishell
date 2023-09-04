@@ -16,6 +16,21 @@
 #include "../../include/minishell.h"
 #include "../../include/utils.h"
 #include "unistd.h"
+#include "../../Lib42/include/libft.h"
+
+int	test_isspace(char*str)
+{
+	int count;
+
+	count = 0;
+	while(str[count] != '\0')
+	{
+		if (ft_strchr(ISSPACE, str[count]) == 0)
+			return(0);
+		count++;
+	}
+	return(1);
+}
 
 void	line_history(t_data *mini_data)
 {

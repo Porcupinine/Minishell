@@ -19,6 +19,7 @@
 # include <stdio.h>
 
 # define MINISHELL "Minihell"
+# define ISSPACE " \f\n\r\t\v"
 
 typedef enum s_redirect
 {

@@ -43,7 +43,7 @@ int	main(int argc, char **argv, char **envp)
 		set_signals();
 		mini_data->command_line = readline("MINISHELL: ");
 		line_history(mini_data);
-		if (ft_strncmp(mini_data->command_line, "", 1) != 0)
+		if (test_isspace(mini_data->command_line) == 0)
 		{
 			if (parse(mini_data) == 0)
 				start(mini_data);
