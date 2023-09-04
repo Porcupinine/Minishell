@@ -15,6 +15,7 @@
 #include "libft.h"
 #include "../../../include/lexical_analyzer.h"
 #include "../../../include/utils.h"
+#include "../../../include/exec.h"
 
 static t_outfile	*find_last_out(t_outfile *out)
 {
@@ -84,10 +85,14 @@ static void	add_infile(t_infile **infile, enum s_type type, char *str)
 	}
 }
 
-void	add_inout(t_commands **cmd, char *str, enum s_type type)
+void	add_inout(t_commands **cmd, char *str, enum s_type type, \
+			t_data *mini_data)
 {
+	char	*tmp;
+
+	tmp = expanded(str, mini_data);
 	if (type == T_BIG || type == T_BIGBIG)
-		add_outfile(&(*cmd)->outfiles, type, str);
+		add_outfile(&(*cmd)->outfiles, type, tmp);
 	else
-		add_infile(&(*cmd)->infiles, type, str);
+		add_infile(&(*cmd)->infiles, type, tmp);
 }

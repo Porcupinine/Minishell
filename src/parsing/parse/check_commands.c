@@ -45,6 +45,8 @@ void	extract_cmd(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
 		temp2 = temp;
 		temp = ft_strjoin_space(temp2, exun);
 		free(temp2);
+		free(exun);
+		exun = NULL;
 		temp2 = NULL;
 		(*it_token) = (*it_token)->next;
 	}
@@ -74,7 +76,7 @@ static int	found_here(t_tokens **it_token, t_commands **cmd, \
 		return (-1);
 	}
 	set_signals();
-	add_inout(cmd, "tmp_file", (*it_token)->type);
+	add_inout(cmd, "tmp_file", (*it_token)->type, mini_data);
 	(*it_token) = (*it_token)->next->next;
 	return (0);
 }
@@ -96,7 +98,7 @@ int	between_pipes(t_tokens **it_token, t_commands **cmd, t_data *mini_data, \
 			(*it_token) = (*it_token)->next;
 			if ((*it_token) && (*it_token)->type == T_CHAR)
 			{
-				add_inout(cmd, (*it_token)->str, (type));
+				add_inout(cmd, (*it_token)->str, (type), mini_data);
 				(*it_token) = (*it_token)->next;
 			}
 			else
@@ -109,7 +111,7 @@ int	between_pipes(t_tokens **it_token, t_commands **cmd, t_data *mini_data, \
 	return (0);
 }
 
-void	parse_tokens(t_state_machine *parser, t_data *mini_data)
+int	parse_tokens(t_state_machine *parser, t_data *mini_data)
 {
 	t_commands	*cmd;
 	t_tokens	*it_token;
@@ -117,12 +119,12 @@ void	parse_tokens(t_state_machine *parser, t_data *mini_data)
 	it_token = parser->tokens_list;
 	cmd = NULL;
 	if (it_token == NULL)
-		return ;
+		return (1);
 	while ((it_token))
 	{
 		(cmd) = ft_calloc_exit(1, sizeof(t_commands));
 		if (between_pipes(&it_token, &cmd, mini_data, parser) == -1)
-			return ;
+			return (1);
 		if ((cmd) != NULL)
 		{
 			add_cmd_node(&mini_data->commands, (cmd));
@@ -134,4 +136,5 @@ void	parse_tokens(t_state_machine *parser, t_data *mini_data)
 	}
 	free_token_list(&parser->tokens_list);
 	parser->tokens_list = NULL;
+	return(0);
 }

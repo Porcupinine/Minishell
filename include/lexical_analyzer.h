@@ -182,7 +182,7 @@ void	found_quotes(t_state_machine *parser);
  * @param parser for the token list
  * @param mini_data for command list
  */
-void	parse_tokens(t_state_machine *parser, t_data *mini_data);
+int	parse_tokens(t_state_machine *parser, t_data *mini_data);
 /**
  * prints syntax error, set exit code to 258 and free token list
  * @param parser state machine 

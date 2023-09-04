@@ -31,42 +31,6 @@ char	*search_envp(char *var, t_data *mini)
 	return (ft_strdup(""));
 }
 
-//char	*var_replace(char **line, char *var_exp, int start, int end)
-//{
-//	char	*sub;
-//	char	*sub2;
-//	char	*join;
-//	char	*newline;
-//
-//	sub = ft_substr(*line, 0, start - 1);
-//	join = ft_strjoin(sub, var_exp);
-//	sub2 = ft_substr(*line, end, ft_strlen(*line));
-//	newline = ft_strjoin(join, sub2);
-//	free(sub);
-//	free(join);
-//	free(sub2);
-//	return (newline);
-//}
-
-//int	expand_var(char **line, t_data *mini, int start)
-//{
-//	int		end;
-//	int		new_len_line;
-//	char	*var;
-//	char	*var_exp;
-//
-//	end = var_len(*line, start);
-//	if (end == start)
-//		return (start);
-//	var = var_name(*line, start, end - start);
-//	var_exp = search_envp(var, mini);
-//	new_len_line = (start - 1) + (int)ft_strlen(var_exp);
-//	*line = var_replace(line, var_exp, start, end);
-//	free(var_exp);
-//	free(var);
-//	return (new_len_line);
-//}
-
 char	*var_replace(char *line, char *var_exp, int start, int end)
 {
 	char	*sub;
@@ -135,5 +99,5 @@ char	*expanded(char *str, t_data *mini_data)
 		return (exp_str);
 	}
 	else
-		return (str);
+		return (ft_strdup(str));
 }

@@ -69,6 +69,8 @@ int	parse_machine(t_data *mini_data, t_state_machine *parser)
 	else if (parser->state == S_CHAR)
 		add_token(&parser->tokens_list, \
 	ft_substr(parser->cmd, parser->start, parser->len), T_CHAR);
+	else if (parser->state == S_ERROR)
+		return (1);
 	else if (parser->state != S_WHITESPACE)
 		syntax_error(parser, parser->cmd[(parser->count) - 1]);
 	return (0);

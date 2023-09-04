@@ -58,7 +58,7 @@ void	add_cmd_node(t_commands **cmd, t_commands *new_cmd);
  * @param str name of the file
  * @param type type of redirection
  */
-void	add_inout(t_commands **cmd, char *str, enum s_type type);
+void	add_inout(t_commands **cmd, char *str, enum s_type type, t_data *mini_data);
 /**
  * print the list of commands with list of infiles and outfiles if they exist
  * @param cmd pointer to the head of the command list
@@ -141,6 +141,8 @@ void	no_filedirectory(char *file, t_data *mini);
 
 //--------------------------------------------------------------------history
 void	line_history(t_data *mini_data);
+int		test_isspace(char*str);
+
 
 //--------------------------------------------------------i_want_to_break_free
 /**
