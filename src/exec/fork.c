@@ -6,7 +6,7 @@
 /*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:49:01 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/04 09:38:14 by domi             ###   ########.fr       */
+/*   Updated: 2023/09/04 10:43:03 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static int exec_last_cmd(t_data *mini, t_commands *commands, int read_end)
 	if (pid == -1)
 		return (err_msg("", "fork failed.\n"),
 			set_exit_code(mini, 1), -1);
-	printf("getting here?? cmd = %s\n", commands->cmd);
 	if (pid == 0)
 	{
 		set_signals();
@@ -76,7 +75,6 @@ static int exec_last_cmd(t_data *mini, t_commands *commands, int read_end)
 			if (close(commands->out) == -1)
 				return (err_msg("", "close failed.\n"), set_exit_code(mini, 1), exit(1), -1);
 		}
-		printf("last one, read end= %d\n", read_end);
 		split_args(commands->cmd, mini->mini_envp, mini);
 	}
 	if (close(read_end) == -1)
@@ -127,7 +125,7 @@ static void childchild(t_data *mini, t_commands *commands, int read_end, int *p_
 		return (err_msg("", "close failed.\n"), set_exit_code(mini, 1));
 }
 
-static int closeopen_fds(t_data *mini, int read_end, int *p_fd)
+static int connect_fds(t_data *mini, int read_end, int *p_fd)
 {
 	if (close(p_fd[1]) == -1)
 		return (err_msg("", "close failed.\n"), set_exit_code(mini, 1), -1);
@@ -146,13 +144,12 @@ int	exec_fork(t_data *mini)
 	int			p_fd[2];
 	int			read_end;
 	t_commands	*tmp;
-	int status;
 	int i;
 
 	tmp = mini->commands;
 	read_end = 0;
 	i = 1;
-	while (tmp->next)
+	while (i < mini->nb_cmds) // or tmp->next
 	{
 		if (pipe(p_fd) == -1)
 			return (err_msg("", "pipe failed.\n"),
@@ -166,30 +163,34 @@ int	exec_fork(t_data *mini)
 		{
 			unset_signals();
 			childchild(mini, tmp, read_end, p_fd);
-			read_end = closeopen_fds(mini, read_end, p_fd);
-			if (read_end == -1)
-				return (1);
 		}
-		printf("next\n");
+		read_end = connect_fds(mini, read_end, p_fd);
+		if (read_end == -1)
+			return (1);
 		tmp = tmp->next;
 		i++;
 	}
-	printf("last\n");
 	pid = exec_last_cmd(mini, tmp, read_end);
 	if (pid != -1)
 	{
-		waitpid(pid, &status, 0);
-		if (WIFEXITED(status))
-			mini->exit_code = WEXITSTATUS(status);
-		if (WIFSIGNALED(status))
-			mini->exit_code = 128 + WTERMSIG(status);
+		waitpid(pid, &mini->exit_code, 0);
+		if (WIFEXITED(mini->exit_code))
+			mini->exit_code = WEXITSTATUS(mini->exit_code);
+		else if (WIFSIGNALED(mini->exit_code))
+			mini->exit_code = 128 + WTERMSIG(mini->exit_code);
 		while (1)
 			if (wait(NULL) == -1)
 				break ;
 	}
-	printf("returing?\n");
 	return (mini->exit_code);
 }
+
+// void pid_exit_code(t_data *mini, pid_t pid)
+// {
+// 	int status;
+	
+	
+// }
 
 
 
