@@ -95,4 +95,5 @@ void	add_inout(t_commands **cmd, char *str, enum s_type type, \
 		add_outfile(&(*cmd)->outfiles, type, tmp);
 	else
 		add_infile(&(*cmd)->infiles, type, tmp);
+	free(tmp);
 }

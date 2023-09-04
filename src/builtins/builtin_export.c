@@ -56,7 +56,7 @@ static char	**add_line_envp(char **envp, char *cmd, int size, t_data *mini)
 		return (not_valid_identifier_s(&cmd, mini), free(new), NULL);
 	new[i] = ft_strdup(cmd);
 	new[size] = NULL;
-	free(envp);
+	free_str(envp);
 	return (new);
 }
 
@@ -80,6 +80,7 @@ static int	go_export(t_data *mini, char *cmd)
 				ft_strlen(name) - 1) == 0)
 		{
 			tmp = ft_strdup("");
+			free(mini->mini_envp[i]);
 			mini->mini_envp[i] = ft_strjoin(tmp, cmd);
 			return (free(tmp), free(name), set_exit_code(mini, 0), 0);
 		}
