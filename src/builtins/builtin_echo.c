@@ -24,10 +24,13 @@ static void	write_echo(int i, char **cmd, t_data *mini)
 	tmp = NULL;
 	while (cmd[i])
 	{
-		tmp = cmd[i];
-		cmd[i] = remove_quotes(cmd[i]);
-		free(tmp);
-		tmp = NULL;
+		if (ft_strchr(cmd[i], '\'') != 0 || ft_strchr(cmd[i], '"') != 0)
+		{
+			tmp = cmd[i];
+			cmd[i] = remove_quotes(cmd[i]);
+			free(tmp);
+			tmp = NULL;
+		}
 		ft_putstr_fd(cmd[i], mini->commands->out);
 		if (cmd[i + 1] != NULL)
 			ft_putchar_fd(' ', mini->commands->out);
