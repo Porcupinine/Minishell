@@ -15,7 +15,8 @@
 
 void	found_char(t_state_machine *parser)
 {
-	if (parser->status != S_WORD && parser->status != S_DQUOTES)
+	if (parser->status != S_WORD && (parser->status != S_SQUOTES \
+	&& parser->status != S_DQUOTES))
 	{
 		parser->status = S_WORD;
 		parser->start = parser->count;
@@ -30,8 +31,8 @@ void	found_squote(t_state_machine *parser)
 {
 	if (parser->status == S_WAITING)
 	{
-		parser->status = S_SQUOTES;
 		parser->len++;
+		parser->status = S_SQUOTES;
 		parser->start = parser->count;
 	}
 	else if (parser->status == S_SQUOTES)
