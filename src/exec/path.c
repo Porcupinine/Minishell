@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   path.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/07/21 11:43:11 by dmaessen      #+#    #+#                 */
-/*   Updated: 2023/09/04 14:49:25 by lpraca-l      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   path.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/21 11:43:11 by dmaessen          #+#    #+#             */
+/*   Updated: 2023/09/05 10:50:01 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ char	*split_args(char *cmd, char **envp, t_data *mini)
 //	printf("cmd == %s IN %d OUT %d\n", cmd, mini->commands->in, mini->commands->out);
 //	expand_dollar(cmd, mini);
 	command = ft_split(cmd, ' ');
-	if (builtins(command, mini) == 1)
+	if (builtins(command, cmd, mini) == 1)
 	{
 		if (*envp == NULL)
 			return (ft_error("Envp not found\n"), NULL);

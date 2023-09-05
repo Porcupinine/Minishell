@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:09:31 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/04 14:43:46 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/05 09:00:33 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 
 static void	write_echo(int i, char **cmd, t_data *mini)
 {
-	char	*tmp;
+	// char	*tmp;
 
-	tmp = NULL;
+	// tmp = NULL;
 	while (cmd[i])
 	{
 //		if (ft_strchr(cmd[i], '\'') != 0 || ft_strchr(cmd[i], '"') != 0)
@@ -62,7 +62,7 @@ static void	echo_n(t_data *mini, char **cmd, int j, size_t i)
 
 int	builtin_echo(t_data *mini, char **cmd)
 {
-	int	i;
+	//int	i;
 
 	if (ft_strncmp(mini->commands->cmd, "echo -n", 7) == 0)
 	{
@@ -71,7 +71,7 @@ int	builtin_echo(t_data *mini, char **cmd)
 	}
 	else if (ft_strlen(cmd[0]) == 4)
 	{
-		i = 1;
+		//i = 1;
 //		while (cmd[i])
 //		{
 //			if (ft_strchr(cmd[i], '\'') == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 12:53:54 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/30 15:31:04 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/05 09:30:29 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ bool	check_cmd(char *cmd)
 	while (cmd[i] && cmd[i] != '=')
 	{
 		if (ft_isalnum(cmd[i]) == 0 && cmd[i] != '='
-			&& cmd[i] != '_' && cmd[i] != '$' && cmd[i] != 92)
+			&& cmd[i] != '_' && cmd[i] != '$' && cmd[i] != 92 && cmd[i] != 34 && cmd[i] != 39)
 			return (false);
 		i++;
 	}
@@ -41,7 +41,7 @@ bool	is_valid_noerror(char *cmd)
 	{
 		if (ft_isalnum(cmd[i]) == 0)
 		{
-			if (cmd[i] != '$' && cmd[i] != 92)
+			if (cmd[i] != '$' && cmd[i] != 92 && cmd[i] != 34 && cmd[i] != 39)
 				return (false);
 		}
 		i++;
