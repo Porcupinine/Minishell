@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exec.h                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/31 14:43:48 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/05 10:51:19 by domi             ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   exec.h                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: domi <domi@student.42.fr>                    +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/07/31 14:43:48 by dmaessen      #+#    #+#                 */
+/*   Updated: 2023/09/05 23:34:55 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ int		builtin_export(t_data *mini, char **cmd, char *str);
 bool	check_cmd(char *cmd);
 bool	is_valid_noerror(char *cmd);
 int		len_equal(char *cmd);
+char	**add_line_envp(char **envp, char *cmd, t_data *mini);
+void	print_xenv(t_data *mini);
+int		replace_envp_var(t_data *mini, char *name, char *res);
 
 void	builtin_exit(t_data *mini, char **cmd);
 
@@ -67,7 +70,7 @@ int		array_size(char **envp);
 void	set_exit_code(t_data *mini, int code);
 int		size_envp(t_data *mini);
 int		not_alphanum(char *str);
-int     find_path(char **envp);
+int		find_path(char **envp);
 
 char	*split_args(char *cmd, char **envp, t_data *mini);
 
@@ -91,9 +94,9 @@ char	*var_replace(char *line, char *var_exp, int start, int end);
 char	*char_expand_var(char *line, t_data *mini, int start);
 
 
-int	    exec_fork(t_data *mini);
-void    pid_exit_code(t_data *mini, pid_t pid);
-int     forkfork(t_data *mini, t_commands *commands, int read_end, int *p_fd);
+int		exec_fork(t_data *mini);
+void	pid_exit_code(t_data *mini, pid_t pid);
+int		forkfork(t_data *mini, t_commands *commands, int read_end, int *p_fd);
 void	childchild(t_data *mini, t_commands *commands, int read_end, int *p_fd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 13:25:10 by dmaessen      #+#    #+#                 */
-/*   Updated: 2023/09/05 19:58:49 by laura         ########   odam.nl         */
+/*   Updated: 2023/09/05 23:37:10 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,76 +15,10 @@
 #include "../../Lib42/include/libft.h"
 #include "../../include/utils.h"
 
-static void	print_xenv(t_data *mini)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (mini->mini_envp[i])
-	{
-		ft_putstr_fd("declare -x ", 1);
-		j = 0;
-		while (mini->mini_envp[i][j])
-		{
-			if (mini->mini_envp[i][j] == '=')
-				ft_putstr_fd("=\"", 1);
-			else
-				ft_putchar_fd(mini->mini_envp[i][j], 1);
-			j++;
-		}
-		ft_putstr_fd("\"\n", 2);
-		i++;
-	}
-	set_exit_code(mini, 0);
-}
-
-static char	**add_line_envp(char **envp, char *cmd, int size, t_data *mini)
-{
-	char	**new;
-	int		i;
-
-	new = ft_calloc_exit((size + 1), sizeof(char *));
-	i = 0;
-	while (envp[i] && i < size - 1)
-	{
-		new[i] = ft_strdup(envp[i]);
-		i++;
-	}
-	// cmd = expand_dollar(cmd, mini); // this is needed, not rm??
-	if (cmd[0] == '=')
-		return (not_valid_identifier_s(&cmd, mini), free(new), NULL);
-	new[i] = ft_strdup(cmd);
-	new[size] = NULL;
-	free_str(envp);
-	return (new);
-}
-
-static int replace_envp_var(t_data *mini, char *name, char *res)
-{
-	int i;
-
-	i = 0;
-	while (mini->mini_envp[i])
-	{
-		if (ft_strncmp(mini->mini_envp[i], name,
-				ft_strlen(name) - 1) == 0)
-		{
-			free(mini->mini_envp[i]);
-			free(res);
-			mini->mini_envp[i] = ft_strjoin(name, res);
-			return (free(name), set_exit_code(mini, 0), 0);
-		}
-		i++;
-	}
-	return (1);
-}
-
 static int	go_export(t_data *mini, char *cmd)
 {
 	char	*name;
 	char	**new;
-	int		size;
 	char	*tmp;
 	char	*res;
 	char	*tmp2;
@@ -97,8 +31,7 @@ static int	go_export(t_data *mini, char *cmd)
 	tmp = ft_strjoin(name, tmp2);
 	free(name);
 	free(tmp2);
-	size = size_envp(mini);
-	new = add_line_envp(mini->mini_envp, tmp, size + 1, mini);
+	new = add_line_envp(mini->mini_envp, tmp, mini);
 	free(tmp);
 	if (new == NULL)
 		return (mini->exit_code);
@@ -117,7 +50,7 @@ static int	validation_export(t_data *mini, char *str)
 	return (0);
 }
 
-static void check_bool(bool *s, bool *d, char c)
+static void	check_bool(bool *s, bool *d, char c)
 {
 	if (c == 34 && *d == false && *s == false)
 		*d = true;
@@ -143,15 +76,15 @@ static int	export_withquotes(t_data *mini, char *str, int i, int j)
 		if ((str[i] == ' ' && d == false && s == false)
 			|| (str[i + 1] == '\0' && (d == false && s == false)))
 		{
-			 if (str[i + 1] == '\0')
-			 	i++;
-			tmp = ft_substr(str, j , (i - j));
+			if (str[i + 1] == '\0')
+				i++;
+			tmp = ft_substr(str, j, (i - j));
 			validation_export(mini, tmp);
 			free(tmp);
 			j = i;
 			j++;
 		}
-		 if (str[i] != '\0')
+		if (str[i] != '\0')
 			i++;
 	}
 	return (0);

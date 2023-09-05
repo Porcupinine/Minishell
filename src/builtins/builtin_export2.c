@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   builtin_export2.c                                  :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/30 12:53:54 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/05 09:30:29 by domi             ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   builtin_export2.c                                  :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: domi <domi@student.42.fr>                    +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/08/30 12:53:54 by dmaessen      #+#    #+#                 */
+/*   Updated: 2023/09/05 23:39:16 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,50 @@ int	len_equal(char *cmd)
 		i++;
 	}
 	return (i);
+}
+
+void	print_xenv(t_data *mini)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (mini->mini_envp[i])
+	{
+		ft_putstr_fd("declare -x ", 1);
+		j = 0;
+		while (mini->mini_envp[i][j])
+		{
+			if (mini->mini_envp[i][j] == '=')
+				ft_putstr_fd("=\"", 1);
+			else
+				ft_putchar_fd(mini->mini_envp[i][j], 1);
+			j++;
+		}
+		ft_putstr_fd("\"\n", 2);
+		i++;
+	}
+	set_exit_code(mini, 0);
+}
+
+char	**add_line_envp(char **envp, char *cmd, t_data *mini)
+{
+	char	**new;
+	int		i;
+	int		size;
+
+	size = size_envp(mini) + 1;
+	new = ft_calloc_exit((size + 1), sizeof(char *));
+	i = 0;
+	while (envp[i] && i < size - 1)
+	{
+		new[i] = ft_strdup(envp[i]);
+		i++;
+	}
+	if (cmd[0] == '=')
+		return (not_valid_identifier_s(&cmd, mini), free(new), NULL); //return??
+	new[i] = ft_strdup(cmd);
+	new[size] = NULL;
+	free_str(envp);
+	return (new);
 }

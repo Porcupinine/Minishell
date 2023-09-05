@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 14:06:41 by laura         #+#    #+#                 */
-/*   Updated: 2023/09/04 14:11:27 by lpraca-l      ########   odam.nl         */
+/*   Updated: 2023/09/06 00:25:00 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <unistd.h>
-
 
 void	sigint_handler(int sig)
 {
@@ -46,6 +45,5 @@ void	set_signals(void)
 {
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, sigquit_handler);
-
 	set_term();
 }

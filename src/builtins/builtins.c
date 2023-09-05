@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 17:07:22 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/05 10:50:27 by domi             ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   builtins.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: domi <domi@student.42.fr>                    +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/06/13 17:07:22 by dmaessen      #+#    #+#                 */
+/*   Updated: 2023/09/06 00:24:00 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	builtins(char **cmd, char *str, t_data *mini)
 int	check_builtins(char **cmd)
 {
 	if (!cmd[0])
-		return (1); 
+		return (1);
 	if (ft_strncmp(cmd[0], "echo", 4) == 0)
 		return (0);
 	else if (ft_strncmp(cmd[0], "cd", 2) == 0)

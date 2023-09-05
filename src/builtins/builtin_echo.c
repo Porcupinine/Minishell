@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   builtin_echo.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/27 13:09:31 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/05 09:00:33 by domi             ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   builtin_echo.c                                     :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: domi <domi@student.42.fr>                    +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/07/27 13:09:31 by dmaessen      #+#    #+#                 */
+/*   Updated: 2023/09/06 00:15:37 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,8 @@
 
 static void	write_echo(int i, char **cmd, t_data *mini)
 {
-	// char	*tmp;
-
-	// tmp = NULL;
 	while (cmd[i])
 	{
-//		if (ft_strchr(cmd[i], '\'') != 0 || ft_strchr(cmd[i], '"') != 0)
-//		{
-//			tmp = cmd[i];
-//			cmd[i] = remove_quotes(cmd[i]);
-//			free(tmp);
-//			tmp = NULL;
-//		}
 		ft_putstr_fd(cmd[i], mini->commands->out);
 		if (cmd[i + 1] != NULL)
 			ft_putchar_fd(' ', mini->commands->out);
@@ -52,18 +42,11 @@ static void	echo_n(t_data *mini, char **cmd, int j, size_t i)
 		j++;
 	}
 	i = j;
-//	while (cmd[i])
-//	{
-//		cmd[i] = expand_dollar(cmd[i], mini);
-//		i++;
-//	}
 	write_echo(j, cmd, mini);
 }
 
 int	builtin_echo(t_data *mini, char **cmd)
 {
-	//int	i;
-
 	if (ft_strncmp(mini->commands->cmd, "echo -n", 7) == 0)
 	{
 		echo_n(mini, cmd, 1, 0);
@@ -71,13 +54,6 @@ int	builtin_echo(t_data *mini, char **cmd)
 	}
 	else if (ft_strlen(cmd[0]) == 4)
 	{
-		//i = 1;
-//		while (cmd[i])
-//		{
-//			if (ft_strchr(cmd[i], '\'') == 0)
-//				cmd[i] = expand_dollar(cmd[i], mini);
-//			i++;
-//		}
 		write_echo(1, cmd, mini);
 		write(mini->commands->out, "\n", 1);
 		set_exit_code(mini, 0);

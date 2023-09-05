@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   path.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/21 11:43:11 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/05 10:50:01 by domi             ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   path.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: domi <domi@student.42.fr>                    +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/07/21 11:43:11 by dmaessen      #+#    #+#                 */
+/*   Updated: 2023/09/06 00:17:45 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,12 +115,9 @@ static void	no_pathtocmd(char *path_to_cmd, t_data *mini, \
 char	*split_args(char *cmd, char **envp, t_data *mini)
 {
 	char	**command;
-
 	char	*path_to_cmd;
 	char	**paths;
 
-//	printf("cmd == %s IN %d OUT %d\n", cmd, mini->commands->in, mini->commands->out);
-//	expand_dollar(cmd, mini);
 	command = ft_split(cmd, ' ');
 	if (builtins(command, cmd, mini) == 1)
 	{

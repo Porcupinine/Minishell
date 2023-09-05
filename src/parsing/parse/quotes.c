@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   quotes.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/31 14:13:48 by laura             #+#    #+#             */
-/*   Updated: 2023/09/01 12:10:56 by dmaessen         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   quotes.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/08/31 14:13:48 by laura         #+#    #+#                 */
+/*   Updated: 2023/09/06 00:20:19 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*remove(char *str, char c)
 		new_str[count--] = str[count_str--];
 	count_str--;
 	new_str[count--] = str[count_str--];
-	return(new_str);
+	return (new_str);
 }
 
 char	*remove_quotes(char *str)
@@ -57,4 +57,3 @@ char	*remove_quotes(char *str)
 	}
 	return (tmp);
 }
-//TODO rework

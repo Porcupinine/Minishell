@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   builtin_unset.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/31 12:32:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/30 15:45:16 by dmaessen         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   builtin_unset.c                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/07/31 12:32:10 by dmaessen      #+#    #+#                 */
+/*   Updated: 2023/09/06 00:23:16 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	**update_envp(char **envp, char *arg, int size)
 	{
 		if (ft_strncmp(envp[i], arg, ft_strlen(arg)) == 0
 			&& is_exact_match(arg, envp[i]) == true)
-			free(envp[i]);
+			continue ;
 		else
 		{
 			new[j] = ft_strdup(envp[i]);
@@ -65,8 +65,10 @@ static int	unset_arg(t_data *mini, char *arg)
 	to_unset = ft_strjoin(arg, "=");
 	size = size_envp(mini);
 	new = update_envp(mini->mini_envp, to_unset, size - 1);
+	free(to_unset);
 	if (new == NULL)
-		return (free(to_unset), -1);
+		return (-1);
+	free_str(mini->mini_envp);
 	mini->mini_envp = new;
 	return (set_exit_code(mini, 0), 0);
 }

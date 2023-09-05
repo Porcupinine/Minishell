@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/28 11:50:47 by laura         #+#    #+#                 */
-/*   Updated: 2023/09/04 14:13:24 by lpraca-l      ########   odam.nl         */
+/*   Updated: 2023/09/06 00:18:36 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@
 
 int	test_isspace(char*str)
 {
-	int count;
+	int	count;
 
 	count = 0;
-	while(str[count] != '\0')
+	while (str[count] != '\0')
 	{
 		if (ft_strchr(ISSPACE, str[count]) == 0)
-			return(0);
+			return (0);
 		count++;
 	}
-	return(1);
+	return (1);
 }
 
 void	line_history(t_data *mini_data)

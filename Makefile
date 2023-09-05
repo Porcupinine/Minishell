@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: domi <domi@student.42.fr>                  +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/02/07 11:56:57 by dmaessen          #+#    #+#              #
-#    Updated: 2023/09/05 09:18:37 by domi             ###   ########.fr        #
+#                                                         ::::::::             #
+#    Makefile                                           :+:    :+:             #
+#                                                      +:+                     #
+#    By: domi <domi@student.42.fr>                    +#+                      #
+#                                                    +#+                       #
+#    Created: 2023/02/07 11:56:57 by dmaessen      #+#    #+#                  #
+#    Updated: 2023/09/06 00:13:59 by laura         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ LIBS	:= $(LIB42)/libft.a -L/Users/$(USER)/.brew/opt/readline/lib
 #------------------------------------------------------------------------Source
 SRC     := src/main.c \
 	   src/builtins/builtin_cd.c src/builtins/builtin_echo.c src/builtins/builtin_env.c \
-	   src/builtins/builtin_exit.c src/builtins/builtin_export.c src/builtins/builtin_pwd.c \
+	   src/builtins/builtin_exit.c src/builtins/builtin_export.c src/builtins/builtin_export3.c \
+	   src/builtins/builtin_pwd.c \
 	   src/builtins/builtin_unset.c src/builtins/builtins.c src/builtins/builtin_export2.c \
 	   src/exec/fork2.c src/exec/dollarsign.c src/exec/errors.c src/exec/input_op.c \
 	   src/exec/output_op.c src/exec/path.c src/exec/start.c src/exec/utils.c \

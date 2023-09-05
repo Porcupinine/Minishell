@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/11 07:55:33 by laura         #+#    #+#                 */
-/*   Updated: 2023/09/04 14:18:43 by lpraca-l      ########   odam.nl         */
+/*   Updated: 2023/09/06 00:21:11 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,12 +129,11 @@ int	parse_tokens(t_state_machine *parser, t_data *mini_data)
 		{
 			add_cmd_node(&mini_data->commands, (cmd));
 			(cmd) = NULL;
-
 			if ((it_token))
 				(it_token) = (it_token)->next;
 		}
 	}
 	free_token_list(&parser->tokens_list);
 	parser->tokens_list = NULL;
-	return(0);
+	return (0);
 }

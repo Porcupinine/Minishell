@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   dollarsign.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/25 13:54:29 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/05 08:59:18 by domi             ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   dollarsign.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: domi <domi@student.42.fr>                    +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/07/25 13:54:29 by dmaessen      #+#    #+#                 */
+/*   Updated: 2023/09/06 00:17:07 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char	*var_replace(char *line, char *var_exp, int start, int end)
 	free(sub2);
 	return (newline);
 }
+
 char	*char_expand_var(char *line, t_data *mini, int start)
 {
 	int		end;
@@ -66,18 +67,15 @@ char	*char_expand_var(char *line, t_data *mini, int start)
 char	*expand_dollar(char *line, t_data *mini)
 {
 	int		i;
-	//char	*tmp;
 
-	//tmp = NULL;
 	while (ft_strchr(line, '$') != NULL)
 	{
-		//tmp = line;
 		i = 0;
 		while (line[i] != '\0')
 		{
 			if (line[i] == '$')
 			{
-				line = char_expand_var(line, mini, i+1);
+				line = char_expand_var(line, mini, i + 1);
 				break ;
 			}
 			i++;
