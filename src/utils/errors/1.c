@@ -48,6 +48,17 @@ void	not_valid_identifier(char **command, t_data *mini)
 	mini->exit_code = 1;
 }
 
+void	not_valid_id(char *command, t_data *mini)
+{
+	write(2, "minishell: ", 11);
+	write(2, "export", 6);
+	write(2, ": `", 3);
+	write(2, command, ft_strlen(command));
+	write(2, "': ", 3);
+	write(2, "not a valid identifier\n", 23);
+	mini->exit_code = 1;
+}
+
 void	not_valid_identifier_s(char **command, t_data *mini)
 {
 	write(2, "minishell: ", 11);

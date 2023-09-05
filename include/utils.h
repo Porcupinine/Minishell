@@ -138,6 +138,7 @@ void	not_valid_identifier_s(char **command, t_data *mini);
 void	not_set(char *command, char *str, t_data *mini);
 void	not_directory_cd(char *command, t_data *mini);
 void	no_filedirectory(char *file, t_data *mini);
+void	not_valid_id(char *command, t_data *mini);
 
 //--------------------------------------------------------------------history
 void	line_history(t_data *mini_data);

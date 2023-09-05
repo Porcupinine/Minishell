@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 13:25:10 by dmaessen      #+#    #+#                 */
-/*   Updated: 2023/09/05 19:56:33 by laura         ########   odam.nl         */
+/*   Updated: 2023/09/05 19:58:49 by laura         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,9 @@ static char	**add_line_envp(char **envp, char *cmd, int size, t_data *mini)
 	return (new);
 }
 
-static int replace_envp_var(t_data *mini, char *cmd, char *name, char *res)
+static int replace_envp_var(t_data *mini, char *name, char *res)
 {
 	int i;
-	char *tmp;
 
 	i = 0;
 	while (mini->mini_envp[i])
@@ -71,8 +70,8 @@ static int replace_envp_var(t_data *mini, char *cmd, char *name, char *res)
 		if (ft_strncmp(mini->mini_envp[i], name,
 				ft_strlen(name) - 1) == 0)
 		{
-			tmp = ft_strdup("");
 			free(mini->mini_envp[i]);
+			free(res);
 			mini->mini_envp[i] = ft_strjoin(name, res);
 			return (free(name), set_exit_code(mini, 0), 0);
 		}
@@ -93,7 +92,7 @@ static int	go_export(t_data *mini, char *cmd)
 	name = ft_substr(cmd, 0, len_equal(cmd));
 	res = ft_substr(cmd, ft_strlen(name), ft_strlen(cmd));
 	tmp2 = remove_quotes(res);
-	if (replace_envp_var(mini, cmd, name, tmp2) == 0)
+	if (replace_envp_var(mini, name, tmp2) == 0)
 		return (set_exit_code(mini, 0), 0);
 	tmp = ft_strjoin(name, tmp2);
 	free(name);
@@ -114,7 +113,7 @@ static int	validation_export(t_data *mini, char *str)
 	else if (check_cmd(str) == true)
 		go_export(mini, str);
 	else
-		return (not_valid_identifier(&str, mini), 1);
+		return (not_valid_id(str, mini), 1);
 	return (0);
 }
 
@@ -169,18 +168,15 @@ int	builtin_export(t_data *mini, char **cmd, char *str)
 	if (ft_strchr(str, 39) == 0 && ft_strchr(str, 34) == 0)
 	{
 		i = 0;
-		while (cmd[i])
+		while (cmd[++i])
 		{
 			if (ft_strchr(cmd[i], '=') == NULL
 				&& is_valid_noerror(cmd[i]) == true)
-				i++;
+				continue ;
 			else if (check_cmd(cmd[i]) == true)
-			{
 				go_export(mini, cmd[i]);
-				i++;
-			}
 			else
-				not_valid_identifier(cmd, mini);
+				not_valid_id(cmd[i], mini);
 		}
 	}
 	else
