@@ -66,11 +66,8 @@ static int	go_export(t_data *mini, char *cmd)
 	int		i;
 	char	**new;
 	int		size;
-<<<<<<< HEAD
 	char 	*tmp;
-=======
-	char *tmp;
->>>>>>> lpraca-l
+
 
 	name = ft_substr(cmd, 0, len_equal(cmd));
 	i = 0;
