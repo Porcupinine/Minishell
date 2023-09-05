@@ -132,10 +132,12 @@ static int export_withquotes(t_data *mini, char *str, int i, int j)
 		else if (str[i] == 39 && s == true)
 			s = false;
 		if ((str[i] == ' ' && d == false && s == false)
-			|| (str[i + 1] == '\0' && (d == false || s == false)))
+			|| (str[i +1] == '\0' && (d == false && s == false)))
 		{
+			if(str[i+1] == '\0')
+				i++;
 			printf("BEF SUBSTR -- j = %d -- i = %d\n", j, i);
-			tmp = ft_substr(str, j, i); // goes wrong here still takes the rest of the str not till i
+			tmp = ft_substr(str, j, i - j); // goes wrong here still takes the rest of the str not till i
 			printf("tmp = %s -- j = %d -- i = %d\n", tmp, j, i);
 			if (validation_export(mini, tmp) == 1)
 				return (1);
@@ -145,7 +147,8 @@ static int export_withquotes(t_data *mini, char *str, int i, int j)
 			j = i;
 			j++;
 		}
-		i++;
+		if(str[i] != '\0')
+			i++;
 	}
 	return (0);
 }
