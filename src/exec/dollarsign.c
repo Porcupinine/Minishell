@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   dollarsign.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/07/25 13:54:29 by dmaessen      #+#    #+#                 */
-/*   Updated: 2023/09/04 14:20:53 by lpraca-l      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   dollarsign.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/25 13:54:29 by dmaessen          #+#    #+#             */
+/*   Updated: 2023/09/05 08:59:18 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ char	*char_expand_var(char *line, t_data *mini, int start)
 char	*expand_dollar(char *line, t_data *mini)
 {
 	int		i;
-	char	*tmp;
+	//char	*tmp;
 
-	tmp = NULL;
+	//tmp = NULL;
 	while (ft_strchr(line, '$') != NULL)
 	{
-		tmp = line;
+		//tmp = line;
 		i = 0;
 		while (line[i] != '\0')
 		{

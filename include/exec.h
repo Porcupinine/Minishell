@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 14:43:48 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/04 14:34:37 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/05 10:51:19 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include "minishell.h"
 
 /* BUILTINS */
-int		builtins(char **cmd, t_data *mini);
+int		builtins(char **cmd, char *str, t_data *mini);
 int		check_builtins(char **cmd);
 
 int		builtin_unset(t_data *mini, char **arg);
@@ -34,7 +34,7 @@ char	**update_envp(char **envp, char *arg, int size);
 
 int		builtin_pwd(t_data *mini);
 
-int		builtin_export(t_data *mini, char **cmd);
+int		builtin_export(t_data *mini, char **cmd, char *str);
 bool	check_cmd(char *cmd);
 bool	is_valid_noerror(char *cmd);
 int		len_equal(char *cmd);

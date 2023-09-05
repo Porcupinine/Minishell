@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+         #
+#    By: domi <domi@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/07 11:56:57 by dmaessen          #+#    #+#              #
-#    Updated: 2023/09/04 14:19:23 by dmaessen         ###   ########.fr        #
+#    Updated: 2023/09/05 09:18:37 by domi             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,9 +49,10 @@ SRC     := src/main.c \
 	   src/utils/errors/1.c src/utils/errors/127.c src/utils/errors/255.c \
 	   src/utils/history/history.c \
 	   src/utils/I_want_to_break_free/parser_free.c src/utils/I_want_to_break_free/parser_free_array.c \
-	   src/utils/signal_handlers/signal_handlers.c \
+	   src/utils/signal_handlers/signal_handlers.c src/utils/signal_handlers/signal_handlers2.c \
 	   src/utils/token_list_actions/add_token.c src/utils/token_list_actions/print_tokens.c \
-	   src/utils/token_list_actions/search_token.c
+	   src/utils/token_list_actions/search_token.c 
+	   
 
 #-----------------------------------------------------------------------Objects
 OBJS	:= $(SRC:.c=.o)
