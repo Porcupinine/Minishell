@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:09:12 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/30 14:18:14 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/04 17:26:34 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	builtin_cd(t_data *mini, char **cmd)
 		res = chdir(path);
 		free(path);
 		if (res != 0)
-			return (not_set("cd", "HOME not set", mini), 1);
+			return (not_set("cd", "HOME not set\n", mini), 1);
 		change_pwd(mini);
 		return (set_exit_code(mini, 0), 0);
 	}

@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:25:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/30 14:39:44 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/04 18:53:16 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static char	**add_line_envp(char **envp, char *cmd, int size, t_data *mini)
 		new[i] = ft_strdup(envp[i]);
 		i++;
 	}
+	cmd = expand_dollar(cmd, mini); // this is needed, not rm??
 	if (cmd[0] == '=')
 		return (not_valid_identifier_s(&cmd, mini), free(new), NULL);
 	new[i] = ft_strdup(cmd);
@@ -65,7 +66,8 @@ static int	go_export(t_data *mini, char *cmd)
 	int		i;
 	char	**new;
 	int		size;
-	char *tmp;
+	char 	*tmp;
+
 
 	name = ft_substr(cmd, 0, len_equal(cmd));
 	i = 0;
@@ -90,7 +92,7 @@ static int	go_export(t_data *mini, char *cmd)
 	return (set_exit_code(mini, 0), 0);
 }
 
-int	builtin_export(t_data *mini, char **cmd)
+int	builtin_export(t_data *mini, char **cmd) // add rm quotes to this function
 {
 	int	i;
 
