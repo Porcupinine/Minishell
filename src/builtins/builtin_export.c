@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:25:10 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/05 11:04:48 by domi             ###   ########.fr       */
+/*   Updated: 2023/09/05 12:40:34 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,19 +113,51 @@ static int validation_export(t_data *mini, char *str)
 	return (0);
 }
 
+static int export_withquotes(t_data *mini, char *str, int i, int j)
+{
+	bool s;
+	bool d;
+	char *tmp;
+
+	s = false;
+	d = false;
+	while (str[i])
+	{
+		if (str[i] == 34 && d == false && s == false)
+			d = true;
+		else if (str[i] == 34 && d == true)
+			d = false;
+		if (str[i] == 39 && s == false && d == false)
+			s = true;
+		else if (str[i] == 39 && s == true)
+			s = false;
+		if ((str[i] == ' ' && d == false && s == false)
+			|| (str[i + 1] == '\0' && (d == false || s == false)))
+		{
+			printf("BEF SUBSTR -- j = %d -- i = %d\n", j, i);
+			tmp = ft_substr(str, j, i); // goes wrong here still takes the rest of the str not till i
+			printf("tmp = %s -- j = %d -- i = %d\n", tmp, j, i);
+			if (validation_export(mini, tmp) == 1)
+				return (1);
+			free(tmp);
+			tmp = NULL;
+			//i++;
+			j = i;
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
 int	builtin_export(t_data *mini, char **cmd, char *str) // add rm quotes to this function
 {
 	int	i;
-	char *tmp;
-	int j;
-	bool s;
-	bool d;
 
 	if (!cmd[1] && ft_strlen(cmd[0]) == 6)
 		print_xenv(mini);
 	if (!cmd[1] && ft_strlen(cmd[0]) > 6)
 		no_command(cmd, mini);
-	j = 0;
 	if (ft_strchr(str, 39) == 0 && ft_strchr(str, 34) == 0)
 	{
 		i = 1;
@@ -143,34 +175,6 @@ int	builtin_export(t_data *mini, char **cmd, char *str) // add rm quotes to this
 		}
 	}
 	else
-	{
-		i = 7;
-		j = 7;
-		s = false;
-		d = false;
-		while (str[i])
-		{
-			if ((str[i] == ' ' && d == false && s == false)
-				|| (str[i + 1] == '\0' && (d == false || s == false)))
-			{
-				tmp = ft_substr(str, j, i); // goes wrong here still takes the rest of the str not till i
-				printf("tmp = %s\n", tmp);
-				if (validation_export(mini, tmp) == 1)
-					return (1);
-				free(tmp);
-				i++;
-				j = i;
-			}
-			if (str[i] == 39 && d == false && s == false)
-				d = true;
-			else if (str[i] == 39 && d == true && s == false)
-				d = false;
-			else if (str[i] == 34 && s == false && d == false)
-				s = true;
-			else if (str[i] == 34 && s == true && d == false)
-				s = false;
-			i++;
-		}
-	}
+		export_withquotes(mini, str, 7, 7); // check on succes??
 	return (mini->exit_code);
 }
