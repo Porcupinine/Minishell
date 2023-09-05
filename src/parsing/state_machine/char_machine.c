@@ -86,7 +86,8 @@ void	token_str(t_state_machine *parser)
 	char	c;
 
 	c = parser->cmd[parser->count];
-	if (ft_strchr(METACHAR, c) != 0 && (parser->status == S_DQUOTES || parser->status == S_SQUOTES))
+	if (ft_strchr(METACHAR, c) != 0 && (parser->status == S_DQUOTES \
+	|| parser->status == S_SQUOTES))
 		parser->len++;
 	else if (ft_strchr(QUOTES, c) != 0)
 		found_quotes(parser);
