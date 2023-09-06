@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:14 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/04 14:36:55 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/06 22:11:39 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	exec_fork_onecmd(t_data *mini)
 	waitpid(pid, &mini->exit_code, 0);
 	if (WIFEXITED(mini->exit_code))
 		mini->exit_code = WEXITSTATUS(mini->exit_code);
-	if (WIFSIGNALED(mini->exit_code))
+	else if (WIFSIGNALED(mini->exit_code))
 		mini->exit_code = 128 + WTERMSIG(mini->exit_code);
 	return (mini->exit_code);
 }
