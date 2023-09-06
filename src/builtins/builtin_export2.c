@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   builtin_export2.c                                  :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: domi <domi@student.42.fr>                    +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/08/30 12:53:54 by dmaessen      #+#    #+#                 */
-/*   Updated: 2023/09/05 23:39:16 by laura         ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   builtin_export2.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/30 12:53:54 by dmaessen          #+#    #+#             */
+/*   Updated: 2023/09/06 14:35:57 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ bool	check_cmd(char *cmd)
 	while (cmd[i] && cmd[i] != '=')
 	{
 		if (ft_isalnum(cmd[i]) == 0 && cmd[i] != '='
-			&& cmd[i] != '_' && cmd[i] != '$' && cmd[i] != 92 && cmd[i] != 34 && cmd[i] != 39)
+			&& cmd[i] != '_' && cmd[i] != '$' && cmd[i] != 92
+			&& cmd[i] != 34 && cmd[i] != 39)
 			return (false);
 		i++;
 	}
@@ -105,7 +106,7 @@ char	**add_line_envp(char **envp, char *cmd, t_data *mini)
 		i++;
 	}
 	if (cmd[0] == '=')
-		return (not_valid_identifier_s(&cmd, mini), free(new), NULL); //return??
+		return (not_valid_identifier_s(&cmd, mini), free(new), NULL);
 	new[i] = ft_strdup(cmd);
 	new[size] = NULL;
 	free_str(envp);

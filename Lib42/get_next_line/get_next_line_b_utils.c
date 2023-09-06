@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_b_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 08:08:33 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/06 11:32:16 by domi             ###   ########.fr       */
+/*   Updated: 2023/09/06 14:38:29 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ char	*ft_strjoin_gnl_b(char *memory, char *buf)
 	join = ft_calloc_b((len1 + ft_strlen_gnl(buf) + 1), sizeof(char));
 	if (!join)
 		return (ft_free_b(&memory, NULL), NULL);
-		// return (ft_free_b(&memory, NULL), ft_error("Malloc fail\n"), NULL); // TODO malloc exit fine like this?
 	i = 0;
 	while (memory[i])
 	{
@@ -86,14 +85,12 @@ char	*ft_substr_gnl_b(char const *s, unsigned int start, size_t len)
 		sub = malloc(1 * sizeof(char));
 		if (!sub)
 			return (NULL);
-			// return (ft_error("Malloc fail\n"), NULL); // TODO malloc exit fine like this?
 		sub[0] = '\0';
 		return (sub);
 	}
 	sub = malloc((len + 1) * sizeof(char));
 	if (!sub)
 		return (NULL);
-		// return (ft_error("Malloc fail\n"), NULL); // TODO malloc exit fine like this?
 	i = 0;
 	while (i < len)
 	{

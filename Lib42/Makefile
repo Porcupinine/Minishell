@@ -29,7 +29,7 @@ libft/ft_lstadd_back.c libft/ft_lstdelone.c libft/ft_lstclear.c \
 libft/ft_lstiter.c ft_printf/ft_printf.c \
 ft_printf/ft_print_char_string.c ft_printf/ft_putnbr_base.c \
 ft_printf/ft_pointer.c ft_printf/ft_putnbr_ulong.c \
-get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
+get_next_line/get_next_line_utils.c \
 libft/ft_charjoin.c get_next_line/get_next_line_exit.c \
 get_next_line/get_next_line_b_exit.c get_next_line/get_next_line_b_utils.c
 
@@ -48,7 +48,7 @@ $(OBJ_DIR)%.o : %.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
 
 $(NAME): $(OBJECTS_PREFIXED)
-	@ar r $(NAME) $(OBJECTS_PREFIXED)
+	@ar rcs $(NAME) $(OBJECTS_PREFIXED)
 	@echo "Lib42 is ready!"
 
 clean:

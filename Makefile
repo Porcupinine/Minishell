@@ -6,7 +6,7 @@
 #    By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/07 11:56:57 by dmaessen          #+#    #+#              #
-#    Updated: 2023/09/06 14:30:49 by dmaessen         ###   ########.fr        #
+#    Updated: 2023/09/06 15:16:59 by dmaessen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,6 @@ all: $(NAME)
 $(OBJ_DIR)%.o : %.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
-        # $(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) ${INC_READLINE}
 
 lib42_build:
 	@$(MAKE) -C $(LIB42)
@@ -79,8 +78,10 @@ $(NAME): lib42_build $(OBJECTS_PREFIXED)
 
 clean:
 	@rm -rf $(OBJ_DIR)
+	@make clean -C $(LIB42)
 
 fclean: clean
+	@rm -f Lib42/libft.a
 	@rm -f $(NAME)
 
 re: fclean

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   libft.h                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: lpraca-l <lplacerdadesign@gmail.com>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/09 19:47:08 by lpraca-l      #+#    #+#                 */
-/*   Updated: 2023/05/23 15:14:27 by lpraca-l      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/09 19:47:08 by lpraca-l          #+#    #+#             */
+/*   Updated: 2023/09/06 14:37:38 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,14 +140,14 @@ char	*ft_strrchr(const char *s, int c);
  * @param c
  * @return
  */
-int	ft_strrchr_position(const char *s, int c);
+int		ft_strrchr_position(const char *s, int c);
 /**
  *
  * @param s
  * @param c
  * @return
  */
-int	ft_strchr_position(const char *s, int c);
+int		ft_strchr_position(const char *s, int c);
 /**
  * Compare n bytes from two strings
  * @param s1 string 1
@@ -223,7 +223,7 @@ void	*ft_calloc_exit(size_t count, size_t size);
  * @param len how long the new string willl be
  * @return new string or NULL if it fails
  */
-		char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 /**
  * Allocates (with malloc(3)) and returns a new
  * string, which is the result of the concatenation

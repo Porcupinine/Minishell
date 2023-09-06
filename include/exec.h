@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   exec.h                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: domi <domi@student.42.fr>                    +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/07/31 14:43:48 by dmaessen      #+#    #+#                 */
-/*   Updated: 2023/09/05 23:34:55 by laura         ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   exec.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/31 14:43:48 by dmaessen          #+#    #+#             */
+/*   Updated: 2023/09/06 14:42:20 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ char	*var_name(char *line, int start, int end);
 char	*search_envp(char *var, t_data *mini);
 char	*var_replace(char *line, char *var_exp, int start, int end);
 char	*char_expand_var(char *line, t_data *mini, int start);
-
 
 int		exec_fork(t_data *mini);
 void	pid_exit_code(t_data *mini, pid_t pid);
