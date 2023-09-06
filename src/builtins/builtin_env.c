@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:13:30 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/30 12:51:35 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/06 22:04:45 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ int	builtin_env(t_data *mini, char **cmd)
 	if (cmd[1] != NULL)
 	{
 		no_filedir("env", cmd[1], mini);
+		return (mini->exit_code);
+	}
+	if (ft_strncmp(cmd[0], "env\0", 4) != 0)
+	{
+		no_command(cmd, mini);
 		return (mini->exit_code);
 	}
 	i = 0;
