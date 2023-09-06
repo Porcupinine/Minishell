@@ -24,10 +24,12 @@ ASANFLAGS += -fsanitize=address -g #-fsanitize=leak
 LIB42   := ./Lib42
 
 #-----------------------------------------------------------------------Headers
-HEADERS	:= -I ./include -I $(LIB42)/include -I/Users/$(USER)/.brew/opt/readline/include
+HEADERS	:= -I ./include -I $(LIB42)/include
+RL_HEARDERS	:= -I/Users/$(USER)/.brew/opt/readline/include
 
 #---------------------------------------------------------------------Libraries
-LIBS	:= $(LIB42)/libft.a -L/Users/$(USER)/.brew/opt/readline/lib
+LIBS	:= $(LIB42)/libft.a
+RL_LIB	:= -L/Users/$(USER)/.brew/opt/readline/lib
 
 #------------------------------------------------------------------------Source
 SRC     := src/main.c \
@@ -65,25 +67,26 @@ OBJECTS_PREFIXED := $(addprefix $(OBJ_DIR), $(OBJS))
 #-------------------------------------------------------------------------Rules
 all: $(NAME)
 
+$(NAME): $(LIBS) $(OBJECTS_PREFIXED)
+	$(CC) $(ASANFLAGS) $(CFLAGS) $(OBJECTS_PREFIXED) $(LIBS) $(HEADERS) -o $@ -lreadline
+	@echo "MINIHELL is ready!"
+
 $(OBJ_DIR)%.o : %.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
-        # $(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) ${INC_READLINE}
+	@$(CC) $(CFLAGS)  -o $@ -c $<  $(HEADERS)
 
-lib42_build:
+$(LIBS):
 	@$(MAKE) -C $(LIB42)
-
-$(NAME): lib42_build $(OBJECTS_PREFIXED)
-	$(CC) $(ASANFLAGS) $(OBJECTS_PREFIXED) $(LIBS) $(HEADERS) -o $@ -lreadline
-	@echo "MINIHELL is ready!"
 
 clean:
 	@rm -rf $(OBJ_DIR)
+	@$(MAKE) clean -C $(LIB42)
+
 
 fclean: clean
 	@rm -f $(NAME)
+	@$(MAKE) fclean -C $(LIB42)
 
-re: fclean
-	@$(MAKE) all
+re: fclean all
 
 .PHONY: all, clean, fclean, re, lib42_build

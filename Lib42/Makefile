@@ -53,9 +53,11 @@ $(NAME): $(OBJECTS_PREFIXED)
 
 clean:
 	@rm -rf $(OBJ_DIR)
+	@echo libft clean
 
 fclean: clean
 	@rm -f $(NAME)
+	@echo libft fclean
 
 re: clean all
 
