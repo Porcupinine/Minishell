@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:09:31 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/06 16:21:44 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/06 21:34:52 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@
 #include "../../include/utils.h"
 #include "../../include/lexical_analyzer.h"
 
-static void	write_echo(int i, char **cmd)
+static void	write_echo(int i, char **cmd, int fd)
 {
 	while (cmd[i])
 	{
-		ft_putstr_fd(cmd[i], 1);
+		ft_putstr_fd(cmd[i], fd);
 		if (cmd[i + 1] != NULL)
-			ft_putchar_fd(' ', 1);
+			ft_putchar_fd(' ', fd);
 		i++;
 	}
 }
 
-static void	echo_n(char **cmd, int j, size_t i)
+static void	echo_n(char **cmd, int j, size_t i, int fd)
 {
 	while (cmd[j])
 	{
@@ -42,20 +42,26 @@ static void	echo_n(char **cmd, int j, size_t i)
 		j++;
 	}
 	i = j;
-	write_echo(j, cmd);
+	write_echo(j, cmd, fd);
 }
 
 int	builtin_echo(t_data *mini, char **cmd)
 {
+	int fd;
+
+	if (mini->commands->out == 0)
+		fd = 1;
+	else
+		fd = mini->commands->out;
 	if (ft_strncmp(mini->commands->cmd, "echo -n", 7) == 0)
 	{
-		echo_n(cmd, 1, 0);
+		echo_n(cmd, 1, 0, fd);
 		set_exit_code(mini, 0);
 	}
 	else if (ft_strlen(cmd[0]) == 4)
 	{
-		write_echo(1, cmd);
-		write(1, "\n", 1);
+		write_echo(1, cmd, fd);
+		write(fd, "\n", 1);
 		set_exit_code(mini, 0);
 	}
 	else

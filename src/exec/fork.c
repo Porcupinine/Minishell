@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:49:01 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/04 14:34:26 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/06 21:18:37 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static int	exec_last_cmd(t_data *mini, t_commands *commands, int read_end)
 			return (err_msg("", "dup2 failed.\n"),
 				set_exit_code(mini, 1), exit(1), -1);
 		dup_close_file(mini, commands);
+		printf("LAST CMD out == %d\n", mini->commands->out);
 		split_args(commands->cmd, mini->mini_envp, mini);
 	}
 	if (close(read_end) == -1)
