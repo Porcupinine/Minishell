@@ -6,7 +6,7 @@
 #    By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/07 11:56:57 by dmaessen          #+#    #+#              #
-#    Updated: 2023/09/06 15:16:59 by dmaessen         ###   ########.fr        #
+#    Updated: 2023/09/06 15:24:16 by dmaessen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ OBJ_DIR := objs/
 OBJECTS_PREFIXED := $(addprefix $(OBJ_DIR), $(OBJS))
 
 #-------------------------------------------------------------------------Rules
-all: $(NAME)
+all: lib42_build $(NAME)
 
 $(OBJ_DIR)%.o : %.c
 	@mkdir -p $(dir $@)
@@ -72,7 +72,7 @@ $(OBJ_DIR)%.o : %.c
 lib42_build:
 	@$(MAKE) -C $(LIB42)
 
-$(NAME): lib42_build $(OBJECTS_PREFIXED)
+$(NAME): $(OBJECTS_PREFIXED)
 	$(CC) $(ASANFLAGS) $(OBJECTS_PREFIXED) $(LIBS) $(HEADERS) -o $@ -lreadline
 	@echo "MINIHELL is ready!"
 
