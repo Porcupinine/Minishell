@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   lexical_analyzer.h                                 :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: lpraca-l <lpraca-l@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/08/31 16:15:36 by lpraca-l      #+#    #+#                 */
-/*   Updated: 2023/09/04 14:22:11 by lpraca-l      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   lexical_analyzer.h                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/31 16:15:36 by lpraca-l          #+#    #+#             */
+/*   Updated: 2023/09/06 14:42:08 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ void	found_quotes(t_state_machine *parser);
  * @param parser for the token list
  * @param mini_data for command list
  */
-int	parse_tokens(t_state_machine *parser, t_data *mini_data);
+int		parse_tokens(t_state_machine *parser, t_data *mini_data);
 /**
  * prints syntax error, set exit code to 258 and free token list
  * @param parser state machine 

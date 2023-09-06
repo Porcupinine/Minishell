@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         ::::::::             #
-#    Makefile                                           :+:    :+:             #
-#                                                      +:+                     #
-#    By: domi <domi@student.42.fr>                    +#+                      #
-#                                                    +#+                       #
-#    Created: 2023/02/07 11:56:57 by dmaessen      #+#    #+#                  #
-#    Updated: 2023/09/06 00:13:59 by laura         ########   odam.nl          #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/02/07 11:56:57 by dmaessen          #+#    #+#              #
+#    Updated: 2023/09/06 15:43:13 by dmaessen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,18 +18,16 @@ CC 	:=  gcc
 
 #-------------------------------------------------------------------------Flags
 CFLAGS	+= -Wextra -Wall -Werror
-ASANFLAGS += -fsanitize=address -g #-fsanitize=leak
+ASANFLAGS += #-fsanitize=address -g #-fsanitize=leak
 
 #----------------------------------------------------------------Libraries path
 LIB42   := ./Lib42
 
 #-----------------------------------------------------------------------Headers
-HEADERS	:= -I ./include -I $(LIB42)/include
-RL_HEARDERS	:= -I/Users/$(USER)/.brew/opt/readline/include
+HEADERS	:= -I ./include -I $(LIB42)/include -I/Users/$(USER)/.brew/opt/readline/include
 
 #---------------------------------------------------------------------Libraries
-LIBS	:= $(LIB42)/libft.a
-RL_LIB	:= -L/Users/$(USER)/.brew/opt/readline/lib
+LIBS	:= $(LIB42)/libft.a -L/Users/$(USER)/.brew/opt/readline/lib
 
 #------------------------------------------------------------------------Source
 SRC     := src/main.c \
@@ -49,7 +47,7 @@ SRC     := src/main.c \
 	   src/utils/cmd_list_actions/add_cmd_node.c src/utils/cmd_list_actions/add_inout_node.c \
 	   src/utils/cmd_list_actions/print_cmd.c \
 	   src/utils/envp_parser/parse_list_envp.c src/utils/envp_parser/parse_array_envp.c \
-	   src/utils/errors/1.c src/utils/errors/127.c src/utils/errors/255.c \
+	   src/utils/errors/1.c src/utils/errors/1_b.c src/utils/errors/127.c src/utils/errors/255.c \
 	   src/utils/history/history.c \
 	   src/utils/I_want_to_break_free/parser_free.c src/utils/I_want_to_break_free/parser_free_array.c \
 	   src/utils/signal_handlers/signal_handlers.c src/utils/signal_handlers/signal_handlers2.c \
@@ -65,28 +63,28 @@ OBJ_DIR := objs/
 OBJECTS_PREFIXED := $(addprefix $(OBJ_DIR), $(OBJS))
 
 #-------------------------------------------------------------------------Rules
-all: $(NAME)
-
-$(NAME): $(LIBS) $(OBJECTS_PREFIXED)
-	$(CC) $(ASANFLAGS) $(CFLAGS) $(OBJECTS_PREFIXED) $(LIBS) $(HEADERS) -o $@ -lreadline
-	@echo "MINIHELL is ready!"
+all: lib42_build $(NAME)
 
 $(OBJ_DIR)%.o : %.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS)  -o $@ -c $<  $(HEADERS)
+	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
 
-$(LIBS):
+lib42_build:
 	@$(MAKE) -C $(LIB42)
+
+$(NAME): $(OBJECTS_PREFIXED)
+	@$(CC) $(ASANFLAGS) $(OBJECTS_PREFIXED) $(LIBS) $(HEADERS) -o $@ -lreadline
+	@echo "MINIHELL is ready!"
 
 clean:
 	@rm -rf $(OBJ_DIR)
-	@$(MAKE) clean -C $(LIB42)
-
+	@make clean -C $(LIB42)
 
 fclean: clean
+	@rm -f Lib42/libft.a
 	@rm -f $(NAME)
-	@$(MAKE) fclean -C $(LIB42)
 
-re: fclean all
+re: fclean
+	@$(MAKE) all
 
 .PHONY: all, clean, fclean, re, lib42_build
