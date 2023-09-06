@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 12:32:30 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/08/29 16:32:46 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/06 16:12:34 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ static void	throw_error(t_data *mini, char **cmd, long long nb, int i)
 		if (ft_strncmp(cmd[1], "-9223372036854775808", 20) == 0)
 			mini->exit_code = 0;
 	}
+	if (i == 3)
+	{
+		numeric_arg_required(cmd, mini);
+		mini->exit_code = 255;
+	}
 }
 
 static long	ft_atoi_long(char *str, t_data *mini, char **cmd, long long nb)
@@ -51,7 +56,7 @@ static long	ft_atoi_long(char *str, t_data *mini, char **cmd, long long nb)
 		if ((str[i] >= 48 && str[i] <= 57))
 			nb = (nb * 10) + (str[i] - 48);
 		else
-			return (-1);
+			return (throw_error(mini, cmd, nb, 3), -1);
 		if (nb > LONG_MAXX)
 			return (throw_error(mini, cmd, nb, 1), -1);
 		i++;
