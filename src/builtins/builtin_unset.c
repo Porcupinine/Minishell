@@ -44,13 +44,13 @@ char	**update_envp(char **envp, char *arg, int size)
 	{
 		if (ft_strncmp(envp[i], arg, ft_strlen(arg)) == 0
 			&& is_exact_match(arg, envp[i]) == true)
-			continue ;
+			i++;
 		else
 		{
 			new[j] = ft_strdup(envp[i]);
 			j++;
+			i++;
 		}
-		i++;
 	}
 	new[size] = NULL;
 	return (new);

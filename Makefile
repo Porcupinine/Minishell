@@ -14,7 +14,7 @@
 NAME	:= minishell
 
 #----------------------------------------------------------------------Compiler
-CC 	:=  -gcc
+CC 	:=  gcc
 
 #-------------------------------------------------------------------------Flags
 CFLAGS	+= -Wextra -Wall -Werror
@@ -74,7 +74,7 @@ lib42_build:
 	@$(MAKE) -C $(LIB42)
 
 $(NAME): lib42_build $(OBJECTS_PREFIXED)
-	@$(CC) $(ASANFLAGS) $(OBJECTS_PREFIXED) $(LIBS) $(HEADERS) -o $@ -lreadline
+	$(CC) $(ASANFLAGS) $(OBJECTS_PREFIXED) $(LIBS) $(HEADERS) -o $@ -lreadline
 	@echo "MINIHELL is ready!"
 
 clean:
