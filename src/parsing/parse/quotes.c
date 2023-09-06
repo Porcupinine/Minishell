@@ -20,6 +20,8 @@ static char	*remove(char *str, char c)
 
 	count = 0;
 	count_str = 0;
+	if (ft_strlen(str) == 2)
+		return (ft_strdup(""));
 	new_str = ft_calloc_exit((ft_strlen(str) - 1), sizeof (char));
 	while (str[count_str] != '\0' && str[count_str] != c)
 		new_str[count++] = str[count_str++];
