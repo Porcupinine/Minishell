@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         ::::::::             #
-#    Makefile                                           :+:    :+:             #
-#                                                      +:+                     #
-#    By: domi <domi@student.42.fr>                    +#+                      #
-#                                                    +#+                       #
-#    Created: 2023/02/07 11:56:57 by dmaessen      #+#    #+#                  #
-#    Updated: 2023/09/06 00:13:59 by laura         ########   odam.nl          #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/02/07 11:56:57 by dmaessen          #+#    #+#              #
+#    Updated: 2023/09/06 14:30:49 by dmaessen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ SRC     := src/main.c \
 	   src/utils/cmd_list_actions/add_cmd_node.c src/utils/cmd_list_actions/add_inout_node.c \
 	   src/utils/cmd_list_actions/print_cmd.c \
 	   src/utils/envp_parser/parse_list_envp.c src/utils/envp_parser/parse_array_envp.c \
-	   src/utils/errors/1.c src/utils/errors/127.c src/utils/errors/255.c \
+	   src/utils/errors/1.c src/utils/errors/1_b.c src/utils/errors/127.c src/utils/errors/255.c \
 	   src/utils/history/history.c \
 	   src/utils/I_want_to_break_free/parser_free.c src/utils/I_want_to_break_free/parser_free_array.c \
 	   src/utils/signal_handlers/signal_handlers.c src/utils/signal_handlers/signal_handlers2.c \
