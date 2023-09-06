@@ -22,8 +22,13 @@ void	token_start(t_state_machine *parser)
 	if (ft_strchr(METACHAR, c) == 0 || ft_strchr(QUOTES, c) != 0)
 	{
 		parser->state = S_CHAR;
-		parser->status = S_WORD;
 		parser->len++;
+		if (c == '"')
+			parser->status = S_DQUOTES;
+		else if (c == '\'')
+			parser->status = S_SQUOTES;
+		else
+			parser->status = S_WORD;
 	}
 	else if (c == ' ')
 		parser->state = S_WHITESPACE;
