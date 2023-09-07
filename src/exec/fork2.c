@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:43:14 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/06 22:11:39 by domi             ###   ########.fr       */
+/*   Updated: 2023/09/07 17:39:08 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	pid_exit_code(t_data *mini, pid_t pid)
 	{
 		mini->exit_code = 128 + WTERMSIG(mini->exit_code);
 		if (mini->exit_code == 131)
-			printf("^\\Quit: 3\n");
+			write(1, "^\\Quit: 3\n", 10);
 	}
 	while (1)
 		if (wait(NULL) == -1)
