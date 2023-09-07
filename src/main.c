@@ -21,6 +21,8 @@
 #include "../include/utils.h"
 #include "../include/exec.h"
 
+extern int g_signal_code;
+
 void	return_prompt(void)
 {
 	printf("\n");
@@ -44,12 +46,9 @@ int	main(int argc, char **argv, char **envp)
 		mini_data->command_line = readline("minishell: ");
 		line_history(mini_data);
 		if (test_isspace(mini_data->command_line) == 0)
-		{
 			if (parse(mini_data) == 0)
 				start(mini_data);
-		}
 	}
-	printf("hi\n");
 	free(mini_data->command_line);
 	free(mini_data);
 	return (0);
