@@ -77,7 +77,7 @@ char	*split_args(char *cmd, char **envp, t_data *mini);
 void	run_one_cmd(t_data *mini);
 int		exec_fork_onecmd(t_data *mini);
 
-void	output_re(t_commands *commands);
+void	output_re(t_commands *commands, t_data *mini);
 
 void	input_re(t_commands *commands, t_data *mini);
 

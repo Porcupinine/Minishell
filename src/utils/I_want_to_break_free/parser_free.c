@@ -68,7 +68,7 @@ void	free_cmd_list(t_commands **cmd)
 	t_commands	*tmp;
 
 	tmp = NULL;
-	if (cmd == NULL)
+	if (*cmd == NULL)
 		return ;
 	while (*cmd != NULL)
 	{

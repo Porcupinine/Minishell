@@ -19,7 +19,7 @@
 void	run_one_cmd(t_data *mini)
 {
 	input_re(mini->commands, mini);
-	output_re(mini->commands);
+	output_re(mini->commands, mini);
 	if (mini->commands->out < 0 || mini->commands->in < 0)
 	{
 		exit(1);

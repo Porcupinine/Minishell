@@ -17,20 +17,23 @@
 
 void	input_re(t_commands *commands, t_data *mini)
 {
-	if (commands->infiles == NULL)
+	t_infile *temp;
+
+	temp = commands->infiles;
+	if (temp == NULL)
 		commands->in = STDIN_FILENO;
-	while (commands->infiles)
+	while (temp)
 	{
-		commands->in = open(commands->infiles->file, O_RDONLY, 0644);
+		commands->in = open(temp->file, O_RDONLY, 0644);
 		if (commands->in < 0)
 		{
-			no_filedirectory(commands->infiles->file, mini);
+			no_filedirectory(temp->file, mini);
 			break ;
 		}
 		else
 			set_exit_code(mini, 0);
-		if (commands->infiles->next != NULL)
+		if (temp->next != NULL)
 			close(commands->in);
-		commands->infiles = commands->infiles->next;
+		temp = temp->next;
 	}
 }
