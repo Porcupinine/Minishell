@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:09:31 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/07 12:38:00 by domi             ###   ########.fr       */
+/*   Updated: 2023/09/07 16:40:10 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 static int	echo_n(char **cmd, int j, size_t i)
 {
-	int count;
-	int a;
+	int	count;
+	int	a;
 
 	while (cmd[j])
 	{
@@ -44,7 +44,7 @@ static int	echo_n(char **cmd, int j, size_t i)
 	return (count);
 }
 
-static int set_fd(t_data *mini)
+static int	set_fd(t_data *mini)
 {
 	if (mini->commands->out == 0)
 		return (1);
@@ -54,7 +54,7 @@ static int set_fd(t_data *mini)
 
 int	builtin_echo(t_data *mini, char **cmd, char *str)
 {
-	int fd;
+	int	fd;
 	int	i;
 
 	fd = set_fd(mini);

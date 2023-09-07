@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 16:15:36 by lpraca-l          #+#    #+#             */
-/*   Updated: 2023/09/06 14:42:08 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/07 16:40:19 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,6 @@ void	handle_heredoc(t_tokens **it_token, t_commands **cmd, \
  * @return char* unquoted string
  */
 char	*remove_quotes(char *str);
-void remove_quotes2point0(char **str);
+void	remove_quotes2point0(char **str);
 
 #endif //MINISHELL_LEXICAL_ANALYZER_H
