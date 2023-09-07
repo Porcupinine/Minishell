@@ -35,11 +35,13 @@ int	parse(t_data *mini_data)
 		free_parser(mini_data, parser);
 		return (1);
 	}
+	print_tokens(parser->tokens_list);
 	if (parse_tokens(parser, mini_data) == 1)
 	{
 		free_parser(mini_data, parser);
 		return (1);
 	}
+	print_cmd_list(mini_data->commands);
 	free_parser(mini_data, parser);
 	return (0);
 }

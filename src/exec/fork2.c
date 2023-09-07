@@ -43,6 +43,7 @@ int	exec_fork_onecmd(t_data *mini)
 	pid_t	pid;
 
 	pid = fork();
+	ignore_signals();
 	pid_lstadd_back(&mini->process, pid);
 	if (pid == -1)
 		return (err_msg("", "fork failed.\n"),
@@ -54,11 +55,7 @@ int	exec_fork_onecmd(t_data *mini)
 	}
 	close_pipe(mini->fd, mini->nb_cmds);
 	free_fd(mini->fd, mini->nb_cmds);
-	waitpid(pid, &mini->exit_code, 0);
-	if (WIFEXITED(mini->exit_code))
-		mini->exit_code = WEXITSTATUS(mini->exit_code);
-	else if (WIFSIGNALED(mini->exit_code))
-		mini->exit_code = 128 + WTERMSIG(mini->exit_code);
+	pid_exit_code(mini, pid);
 	return (mini->exit_code);
 }
 
@@ -68,12 +65,16 @@ int	forkfork(t_data *mini, t_commands *commands, \
 	pid_t		pid;
 
 	pid = fork();
+	ignore_signals();
 	pid_lstadd_back(&mini->process, pid);
 	if (pid == -1)
 		return (err_msg("", "fork failed.\n"),
 			set_exit_code(mini, 1), 1);
 	if (pid == 0)
+	{
+		unset_signals();
 		childchild(mini, commands, read_end, p_fd);
+	}
 	return (0);
 }
 
@@ -83,7 +84,11 @@ void	pid_exit_code(t_data *mini, pid_t pid)
 	if (WIFEXITED(mini->exit_code))
 		mini->exit_code = WEXITSTATUS(mini->exit_code);
 	else if (WIFSIGNALED(mini->exit_code))
+	{
 		mini->exit_code = 128 + WTERMSIG(mini->exit_code);
+		if (mini->exit_code == 131)
+			printf("^\\Quit: 3\n");
+	}
 	while (1)
 		if (wait(NULL) == -1)
 			break ;

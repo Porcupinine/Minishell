@@ -59,3 +59,34 @@ char	*remove_quotes(char *str)
 	}
 	return (tmp);
 }
+
+// check which quote, remove it ignore diferent ones and remove next
+
+void remove_quotes2point0(char **str)
+{
+	int count_new;
+	int count_og;
+
+	count_og = 0;
+	count_new = 0;
+	while ((*str)[count_og] != '\0')
+	{
+		if ((*str)[count_og] == '"')
+		{
+			count_og++;
+			while ((*str)[count_og] != '"')
+				(*str)[count_new++] = (*str)[count_og++];
+			count_og++;
+		}
+		else if ((*str)[count_og] == '\'')
+		{
+			count_og++;
+			while ((*str)[count_og] != '\'')
+				(*str)[count_new++] = (*str)[count_og++];
+			count_og++;
+		}
+		else if ((*str)[count_og] != '\0')
+			(*str)[count_new++] = (*str)[count_og++];
+	}
+	(*str)[count_new] = '\0';
+}

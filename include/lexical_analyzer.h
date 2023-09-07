@@ -213,5 +213,6 @@ void	handle_heredoc(t_tokens **it_token, t_commands **cmd, \
  * @return char* unquoted string
  */
 char	*remove_quotes(char *str);
+void remove_quotes2point0(char **str);
 
 #endif //MINISHELL_LEXICAL_ANALYZER_H
