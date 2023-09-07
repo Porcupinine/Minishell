@@ -14,51 +14,28 @@
 #include "../../include/exec.h"
 #include "../../Lib42/include/libft.h"
 
-static void	open_lastfile(t_commands *commands, t_outfile *last_out)
+void	output_re(t_commands *commands, t_data *mini)
 {
-	if (last_out->type == APPEND_OUTPUT)
-		commands->out = open(last_out->file,
-				O_CREAT | O_WRONLY | O_APPEND, 0644);
-	else
-		commands->out = open(last_out->file,
-				O_CREAT | O_WRONLY | O_TRUNC, 0644);
-}
+	t_outfile *temp;
 
-static void	open_close_file(t_commands *commands)
-{
-	if (commands->outfiles->type == APPEND_OUTPUT)
-		commands->out = open(commands->outfiles->file,
-				O_CREAT | O_WRONLY | O_APPEND, 0644);
-	else
-		commands->out = open(commands->outfiles->file,
-				O_CREAT | O_WRONLY | O_TRUNC, 0644);
-}
-
-void	output_re(t_commands *commands)
-{
-	if (commands->outfiles == NULL)
+	temp = commands->outfiles;
+	if (temp == NULL)
 		commands->out = STDOUT_FILENO;
-	else
+	while (temp)
 	{
-		while (1)
-		{
-			if (commands->outfiles->next != NULL)
-			{
-				open_close_file(commands);
-				if (commands->out < 0)
-					return (err_msg(commands->outfiles->file,
+		if (temp->type == APPEND_OUTPUT)
+			commands->out = open(temp->file,
+								 O_CREAT | O_WRONLY | O_APPEND, 0644);
+		else
+			commands->out = open(temp->file,
+								 O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		if (commands->out < 0)
+			return (err_msg(temp->file,
 							"No such file or directory"));
-				close(commands->out);
-			}
-			else
-			{
-				open_lastfile(commands, commands->outfiles);
-				if (commands->out < 0)
-					return (err_msg(commands->outfiles->file,
-							"No such file or directory"));
-				break ;
-			}
-			commands->outfiles = commands->outfiles->next;
-		}
+		else
+			set_exit_code(mini, 0);
+		if (temp->next != NULL)
+			close(commands->out);
+		temp = temp->next;
 	}
 }

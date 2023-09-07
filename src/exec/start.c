@@ -49,7 +49,7 @@ static void	one_cmd(t_data *mini)
 	{
 		free_str(command);
 		input_re(mini->commands, mini);
-		output_re(mini->commands);
+		output_re(mini->commands, mini);
 		if (mini->commands->out < 0 || mini->commands->in < 0)
 			return (set_exit_code(mini, 1), close_fds(mini));
 		split_args(mini->commands->cmd, mini->mini_envp, mini);
@@ -60,12 +60,13 @@ static void	one_cmd(t_data *mini)
 int	start(t_data *mini)
 {
 	mini->nb_cmds = lst_size(mini->commands);
-	if (mini->nb_cmds == 1 && ft_strlen(mini->commands->cmd) == 0)
+	if (mini->nb_cmds == 1 && (mini->commands->cmd == NULL \
+	|| ft_strlen(mini->commands->cmd) == 0))
 	{
 		input_re(mini->commands, mini);
 		if (mini->commands->in < 0)
 			return (reset_cmdlist(mini), set_exit_code(mini, 1), 1);
-		output_re(mini->commands);
+		output_re(mini->commands, mini);
 		if (mini->commands->out < 0)
 			return (reset_cmdlist(mini), set_exit_code(mini, 1), 1);
 		close_fds(mini);

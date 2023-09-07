@@ -21,7 +21,7 @@ static void	dup_close_file(t_data *mini, t_commands *commands)
 	input_re(commands, mini);
 	if (commands->in < 0)
 		return (set_exit_code(mini, 1));
-	output_re(commands);
+	output_re(commands, mini);
 	if (commands->out < 0)
 		return (set_exit_code(mini, 1));
 	if (commands->in != STDIN_FILENO)
