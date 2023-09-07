@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   signal_handlers.c                                  :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/08/31 14:06:41 by laura         #+#    #+#                 */
-/*   Updated: 2023/09/06 14:16:28 by laura         ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   signal_handlers.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/31 14:06:41 by laura             #+#    #+#             */
+/*   Updated: 2023/09/07 17:25:33 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <unistd.h>
-
 
 void	sigint_handler(int sig)
 {

@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:13:48 by laura             #+#    #+#             */
-/*   Updated: 2023/09/07 16:39:54 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/07 17:27:21 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*remove_quotes(char *str)
 	return (tmp);
 }
 
-static void whyyyyy(char **str, int *count_new, int *count_og, char c)
+static void	whyyyyy(char **str, int *count_new, int *count_og, char c)
 {
 	while ((*str)[(*count_og)] != c)
 		(*str)[(*count_new)++] = (*str)[(*count_og)++];

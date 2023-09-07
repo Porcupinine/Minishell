@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:19:42 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/07 17:22:09 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/07 17:26:06 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 void	input_re(t_commands *commands, t_data *mini)
 {
-	t_infile *temp;
+	t_infile	*temp;
 
 	temp = commands->infiles;
 	if (temp == NULL)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/07/17 17:23:55 by laura         #+#    #+#                 */
-/*   Updated: 2023/09/04 14:12:16 by lpraca-l      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/17 17:23:55 by laura             #+#    #+#             */
+/*   Updated: 2023/09/07 17:25:27 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 #include "../include/lexical_analyzer.h"
 #include "../include/utils.h"
 #include "../include/exec.h"
-
-extern int g_signal_code;
 
 void	return_prompt(void)
 {
