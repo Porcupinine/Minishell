@@ -43,13 +43,14 @@ static int	exec_last_cmd(t_data *mini, t_commands *commands, int read_end)
 	pid_t	pid;
 
 	pid = fork();
+	ignore_signals();
 	pid_lstadd_back(&mini->process, pid);
 	if (pid == -1)
 		return (err_msg("", "fork failed.\n"),
 			set_exit_code(mini, 1), -1);
 	if (pid == 0)
 	{
-		set_signals();
+		unset_signals();
 		if (dup2(read_end, STDIN_FILENO) == -1)
 			return (err_msg("", "dup2 failed.\n"),
 				set_exit_code(mini, 1), exit(1), -1);
@@ -65,7 +66,6 @@ static int	exec_last_cmd(t_data *mini, t_commands *commands, int read_end)
 void	childchild(t_data *mini, t_commands *commands, \
 	int read_end, int *p_fd)
 {
-	unset_signals();
 	close(p_fd[0]);
 	if (dup2(read_end, STDIN_FILENO) == -1)
 		return (err_msg("", "dup2 failed.\n"), set_exit_code(mini, 1));
@@ -73,10 +73,7 @@ void	childchild(t_data *mini, t_commands *commands, \
 		return (err_msg("", "dup2 failed.\n"), set_exit_code(mini, 1));
 	dup_close_file(mini, commands);
 	if (mini->exit_code == 1)
-	{
 		exit(1);
-		return ;
-	}
 	split_args(commands->cmd, mini->mini_envp, mini);
 	close(p_fd[1]);
 }

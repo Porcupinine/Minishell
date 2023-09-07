@@ -41,7 +41,7 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		set_signals();
-		mini_data->command_line = readline("MINISHELL: ");
+		mini_data->command_line = readline("minishell: ");
 		line_history(mini_data);
 		if (test_isspace(mini_data->command_line) == 0)
 		{
