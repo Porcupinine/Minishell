@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   quotes.c                                           :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: dmaessen <dmaessen@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/08/31 14:13:48 by laura         #+#    #+#                 */
-/*   Updated: 2023/09/06 00:20:19 by laura         ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   quotes.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/31 14:13:48 by laura             #+#    #+#             */
+/*   Updated: 2023/09/07 16:39:54 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,16 @@ char	*remove_quotes(char *str)
 	return (tmp);
 }
 
-static void whyyyyy(char **str, int *count_new, int *count_og)
+static void	whyyyyy(char **str, int *count_new, int *count_og)
 {
 	while ((*str)[(*count_og)] != '"')
 		(*str)[(*count_new)++] = (*str)[(*count_og)++];
 }
 
-void remove_quotes2point0(char **str)
+void	remove_quotes2point0(char **str)
 {
-	int count_new;
-	int count_og;
+	int	count_new;
+	int	count_og;
 
 	count_og = 0;
 	count_new = 0;
