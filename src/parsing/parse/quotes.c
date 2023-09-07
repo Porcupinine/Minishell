@@ -60,7 +60,11 @@ char	*remove_quotes(char *str)
 	return (tmp);
 }
 
-// check which quote, remove it ignore diferent ones and remove next
+static void whyyyyy(char **str, int *count_new, int *count_og)
+{
+	while ((*str)[(*count_og)] != '"')
+		(*str)[(*count_new)++] = (*str)[(*count_og)++];
+}
 
 void remove_quotes2point0(char **str)
 {
@@ -74,15 +78,13 @@ void remove_quotes2point0(char **str)
 		if ((*str)[count_og] == '"')
 		{
 			count_og++;
-			while ((*str)[count_og] != '"')
-				(*str)[count_new++] = (*str)[count_og++];
+			whyyyyy(str, &count_new, &count_og);
 			count_og++;
 		}
 		else if ((*str)[count_og] == '\'')
 		{
 			count_og++;
-			while ((*str)[count_og] != '\'')
-				(*str)[count_new++] = (*str)[count_og++];
+			whyyyyy(str, &count_new, &count_og);
 			count_og++;
 		}
 		else if ((*str)[count_og] != '\0')
