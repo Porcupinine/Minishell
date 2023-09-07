@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 14:43:48 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/06 14:42:20 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/09/07 12:12:45 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	builtin_exit(t_data *mini, char **cmd);
 
 int		builtin_env(t_data *mini, char **cmd);
 
-int		builtin_echo(t_data *mini, char **cmd);
+int		builtin_echo(t_data *mini, char **cmd, char *str);
 
 int		builtin_cd(t_data *mini, char **cmd);
 int		search_specific_path(t_data *mini, char *cmd);

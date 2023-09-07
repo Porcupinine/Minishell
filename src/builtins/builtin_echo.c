@@ -6,7 +6,7 @@
 /*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:09:31 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/06 21:34:52 by domi             ###   ########.fr       */
+/*   Updated: 2023/09/07 12:13:54 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,10 @@ static void	echo_n(char **cmd, int j, size_t i, int fd)
 	write_echo(j, cmd, fd);
 }
 
-int	builtin_echo(t_data *mini, char **cmd)
+int	builtin_echo(t_data *mini, char **cmd, char *str)
 {
 	int fd;
+	int	i;
 
 	if (mini->commands->out == 0)
 		fd = 1;
@@ -60,7 +61,10 @@ int	builtin_echo(t_data *mini, char **cmd)
 	}
 	else if (ft_strlen(cmd[0]) == 4)
 	{
-		write_echo(1, cmd, fd);
+		//write_echo(1, cmd, fd);
+		i = 4;
+		while (str[++i])
+			ft_putchar_fd(str[i], fd);
 		write(fd, "\n", 1);
 		set_exit_code(mini, 0);
 	}

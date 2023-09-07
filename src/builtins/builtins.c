@@ -6,7 +6,7 @@
 /*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 17:07:22 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/06 22:01:28 by domi             ###   ########.fr       */
+/*   Updated: 2023/09/07 12:09:51 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 int	builtins(char **cmd, char *str, t_data *mini)
 {
 	if (ft_strncmp(cmd[0], "echo", 4) == 0)
-		builtin_echo(mini, cmd);
+		builtin_echo(mini, cmd, str);
 	else if (ft_strncmp(cmd[0], "cd", 2) == 0)
 		builtin_cd(mini, cmd);
 	else if (ft_strncmp(cmd[0], "pwd", 3) == 0)
