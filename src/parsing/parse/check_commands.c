@@ -41,7 +41,7 @@ void	extract_cmd(t_tokens **it_token, t_commands **cmd, t_data *mini_data)
 	{
 		exun = expanded((*it_token)->str, mini_data);
 		if (ft_strncmp(temp, "export", 6) != 0)
-			exun = remove_quotes(exun);
+			remove_quotes2point0(&exun);
 		temp2 = temp;
 		temp = ft_strjoin_space(temp2, exun);
 		free(temp2);

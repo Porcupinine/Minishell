@@ -34,7 +34,7 @@ add_executable(minishell src/main.c
 		src/utils/cmd_list_actions/add_cmd_node.c src/utils/cmd_list_actions/add_inout_node.c
 		src/utils/cmd_list_actions/print_cmd.c
 		src/utils/envp_parser/parse_list_envp.c src/utils/envp_parser/parse_array_envp.c
-		src/utils/errors/1.c src/utils/errors/127.c src/utils/errors/255.c
+		src/utils/errors/1.c src/utils/errors/1_b.c src/utils/errors/127.c src/utils/errors/255.c
 		src/utils/history/history.c
 		src/utils/I_want_to_break_free/parser_free.c src/utils/I_want_to_break_free/parser_free_array.c
 		src/utils/signal_handlers/signal_handlers.c src/utils/signal_handlers/signal_handlers2.c
