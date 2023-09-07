@@ -6,7 +6,7 @@
 /*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 13:09:31 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/09/07 12:13:54 by domi             ###   ########.fr       */
+/*   Updated: 2023/09/07 12:38:00 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,11 @@
 #include "../../include/utils.h"
 #include "../../include/lexical_analyzer.h"
 
-static void	write_echo(int i, char **cmd, int fd)
+static int	echo_n(char **cmd, int j, size_t i)
 {
-	while (cmd[i])
-	{
-		ft_putstr_fd(cmd[i], fd);
-		if (cmd[i + 1] != NULL)
-			ft_putchar_fd(' ', fd);
-		i++;
-	}
-}
+	int count;
+	int a;
 
-static void	echo_n(char **cmd, int j, size_t i, int fd)
-{
 	while (cmd[j])
 	{
 		if (ft_strncmp(cmd[j], "-", 1) == 0)
@@ -42,7 +34,22 @@ static void	echo_n(char **cmd, int j, size_t i, int fd)
 		j++;
 	}
 	i = j;
-	write_echo(j, cmd, fd);
+	a = 0;
+	count = 0;
+	while (a < j)
+	{
+		count += ft_strlen(cmd[a]) + 1;
+		a++;
+	}
+	return (count);
+}
+
+static int set_fd(t_data *mini)
+{
+	if (mini->commands->out == 0)
+		return (1);
+	else
+		return (mini->commands->out);
 }
 
 int	builtin_echo(t_data *mini, char **cmd, char *str)
@@ -50,18 +57,16 @@ int	builtin_echo(t_data *mini, char **cmd, char *str)
 	int fd;
 	int	i;
 
-	if (mini->commands->out == 0)
-		fd = 1;
-	else
-		fd = mini->commands->out;
+	fd = set_fd(mini);
 	if (ft_strncmp(mini->commands->cmd, "echo -n", 7) == 0)
 	{
-		echo_n(cmd, 1, 0, fd);
+		i = echo_n(cmd, 1, 0) - 1;
+		while (str[++i])
+			ft_putchar_fd(str[i], fd);
 		set_exit_code(mini, 0);
 	}
 	else if (ft_strlen(cmd[0]) == 4)
 	{
-		//write_echo(1, cmd, fd);
 		i = 4;
 		while (str[++i])
 			ft_putchar_fd(str[i], fd);
