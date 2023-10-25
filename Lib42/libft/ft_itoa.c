@@ -62,7 +62,7 @@ char	*ft_itoa(int n)
 	nb_size = n_size(nb);
 	if (nb == 0)
 		nb_size = 1;
-	nb_char = ft_calloc((nb_size + 1), sizeof(char));
+	nb_char = ft_calloc_exit((nb_size + 1), sizeof(char));
 	if (nb_char == NULL)
 		return (NULL);
 	ft_memset(nb_char, 'a', nb_size);
