@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_itoa.c                                          :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: lpraca-l <lplacerdadesign@gmail.com>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/22 13:45:57 by lpraca-l      #+#    #+#                 */
-/*   Updated: 2022/10/26 17:59:08 by lpraca-l      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/22 13:45:57 by lpraca-l          #+#    #+#             */
+/*   Updated: 2023/10/25 10:22:52 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ char	*ft_itoa(int n)
 	if (nb == 0)
 		nb_size = 1;
 	nb_char = ft_calloc_exit((nb_size + 1), sizeof(char));
-	if (nb_char == NULL)
-		return (NULL);
 	ft_memset(nb_char, 'a', nb_size);
 	nb_char[nb_size + 1] = '\0';
 	if (nb < 0)

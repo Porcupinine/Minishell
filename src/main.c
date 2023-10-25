@@ -42,12 +42,16 @@ int	main(int argc, char **argv, char **envp)
 	{
 		set_signals();
 		mini_data->command_line = readline("minishell: ");
-		line_history(mini_data);
 		if (test_isspace(mini_data->command_line) == 0)
 			if (parse(mini_data) == 0)
+			{
+				line_history(mini_data);
+				free(mini_data->command_line);
+				mini_data->command_line = NULL;
 				start(mini_data);
+			}
 	}
-	free(mini_data->command_line);
+//	free(mini_data->command_line);
 	free(mini_data);
 	return (0);
 }
