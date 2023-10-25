@@ -33,7 +33,8 @@ static int	echo_n(char **cmd, int j, size_t i)
 			break ;
 		j++;
 	}
-	i = j;
+	if (cmd[j] == NULL)
+		j -= 1;
 	a = 0;
 	count = 0;
 	while (a < j)
