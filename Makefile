@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+         #
+#    By: domi <domi@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/07 11:56:57 by dmaessen          #+#    #+#              #
-#    Updated: 2023/09/06 15:43:13 by dmaessen         ###   ########.fr        #
+#    Updated: 2023/09/07 21:54:23 by domi             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME	:= minishell
 CC 	:=  gcc
 
 #-------------------------------------------------------------------------Flags
-CFLAGS	+= -Wextra -Wall -Werror
+CFLAGS	+= -Wextra -Wall -Werror -g
 ASANFLAGS += #-fsanitize=address -g #-fsanitize=leak
 
 #----------------------------------------------------------------Libraries path
