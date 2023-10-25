@@ -24,11 +24,6 @@ void	sigint_handler(int sig)
 	(void)sig;
 }
 
-void	sigquit_handler(int sig)
-{
-	(void)sig;
-}
-
 void	unset_signals(void )
 {
 	signal(SIGINT, SIG_DFL);
@@ -44,6 +39,6 @@ void	ignore_signals(void)
 void	set_signals(void)
 {
 	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, sigquit_handler);
+	signal(SIGQUIT, SIG_IGN);
 	set_term();
 }

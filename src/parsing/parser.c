@@ -16,10 +16,8 @@
 #include "../../include/utils.h"
 #include <stdio.h>
 
-static void	free_parser(t_data *mini_data, t_state_machine *parser)
+static void	free_parser(t_state_machine *parser)
 {
-	free(mini_data->command_line);
-	mini_data->command_line = NULL;
 	free(parser);
 	parser = NULL;
 }
@@ -32,14 +30,14 @@ int	parse(t_data *mini_data)
 	if (parse_machine(mini_data, parser) == 1)
 	{
 		mini_data->exit_code = parser->exit_code;
-		free_parser(mini_data, parser);
+		free_parser(parser);
 		return (1);
 	}
 	if (parse_tokens(parser, mini_data) == 1)
 	{
-		free_parser(mini_data, parser);
+		free_parser(parser);
 		return (1);
 	}
-	free_parser(mini_data, parser);
+	free_parser(parser);
 	return (0);
 }
