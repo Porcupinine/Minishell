@@ -23,7 +23,7 @@ int	builtin_pwd(t_data *mini)
 	pwd_path = getcwd(NULL, 0);
 	if (pwd_path == NULL)
 		return (set_exit_code(mini, errno),
-			err_msg("getcwd", "failed"), -1);
+			err_msg("getcwd", "failed\n"), -1);
 	pwd = ft_calloc_exit((ft_strlen(pwd_path) + 2), sizeof(char));
 	ft_memmove(pwd, pwd_path, ft_strlen(pwd_path));
 	len = ft_strlen(pwd);

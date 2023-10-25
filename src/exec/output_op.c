@@ -30,8 +30,10 @@ void	output_re(t_commands *commands, t_data *mini)
 			commands->out = open(temp->file, \
 				O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (commands->out < 0)
-			return (err_msg(temp->file, \
-					"No such file or directory"));
+		{
+			no_filedirectory(temp->file, mini);
+			break ;
+		}
 		else
 			set_exit_code(mini, 0);
 		if (temp->next != NULL)

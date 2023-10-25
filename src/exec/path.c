@@ -90,16 +90,6 @@ static void	no_pathtocmd(char *path_to_cmd, t_data *mini, \
 	if (!path_to_cmd)
 	{
 		modif_env(mini, command[0]);
-		if (access(command[0], F_OK) != 0)
-		{
-			no_filedir("minishell", command[0], mini);
-			exit (127);
-		}
-		if (access(command[0], X_OK) != 0)
-		{
-			permission_denied(command, mini);
-			exit (126);
-		}
 		execve(command[0], &command[0], envp);
 		no_command(command, mini);
 		exit(mini->exit_code);
