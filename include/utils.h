@@ -134,11 +134,47 @@ void		numeric_arg_required(char **command, t_data *mini);
  * message
  */
 void		not_directory(char **command, t_data *mini);
+/**
+ * writes no such file/directory error message, set exit code to 127 
+ * @param str displays the command
+ * @param command displays the argument comming after the str
+ * @param mini updates the exit code
+ */
 void		no_filedir(char *str, char *command, t_data *mini);
+/**
+ * writes not a valid identifier error message (specific to export
+ * cmd), set exit code to 1
+ * @param command displays the argument comming after the export command
+ * @param mini updates the exit code
+ */
 void		not_valid_identifier_s(char **command, t_data *mini);
+/**
+ * writes a not set error message, set exit code to 1
+ * @param command displays which variable is not set
+ * @param str displays not set error message
+ * @param mini updates the exit code
+ */
 void		not_set(char *command, char *str, t_data *mini);
+/**
+ * writes not a directory error message (specific to the cd cmd)
+ * and set exit code to 1
+ * @param command displays the variable that is not a directory
+ * @param mini updates the exit code
+ */
 void		not_directory_cd(char *command, t_data *mini);
+/**
+ * writes not a file/directory error message (specific to the functions
+ *  trying to open the input/output files) and set exit code to 1
+ * @param file displays the file that is not a file/directory
+ * @param mini updates the exit code
+ */
 void		no_filedirectory(char *file, t_data *mini);
+/**
+ * writes not a valid identifier error message (specific to export)
+ * and set exit code to 1
+ * @param command displays the argument comming after the export command
+ * @param mini updates the exit code
+ */
 void		not_valid_id(char *command, t_data *mini);
 
 //--------------------------------------------------------------------history

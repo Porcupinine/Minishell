@@ -25,15 +25,53 @@
 # include "minishell.h"
 
 /* BUILTINS */
+/**
+ * checks if the first cmd is a builtin and redirects to the right 
+ * function accordingly or returns with 1 if not a builtin
+ * @param cmd splitted command line
+ * @param str entire command line un-splitted
+ * @param mini 
+ */
 int		builtins(char **cmd, char *str, t_data *mini);
+/**
+ * checks if the first cmd is a builtin if so it returns 0 else returns 1
+ * @param cmd splitted command line
+ */
 int		check_builtins(char **cmd);
 
+/**
+ * looks for the position of the arg(s) to be unsetted in envp
+ * @param arg splitted command line
+ * @param mini
+ */
 int		builtin_unset(t_data *mini, char **arg);
+/**
+ * loops through envp to find the specified arg
+ * @param arg arg/var to be unset
+ * @param mini to access mini->mini_envp
+ */
 int		find_envp(t_data *mini, char *arg);
+/**
+ * updates the environement list/array by malloc-ing a new array and skipping
+ * over the arg to be unset, and returns the new malloc-ed array
+ * @param envp current environement array
+ * @param arg arg to be unset from the array
+ * @param size size of current array -1 for the arg to be unset
+ */
 char	**update_envp(char **envp, char *arg, int size);
 
+/**
+ * prints the current working directory on the terminal via getcwd
+ * @param mini
+ */
 int		builtin_pwd(t_data *mini);
 
+/**
+ * 
+ * @param cmd splitted command line
+ * @param str entire command line un-splitted
+ * @param mini
+ */
 int		builtin_export(t_data *mini, char **cmd, char *str);
 bool	check_cmd(char *cmd);
 bool	is_valid_noerror(char *cmd);

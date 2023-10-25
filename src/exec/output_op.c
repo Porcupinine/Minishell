@@ -12,6 +12,7 @@
 
 #include "../../include/minishell.h"
 #include "../../include/exec.h"
+#include "../../include/utils.h"
 #include "../../Lib42/include/libft.h"
 
 void	output_re(t_commands *commands, t_data *mini)
